@@ -4,24 +4,28 @@ type ButtonVariant = 'primary' | 'secondary' | 'wide' | 'contrast';
 type ButtonSize = 'small' | 'large' | 'wideMob';
 
 interface ButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   className?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  disabled: boolean;
+  disabled?: boolean;
+  [props: string]: unknown;
 }
 
 const Button: React.FC<ButtonProps> = ({
-  children,
-  onClick,
-  className,
+  children = 'Click',
+  onClick = () => {
+    console.log('clicked');
+  },
+  className = '',
   variant = 'primary',
   size = 'small',
-  disabled,
+  disabled = false,
+  ...props
 }) => {
   let buttonStyles =
-    'py-2 px-8 font-light rounded hover:shadow disabled:bg-[#808080]';
+    'py-2 px-10 font-light rounded hover:shadow disabled:bg-[#808080]';
 
   if (size === 'large') {
     buttonStyles += ' text-18 px-8';
@@ -75,6 +79,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       className={`${buttonStyles} ${className}`}
       disabled={disabled}
+      {...props}
     >
       {children}
     </button>
