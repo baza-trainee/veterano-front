@@ -1,14 +1,8 @@
-
-import './App.css'
+import { useState } from 'react';
+import Button from './components/Button';
 
 function App() {
-
-
-  return (
-    <>
-
-    </>
-  )
+  return <></>;
 }
 
-export default App
+export default App;
