@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ['./index.html', './src//*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
       'sm': '320px',
@@ -36,9 +37,11 @@ export default {
         'error30': "#FF9EA9",
         'success100': "#7ED222"
       },
+      fontFamily: {
+        'e-Ukraine': ['e-Ukraine', 'sans']
+      }
     },
   },
-  plugins: [
-  ],
+  plugins: [],
 }
 
