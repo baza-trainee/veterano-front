@@ -13,17 +13,6 @@ export default {
       backgroundColor: {
         'whiteBg': '#ECECEC',
       },
-      fontSize: {
-        'heading-1': '44px',
-        'heading-2': '32px',
-        'heading-mob': '28px',
-        'heading-3': '24px',
-        'body-md': '20px',
-        'body-lg': '18px',
-        'body-default': '16px',
-        'body-sm': '14px',
-        'body-xs': '12px',
-      },
       colors: {
         'black': "#151515",
         'white': "#FCFCFC",
