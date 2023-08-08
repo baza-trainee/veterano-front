@@ -6,7 +6,7 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = ({children}) => {
   return (
-    <div className="w-full">
+    <div className="w-full font-e-Ukraine">
       {children}
     </div>
   );
