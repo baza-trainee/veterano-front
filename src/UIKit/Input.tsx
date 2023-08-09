@@ -1,4 +1,6 @@
 import {FC, InputHTMLAttributes, useState} from "react";
+import {BsFillEyeFill} from "react-icons/bs";
+import {AiFillEyeInvisible} from "react-icons/ai";
 
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -11,6 +13,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
 
   const [visible, setVisible] = useState(true)
+
   const labelStyles = () => {
     let style = `  
     pl-[10px] 
@@ -49,15 +52,14 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
   }
 
   const togglePassword = () => {
-    const inputElement = document.querySelector('#password')
+    const inputElement = document.querySelector('#password');
     if (inputElement) {
-      inputElement.setAttribute(
-        'type',
-        visible ? 'password' : 'text'
-      );
-      setVisible(!visible)
+      const currentType = inputElement.getAttribute('type');
+      const newType = currentType === 'password' ? 'text' : 'password';
+      inputElement.setAttribute('type', newType);
+      setVisible(!visible);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col-reverse relative w-[288px] md:w-[320px] lg:w-[413px]">
@@ -76,10 +78,10 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
       {props.type === 'password' &&
         <div
           onClick={togglePassword}
-          className="absolute right-[5%] cursor-pointer">
+          className="absolute right-[5%] bottom-[10%] cursor-pointer">
           {visible ?
-            <span className="material-icons">visibility_off</span> :
-            <span className="material-icons ">visibility</span>
+            <BsFillEyeFill/> :
+            <AiFillEyeInvisible/>
           }
         </div>
       }
