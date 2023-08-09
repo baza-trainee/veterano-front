@@ -13,7 +13,6 @@ const Typography: React.FC<TypographyProps> = ({
 }) => {
   const Component = component || variant;
   const className = `text-${variant}-sm md:text-${variant}-md lg:text-${variant}-lg`;
-  console.log(className);
   return (
     <Component className={className.toString()} {...props}>
       {children}
