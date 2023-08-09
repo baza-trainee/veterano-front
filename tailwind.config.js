@@ -34,7 +34,6 @@ export default {
       fontFamily: {
         'e-Ukraine': ['e-Ukraine', 'sans-serif']
       },
-
     },
   },
   plugins: [],

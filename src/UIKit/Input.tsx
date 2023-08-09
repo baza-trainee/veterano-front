@@ -1,68 +1,78 @@
-import {FC} from "react";
+import {FC, InputHTMLAttributes} from "react";
 
-interface InputPropsType {
-  type: string,
-  label: string,
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string,
-  value:string,
-  onchange: () => void
+  label?: string,
+  value: string
+  error?: string
 }
 
-const Input: FC<InputPropsType> = ({type, label, id, value, onchange}) => {
+const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
+
+
+  const labelStyles = () => {
+    let style = `  
+    pl-[10px] 
+    translate-y-[2.5rem] 
+    transition-all 
+    duration-300 
+    peer-focus:leading-7 
+    peer-focus:text-[14px] 
+    peer-focus:translate-y-[1.9rem]  
+    peer-focus:text-grey50
+    peer-disabled:text-grey50 
+    `
+    if (value.length > 0) {
+      style = `
+      peer-invalid:text-error100 
+      pl-[10px] leading-7 
+      text-[14px]  
+      translate-y-[1.9rem]
+      text-grey50`
+    }
+    return style
+  }
+  const inputStyles = () => {
+    let style = `peer`
+
+    if (value.length > 0) {
+      style = `peer h-[64px] pb-[1px] pt-[20px] `
+    }
+    if (error) {
+      style = `peer  border-error100 focus:border-black`
+}
+    if (error && value.length > 0) {
+      style = `peer  h-[64px] pb-[1px] pt-[20px]`
+
+    }
+
+    return style
+  }
+
+
   return (
-    <>
-      {/*<div className="relative">*/}
-
-      {/*  <label className="mt-0*/}
-      {/*  invisible*/}
-      {/*  peer-focus:visible*/}
-      {/*  text-pink-600*/}
-      {/*  text-sm*/}
-      {/*  ">{placeholder}</label>*/}
-
-      {/*  <input className="peer w-[288px] md:w-[320px] lg:w-[413px] font-light border-b-[1px] text-base border-black h-[48px] p-[10px] text-grey100*/}
-      {/*hover:bg-yellow50 lg:hover:shadow-small*/}
-      {/*focus:outline-none focus:bg-inherit focus:h-[64px] focus:py-[10px] focus:pb-[12px]focus:placeholder:focus:text-black*/}
-      {/*placeholder:text-grey100*/}
-      {/*placeholder-shown:border-gray-500 "*/}
-      {/*         type={type}*/}
-      {/*         id={id}*/}
-      {/*         placeholder={placeholder}/>*/}
-
-
-      {/*</div>*/}
-
-
-      <div className="flex flex-col-reverse">
-        <input id={id} type={type} placeholder=" " value={value}
-               className="
-          w-[288px] md:w-[320px] lg:w-[413px]
-          font-light
-          border-b-[1px]
-          text-base
-          border-black h-[48px] p-[10px] text-black
-      hover:bg-yellow50 lg:hover:shadow-small
-      focus:outline-none
-      focus:bg-inherit
-      focus:p-[10px]
-      focus:pb-[12px]
-      focus:h-[64px]
-     "/>
+    <div className="flex flex-col-reverse relative">
+      <input
+        id={id}
+        placeholder=""
+        value={value}
+        {...props}
+        className={inputStyles()}
+      />
+      {label &&
         <label
-          htmlFor="text"
-          className="
-            pl-[12px]
-            focus:text-[14px]
-            text-grey50
-            leading-7
-            translate-y-[2.6rem]
-            transition-all
-            duration-300">{label}</label>
-      </div>
+          htmlFor={id}
+          className={labelStyles()}
+        >{label}</label>}
+      {error && <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[24px]">
+        {error}
+      </p>}
+    </div>
 
 
-    </>
   );
 };
 
 export default Input;
+

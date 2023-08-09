@@ -1,7 +1,7 @@
 import './App.css'
 import Container from "./components/Container.tsx";
-import Input2 from "./UIKit/Input2.tsx";
-import {ChangeEvent, useState} from "react";
+import Input from "./UIKit/Input.tsx";
+import {ChangeEvent, FormEventHandler, useState} from "react";
 
 interface ValueStateType {
   name: string,
@@ -15,6 +15,7 @@ function App() {
     password: "",
     email:""
   })
+
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValue((prevValue) => ({
@@ -22,39 +23,53 @@ function App() {
       [name]: value
     }));
   }
+  const handlerSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault()
+    console.log('form submitted')
+  }
 
 return (
   <>
     <Container>
-      <Input2
+
+      <form onSubmit={handlerSubmit}>
+        <Input
         id='name'
         type="text"
         name="name"
         value={value.name}
-        required
         onChange={handleOnChange}
         label="Ім'я"
-      />
-      <Input2
-        id='lastName'
-        type="email"
-        name="email"
-        value={value.email}
-        disabled
+        error="Help message"
+        minLength={2}
         required
-        onChange={handleOnChange}
-        label="Email"
-      />
-      <Input2
-        id='password'
-        type="password"
-        name="password"
-        value={value.password}
-        required
-        onChange={handleOnChange}
-        label="Пароль"
       />
 
+        <Input
+          id='email'
+          type="email"
+          name="email"
+          value={value.email}
+          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+          required
+          onChange={handleOnChange}
+          label="Email"
+          error=''
+        />
+        <Input
+          id='password'
+          type="password"
+          name="password"
+          value={value.password}
+          minLength={5}
+          required
+          onChange={handleOnChange}
+          label="Пароль"
+          error="Help message"
+        />
+
+      <button className='my-14' type="submit">fgfgfgfg</button>
+      </form>
     </Container>
   </>
 )

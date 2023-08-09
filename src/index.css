@@ -3,5 +3,34 @@
 @tailwind utilities;
 
 
+@layer components {
+  input:invalid:not(:placeholder-shown) {
+    border-color: #D30018
+  }
+
+  input:focus {
+    @apply focus:outline-none
+    focus:bg-inherit
+    focus:p-[10px]
+    focus:pt-[20px]
+    focus:pb-[1px]
+    focus:h-[64px]
+  }
+
+  input:hover {
+    @apply bg-yellow50 lg:shadow-small
+  }
+
+  input:disabled {
+    @apply border-b-[1px] border-grey50 bg-inherit
+
+  }
+
+  input {
+    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] font-light border-b-[1px] border-black text-black
+  }
+
+}
+
 
 
