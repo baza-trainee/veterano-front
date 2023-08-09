@@ -12,8 +12,9 @@ const Input2: FC<InputProps> = ({id, value, label, ...props}) => {
     let style = `pl-[10px] translate-y-[2.5rem] transition-all duration-300 
     peer-focus:leading-7 
     peer-focus:text-[14px] 
-    peer-focus:translate-y-[1.5rem]  
-    peer-focus:text-grey50`
+    peer-focus:translate-y-[1.9rem]  
+    peer-focus:text-grey50
+    peer-disabled:text-grey50 `
     if (value.length > 0) {
       style = `pl-[10px] leading-7 text-[14px]  translate-y-[1.9rem] text-grey50`
     }
@@ -28,8 +29,12 @@ const Input2: FC<InputProps> = ({id, value, label, ...props}) => {
         focus:outline-none
         focus:bg-inherit
         focus:p-[10px]
-        focus:pb-[10px]
+        focus:pt-[20px]
+        focus:pb-[1px]
         focus:h-[64px]
+        disabled:border-b-[1px]
+        disabled:border-grey50
+        disabled:bg-inherit
     `
     if (value.length > 0) {
       style = `peer w-[288px] md:w-[320px] lg:w-[413px] font-light border-b-[1px]
@@ -46,7 +51,6 @@ const Input2: FC<InputProps> = ({id, value, label, ...props}) => {
     return style
   }
 
-
   return (
     <div className="flex flex-col-reverse">
       <input
@@ -61,8 +65,6 @@ const Input2: FC<InputProps> = ({id, value, label, ...props}) => {
           className={labelStyles()}
         >{label}</label>}
     </div>
-
-
 
   );
 };
