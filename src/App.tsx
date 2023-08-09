@@ -1,15 +1,8 @@
-
-import './App.css'
-import Container from "./components/Container.tsx";
+import { useState } from 'react';
+import Button from './components/Button';
 
 function App() {
-
-
-  return (
-    <>
-      <Container>cfcvcvcv</Container>
-    </>
-  )
+  return <></>;
 }
 
-export default App
+export default App;
