@@ -116,21 +116,21 @@ export default {
             lineHeight: "155%",
           },
         ],
-        "body-lg": [
+        "p-lg": [
           "18px",
           {
             fontWeight: "300",
             lineHeight: "155%",
           },
         ],
-        "body-md": [
+        "p-md": [
           "16px",
           {
             fontWeight: "300",
             lineHeight: "150%",
           },
         ],
-        "body-sm": [
+        "p-sm": [
           "16px",
           {
             fontWeight: "300",
