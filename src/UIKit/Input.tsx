@@ -86,7 +86,7 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
         </div>
       }
 
-      {error && <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[24px]">
+      {error && <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[26px]">
         {error}
       </p>}
     </div>
