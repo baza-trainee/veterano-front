@@ -6,15 +6,16 @@ interface TypographyProps {
   children?: React.ReactNode;
 }
 const Typography: React.FC<TypographyProps> = ({
-  variant = "p",
+  variant = "h1",
   children,
   component,
   ...props
 }) => {
   const Component = component || variant;
   const className = `text-${variant}-sm md:text-${variant}-md lg:text-${variant}-lg`;
+  console.log(className);
   return (
-    <Component className={className} {...props}>
+    <Component className={className.toString()} {...props}>
       {children}
     </Component>
   );
