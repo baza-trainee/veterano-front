@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, MouseEvent } from 'react';
 import Button from './Button';
 
 interface CardProps {
@@ -6,17 +6,17 @@ interface CardProps {
   title: string;
   text: string;
   buttonText: string;
-  onButtonClick: () => void;
+  onButtonClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const CardInfo: React.FC<CardProps> = ({
-  imageSrc,
+  imageSrc = '../Photo.svg',
   title = 'Проект',
   text = 'Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.',
   onButtonClick,
 }) => {
   return (
-    <div className="w-[320px] sm:w-[350px] md:w-[413px]">
+    <div className="sm:w-[320px] md:w-[350px] lg:w-[413px]">
       <img src={imageSrc} alt={title} className="w-full h-auto" />
       <div className="bg-white p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8">
         <h2 className="text-xl font-semibold mb-3">{title}</h2>
