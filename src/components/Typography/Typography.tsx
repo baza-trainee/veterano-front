@@ -12,20 +12,17 @@ const Typography: React.FC<TypographyProps> = ({
   ...props
 }) => {
   const Component = component || variant;
-  const className =
-    "text-" +
-    variant +
-    "-sm" +
-    " " +
-    "md:text-" +
-    variant +
-    "-md" +
-    " " +
-    "lg:text-" +
-    variant +
-    "-lg";
+  const className = {
+    h1: "text-h1-sm md:text-h1-md lg:text-h1-lg",
+    h2: "text-h2-sm md:text-h2-md lg:text-h2-lg",
+    h3: "text-h3-sm md:text-h3-md lg:text-h3-lg",
+    h4: "text-h4-sm md:text-h4-md lg:text-h4-lg",
+    h5: "text-h5-sm md:text-h5-md lg:text-h5-lg",
+    p: "text-p-sm md:text-p-md lg:text-p-lg",
+  };
+
   return (
-    <Component className={className} {...props}>
+    <Component className={className[variant]} {...props}>
       {children}
     </Component>
   );

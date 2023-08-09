@@ -1,5 +1,11 @@
+import Typography from "./components/Typography/Typography";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Typography variant="p">dlasldlas</Typography>
+    </>
+  );
 }
 
 export default App;
