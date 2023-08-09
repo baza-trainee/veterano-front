@@ -20,9 +20,7 @@ const Input2: FC<InputProps> = ({id, label, ...props}) => {
         focus:p-[10px]
         focus:pb-[12px]
         focus:h-[64px]
-
         "
-
       />
       {label &&
         <label
