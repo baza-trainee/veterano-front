@@ -76,11 +76,13 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
       {props.type === 'password' &&
         <div
           onClick={togglePassword}
-          className="absolute right-[5%] bottom-[15%] z-30">
+          className="absolute right-[5%] cursor-pointer">
           {visible ?
-            <img className="w-[30px] h-[15px] cursor-pointer" src="/img/eye_slash.svg" alt="eye-slash"/> :
-            <img className="w-[30px] h-[15px] cursor-pointer" src="/img/eye_fill.svg" alt="eye-fill"/>}
-        </div>}
+            <span className="material-icons">visibility_off</span> :
+            <span className="material-icons ">visibility</span>
+          }
+        </div>
+      }
 
       {error && <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[24px]">
         {error}
