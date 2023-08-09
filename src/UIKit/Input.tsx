@@ -1,16 +1,16 @@
-import {FC, InputHTMLAttributes} from "react";
+import {FC, InputHTMLAttributes, useState} from "react";
 
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string,
   label?: string,
   value: string
-  error?: string
+  error?: string,
 }
 
 const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
 
-
+  const [visible, setVisible] = useState(true)
   const labelStyles = () => {
     let style = `  
     pl-[10px] 
@@ -41,18 +41,26 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
     }
     if (error) {
       style = `peer  border-error100 focus:border-black`
-}
+    }
     if (error && value.length > 0) {
       style = `peer  h-[64px] pb-[1px] pt-[20px]`
-
     }
-
     return style
   }
 
+  const togglePassword = () => {
+    const inputElement = document.querySelector('#password')
+    if (inputElement) {
+      inputElement.setAttribute(
+        'type',
+        visible ? 'password' : 'text'
+      );
+      setVisible(!visible)
+    }
+  }
 
   return (
-    <div className="flex flex-col-reverse relative">
+    <div className="flex flex-col-reverse relative w-[288px] md:w-[320px] lg:w-[413px]">
       <input
         id={id}
         placeholder=""
@@ -65,6 +73,15 @@ const Input: FC<InputProps> = ({error, id, value, label, ...props}) => {
           htmlFor={id}
           className={labelStyles()}
         >{label}</label>}
+      {props.type === 'password' &&
+        <div
+          onClick={togglePassword}
+          className="absolute right-[5%] bottom-[15%] z-30">
+          {visible ?
+            <img className="w-[30px] h-[15px] cursor-pointer" src="/img/eye_slash.svg" alt="eye-slash"/> :
+            <img className="w-[30px] h-[15px] cursor-pointer" src="/img/eye_fill.svg" alt="eye-fill"/>}
+        </div>}
+
       {error && <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[24px]">
         {error}
       </p>}

@@ -1,7 +1,7 @@
 import './App.css'
 import Container from "./components/Container.tsx";
 import Input from "./UIKit/Input.tsx";
-import {ChangeEvent, FormEventHandler, useState} from "react";
+import {ChangeEvent, useState} from "react";
 
 interface ValueStateType {
   name: string,
@@ -23,16 +23,11 @@ function App() {
       [name]: value
     }));
   }
-  const handlerSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault()
-    console.log('form submitted')
-  }
 
 return (
   <>
     <Container>
 
-      <form onSubmit={handlerSubmit}>
         <Input
         id='name'
         type="text"
@@ -68,8 +63,6 @@ return (
           error="Help message"
         />
 
-      <button className='my-14' type="submit">fgfgfgfg</button>
-      </form>
     </Container>
   </>
 )
