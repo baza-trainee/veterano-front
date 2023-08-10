@@ -38,7 +38,6 @@ const ArrowButton: FC<ArrowButtonProps> = ({
     variantStyle = buttonStyle[variant].active
   }
 
-
   return (
 
     <button onClick={onClick} className={variantStyle}>
