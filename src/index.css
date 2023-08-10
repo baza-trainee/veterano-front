@@ -11,6 +11,30 @@
     @apply  rounded flex items-center justify-center
   }
 
+@layer utilities {
+
+  .input-form {
+    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black
+  }
+
+  .input-form:invalid:not(:placeholder-shown) {
+    @apply border-[#D30018]
+  }
+
+  .input-form:hover {
+    @apply bg-yellow50 lg:shadow-small
+  }
+
+  .input-form:disabled {
+    @apply border-b-[1px] border-grey50 bg-inherit
+  }
+
+  .input-form:focus {
+    @apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px]
+  }
+
+}
+
 
 }
 

@@ -169,7 +169,7 @@ export default {
         success100: "#7ED222",
       },
       fontFamily: {
-        "e-Ukraine": ["e-Ukraine", "sans-serif"],
+        'e-Ukraine': ['e-Ukraine', 'sans-serif']
       },
     },
   },
