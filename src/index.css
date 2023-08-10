@@ -4,3 +4,12 @@
 :root {
   font-size: 16px;
 }
+
+
+@layer utilities {
+  .arrow-btn{
+    @apply  rounded flex items-center justify-center
+  }
+
+
+}
