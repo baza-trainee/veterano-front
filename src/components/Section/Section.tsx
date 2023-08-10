@@ -4,17 +4,28 @@ import Container from "../Container";
 
 interface SectionProps {
   title: string;
-  children: ReactNode;
+  className?: string;
+  children?: ReactNode;
 }
 
-const Section: FC<SectionProps> = ({ title = "Title", children }) => {
+const Section: FC<SectionProps> = ({
+  className = "",
+  title = "",
+  children,
+}) => {
   return (
-    <section className="py-[80px md:py-[100px] lg:py-[120px]]">
+    <section
+      className={
+        className + " " + "py-section-sm md:py-section-md lg:py-section-lg"
+      }
+    >
       <Container>
         <Typography variant="h2" className="text-center">
           {title}
         </Typography>
-        <div className="mt-[48px]">{children}</div>
+        <div className="mt-section-content-sm md:mt-section-content-md lg:mt-section-content-lg">
+          {children}
+        </div>
       </Container>
     </section>
   );
