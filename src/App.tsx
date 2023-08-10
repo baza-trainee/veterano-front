@@ -1,20 +1,22 @@
 import './App.css'
 import Container from "./components/Container.tsx";
 import Input from "./UIKit/Input.tsx";
-import {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 
 interface ValueStateType {
-  name: string,
+  userName: string,
   password: string,
   email: string
 }
 function App() {
 
   const [ value, setValue] = useState<ValueStateType>({
-    name: "",
+    userName: "",
     password: "",
     email:""
   })
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,45 +25,40 @@ function App() {
       [name]: value
     }));
   }
+  const togglePasswordVisibility = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setPasswordVisible((prevPasswordVisible) => !prevPasswordVisible);
+  };
 
 return (
   <>
     <Container>
+      <Input
+        id='password'
+        type={passwordVisible ? 'text' : 'password'}
+        name="password"
+        value={value.password}
+        minLength={5}
+        required
 
-        <Input
+        onChange={handleOnChange}
+        onMouseDown={togglePasswordVisibility}
+        passwordVisible={passwordVisible}
+        label="Пароль"
+        error="Help message"
+      />
+      <Input
         id='name'
         type="text"
-        name="name"
-        value={value.name}
+        name="userName"
+        disabled
+        value={value.userName}
+        minLength={5}
+        required
         onChange={handleOnChange}
         label="Ім'я"
-        error="Help message"
-        minLength={2}
-        required
       />
 
-        <Input
-          id='email'
-          type="email"
-          name="email"
-          value={value.email}
-          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
-          required
-          onChange={handleOnChange}
-          label="Email"
-          error=''
-        />
-        <Input
-          id='password'
-          type="password"
-          name="password"
-          value={value.password}
-          minLength={5}
-          required
-          onChange={handleOnChange}
-          label="Пароль"
-          error="Help message"
-        />
 
     </Container>
   </>
