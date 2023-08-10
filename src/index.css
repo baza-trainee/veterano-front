@@ -4,3 +4,59 @@
 :root {
   font-size: 16px;
 }
+
+
+@layer utilities {
+  .btn-style {
+    @apply font-light rounded py-2 px-10
+  }
+
+  .link-style {
+    @apply text-white font-light leading-[24px] cursor-pointer
+  }
+
+  .link-style:hover {
+    @apply text-yellow50
+  }
+
+  .link-style:active {
+    @apply text-yellow100
+  }
+
+  .primary-btn {
+    @apply flex items-center justify-center
+  }
+
+  .primary-btn:hover {
+    @apply shadow-middle bg-[#FCFCFC] border border-black text-black
+  }
+
+  .primary-btn:active{
+    @apply shadow-none
+  }
+
+  .secondary-btn{
+    @apply min-w-[100px] inline-flex items-center justify-center
+  }
+
+  .secondary-btn:hover{
+    @apply bg-black text-white
+  }
+
+  .secondary-btn:active{
+    @apply bg-[#FDF5E1] text-black
+  }
+
+  .primary-dark-bg{
+    @apply flex items-center
+  }
+
+  .primary-dark-bg:hover{
+    @apply bg-yellow50
+  }
+
+  .primary-dark-bg:active{
+    @apply bg-yellow100
+  }
+
+}
