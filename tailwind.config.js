@@ -8,7 +8,6 @@ export default {
       md: "768px",
       lg: "1280px",
     },
-
     extend: {
       boxShadow: {
         small:
