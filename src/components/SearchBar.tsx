@@ -7,7 +7,8 @@ interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   placeholder?: string,
   disabled: boolean
-  error?: string
+  error?: string,
+  tabIndex?: number;
 }
 
 const SearchBar: FC<SearchBarProps> = ({value, onChange, placeholder, error, disabled, ...props}) => {
@@ -18,14 +19,14 @@ const SearchBar: FC<SearchBarProps> = ({value, onChange, placeholder, error, dis
 
   useEffect(() => {
     if (error && error.trim() !== "") {
-      setErrors("Текст помилки");
+      setErrors(error);
     } else {
       setErrors(null);
     }
   }, [value]);
 
   return (
-    <div tabIndex={0}
+    <div tabIndex={props.tabIndex}
          onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}
          className={disabled ? 'search-wrapper-disabled' : errors ? 'search-wrapper-error' :  "search-wrapper"}
     >
