@@ -1,38 +1,36 @@
-import {FC} from "react";
-import {LinkPropsType} from "../interfaces/Interfaces.ts";
-import {variantClassNames, sizeClassNames} from "../constans/const.ts";
+import { FC } from "react";
+import { LinkPropsType } from "../interfaces/Interfaces.ts";
+import { variantClassNames, sizeClassNames } from "../constans/const.ts";
 
 const Link: FC<LinkPropsType> = ({
-                                   to,
-                                   variant ='underlineFooter',
-                                   children,
-                                   size,
-                                   disabled,
-                                   ...props
-                                 }) => {
+  to,
+  variant = "underlineFooter",
+  children,
+  size,
+  disabled,
+  ...props
+}) => {
+  const linkSizeClass = size ? sizeClassNames[size] : "";
+  const variantStyles = variantClassNames[variant] || "";
 
-  const linkSizeClass = size ? sizeClassNames[size] : ''
-  const variantStyles = variantClassNames[variant] || '';
-
-  let variantClassName = '';
-  if (typeof variantStyles === 'string') {
+  let variantClassName = "";
+  if (typeof variantStyles === "string") {
     variantClassName = variantStyles;
   } else if (disabled) {
-    variantClassName = variantStyles?.disabled || '';
+    variantClassName = variantStyles?.disabled || "";
   } else {
-    variantClassName = variantStyles?.active || '';
+    variantClassName = variantStyles?.active || "";
   }
 
   return (
     <>
-        <a
-          href={to}
-          className={`${variantClassName} ${linkSizeClass} `}
-          {...props}
-        >
-          {children}
-        </a>
-
+      <a
+        href={to}
+        className={`${variantClassName} ${linkSizeClass} `}
+        {...props}
+      >
+        {children}
+      </a>
     </>
   );
 };
