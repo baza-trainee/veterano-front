@@ -23,6 +23,14 @@
     @apply text-yellow100
   }
 
+  .nav-link-style{
+    @apply text-black text-p-lg
+  }
+
+  .nav-link-style:hover{
+    @apply text-white
+  }
+
   .primary-btn {
     @apply flex items-center justify-center
   }
