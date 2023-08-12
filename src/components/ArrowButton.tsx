@@ -29,7 +29,7 @@ const ArrowButton: FC<ArrowButtonProps> = ({
     },
     carousel: {
       active:
-        "w-10 h-12 arrow-btn bg-black hover:bg-yellow100 active:bg-yellow50 cursor-pointer z-50",
+        "w-10 h-12 arrow-btn bg-black hover:bg-yellow100 active:bg-yellow50 cursor-pointer",
       disable:
         "w-10 h-12 arrow-btn bg-grey50 hover:bg-yellow100 active:bg-yellow50 pointer-events-none",
     },

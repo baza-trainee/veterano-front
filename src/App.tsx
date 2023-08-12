@@ -1,5 +1,6 @@
 import './App.css'
 import Carousel from "./components/Carousel/Carousel.tsx";
+import Section from "./components/Section/Section.tsx";
 
 
 const items = [
@@ -36,10 +37,13 @@ const items = [
 ]
 function App() {
 
-  return(<>
+  return(
+    <>
 
 
-    <Carousel items={items}/></>)
+    <Section className='md:px-[24px] lg:px-[80px]' title={'Ghjtrnb'}  ><Carousel items={items} gap={'20'}/></Section>
+</>
+    )
 }
 
 export default App;
