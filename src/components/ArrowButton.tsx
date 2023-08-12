@@ -23,13 +23,13 @@ const ArrowButton: FC<ArrowButtonProps> = ({
   const buttonStyle = {
     faq: {
       active:
-        "w-8 h-8 arrow-btn bg-white hover:bg-yellow100 active:bg-yellow50",
+        "w-8 h-8 arrow-btn bg-white hover:bg-yellow100 active:bg-yellow50 cursor-pointer",
       disable:
         "w-8 h-8 arrow-btn bg-grey50 hover:bg-yellow100 active:bg-yellow50 pointer-events-none",
     },
     carousel: {
       active:
-        "w-10 h-12 arrow-btn bg-black hover:bg-yellow100 active:bg-yellow50",
+        "w-10 h-12 arrow-btn bg-black hover:bg-yellow100 active:bg-yellow50 cursor-pointer z-50",
       disable:
         "w-10 h-12 arrow-btn bg-grey50 hover:bg-yellow100 active:bg-yellow50 pointer-events-none",
     },
