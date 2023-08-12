@@ -36,7 +36,7 @@ const Carousel: FC<CarouselProps> = ({items}) => {
            <CardInfo imageSrc={item.image} text={item.description} title={item.title} />
          </div>
        ))}
-       <div className={'flex gap-[24px]'}>
+       <div className={'flex gap-[24px] z-40'}>
          <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev} />
          <ArrowButton direction="right" variant="carousel" disabled={currentSlide >= items.length - visibleSlides} onClick={handleNext} />
        </div>
