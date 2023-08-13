@@ -41,7 +41,10 @@ function App() {
     <>
 
 
-    <Section className='md:px-[24px] lg:px-[80px]' title={'Ghjtrnb'}  ><Carousel items={items} gap={'52'}/></Section>
+    <Section className='md:pl-[23px] lg:px-[80px] ' title={'Ghjtrnb'}  >
+      <Carousel items={items} gap={54} slides={5}/>
+
+    </Section>
 </>
     )
 }

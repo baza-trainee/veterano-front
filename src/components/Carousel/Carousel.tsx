@@ -1,5 +1,6 @@
 import {FC, useEffect, useRef, useState} from "react";
 import ArrowButton from "../ArrowButton.tsx";
+import CardInfo from "./CardInfo.tsx";
 
 
 type ItemsProps = {
@@ -9,98 +10,64 @@ type ItemsProps = {
 }
 interface CarouselProps {
   items: ItemsProps[],
-  gap: string
+  gap: number,
+  slides: number
 }
 
-const Carousel: FC<CarouselProps> = ({items, gap}) => {
+const Carousel: FC<CarouselProps> = ({items, gap, slides}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [visibleSlides, setVisibleSlides] = useState(3);
-  const slideRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [slideWidth, setSlideWidth] = useState(0);
 
   useEffect(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current ? containerRef.current.offsetWidth : 0;
-      const width = containerWidth / 5
+      const totalGaps = gap*slides
+      const width = ((containerWidth - totalGaps) / slides)
       setSlideWidth(width);
+      console.log('containerWidth', containerWidth)
+      console.log('slides', slides)
+      console.log('gap', gap)
+      console.log('totalGaps', totalGaps)
+
     }
   }, []);
+  console.log('slideWidth', slideWidth)
 
-  console.log(slideWidth);
-
-  useEffect(() => {
-    if (containerRef.current && slideWidth > 0) {
-      const containerWidth = containerRef.current ? containerRef.current.offsetWidth : 0;
-      const newVisibleSlides = Math.floor(containerWidth / slideWidth);
-      setVisibleSlides(newVisibleSlides);
-    }
-
-  }, [slideWidth, gap]);
 
   const handlePrev = () => {
     setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : currentSlide);
   };
 
   const handleNext = () => {
-    setCurrentSlide(currentSlide + visibleSlides < items.length ? currentSlide + 1 : currentSlide);
+    setCurrentSlide(currentSlide + slides < items.length ? currentSlide + 1 : currentSlide);
   };
 
   return (
    <>
-     {/*<div ref={containerRef} className='overflow-hidden m-auto w-320px md:w-[740px] lg:w-[1280px]'>*/}
-     {/*  <div className="flex relative " style={{*/}
-     {/*    transition: 'left 0.9s ease-in-out',*/}
-     {/*    left: `-${(currentSlide * slideWidth)}px`,*/}
-
-     {/*  }}>*/}
-     {/*    {items.map((item, index) => (*/}
-     {/*      <div ref={slideRef} key={index} style={{width: `${slideWidth}`, marginRight: (visibleSlides > 1 && index < items.length - 1) ? `${gap}px` : '0px'}}>*/}
-     {/*        <CardInfo imageSrc={item.image} text={item.description} title={item.title}/>*/}
-     {/*      </div>*/}
-     {/*    ))}*/}
-     {/*  </div>*/}
-     {/*  <div className={'flex gap-[24px] '}>*/}
-     {/*    <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev}/>*/}
-     {/*    <ArrowButton direction="right" variant="carousel" disabled={currentSlide + visibleSlides >= items.length} onClick={handleNext}/>*/}
-     {/*  </div>*/}
-     {/*</div>*/}
-     <div ref={containerRef} className='overflow-hidden m-auto w-320px md:w-[740px] lg:w-[1280px]'>
+     <div ref={containerRef} className='overflow-hidden m-auto w-320px md:w-[768px] lg:w-[1280px]'>
        <div className="flex relative " style={{
          transition: 'left 0.9s ease-in-out',
          left: `-${(currentSlide * slideWidth)}px`,
-
        }}>
          {items.map((item, index) => (
-           <div ref={slideRef} key={index} style={{width: `384px`}}>
-            <div className={'w-[165px] h-[72px]'}><img src={item.image} alt=""/></div>
+           <div key={index}
+                className={'flex justify-center md:justify-start'}
+                style={{
+                  minWidth: `${slideWidth}px`,
+                  marginRight: index < slides ? `${gap}px` : '0px'
+           }}>
+            <div className={'w-[214px] h-[94px]'}><img width={214} height={94} src={item.image} alt=""/></div>
+            {/* <CardInfo title={item.title} text={item.description} imageSrc={item.image}/>*/}
            </div>
          ))}
        </div>
        <div className={'flex gap-[24px] '}>
          <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev}/>
-         <ArrowButton direction="right" variant="carousel" disabled={currentSlide + visibleSlides >= items.length} onClick={handleNext}/>
+         <ArrowButton direction="right" variant="carousel" disabled={currentSlide + slides >= items.length} onClick={handleNext}/>
        </div>
      </div></>
   );
 };
 
 export default Carousel;
-
-{/*<div ref={containerRef} className='relative overflow-hidden m-auto w-320px md:w-[740px] lg:w-[1280px] min-h-[700px]'>*/}
-{/*  <div className="flex relative " style={{*/}
-{/*    transition: 'left 0.9s ease-in-out',*/}
-{/*    left: `-${(currentSlide * slideWidth)}px`,*/}
-{/*  }}>*/}
-{/*    {items.map((item, index) => (*/}
-{/*      <div ref={slideRef} key={index} style={{marginRight: (visibleSlides > 1 && index < items.length - 1) ? `${gap}px` : '0px'}}>*/}
-{/*        <CardInfo imageSrc={item.image} text={item.description} title={item.title}/>*/}
-{/*      </div>*/}
-{/*    ))}*/}
-{/*  </div>*/}
-
-{/*  <div className={'flex gap-[24px] absolute mt-24px  '}>*/}
-{/*    <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev}/>*/}
-{/*    <ArrowButton direction="right" variant="carousel" disabled={currentSlide + visibleSlides >= items.length} onClick={handleNext}/>*/}
-{/*  </div>*/}
-{/*</div>*/}
