@@ -2,38 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  font-size: 16px;
+	font-size: 16px;
 }
 
-
 @layer utilities {
-  .arrow-btn{
-    @apply  rounded flex items-center justify-center
+	.btn-style {
+		@apply font-light rounded py-2 px-10;
+	}
+
+	.link-style {
+		@apply text-white font-light leading-[24px] cursor-pointer;
+	}
+
+	.link-style:hover {
+		@apply text-yellow50;
+	}
+
+	.link-style:active {
+		@apply text-yellow100;
+	}
+
+	.nav-link-style {
+		@apply text-black text-p-lg;
+	}
+
+	.nav-link-style:hover {
+		@apply text-white;
+	}
+
+	.primary-btn {
+		@apply flex items-center justify-center;
+	}
+
+	.primary-btn:hover {
+		@apply shadow-middle bg-[#FCFCFC] border border-black text-black;
+	}
+
+	.primary-btn:active {
+		@apply shadow-none;
+	}
+
+	.secondary-btn {
+		@apply min-w-[100px] inline-flex items-center justify-center;
+	}
+
+	.secondary-btn:hover {
+		@apply bg-black text-white;
+	}
+
+	.secondary-btn:active {
+		@apply bg-[#FDF5E1] text-black;
+	}
+
+	.primary-dark-bg {
+		@apply flex items-center;
+	}
+
+	.primary-dark-bg:hover {
+		@apply bg-yellow50;
+	}
+
+	.primary-dark-bg:active {
+		@apply bg-yellow100;
+	}
+	.arrow-btn {
+		@apply rounded flex items-center justify-center;
+	}
+
+	.input-form {
+		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+	}
+
+	.input-form:invalid:not(:placeholder-shown) {
+		@apply border-[#D30018];
+	}
+
+	.input-form:hover {
+		@apply bg-yellow50 lg:shadow-small;
+	}
+
+	.input-form:disabled {
+		@apply border-b-[1px] border-grey50 bg-inherit;
+	}
+
+	.input-form:focus {
+		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
+	}
+
+  .carousel-actions{
+    @apply flex flex-col items-center md:flex-row md:justify-end m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] justify-end pr-5
   }
-
-@layer utilities {
-
-  .input-form {
-    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black
-  }
-
-  .input-form:invalid:not(:placeholder-shown) {
-    @apply border-[#D30018]
-  }
-
-  .input-form:hover {
-    @apply bg-yellow50 lg:shadow-small
-  }
-
-  .input-form:disabled {
-    @apply border-b-[1px] border-grey50 bg-inherit
-  }
-
-  .input-form:focus {
-    @apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px]
-  }
-
-}
-
-
 }
