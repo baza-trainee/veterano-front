@@ -8,6 +8,7 @@ interface CardProps {
   text: string;
   buttonText?: string;
   onButtonClick?: (event: MouseEvent<HTMLButtonElement>) => void,
+
   
 }
 

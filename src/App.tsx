@@ -7,7 +7,7 @@ const items = [
   {
     title: 'Проект 1',
     description: 'Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. Rороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.',
-    image: 'https://plus.unsplash.com/premium_photo-1664302321879-3a65c22f4578?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80'
+    image: 'https://s3-alpha-sig.figma.com/img/37de/5ee0/448ccd2cfd9588ede46bb28ff84cab59?Expires=1692576000&Signature=kdexn3g3sjgao67gcCHXisjCKt-PxwSs2XJScXF6Nfi2EqHFnNiMdsLZv6d8ATtC7miVv2rnQtutHydtarNZRP9pZa2FdkbtyQgTlVqsrC6vQHGf9AvVRBlhwFe1W5OUKjPRO4X7aKtpHhjn0CjBHljTNSw9o659O5Afu0medAMqw3W7YZ3~GNrMX0nzMB0FgqyPgsQOtXxxiAS8~aSuIYKaIHhQi~AlE~SSG0RcLdWNnOSElGo6jhhrBs3qQSRc3zZ7vtTSePIgEtFMUpHORpdsKIpAWAWx~KbElJpNqlsbGLNrC61Ed8TcMY7UwLogVJ93qMhun7XivLqyOL2pcw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
   },
   {
     title: 'Проект 2',
@@ -41,7 +41,7 @@ function App() {
     <>
 
 
-    <Section className='md:px-[24px] lg:px-[80px]' title={'Ghjtrnb'}  ><Carousel items={items} gap={'20'}/></Section>
+    <Section className='md:px-[24px] lg:px-[80px]' title={'Ghjtrnb'}  ><Carousel items={items} gap={'52'}/></Section>
 </>
     )
 }
