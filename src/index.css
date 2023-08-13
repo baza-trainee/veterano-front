@@ -99,7 +99,7 @@
 	.input-form:focus {
 		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
-}
+
   .input-form:focus {
     @apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px]
   }

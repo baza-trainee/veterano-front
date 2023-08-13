@@ -6,14 +6,14 @@ interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string,
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   placeholder?: string,
-  disabled: boolean
+  disabled?: boolean
   error?: string,
   tabIndex?: number;
 }
 
-const SearchBar: FC<SearchBarProps> = ({value, onChange, placeholder, error, disabled, ...props}) => {
+const SearchBar: FC<SearchBarProps> = ({value, onChange, placeholder, error, disabled = 'false', ...props}) => {
 
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState<boolean | null>(false);
   const [errors, setErrors] = useState<string | null>(null);
 
 
