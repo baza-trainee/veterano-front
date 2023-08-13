@@ -1,17 +1,23 @@
-import {ReactNode} from "react";
-
+import { ReactNode } from "react";
 
 export interface LinkPropsType {
-  children?: ReactNode
-  to: string
-  variant: 'primary' | 'primaryDarkBg' | 'secondary' | 'underlineFooter' | 'underlineNoneFooter' | "underlineSideBar" | "underlineNoneSideBar"
-  size?: 'small' | 'large' | 'wideMob'
-  disabled?: boolean,
+	children?: ReactNode;
+	to: string;
+	variant:
+		| "primary"
+		| "primaryDarkBg"
+		| "secondary"
+		| "underlineFooter"
+		| "underlineNoneFooter"
+		| "underlineSideBar"
+		| "underlineNoneSideBar";
+	size?: "small" | "large" | "wideMob";
+	disabled?: boolean;
+	className?: string;
 }
-
 
 export type sizeClassType = {
-  small: string,
-  large: string,
-  wideMob: string,
-}
+	small: string;
+	large: string;
+	wideMob: string;
+};

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Container from "../Container";
 import { GiHamburgerMenu } from "react-icons/Gi";
-import Button from "../Button";
+import Link from "../Link";
 
 const Header: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -45,13 +45,15 @@ const Header: React.FC = () => {
 							Home
 						</a>
 					</nav> */}
-					<Button
+
+					<Link
+						to="my offer"
 						variant="primary"
 						size="large"
-						className="hidden md:inline-block"
+						className="hidden md:flex"
 					>
-						Підтримати
-					</Button>
+						Детальніше
+					</Link>
 				</div>
 			</Container>
 		</header>
