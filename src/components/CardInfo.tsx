@@ -1,12 +1,12 @@
 import React, { ReactNode, MouseEvent } from "react";
-import Button from "../UIKit/Button";
+import Link from "./Link";
 
 interface CardProps {
 	imageSrc: string;
 	title: string;
 	text: string;
 	buttonText: string;
-	onButtonClick: (event: MouseEvent<HTMLButtonElement>) => void;
+	onButtonClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const CardInfo: React.FC<CardProps> = ({
@@ -23,15 +23,9 @@ const CardInfo: React.FC<CardProps> = ({
 				<p className="text-gray-600 mb-6 text-base md:mb-8 md:text-lg">
 					{text}
 				</p>
-				<Button
-					onClick={onButtonClick}
-					variant="primary"
-					size="small"
-					className=""
-					disabled={false}
-				>
+				<Link to="my offer" variant="primary" size="small">
 					Детальніше
-				</Button>
+				</Link>
 			</div>
 		</div>
 	);
