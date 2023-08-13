@@ -90,6 +90,6 @@
 	}
 
   .carousel-actions{
-    @apply flex flex-col items-center md:flex-row md:justify-end m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] justify-end pr-5
+    @apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5
   }
 }

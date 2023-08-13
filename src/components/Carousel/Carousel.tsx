@@ -51,7 +51,7 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
                  className={'flex justify-center md:justify-start'}
                  style={{
                    minWidth: `${slideWidth}px`,
-                   marginRight: index < items.length -1 ? `${gap}px` : '0px'
+                   marginRight: index < items.length - 1 ? `${gap}px` : '0px'
                  }}>
               <Component data={item}/>
             </div>
@@ -59,15 +59,16 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
         </div>
 
       </div>
-      <div className='carousel-actions'>
-        {button && button() }
-        <div className={'flex gap-[24px]'}>
+
+      <div
+        className={button ? 'carousel-actions justify-between md:flex-row md:justify-between' : 'carousel-actions md:flex-row md:justify-end  '}>
+        {button && button()}
+        <div className={'flex gap-[24px] mt-[5px]'}>
           <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev}/>
           <ArrowButton direction="right" variant="carousel" disabled={currentSlide + slides >= items.length}
                        onClick={handleNext}/>
         </div>
       </div>
-
 
 
     </>
