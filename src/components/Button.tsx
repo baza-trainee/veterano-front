@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
   if (size === "large") {
     buttonStyles += " text-18 px-8";
   } else if (size === "wideMob") {
-    buttonStyles += " text-sm px-9";
+    buttonStyles += " text-sm px-9 bg-white";
   } else {
     buttonStyles += " text-sm px-9";
   }

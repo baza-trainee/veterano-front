@@ -88,4 +88,35 @@
 	.input-form:focus {
 		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
+
+  .footer{
+    @apply flex flex-col md:flex-row border-b-[1px] ml-4 md:ml-0 border-white pb-[96px]
+  }
+
+  .footer-info{
+    @apply mt-[67px] mb-[80px] md:mt-12
+  }
+
+  .footer-nav {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+  }
+
+  .footer-nav ul > li {
+    @apply mb-[44px] md:mb-6 lg:mb-[20px]
+  }
+
+  .social-icons{
+    @apply flex
+  }
+
+  .social-icons > :not(:last-child) {
+    @apply mr-8 md:mr-6 lg:mr-6
+  }
+
+
+
+
+
+
+
 }
