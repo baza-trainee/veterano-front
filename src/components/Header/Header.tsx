@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Container from "../Container";
-import { GiHamburgerMenu } from "react-icons/Gi";
+import Container from "../Container/Container.tsx";
 import Link from "../Links/Link";
 import Sidebar from "./Sidebar";
 import Backdrop from "./Backdrop";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header: React.FC = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
