@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { LinkPropsType } from "../interfaces/Interfaces.ts";
-import { variantClassNames, sizeClassNames } from "../constans/const.ts";
+import { LinkPropsType } from "../../interfaces/Interfaces.ts";
+import { variantClassNames, sizeClassNames } from "../../constans/const.ts";
 
 const Link: FC<LinkPropsType> = ({
   to,

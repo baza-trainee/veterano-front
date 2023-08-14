@@ -10,6 +10,9 @@ export default {
 		},
 
 		extend: {
+      gridTemplateColumns:{
+        'footer': '200px 300px 420px'
+      },
 			boxShadow: {
 				small:
 					"0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)",

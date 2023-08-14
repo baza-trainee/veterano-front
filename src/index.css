@@ -1,8 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
 	font-size: 16px;
+  font-family: 'e-Ukraine', sans-serif;
 }
 
 @layer utilities {
@@ -23,7 +25,7 @@
 	}
 
 	.nav-link-style {
-		@apply text-black text-p-lg;
+		@apply text-black text-p-lg font-light;
 	}
 
 	.nav-link-style:hover {
@@ -90,19 +92,30 @@
 	}
 
   .footer{
-    @apply flex flex-col md:flex-row border-b-[1px] ml-4 md:ml-0 border-white pb-[96px]
+    @apply flex flex-col md:flex-row ml-4 md:ml-6 lg:ml-[80px] pb-[96px] md:h-[361px] relative
+  }
+
+  .wrapper{
+    @apply relative
+  }
+  .wrapper:after {
+    @apply absolute block w-[80%] md:w-[100%] lg:w-[87%] h-[1px] bg-[#BCBCBC] bottom-0 left-4 md:left-0  lg:left-[80px] content-['']
   }
 
   .footer-info{
-    @apply mt-[67px] mb-[80px] md:mt-12
+    @apply mt-[67px] mb-[80px] md:mt-12 md:mr-[22px] lg:mr-[153px]
   }
 
   .footer-nav {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-footer md:auto-rows-fr md:mt-9 lg:w-[70%]
   }
 
   .footer-nav ul > li {
     @apply mb-[44px] md:mb-6 lg:mb-[20px]
+  }
+
+  .footer-nav ul > :last-child {
+    @apply md:mb-0 lg:mb-0
   }
 
   .social-icons{
