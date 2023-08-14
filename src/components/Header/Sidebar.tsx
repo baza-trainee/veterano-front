@@ -4,10 +4,9 @@ import Button from "../Button";
 
 interface SidebarProps {
 	toggleMenu: () => void;
-	isOpen: boolean;
 }
 
-const Sidebar: FC<SidebarProps> = ({ toggleMenu, isOpen }) => {
+const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 	return (
 		<div className="bg-yellow100 text-black h-[506px] p-4 ">
 			<div className="flex flex-col items-end gap-4 mb-11">
