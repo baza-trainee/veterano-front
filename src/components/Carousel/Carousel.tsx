@@ -1,23 +1,18 @@
 import {FC, useEffect, useRef, useState} from "react";
-import ArrowButton from "../ArrowButton.tsx";
+import ArrowButton from "../ArrowButton/ArrowButton.tsx";
 
 
-type ItemsProps = {
-  title: string,
-  description: string,
-  image: string,
-}
 
 interface CarouselProps {
-  items: ItemsProps[],
+  items: unknown,
   gap: number,
-  slides: number,
-  component: React.ComponentType<any>
+	slidesPerView: number,
+  component: React.ComponentType<unknown>
   button?: () => React.ReactElement;
 }
 
 
-const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, button}) => {
+const Carousel: FC<CarouselProps> = ({items, gap, slidesPerView, component: Component, button}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [slideWidth, setSlideWidth] = useState(0);
@@ -25,8 +20,8 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
   useEffect(() => {
     if (containerRef.current) {
       const containerWidth = containerRef.current ? containerRef.current.offsetWidth : 0;
-      const totalGaps = gap * slides
-      const width = ((containerWidth - totalGaps) / slides)
+      const totalGaps = gap * slidesPerView
+      const width = ((containerWidth - totalGaps) / slidesPerView)
       setSlideWidth(width);
     }
   }, []);
@@ -36,7 +31,7 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
   };
 
   const handleNext = () => {
-    setCurrentSlide(currentSlide + slides < items.length ? currentSlide + 1 : currentSlide);
+    setCurrentSlide(currentSlide + slidesPerView < items.length ? currentSlide + 1 : currentSlide);
   };
 
   return (
@@ -53,7 +48,7 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
                    minWidth: `${slideWidth}px`,
                    marginRight: index < items.length - 1 ? `${gap}px` : '0px'
                  }}>
-              <Component data={item}/>
+              <Component {...item}/>
             </div>
           ))}
         </div>
@@ -65,7 +60,7 @@ const Carousel: FC<CarouselProps> = ({items, gap, slides, component: Component, 
         {button && button()}
         <div className={'flex gap-[24px] mt-[5px]'}>
           <ArrowButton direction="left" variant="carousel" disabled={currentSlide === 0} onClick={handlePrev}/>
-          <ArrowButton direction="right" variant="carousel" disabled={currentSlide + slides >= items.length}
+          <ArrowButton direction="right" variant="carousel" disabled={currentSlide + slidesPerView >= items.length}
                        onClick={handleNext}/>
         </div>
       </div>
