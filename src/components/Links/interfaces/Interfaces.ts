@@ -7,6 +7,7 @@ export interface LinkPropsType {
 		| "primary"
 		| "primaryDarkBg"
 		| "secondary"
+		| "secondaryDarkBg"
 		| "underlineFooter"
 		| "underlineNoneFooter"
 		| "underlineSideBar"
