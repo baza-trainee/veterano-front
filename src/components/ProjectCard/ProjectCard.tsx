@@ -1,19 +1,16 @@
-import React, { ReactNode, MouseEvent } from "react";
-import Link from "./Link";
+import Link from "../Links/Link";
 
 interface CardProps {
 	imageSrc: string;
 	title: string;
 	text: string;
 	buttonText: string;
-	onButtonClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
-const CardInfo: React.FC<CardProps> = ({
+const ProjectCard: React.FC<CardProps> = ({
 	imageSrc = "../Photo.svg",
 	title = "Проект",
 	text = "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-	onButtonClick,
 }) => {
 	return (
 		<div className="sm:w-[320px] md:w-[350px] lg:w-[413px]">
@@ -31,4 +28,4 @@ const CardInfo: React.FC<CardProps> = ({
 	);
 };
 
-export default CardInfo;
+export default ProjectCard;

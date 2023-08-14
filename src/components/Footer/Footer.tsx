@@ -5,7 +5,7 @@ import { BsFacebook, BsTelegram } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
-import Button from "../Button.tsx";
+import Button from "../Button/Button.tsx";
 
 const Footer = () => {
 	const isMobile = useMediaQuery({

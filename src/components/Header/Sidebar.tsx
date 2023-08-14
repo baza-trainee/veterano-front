@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import Button from "../Button";
+import Button from "../Button/Button";
 import NavigationLink from "../Links/NavigationLink";
 
 interface SidebarProps {
