@@ -21,6 +21,10 @@
 		@apply font-light rounded py-2 px-10;
 	}
 
+  .arrow-btn{
+    @apply  rounded flex items-center justify-center
+  }
+
 	.link-style {
 		@apply text-white font-light leading-[24px] cursor-pointer;
 	}
@@ -100,10 +104,6 @@
 		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
 
-  .input-form:focus {
-    @apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px]
-  }
-
   .search-wrapper {
     @apply rounded flex justify-between max-w-[288px] md:w-[349px] lg:w-[413px] p-[10px] items-center bg-[#F9F6EC]
   }
@@ -144,7 +144,9 @@
     @apply min-w-[89%] bg-inherit text-grey30 outline-none text-[14px] leading-[26px] lg:text-[16px]  lg:leading-[24px]
   }
 
-
+  .carousel-actions{
+    @apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5
+  }
 
 }
 

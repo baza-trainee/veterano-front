@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 import Typography from "../Typography/Typography";
-import Container from "../Container";
+import Container from "../Container/Container.tsx";
 
 interface SectionProps {
   title: string;
