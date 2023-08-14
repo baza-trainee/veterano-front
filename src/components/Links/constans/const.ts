@@ -10,7 +10,7 @@ export const variantClassNames = {
 	underlineFooter: " link-style underline decoration-1 underline-offset-[5px]",
 	underlineNoneFooter: "link-style ",
 	underlineSideBar:
-		" nav-link-style underline decoration-1 underline-offset-[5px]",
+		" transition-transform transform hover:delay-200 hover:translate-x-2 text-lg ",
 	underlineNoneSideBar: "nav-link-style ",
 	primary: {
 		active: "primary-btn btn-style bg-black text-white",
