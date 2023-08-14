@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Container from "../Container";
 import { GiHamburgerMenu } from "react-icons/Gi";
-import Link from "../Link";
+import Link from "../Links/Link";
 import Sidebar from "./Sidebar";
 import Backdrop from "./Backdrop";
 
