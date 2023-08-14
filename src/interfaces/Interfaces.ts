@@ -13,7 +13,6 @@ export interface LinkPropsType {
 		| "underlineNoneSideBar";
 	size?: "small" | "large" | "wideMob";
 	disabled?: boolean;
-	className?: string;
 }
 
 export type sizeClassType = {

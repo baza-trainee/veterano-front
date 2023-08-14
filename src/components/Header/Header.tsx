@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Container";
 import { GiHamburgerMenu } from "react-icons/Gi";
 import Link from "../Link";
+import Sidebar from "./Sidebar";
+import Backdrop from "./Backdrop";
 
 const Header: React.FC = () => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const toggleMenu = () => {
 		setIsOpen(!isOpen);
 	};
 
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "auto";
+		}
+	}, [isOpen]);
+
 	return (
-		<header className="bg-yellow100">
+		<header className="bg-yellow100 ">
 			<Container>
-				<div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+				<div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
 					<div className="flex items-center">
 						<div className="flex gap-2 items-center">
 							<div className=" sm:hidden md:block">
@@ -30,30 +40,25 @@ const Header: React.FC = () => {
 						</div>
 					</div>
 					<div className="md:hidden">
-						<GiHamburgerMenu
-							className="text-black w-8 h-8 hover:cursor-pointer"
-							onClick={toggleMenu}
-						/>
+						{!isOpen && (
+							<GiHamburgerMenu
+								className="text-black w-8 h-8 hover:cursor-pointer block md:hidden"
+								onClick={toggleMenu}
+							/>
+						)}
 					</div>
-					{/* <nav
-						className={`md:block ${isOpen ? "block" : "hidden"} mt-4 md:mt-0`}
-					>
-						<a
-							href="#"
-							className="text-gray-300 hover:text-white px-3 py-2 md:inline-block"
-						>
-							Home
-						</a>
-					</nav> */}
+					{isOpen && (
+						<div className="absolute top-0 left-0 w-full md:w-[320px] z-20 duration-500 transition-all">
+							<Sidebar toggleMenu={toggleMenu} isOpen={isOpen} />
+						</div>
+					)}
 
-					<Link
-						to="my offer"
-						variant="primary"
-						size="large"
-						className="hidden md:flex"
-					>
-						Детальніше
-					</Link>
+					<div className=" hidden md:flex">
+						<Link to="my offer" variant="primary" size="large">
+							Підтримати
+						</Link>
+					</div>
+					{isOpen && <Backdrop isOpen={isOpen} onClose={toggleMenu} />}
 				</div>
 			</Container>
 		</header>
