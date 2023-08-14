@@ -1,13 +1,5 @@
-import "./App.css";
-import { ErrorPage } from "./pages/ErrorPage";
-
 function App() {
-	return (
-		<>
-			<div className="h-[70px] bg-black"></div>
-			<ErrorPage />
-		</>
-	);
+	return <div></div>;
 }
 
 export default App;

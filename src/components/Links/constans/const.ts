@@ -3,7 +3,7 @@ import { sizeClassType } from "../interfaces/Interfaces.ts";
 export const sizeClassNames: sizeClassType = {
 	small: "w-[136px] h-[36px] leading-[24px] ",
 	large: "max-w-[128px] text-[18px]",
-	wideMob: "w-[288px] bg-white text-[18px] leading-[28px]",
+	wideMob: " bg-black text-[18px]",
 };
 
 export const variantClassNames = {
@@ -26,5 +26,11 @@ export const variantClassNames = {
 		active: "primary-dark-bg btn-style bg-white text-black border border-black",
 		disabled:
 			"primary-dark-bg btn-style !bg-grey50 text-white shadow-none pointer-events-none",
+	},
+	secondaryDarkBg: {
+		active:
+			"secondary-btn btn-style bg-black border border-black text-white hover:cursor-pointer hover:bg-yellow30 hover:text-black ",
+		disabled:
+			" secondary-btn btn-style !bg-grey50 text-white shadow-none pointer-events-none ",
 	},
 };
