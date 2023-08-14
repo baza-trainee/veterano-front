@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-	font-size: 16px;
+  font-size: 16px;
 }
 
+
 @layer utilities {
+  .btn-style {
+    @apply font-light rounded py-2 px-10;
+  }
+  .arrow-btn{
+    @apply  rounded flex items-center justify-center
+  }
+
+  .input-form {
+    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black
+  }
 	.btn-style {
 		@apply font-light rounded py-2 px-10;
 	}
@@ -136,4 +147,8 @@
   .carousel-actions{
     @apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5
   }
+
 }
+
+
+
