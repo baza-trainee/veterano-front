@@ -2,10 +2,10 @@ import { FC, useEffect, useRef, useState } from "react";
 import ArrowButton from "../ArrowButton/ArrowButton.tsx";
 
 interface CarouselProps {
-	items: unknown[];
+	items: any[];
 	gap: number;
 	slidesPerView: number;
-	component: React.ComponentType<unknown>;
+	component: React.ComponentType<any>;
 	button?: () => React.ReactElement;
 }
 
