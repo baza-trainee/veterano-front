@@ -233,6 +233,20 @@
     @apply pb-0
   }
 
+  .project-section {
+    @apply flex flex-col items-center
+  }
+
+  .project-section > div {
+    @apply mb-16
+  }
+
+  .project-section > div:last-of-type {
+    @apply mb-12
+  }
+
+
+
 }
 
 
