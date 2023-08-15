@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Container from "../Container/Container.tsx";
+import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "../Links/Link";
 import Sidebar from "./Sidebar";
 import Backdrop from "./Backdrop";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { NavLink } from "react-router-dom";
 
 const Header: React.FC = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -31,11 +32,13 @@ const Header: React.FC = () => {
 								onClick={toggleMenu}
 							/>
 						</div>
-						<img
-							className="h-[30px] w-[135px] mr-2 hover:cursor-pointer"
-							src="./images/Logo-black.svg"
-							alt="Logo"
-						/>
+						<NavLink to="/">
+							<img
+								className="h-[30px] w-[135px] mr-2 hover:cursor-pointer"
+								src="./images/logo-black.svg"
+								alt="Logo"
+							/>
+						</NavLink>
 					</div>
 				</div>
 				<div className="md:hidden">

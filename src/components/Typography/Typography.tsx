@@ -1,4 +1,4 @@
-type Variant = "h1" | "h2" | "h3" | "h4" | "h5" | "p";
+type Variant = "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span";
 
 interface TypographyProps {
 	variant?: Variant;
@@ -21,9 +21,10 @@ const Typography: React.FC<TypographyProps> = ({
 		h4: "text-h4-sm md:text-h4-md lg:text-h4-lg",
 		h5: "text-h5-sm md:text-h5-md lg:text-h5-lg",
 		p: "text-p-sm md:text-p-md lg:text-p-lg",
+		span: "",
 	};
 	return (
-		<Component className={className + " " + variantClass[variant]} {...props}>
+		<Component className={variantClass[variant] + " " + className} {...props}>
 			{children}
 		</Component>
 	);

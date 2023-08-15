@@ -1,6 +1,7 @@
 import { FC } from "react";
 
-import Button from "../Button";
+import Button from "../Button/Button";
+import NavigationLink from "../Links/NavigationLink";
 
 interface SidebarProps {
 	toggleMenu: () => void;
@@ -16,20 +17,29 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 					onClick={toggleMenu}
 				/>
 				<nav className="flex flex-col gap-9 w-full text-black text-lg">
-					<li className="border-b border-black w-full list-none pt-4  pb-4 hover:cursor-pointer ">
-						<p className="transition-transform transform hover:delay-200 hover:translate-x-2">
+					<li
+						className="border-b border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
+						onClick={toggleMenu}
+					>
+						<NavigationLink to="dsadasda" variant="underlineSideBar">
 							Про нас
-						</p>
+						</NavigationLink>
 					</li>
-					<li className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer ">
-						<p className="transition-transform transform hover:delay-200 hover:translate-x-2">
+					<li
+						className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
+						onClick={toggleMenu}
+					>
+						<NavigationLink to="dsadasda" variant="underlineSideBar">
 							Проєкти
-						</p>
+						</NavigationLink>
 					</li>
-					<li className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer ">
-						<p className="transition-transform transform hover:delay-200 hover:translate-x-2">
+					<li
+						className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
+						onClick={toggleMenu}
+					>
+						<NavigationLink to="dsadasda" variant="underlineSideBar">
 							Контакти
-						</p>
+						</NavigationLink>
 					</li>
 				</nav>
 			</div>
