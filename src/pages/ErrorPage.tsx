@@ -1,10 +1,10 @@
-import Container from "../components/Container";
+import Container from "../components/Container/Container";
 import NavigationLink from "../components/Links/NavigationLink";
 import Typography from "../components/Typography/Typography";
 
 export const ErrorPage = () => {
 	return (
-		<Container className="flex justify-center items-center flex-col p-4 mt-[80px] md:mt-[90px] lg:mt-[100px]">
+		<Container className="flex justify-center items-center flex-col p-4 min-h-[545px]">
 			<Typography
 				variant="span"
 				className="text-grey100 text-[130px] font-extralight md:text-[170px] lg:text-[200px]"
