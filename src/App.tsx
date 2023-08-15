@@ -4,6 +4,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 
 function App() {
 	return (
+
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Layout />}>
