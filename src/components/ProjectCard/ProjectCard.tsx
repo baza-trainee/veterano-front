@@ -4,7 +4,7 @@ interface CardProps {
 	imageSrc: string;
 	title: string;
 	text: string;
-	buttonText: string;
+	buttonText?: string;
 }
 
 const ProjectCard: React.FC<CardProps> = ({
