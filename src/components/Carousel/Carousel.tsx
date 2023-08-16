@@ -45,7 +45,6 @@ const Carousel: FC<CarouselProps> = ({
 
 	return (
 		<div ref={containerRef} className={'overflow-hidden m-auto'}>
-
 			<div
 				className="flex items-center relative "
 				style={{
@@ -66,8 +65,6 @@ const Carousel: FC<CarouselProps> = ({
 					</div>
 				))}
 			</div>
-
-
 			<div
 				className={
 					button

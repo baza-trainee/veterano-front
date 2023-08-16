@@ -13,7 +13,7 @@ const ProjectCard: React.FC<CardProps> = ({
 	text = "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
 }) => {
 	return (
-		<div className="sm:w-[320px] md:w-[350px] lg:w-[413px]">
+		<div className="sm:w-full md:w-full lg:w-full">
 			<img src={imageSrc} alt={title} className="w-full h-auto" />
 			<div className="bg-white p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8">
 				<h2 className="text-xl font-semibold mb-3">{title}</h2>
