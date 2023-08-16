@@ -25,7 +25,7 @@ const Carousel: FC<CarouselProps> = ({
 			const containerWidth = containerRef.current
 				? containerRef.current.offsetWidth
 				: 0;
-			const totalGaps = gap * slidesPerView;
+			const totalGaps = gap * (slidesPerView - 1);
 			const width = (containerWidth - totalGaps) / slidesPerView;
 			setSlideWidth(width);
 		}
@@ -44,11 +44,8 @@ const Carousel: FC<CarouselProps> = ({
 	};
 
 	return (
-		<>
-			<div
-				ref={containerRef}
-				className="overflow-hidden m-auto w-[320px] md:w-[768px] lg:w-[1280px]"
-			>
+		<div ref={containerRef} className={'overflow-hidden m-auto'}>
+
 				<div
 					className="flex items-center relative "
 					style={{
@@ -62,14 +59,14 @@ const Carousel: FC<CarouselProps> = ({
 							className={"flex justify-center md:justify-start"}
 							style={{
 								minWidth: `${slideWidth}px`,
-								marginRight: index < items.length - 1 ? `${gap}px` : "0px",
+								marginRight: (index < items.length - 1) ? `${gap}px` : "0px",
 							}}
 						>
 							<Component {...item} />
 						</div>
 					))}
 				</div>
-			</div>
+
 
 			<div
 				className={
@@ -94,7 +91,7 @@ const Carousel: FC<CarouselProps> = ({
 					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
