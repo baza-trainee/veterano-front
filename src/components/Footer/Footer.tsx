@@ -5,7 +5,6 @@ import { BsFacebook, BsTelegram } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
-import Button from "../Button/Button.tsx";
 
 const Footer = () => {
 	const isMobile = useMediaQuery({
@@ -13,7 +12,7 @@ const Footer = () => {
 	});
 
 	return (
-		<footer className={"bg-black pb-[70px] md:pb-[35px] lg:pb-[38px]"}>
+		<footer className={"bg-black pb-[70px] md:pb-[35px] lg:pb-[38px] md:h-[361px] "}>
 			<Container className={"flex flex-col"}>
 				<div className={"wrapper"}>
 					<div className="footer ">
@@ -26,13 +25,13 @@ const Footer = () => {
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Button variant="secondary" size="wideMob">
+								<Link to="/" variant="secondary" size="wideMob">
 									Підтримати
-								</Button>
+								</Link>
 							) : (
-								<Button variant="contrast" size="wideMob">
+								<Link to="/" variant="primaryDarkBg">
 									Підтримати
-								</Button>
+								</Link>
 							)}
 						</div>
 						<div className={"footer-nav "}>
@@ -73,7 +72,7 @@ const Footer = () => {
 									<p className={"pl-[10px]"}>info@baza-trainee.tech</p>
 								</li>
 							</ul>
-							<ul className={"md:self-center lg:self-start md:mt-3 lg:mt-0 "}>
+							<ul className={"md:self-center lg:self-start lg:mt-0 "}>
 								<li>
 									<Link to={"/#"} variant={"underlineFooter"}>
 										Політика конфіденційності
@@ -87,7 +86,7 @@ const Footer = () => {
 							</ul>
 							<ul
 								className={
-									"lg:col-start-3 md:justify-self-end lg:justify-self-start md:self-center lg:self-start"
+									"lg:col-start-3 md:justify-self-end lg:justify-self-start md:self-center lg:self-start "
 								}
 							>
 								<li className={"social-icons "}>

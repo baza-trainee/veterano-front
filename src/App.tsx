@@ -5,15 +5,14 @@ import HomePage from "./pages/HomePage.tsx";
 
 function App() {
 	return (
-			<BrowserRouter>
-				<Routes>
-					<Route path="/" element={<Layout />}>
-						<Route index element={<HomePage />} />
-						<Route path="*" element={<ErrorPage />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
-
+    <BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Layout />}>
+					<Route index element={<HomePage />} />
+					<Route path="*" element={<ErrorPage />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
