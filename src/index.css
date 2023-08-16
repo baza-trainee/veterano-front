@@ -183,4 +183,17 @@
 	.carousel-actions {
 		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5;
 	}
+
+  .modal{
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-black/50 z-10 flex justify-center opacity-0 transition duration-1000 pointer-events-none
+  }
+
+  .modal.active {
+    @apply opacity-100 pointer-events-auto
+  }
+
+  .modal-content{
+    @apply min-w-[200px] max-h-[550px] flex flex-col
+  }
+
 }
