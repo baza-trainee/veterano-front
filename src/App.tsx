@@ -4,6 +4,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage.tsx";
 
 function App() {
+
 	return (
     <BrowserRouter>
 			<Routes>
