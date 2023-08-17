@@ -27,11 +27,12 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
     peer-focus:translate-y-[1.9rem]  
     peer-focus:text-grey50
     peer-disabled:text-grey50 
+    peer-invalid:text-error100
     `
     if (value.length > 0) {
       style = `
       peer 
-      peer-invalid:text-error100 
+      peer-invalid:text-error100
       pl-[10px] leading-7 
       text-[14px]  
       translate-y-[1.9rem]
@@ -66,17 +67,14 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
         className={inputStyles()}
       />
 			{label && <label htmlFor={id} className={labelStyles()}>{label}</label>}
-
       {props.name === 'password' &&
         <div className="absolute right-[5%] bottom-[10%] cursor-pointer z-10">
           { passwordVisible ?  <AiFillEyeInvisible onMouseDown={onMouseDown}/> : <BsFillEyeFill onMouseDown={onMouseDown}/>}
         </div>
       }
-      {error &&  <p className="absolute block left-[10px] top-[100%] text-error100 text-[14px] leading-[26px]">{error} </p>}
+			{error ? <p className="absolute left-[10px] top-[100%] md:top-[110%] text-error100 text-[14px] leading-[26px] md:leading-4">{error}</p> : null}
 
     </div>
-
-
   );
 };
 

@@ -1,26 +1,18 @@
 import Typography from "../components/Typography/Typography.tsx";
 import { useMedia } from "../hooks/useMedia.tsx";
 import { MdEmail, MdPhone } from "react-icons/md";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik} from "formik";
 import * as Yup from "yup";
 import Input from "../components/Input/Input.tsx";
 import Textarea from "../components/Textarea/Textarea.tsx";
 import Button from "../components/Button/Button.tsx";
 
-interface FormValues {
-	name: string;
-	email: string;
-	message: string;
-}
 
 const ContactUs = () => {
 
 	const { isMobile, isTablet, isDesktop } = useMedia();
 
-	const handleSubmit = (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
-		console.log(values);
-		setSubmitting(false);
-	};
+	const maxMessage = isMobile ? "Скоротіть текст до 300 знаків" : "Просимо скоротити ваше повідомлення до 300 знаків";
 
 	const validationSchema = Yup.object({
 		name: Yup.string()
@@ -35,7 +27,7 @@ const ContactUs = () => {
 			.required("Введіть дійсний email"),
 		message: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.max(300, "Скоротіть текст до 300 знаків")
+			.max(300, maxMessage)
 			.required("Введіть ваше повідомлення"),
 	});
 
@@ -76,7 +68,7 @@ const ContactUs = () => {
 					</ul>
 				</div>
 				<div className={"contact-feedback"}>
-					<div className={"md:w-[34%] lg:w-[298px]"}>
+					<div className={"md:w-[22%] lg:w-[298px]"}>
 						<Typography variant={isDesktop ? "h4" : "h5"} component={isDesktop ? "h4" : "h5"} className={"mt-11"}>Напишіть
 							нам</Typography>
 					</div>
@@ -89,39 +81,48 @@ const ContactUs = () => {
 							}
 						}
 						validationSchema={validationSchema}
-						onSubmit={handleSubmit}
+						onSubmit={(values, { setSubmitting }) => {
+							setSubmitting(false);
+							console.log(values);
+						}}
+						validateOnChange={false}
+						validateOnBlur={true}
 					>
-						{({ values, handleChange, errors, isValid }) => (
-							<Form className={"md:flex md:flex-wrap "}>
-								{/*<div className={'md:flex md:justify-between'}>*/}
+						{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
+							<Form className={"md:flex md:w-[55%] md:flex-col lg:flex-row lg:flex-wrap "}>
 								<Input
-									id={"name"} value={values.name}
-									error={errors.name}
+									id={"name"}
+									value={values.name}
+									error={errors.name && touched.name ? errors.name : undefined}
 									name={"name"}
+									minLength={2}
 									type={"text"}
 									label={"Ім'я"}
 									onChange={handleChange}
-									className={"md:flex-grow-0 md:flex-shrink md:basis-[160px] lg:basis-[305px] md:mr-[20px]"} />
+									onBlur={handleBlur}
+									className={"md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink lg:basis-[305px] "} />
+
 								<Input
 									id={"email"}
 									value={values.email}
-									error={errors.email}
+									error={errors.email && touched.email ? errors.email : undefined}
 									name={"email"}
 									type={"email"}
 									label={"Email"}
 									onChange={handleChange}
-									className={"md:flex-grow md:flex-shrink-0 md:basis-[320px] lg:basis-[413px] "} />
-								{/*</div>*/}
+									onBlur={handleBlur}
+									className={"md:w-full lg:flex-grow lg:flex-shrink-0 lg:basis-[413px] "} />
+
 								<Textarea
 									id={"message"}
 									placeholder={"Введіть ваше повідомлення"}
 									value={values.message}
 									name={"message"}
 									onChange={handleChange}
-									error={errors.message}
-									className={"relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[738px] md:flex-grow md:flex-shrink-0 md:basis-[535px] "}
+									onBlur={handleBlur}
+									error={errors.message && touched.message ? errors.message : undefined}
+									className={"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[738px] lg:flex-grow lg:flex-shrink-0 "}
 								/>
-
 
 								<Button className={"md:w-[167px]"} variant={"primary"} disabled={!isValid} size={"large"}
 												type={"submit"}>Надіслати</Button>

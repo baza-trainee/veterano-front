@@ -11,7 +11,7 @@ interface ButtonProps {
 	size?: ButtonSize;
 	disabled?: boolean;
 	[props: string]: unknown;
-	type?: string | undefined
+	type?: 'button' | 'submit' | 'reset';
 }
 
 const Button: React.FC<ButtonProps> = ({
