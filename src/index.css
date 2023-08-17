@@ -22,10 +22,6 @@
 		@apply font-light rounded py-2 px-10;
 	}
 
-	.arrow-btn {
-		@apply rounded flex items-center justify-center;
-	}
-
 	.link-style {
 		@apply text-white font-light leading-[24px] cursor-pointer;
 	}
@@ -177,10 +173,89 @@
 	}
 
 	.search-input-disabled {
-		@apply min-w-[89%] bg-inherit text-grey30 outline-none text-[14px] leading-[26px] lg:text-[16px]  lg:leading-[24px];
+		@apply min-w-[89%] bg-inherit text-grey30 outline-none text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px];
 	}
 
 	.carousel-actions {
-		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5;
+		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-full lg:w-full;
 	}
+
+  .filter-input {
+    @apply relative w-[197px] flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded
+  }
+
+  .filter-label-chosen {
+    @apply relative w-[197px] flex justify-between items-center p-[10px] bg-black rounded
+  }
+
+  .filter-label-input {
+    @apply bg-black text-white outline-none w-[125px]
+  }
+
+  .filter-input:hover {
+    @apply bg-yellow50
+  }
+
+  .filter-input:hover input {
+    @apply bg-yellow50
+  }
+
+  .filter-input:focus-within {
+    @apply bg-black text-white
+  }
+
+  .filter-input:focus-within > input {
+    @apply bg-black text-white outline-none;
+  }
+
+  .filter-drop-down{
+    @apply w-[100%] h-[258px] bg-[#F9F6EC] text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px]
+  }
+
+  .filter-drop-down::-webkit-scrollbar {
+    @apply hidden
+  }
+
+  .filter-drop-down {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .filter-drop-down > li{
+    @apply pl-[10px]  mb-3 flex items-center
+  }
+
+  .filter-drop-down > li:hover{
+    @apply bg-yellow50 text-black
+  }
+
+  .filter-drop-down > :last-child{
+    @apply pb-0
+  }
+
+  .project-section {
+    @apply flex flex-col items-center
+  }
+
+  .project-section > div {
+    @apply mb-16
+  }
+
+  .project-section > div:last-of-type {
+    @apply mb-12
+  }
+
+  .modal{
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-black/50 z-10 flex justify-center opacity-0 transition duration-1000 pointer-events-none
+  }
+
+  .modal.active {
+    @apply opacity-100 pointer-events-auto
+  }
+
+  .modal-content{
+    @apply min-w-[200px] max-h-[550px] flex flex-col
+  }
 }
+
+

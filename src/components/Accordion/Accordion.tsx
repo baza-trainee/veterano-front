@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ArrowButton from "../ArrowButton/ArrowButton";
 
 interface AccordionItem {
 	title: string;
@@ -29,9 +30,13 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
 						<div className="text-lg text-black font-medium">{item.title}</div>
 						<div>
 							{activeIndex === index ? (
-								<img src="./images/black-arrow-up.svg" />
+								<ArrowButton disabled={false} direction="top" variant="faq" />
 							) : (
-								<img src="./images/black-arrow-down.svg" />
+								<ArrowButton
+									disabled={false}
+									direction="bottom"
+									variant="faq"
+								/>
 							)}
 						</div>
 					</div>
