@@ -3,7 +3,7 @@ import { BiCheck } from "react-icons/bi";
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 	id: string;
-	label: string;
+	label?: string;
 	checked?: boolean;
 	onCheck?: (event: ChangeEvent<HTMLInputElement>) => void;
 	children?: React.ReactNode;
@@ -28,7 +28,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
 				onChange={onCheck}
 				className="hidden peer"
 			/>
-			<label htmlFor={id} className="flex gap-[20px] cursor-pointer peer ">
+			<label
+				htmlFor={id}
+				className="flex gap-[20px] items-center justi cursor-pointer peer font-light text-[18px] leading-[28px]"
+			>
 				<BiCheck
 					fill={checked ? "black" : "transparent"}
 					className={
