@@ -10,7 +10,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string,
   onMouseDown?: MouseEventHandler<HTMLDivElement>
   type: string,
-  passwordVisible?: boolean
+  passwordVisible?: boolean,
+	className?: string
 }
 
 const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, value, label, ...props}) => {
@@ -54,7 +55,7 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
   }
 
   return (
-    <div className="flex flex-col-reverse relative w-[288px] md:w-[320px] lg:w-[413px]">
+    <div className={ ` ${props.className} flex flex-col-reverse relative`}>
       <input
         id={id}
         placeholder=""

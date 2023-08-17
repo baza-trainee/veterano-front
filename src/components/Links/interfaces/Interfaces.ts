@@ -14,6 +14,8 @@ export interface LinkPropsType {
 		| "underlineNoneSideBar";
 	size?: "small" | "large" | "wideMob";
 	disabled?: boolean;
+	style?: React.CSSProperties,
+	className?: string
 }
 
 export type sizeClassType = {
