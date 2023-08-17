@@ -6,9 +6,15 @@ import * as Yup from "yup";
 import Input from "../components/Input/Input.tsx";
 import Textarea from "../components/Textarea/Textarea.tsx";
 import Button from "../components/Button/Button.tsx";
+import { createFeedback } from "../api/FeedbackAPI.ts";
+import { useState } from "react";
+import ModalWindow from "../components/Modal/ModalWindow.tsx";
+import NavigationLink from "../components/Links/NavigationLink.tsx";
 
 
 const ContactUs = () => {
+
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const { isMobile, isTablet, isDesktop } = useMedia();
 
@@ -81,15 +87,26 @@ const ContactUs = () => {
 							}
 						}
 						validationSchema={validationSchema}
-						onSubmit={(values, { setSubmitting }) => {
-							setSubmitting(false);
-							console.log(values);
+						onSubmit={async (values, { setSubmitting }) => {
+							try {
+								const response = await createFeedback({ name: values.name, email: values.email, message: values.message });
+								if (response) {
+									setIsModalOpen(true);
+								} else {
+									console.log("Помилка від сервера");
+								}
+							} catch (error) {
+								console.log(error);
+							} finally {
+								setSubmitting(false);
+							}
 						}}
 						validateOnChange={false}
 						validateOnBlur={true}
 					>
+
 						{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
-							<Form className={"md:flex md:w-[55%] md:flex-col lg:flex-row lg:flex-wrap "}>
+							<Form className={"md:flex md:w-[55%] md:flex-col lg:w-[55%] lg:flex-row lg:flex-wrap lg:max-w-[800px] "}>
 								<Input
 									id={"name"}
 									value={values.name}
@@ -101,7 +118,6 @@ const ContactUs = () => {
 									onChange={handleChange}
 									onBlur={handleBlur}
 									className={"md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink lg:basis-[305px] "} />
-
 								<Input
 									id={"email"}
 									value={values.email}
@@ -121,7 +137,7 @@ const ContactUs = () => {
 									onChange={handleChange}
 									onBlur={handleBlur}
 									error={errors.message && touched.message ? errors.message : undefined}
-									className={"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[738px] lg:flex-grow lg:flex-shrink-0 "}
+									className={"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[785px] lg:flex-grow lg:flex-shrink-0 "}
 								/>
 
 								<Button className={"md:w-[167px]"} variant={"primary"} disabled={!isValid} size={"large"}
@@ -130,6 +146,17 @@ const ContactUs = () => {
 						)}
 
 					</Formik>
+					<ModalWindow className={'p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[400px]'} active={isModalOpen} setActive={setIsModalOpen}>
+						<div className={'text-black mt-[30px]'}>
+							<Typography variant={"h4"} component={'p'} className={'text-center font-bold'}>Ваше повідомлення надіслане</Typography>
+							<div className={'flex justify-center mt-10'}>
+								<img src="/images/success-sent.svg" alt="check" />
+							</div>
+							<div className={'flex justify-center w-full mt-12'}>
+								<NavigationLink to={'/'} variant={"primary"} size={'large'}>До головної</NavigationLink>
+							</div>
+						</div>
+					</ModalWindow>
 				</div>
 
 			</div>
