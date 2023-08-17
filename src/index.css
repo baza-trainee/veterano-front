@@ -86,7 +86,7 @@
 	}
 
 	.input-form {
-		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+		@apply w-full text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
 	}
 
 	.input-form:invalid:not(:placeholder-shown) {
@@ -183,4 +183,30 @@
 	.carousel-actions {
 		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5;
 	}
+
+  .contact-wrapper{
+    @apply my-[80px] ml-4 md:w-[702px] lg:w-full md:mx-6 md:my-[100px] lg:ml-[80px] lg:my-[120px]
+  }
+
+  .contact-info{
+    @apply flex flex-col gap-7 w-full md:flex-row md:gap-2 lg:gap-2 mb-11 md:mb-1
+  }
+
+  .contact-info > ul > li{
+    @apply flex items-center mb-[13px] lg:mb-[9px]
+  }
+
+  .contact-info > ul > li > p{
+    @apply pl-[10px]
+  }
+
+  .contact-feedback{
+    @apply mr-4 md:mr-0 md:flex md:w-[702px] lg:w-full
+  }
+
+
+
+
+
+
 }

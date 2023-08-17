@@ -10,7 +10,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string,
   onMouseDown?: MouseEventHandler<HTMLDivElement>
   type: string,
-  passwordVisible?: boolean
+  passwordVisible?: boolean,
+	className?: string
 }
 
 const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, value, label, ...props}) => {
@@ -54,7 +55,8 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
   }
 
   return (
-    <div className="flex flex-col-reverse relative w-[288px] md:w-[320px] lg:w-[413px]">
+    <div className={ ` ${props.className} flex flex-col-reverse relative`}>
+
       <input
         id={id}
         placeholder=""
@@ -63,13 +65,14 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
         {...props}
         className={inputStyles()}
       />
-      {label && <label htmlFor={id} className={labelStyles()}>{label}</label>}
+			{label && <label htmlFor={id} className={labelStyles()}>{label}</label>}
+
       {props.name === 'password' &&
         <div className="absolute right-[5%] bottom-[10%] cursor-pointer z-10">
           { passwordVisible ?  <AiFillEyeInvisible onMouseDown={onMouseDown}/> : <BsFillEyeFill onMouseDown={onMouseDown}/>}
         </div>
       }
-      {error &&  <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[26px]">{error} </p>}
+      {error &&  <p className="absolute block left-[10px] top-[100%] text-error100 text-[14px] leading-[26px]">{error} </p>}
 
     </div>
 
