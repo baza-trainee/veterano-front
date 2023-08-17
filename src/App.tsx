@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 import { ErrorPage } from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage.tsx";
+import "./App.css";
 
 function App() {
-
 	return (
-    <BrowserRouter>
+		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<HomePage />} />
