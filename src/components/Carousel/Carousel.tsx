@@ -10,12 +10,12 @@ interface CarouselProps {
 }
 
 const Carousel: FC<CarouselProps> = ({
-	items,
-	gap,
-	slidesPerView,
-	component: Component,
-	button,
-}) => {
+																			 items,
+																			 gap,
+																			 slidesPerView,
+																			 component: Component,
+																			 button,
+																		 }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [slideWidth, setSlideWidth] = useState(0);
@@ -25,7 +25,7 @@ const Carousel: FC<CarouselProps> = ({
 			const containerWidth = containerRef.current
 				? containerRef.current.offsetWidth
 				: 0;
-			const totalGaps = gap * slidesPerView;
+			const totalGaps = gap * (slidesPerView - 1);
 			const width = (containerWidth - totalGaps) / slidesPerView;
 			setSlideWidth(width);
 		}
@@ -44,42 +44,36 @@ const Carousel: FC<CarouselProps> = ({
 	};
 
 	return (
-		<>
+		<div ref={containerRef} className={'overflow-hidden m-auto'}>
 			<div
-				ref={containerRef}
-				className="overflow-hidden m-auto w-[320px] md:w-[768px] lg:w-[1280px]"
+				className="flex items-center relative "
+				style={{
+					transition: "left 0.9s ease-in-out",
+					left: `-${currentSlide * slideWidth + currentSlide * gap}px`,
+				}}
 			>
-				<div
-					className="flex items-center relative "
-					style={{
-						transition: "left 0.9s ease-in-out",
-						left: `-${currentSlide * slideWidth + currentSlide * gap}px`,
-					}}
-				>
-					{items.map((item, index) => (
-						<div
-							key={index}
-							className={"flex justify-center md:justify-start"}
-							style={{
-								minWidth: `${slideWidth}px`,
-								marginRight: index < items.length - 1 ? `${gap}px` : "0px",
-							}}
-						>
-							<Component {...item} />
-						</div>
-					))}
-				</div>
+				{items.map((item, index) => (
+					<div
+						key={index}
+						className={"flex justify-center md:justify-start"}
+						style={{
+							minWidth: `${slideWidth}px`,
+							marginRight: (index < items.length - 1) ? `${gap}px` : "0px",
+						}}
+					>
+						<Component {...item} />
+					</div>
+				))}
 			</div>
-
 			<div
 				className={
 					button
 						? "carousel-actions justify-between md:flex-row md:justify-between"
-						: "carousel-actions md:flex-row md:justify-end  "
+						: "carousel-actions justify-center md:flex-row md:justify-end mt-[32px] lg:mt-[34px]  "
 				}
 			>
 				{button && button()}
-				<div className={"flex gap-[24px] mt-[5px]"}>
+				<div className={"flex gap-[24px] "}>
 					<ArrowButton
 						direction="left"
 						variant="carousel"
@@ -94,7 +88,7 @@ const Carousel: FC<CarouselProps> = ({
 					/>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

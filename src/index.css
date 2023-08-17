@@ -43,11 +43,11 @@
 	}
 
 	.primary-btn {
-		@apply flex items-center justify-center;
+		@apply flex items-center justify-center box-border border border-transparent;
 	}
 
 	.primary-btn:hover {
-		@apply shadow-middle bg-[#FCFCFC] border border-black text-black;
+		@apply  shadow-middle bg-[#FCFCFC] border border-black text-black;
 	}
 
 	.primary-btn:active {
@@ -101,23 +101,23 @@
 		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
 
-	.footer {
-		@apply flex flex-col md:flex-row ml-4 md:ml-6 lg:ml-[80px] pb-[96px] md:h-[361px] relative;
+	.footer  {
+		@apply flex flex-col justify-between md:flex-row mx-4 md:ml-6 md:mr-12 lg:mx-[80px] pb-[96px] md:pb-[20px] lg:pb-0 relative;
 	}
 
 	.wrapper {
-		@apply relative;
+		@apply relative ;
 	}
-	.wrapper:after {
-		@apply absolute block w-[80%] md:w-[100%] lg:w-[87%] h-[1px] bg-[#BCBCBC] bottom-0 left-4 md:left-0  lg:left-[80px] content-[''];
+	.footer:after {
+		@apply absolute top-[100%] block w-[100%] md:w-[111%] lg:w-[100%] h-[1px] bg-[#BCBCBC] bottom-0 left-0 md:left-[-24px]  lg:left-0 content-[''];
 	}
 
 	.footer-info {
-		@apply mt-[67px] mb-[80px] md:mt-12 md:mr-[22px] lg:mr-[153px];
+		@apply mt-[67px] mb-[57px] md:mt-12 lg:mt-[80px]
 	}
 
 	.footer-nav {
-		@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-footer md:auto-rows-fr md:mt-9 lg:w-[70%];
+		@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-footer lg:grid-rows-footer md:auto-rows-fr md:mt-9 lg:mt-[80px]
 	}
 
 	.footer-nav ul > li {
@@ -173,11 +173,11 @@
 	}
 
 	.search-input-disabled {
-		@apply min-w-[89%] bg-inherit text-grey30 outline-none text-[14px] leading-[26px] lg:text-[16px]  lg:leading-[24px];
+		@apply min-w-[89%] bg-inherit text-grey30 outline-none text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px];
 	}
 
 	.carousel-actions {
-		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-[768px] lg:w-[1280px] pr-5;
+		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-full lg:w-full;
 	}
 
   .filter-input {
@@ -233,6 +233,29 @@
     @apply pb-0
   }
 
+  .project-section {
+    @apply flex flex-col items-center
+  }
+
+  .project-section > div {
+    @apply mb-16
+  }
+
+  .project-section > div:last-of-type {
+    @apply mb-12
+  }
+
+  .modal{
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-black/50 z-10 flex justify-center opacity-0 transition duration-1000 pointer-events-none
+  }
+
+  .modal.active {
+    @apply opacity-100 pointer-events-auto
+  }
+
+  .modal-content{
+    @apply min-w-[200px] max-h-[550px] flex flex-col
+  }
 }
 
 
