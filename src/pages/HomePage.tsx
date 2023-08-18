@@ -4,8 +4,8 @@ import PartnersSection from "../components/PartnersSection/PartnersSection.tsx";
 const HomePage = () => {
 	return (
 		<>
-		<ProjectSection/>
-    <PartnersSection/>
+			<ProjectSection />
+			<PartnersSection />
 		</>
 	);
 };
