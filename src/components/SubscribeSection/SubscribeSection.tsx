@@ -1,18 +1,21 @@
 import Typography from "../Typography/Typography.tsx";
 import { useMedia } from "../../hooks/useMedia.tsx";
-import { Form, Formik} from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../Input/Input.tsx";
 import Button from "../Button/Button.tsx";
 import Checkbox from "../Checkbox/Checkbox.tsx";
 import Link from "../Links/Link.tsx";
-
+import { useState } from "react";
+import { createSubscription } from "../../api/SubscribeAPI.ts";
+import ModalWindow from "../Modal/ModalWindow.tsx";
+import NavigationLink from "../Links/NavigationLink.tsx";
 
 
 const SubscribeSection = () => {
 
 	const { isDesktop, isMobile } = useMedia();
-
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const validationSchema = Yup.object({
 		name: Yup.string()
@@ -25,7 +28,12 @@ const SubscribeSection = () => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
 			.required("Введіть дійсний email"),
+		check: Yup.bool()
+			.oneOf([true], "Це поле є обов’язковим")
+			.required("Це поле є обов’язковим"),
+
 	});
+
 
 	return (
 		<section>
@@ -35,18 +43,27 @@ const SubscribeSection = () => {
 						новини</Typography>
 				</div>
 				<Formik
-					initialValues={{name: "", email: ""}}
+					initialValues={{ name: "", email: "", check: false }}
 					validationSchema={validationSchema}
-					onSubmit={(values, { setSubmitting }) => {
-						console.log(values);
-						setSubmitting(false);
+					onSubmit={async (values, { setSubmitting, resetForm }) => {
+						try {
+							const response = await createSubscription({ name: values.name, email: values.email });
+							if (response) {
+								setIsModalOpen(true);
+							}
+						} catch (e) {
+							console.log(e);
+						} finally {
+							setSubmitting(false);
+						}
+						resetForm();
 					}}
-					validateOnChange={false}
+					validateOnChange={true}
 					validateOnBlur={true}>
 
 
-					{ ({values, handleBlur, handleChange, errors, touched, isValid }) => (
-						<Form className={'flex flex-col md:items-start md:ml-[50%] '}>
+					{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
+						<Form className={"flex flex-col md:items-start md:ml-[50%] "}>
 							<div>
 								<Input
 									id={"name"}
@@ -58,7 +75,7 @@ const SubscribeSection = () => {
 									label={"Ім'я"}
 									onChange={handleChange}
 									onBlur={handleBlur}
-									style={{ minWidth: isMobile ? '200px' : '350px'}}/>
+									style={{ minWidth: isMobile ? "200px" : "350px" }} />
 
 								<Input
 									id={"email"}
@@ -70,24 +87,40 @@ const SubscribeSection = () => {
 									onChange={handleChange}
 									onBlur={handleBlur}
 									className={"md:w-full "}
-									style={{ minWidth: isMobile ? '200px' : '350px'}}/>
+									style={{ minWidth: isMobile ? "200px" : "350px" }} />
 							</div>
 
-							<div className={'mt-[56px] md:w-[350px] lg:w-full'}>
+							<div className={"mt-[56px] md:w-[350px] lg:w-full"}>
 								<Checkbox
-									id={'subscribe'}
-									checked={true}
-									onCheck={(e) => console.log(e.target.checked)}>
-									<p className={'text-[14px] leading-[26px] md:w-[230px] lg:w-full lg:text-[18px]'}>Я погоджуюся з <Link variant={'underlineFooter'} to={'/rules'}
-																					style={{color: 'black'}}>правилами</Link> сайту khyst.site</p>
+									name={"check"}
+									id={"subscribe"}
+									checked={values.check}
+									onCheck={handleChange}>
+									<p className={"text-[14px] leading-[26px] md:w-[230px] lg:w-full lg:text-[18px]"}>Я погоджуюся з <Link
+										variant={"underlineFooter"} to={"/rules"}
+										style={{ color: "black" }}>правилами</Link> сайту khyst.site</p>
 								</Checkbox>
-								<Button className={"md:w-[167px] mt-[38px] lg:mt-[42px]"} variant={"primary"} disabled={!isValid} size={"large"}
+								{errors.check && touched.check &&
+									<p className={"text-error100 mt-3 pl-[10px] text-[14px]"}>{errors.check}</p>}
+								<Button className={"md:w-[167px] mt-[38px] lg:mt-[42px]"} variant={"primary"} disabled={!isValid}
+												size={"large"}
 												type={"submit"}>Надіслати</Button>
 							</div>
 
 						</Form>
 					)}
 				</Formik>
+				<ModalWindow className={'p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[500px] md:h-[400px]'} active={isModalOpen} setActive={setIsModalOpen}>
+					<div className={'text-black mt-[30px]'}>
+						<Typography variant={"h4"} component={'p'} className={'text-center font-bold'}>Ви успішно підписались на новини </Typography>
+						<div className={'flex justify-center mt-10'}>
+							<img src="/images/success-sent.svg" alt="success" />
+						</div>
+						<div className={'flex justify-center w-full mt-12'}>
+							<NavigationLink to={'/'} variant={"primary"} size={'large'}>До головної</NavigationLink>
+						</div>
+					</div>
+				</ModalWindow>
 			</div>
 
 		</section>

@@ -36,7 +36,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 					fill={checked ? "black" : "transparent"}
 					className={
 						"block rounded-[4px] bg-yellow100 border-black border-[2px] w-[24px] h-[24px] " +
-						(!checked && " bg-[transparent]")
+						(!checked && " bg-inherit")
 					}
 				/>
 				{label || children}
