@@ -8,7 +8,9 @@ export const Layout = () => {
 		<div>
 			<ScrollToTop/>
 			<Header />
-			<Outlet />
+			<div className="flex-grow">
+				<Outlet />
+			</div>
 			<Footer />
 		</div>
 	);
