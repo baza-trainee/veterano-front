@@ -5,6 +5,7 @@ interface FilterButtonProps {
 	checked?: boolean;
 	label: string;
 	value: string;
+	name: string;
 	className?: string;
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -13,6 +14,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	id,
 	checked = false,
 	label,
+	name,
 	value,
 	onChange = ({ target }) => {
 		console.log(target.value);
@@ -32,6 +34,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 				className="hidden peer"
 				id={id}
 				type="radio"
+				name={name}
 				value={value}
 				checked={checked}
 				onChange={onChange}
@@ -39,7 +42,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 			<label
 				htmlFor={id}
 				className={
-					"cursor-pointer inline-block text-[14px] px-[8px] rounded-[51px] border-[1px] border-black hover:bg-black hover:text-white " +
+					"cursor-pointer inline-block text-[14px] px-[8px] rounded-[51px] border-[1px] border-black hover:bg-black hover:text-white whitespace-nowrap " +
 					checkedClass +
 					" " +
 					className
