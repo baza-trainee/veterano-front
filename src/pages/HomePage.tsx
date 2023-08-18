@@ -5,7 +5,6 @@ import HeroSearchBar from "../components/SearchForm/SearchForm.tsx";
 const HomePage = () => {
 	return (
 		<>
-			<HeroSearchBar onSubmit={() => console.log("dsa")} />
 			<ProjectSection />
 			<PartnersSection />
 		</>
