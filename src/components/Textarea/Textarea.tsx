@@ -6,6 +6,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	className?: string;
 	placeholder?: string;
 	onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+	error?: string
 }
 const Textarea: React.FC<TextareaProps> = ({
 	label = "",
@@ -31,7 +32,9 @@ const Textarea: React.FC<TextareaProps> = ({
 					value={value}
 					{...props}
 				/>
+				{props.error &&  <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[26px]">{props.error} </p>}
 			</label>
+
 		</>
 	);
 };

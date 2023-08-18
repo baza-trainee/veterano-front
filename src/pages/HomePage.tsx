@@ -3,6 +3,7 @@ import PartnersSection from "../components/PartnersSection/PartnersSection.tsx";
 import SubscribeSection from "../components/SubscribeSection/SubscribeSection.tsx";
 
 const HomePage = () => {
+
 	return (
 		<>
 		<ProjectSection/>
