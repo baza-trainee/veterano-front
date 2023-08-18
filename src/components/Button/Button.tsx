@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
 		"py-2  font-light rounded hover:shadow disabled:bg-[#808080]";
 
 	if (size === "large") {
-		buttonStyles += " text-18  w-full";
+		buttonStyles += " text-18 w-full";
 	} else if (size === "wideMob") {
 		buttonStyles += " text-sm  w-[288px]";
 	} else {
