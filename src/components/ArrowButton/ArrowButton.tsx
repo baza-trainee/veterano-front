@@ -44,7 +44,7 @@ const ArrowButton: FC<ArrowButtonProps> = ({
 	return (
 		<button onClick={onClick} className={variantStyle}>
 			<MdArrowForwardIos
-				color={variant === "faq" ? "white" : "black"}
+				color={"white"}
 				size={variant === "faq" ? 20 : 30}
 				className={arrowStyle[direction]}
 			/>
