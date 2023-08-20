@@ -184,7 +184,7 @@
 
 
   .filter-input {
-    @apply relative w-[197px] flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded
+    @apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded
   }
 
   .filter-label-chosen {
@@ -294,6 +294,15 @@
 
   .scroll-to-top:hover .scroll-to-top-icon{
     @apply w-[58px] h-[58px]
+  }
+
+  .search-mob{
+    scrollbar-width: none;
+  }
+
+  .search-mob::-webkit-scrollbar{
+    scrollbar-width: none;
+    display: none;
   }
 
 

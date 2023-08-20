@@ -5,6 +5,7 @@ import { AboutUs } from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
+import SearchResults from "./pages/SearchResults.tsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />
             <Route path="/contact" element={<ContactUs />} />
+						<Route path="/search" element={<SearchResults />} />
             <Route path="/aboutus" element={<AboutUs />} />
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
