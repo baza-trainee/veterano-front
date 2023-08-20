@@ -4,7 +4,7 @@ import Typography from "../components/Typography/Typography";
 
 export const ErrorPage = () => {
 	return (
-		<Container className="flex justify-center items-center flex-col p-4 min-h-[545px]">
+		<Container className="flex justify-center items-center flex-col p-4 min-h-[575px]">
 			<Typography
 				variant="span"
 				className="text-grey100 text-[130px] font-extralight md:text-[170px] lg:text-[200px]"
