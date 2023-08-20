@@ -40,7 +40,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 			<label
 				htmlFor={id}
 				className={
-					"cursor-pointer flex text-[14px] px-[8px] rounded-[51px] border-[1px] border-black hover:bg-black hover:text-white " +
+					"cursor-pointer flex text-[14px] px-[8px] rounded-[51px] leading-[26px] border-[1px] border-black hover:bg-black hover:text-white " +
 					checkedClass +
 					" " +
 					className

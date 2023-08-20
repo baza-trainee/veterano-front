@@ -9,7 +9,7 @@ import DropDown from "../components/DropDown/DropDown.tsx";
 const SearchResults = () => {
 	return (
 		<div>
-			<section className={'w-full bg-yellow100 px-4 pt-6 pb-[80px]'}>
+			<section className={'w-full bg-yellow100 px-4 pt-6 pb-[80px] md:py-[56px] md:px-6 lg:pt-11 lg:pb-[56px] lg:pl-[80px]'} >
 				<Typography variant={'h1'} component={'h1'} className={'mb-12'}>Проєкти</Typography>
 				<div>
 					<Formik
@@ -22,9 +22,13 @@ const SearchResults = () => {
 
 						{({ values, setFieldValue, handleChange }) => (
 							<Form>
-								<SearchBar id={'search'} name={'search'} value={values.search} onChange={handleChange} disabled={false} />
-								<div className={'my-6'}>
-									<DropDown name={'country'} cities={['Полтава']} value={values.country} onChange={handleChange} setValue={setFieldValue} placeholder={'Країна / місто'} />
+								<div className={'md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]'}>
+									<div className={'md:w-[350px] lg:w-[413px]'}>
+										<SearchBar id={'search'} name={'search'} value={values.search} onChange={handleChange} disabled={false} />
+									</div>
+									<div className={'my-6 md:my-0 md:w-[350px] lg:w-[197px]'}>
+										<DropDown name={'country'} cities={['Полтава']} value={values.country} onChange={handleChange} setValue={setFieldValue} placeholder={'Країна / місто'} />
+									</div>
 								</div>
 								<div className={'flex overflow-x-auto gap-4 search-mob'}>
 									<FilterButton id={'category'} label={'Усі'} name={'option'} value={'Усі'} onChange={handleChange} checked={true} className={'whitespace-nowrap '}/>
