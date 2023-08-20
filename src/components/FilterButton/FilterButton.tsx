@@ -14,6 +14,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	id,
 	checked = false,
 	label,
+	name,
 	value,
 	onChange = ({ target }) => {
 		console.log(target.value);
@@ -27,12 +28,13 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 		"peer-checked:hover:bg-black " +
 		"peer-checked:text-[14px]";
 	return (
-		<div >
+		<div>
 			<input
 				{...props}
 				className="hidden peer"
 				id={id}
 				type="radio"
+				name={name}
 				value={value}
 				checked={checked}
 				onChange={onChange}
