@@ -2,7 +2,7 @@ import { sizeClassType } from "../interfaces/Interfaces.ts";
 
 export const sizeClassNames: sizeClassType = {
 	small: "w-[136px] h-[36px] leading-[24px] ",
-	large: "max-w-[128px] text-[18px]",
+	large: "text-[18px]",
 	wideMob: " bg-white text-[18px] w-[288px]",
 };
 

@@ -10,11 +10,11 @@ export default {
 		},
 
 		extend: {
-      gridTemplateColumns:{
-        'footer': '200px 300px 420px'
-      },
+			gridTemplateColumns: {
+				footer: "200px 300px 420px",
+			},
 			gridTemplateRows: {
-				'footer': '130px auto',
+				footer: "130px auto",
 			},
 			boxShadow: {
 				small:
