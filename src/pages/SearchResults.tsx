@@ -1,4 +1,3 @@
-import Section from "../components/Section/Section.tsx";
 import Typography from "../components/Typography/Typography.tsx";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -42,12 +41,14 @@ const SearchResults = () => {
 	const city = searchParams.get("city");
 	const country = searchParams.get("country");
 	const category = searchParams.get("category");
+	const size = isMobile ? 6 : 4;
 	const [results, setResults] = useState<ResultsType | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [images, setImages] = useState<ImagesArrayType[]>([]);
+	const [additionalCards, setAdditionalCards] = useState<Card[]>([]);
 
 	useEffect(() => {
-		searchRequest({ q, city, country, category, page: currentPage })
+		searchRequest({ q, city, country, category, page: currentPage, size })
 			.then(data => {
 				setResults(data);
 				const imagesArray: ImagesArrayType[] = [];
@@ -63,6 +64,13 @@ const SearchResults = () => {
 				setImages(imagesArray);
 			});
 	}, [q, city, country, category, currentPage]);
+
+	const loadMore = async () => {
+		const nextPage = currentPage + 1;
+		const newItems = await searchRequest({ q, city, country, category, page: nextPage, size });
+		setAdditionalCards([...additionalCards, ...newItems.cards]);
+	};
+
 	const handleSelectedPage = (selectedPage: number) => {
 		setCurrentPage(selectedPage);
 	};
@@ -71,7 +79,7 @@ const SearchResults = () => {
 		const imageObj = images.find(image => image.imageId === imageId);
 		return imageObj ? imageObj.image : "";
 	};
-
+	const cardsToRender = isMobile ? [...results?.cards || [], ...additionalCards] : results?.cards;
 	return (
 		<>
 			<section
@@ -82,14 +90,15 @@ const SearchResults = () => {
 					className={"mb-12 md:max-w-[768px] mx-auto md:text-left lg:max-w-[1440px]"}>Проєкти</Typography>
 				<HeroSearchBar />
 			</section>
-			<section className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"} >
+			<section className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}>
 				<Container>
-					<Typography variant={isMobile ? "h5" : 'h4'} component={'h2'} className="text-center md:text-left md:ml-6 lg:ml-[80px]">
+					<Typography variant={isMobile ? "h5" : "h4"} component={"h2"}
+											className="text-center md:text-left md:ml-6 lg:ml-[80px]">
 						Знайдено результатів: {results?.totalSize}
 					</Typography>
 					<div className="mt-[32px] lg:mt-6">
-						{results?.cards && results?.cards.map((card, index) =>
-							isMobile?
+						{cardsToRender && cardsToRender.map((card, index) =>
+							isMobile ?
 								<ProjectCard
 									key={index}
 									imageSrc={findImageSrc(card.imageId)}
@@ -97,24 +106,27 @@ const SearchResults = () => {
 									text={card.description}
 									variant={"carousel"} />
 								:
-								<div className={'md:mx-6 lg:mx-[80px]'}>
+								<div className={"md:mx-6 lg:mx-[80px]"}>
 									<ProjectCard
 										key={index}
 										imageSrc={findImageSrc(card.imageId)}
 										title={card.title}
 										text={card.description}
 										variant={"search"} />
-								</div>
+								</div>,
 						)}
 
 					</div>
 					{isMobile ?
-						<div className={'flex justify-center'}><Button variant={'secondary'} size={'wideMob'} className={'mt-[32px]'}>Показати ще</Button></div>
+						<div className={"flex justify-center"}>
+							<Button variant={"secondary"} size={"wideMob"} className={"mt-[32px]"} onClick={loadMore}>Показати
+								ще</Button>
+						</div>
 						:
 						<Pagination
-						pageCount={results?.totalPages || 0}
-						currentPage={currentPage}
-						onSelectedPage={handleSelectedPage} />}
+							pageCount={results?.totalPages || 0}
+							currentPage={currentPage}
+							onSelectedPage={handleSelectedPage} />}
 				</Container>
 			</section>
 		</>

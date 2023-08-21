@@ -1,13 +1,15 @@
 import { $host } from "./index.ts";
 
+
 interface SearchRequestType{
 	q: string | null;
 	city: string | null;
 	country: string | null;
 	category: string | null;
 	page: number | null;
+	size: number | null
 }
-export const searchRequest = async ({q, city, country, category, page}: SearchRequestType) => {
+export const searchRequest = async ({q, city, country, category, page, size}: SearchRequestType) => {
 	try{
 		const {data} = await $host.get('search/card', {
 			params: {
@@ -16,7 +18,7 @@ export const searchRequest = async ({q, city, country, category, page}: SearchRe
 				country,
 				category,
 				page,
-				size: "2"
+				size
 			}
 		})
 		return data
