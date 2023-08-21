@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
-import { ImageChoper } from "./ImageCroper";
+import { ImageCroper } from "./ImageCroper";
 interface ImageInput {
 	onChange: (preview: string) => void;
 }
@@ -18,7 +18,7 @@ const ImageInput = ({
 	return (
 		<>
 			{isCropeningImg && file && (
-				<ImageChoper
+				<ImageCroper
 					aspect={265 / 232}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {

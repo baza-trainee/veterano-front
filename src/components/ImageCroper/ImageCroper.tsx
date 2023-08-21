@@ -3,12 +3,12 @@ import Cropper, { Area, Point } from "react-easy-crop";
 import getCroppedImg from "./getCroppedImg";
 import Button from "../Button/Button";
 
-interface ImageChoperProps {
+interface ImageCroperProps {
 	onClose: (url: string) => void;
 	src: string;
 	aspect: number;
 }
-export const ImageChoper: React.FC<ImageChoperProps> = ({
+export const ImageCroper: React.FC<ImageCroperProps> = ({
 	src,
 	onClose = (url: string) => {
 		console.log(url);
