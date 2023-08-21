@@ -3,8 +3,11 @@ import { string, object } from "yup";
 import { Formik, Form } from "formik";
 import Button from "../../components/Button/Button";
 import { login } from "../../api/AuthAPI";
+import Typography from "../../components/Typography/Typography";
+import { useState } from "react";
 
 const LoginForm = () => {
+	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const validationSchema = object({
 		email: string()
 			.email("Введіть дійсний email")
@@ -19,7 +22,8 @@ const LoginForm = () => {
 	});
 
 	return (
-		<>
+		<div className="rounded-[4px] px-[32px] py-[96px] bg-yellow50 w-[518px]">
+			<Typography variant="h1">Вхід</Typography>
 			<Formik
 				initialValues={{ email: "", password: "" }}
 				validationSchema={validationSchema}
@@ -39,38 +43,49 @@ const LoginForm = () => {
 				validateOnBlur={true}
 			>
 				{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
-					<Form className="w-[518px]">
-						<Input
-							value={values.email}
-							error={errors.email && touched.email ? errors.email : undefined}
-							type="text"
-							name="email"
-							id="email"
-							label="Логін"
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-						<Input
-							value={values.password}
-							error={
-								errors.password && touched.password
-									? errors.password
-									: undefined
-							}
-							name="password"
-							type="password"
-							id="password"
-							label="Пароль"
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-						<Button disabled={!isValid} size="large" type="submit">
-							Увійти
-						</Button>
+					<Form className="flex flex-col gap-[92px]">
+						<div className="flex flex-col gap-[32px] shrink-0">
+							<Input
+								value={values.email}
+								error={errors.email && touched.email ? errors.email : undefined}
+								type="text"
+								name="email"
+								id="email"
+								label="Логін"
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
+							<Input
+								value={values.password}
+								error={
+									errors.password && touched.password
+										? errors.password
+										: undefined
+								}
+								name="password"
+								type={isVisible ? "text" : "password"}
+								id="password"
+								label="Пароль"
+								onChange={handleChange}
+								onBlur={handleBlur}
+								passwordVisible={isVisible}
+								onMouseDown={() => setIsVisible((prev) => !prev)}
+							/>
+						</div>
+						<div className="flex flex-col gap-[32px] items-center">
+							<Button
+								className="w-[129px]"
+								disabled={!isValid}
+								size="large"
+								type="submit"
+							>
+								Увійти
+							</Button>
+						</div>
 					</Form>
 				)}
 			</Formik>
-		</>
+		</div>
 	);
 };
 
