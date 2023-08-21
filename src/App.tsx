@@ -4,10 +4,11 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { AboutUs } from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
+import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 
-function App() {
 
+function App() {
 	return (
 		<>
 			<BrowserRouter>
