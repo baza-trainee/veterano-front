@@ -26,10 +26,10 @@ const DropDown: FC<DropDownProps> = ({
 		cityObj.country.toLowerCase().includes(value.toLowerCase())
 	);
 
-	console.log(results);
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
+	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {
 		if (value.length > 1 && !citySelected) {
@@ -39,6 +39,7 @@ const DropDown: FC<DropDownProps> = ({
 
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country })
+		setInputValue(`${city} / ${country}`)
 		setIsOpen(false);
 		setCitySelected(true);
 	};
@@ -55,10 +56,11 @@ const DropDown: FC<DropDownProps> = ({
 							? "filter-label-input"
 							: "w-[125px] text-4 bg-[#F9F6EC]"
 					}
-					value={value}
+					value={inputValue}
 					onChange={e => {
 						onChange(e);
 						setCitySelected(false);
+						setInputValue(e.target.value);
 					}}
 					name={name}
 				/>

@@ -193,11 +193,11 @@
   }
 
 	.filter-label-chosen {
-		@apply relative w-[197px] flex justify-between items-center p-[10px] bg-black rounded;
+		@apply relative flex justify-between items-center p-[10px] bg-black rounded;
 	}
 
 	.filter-label-input {
-		@apply bg-black text-white outline-none w-[125px];
+		@apply bg-black text-white outline-none ;
 	}
 
 	.filter-input:hover {
