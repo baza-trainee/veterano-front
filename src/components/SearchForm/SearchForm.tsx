@@ -8,10 +8,6 @@ import { useEffect, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
 
-
-
-//test cities
-// const cities = ["Полтава", "Лондон", "Париж", "Київ", "Прага"];
 interface CategoryType {
 	categoryName: string;
 }
@@ -23,8 +19,8 @@ export interface CitiesType {
 
 const HeroSearchBar = () => {
 	const navigate = useNavigate();
-	const [categories, setCategories] = useState<CategoryType[]>([])
-	const [cities, setCities] = useState<CitiesType[]>([])
+	const [categories, setCategories] = useState<CategoryType[]>([]);
+	const [cities, setCities] = useState<CitiesType[]>([]);
 
 	useEffect(() => {
 		getCategoryList()
@@ -32,27 +28,28 @@ const HeroSearchBar = () => {
 				if (data !== null) {
 					setCategories(data);
 				}
-			})
+			});
 		getCitiesList()
 			.then((data) => {
 				if (data !== null) {
 					setCities(data);
 				}
-		})
-	}, [])
+			});
+	}, []);
 
 	return (
 
 		<Container>
 			<Formik
-				initialValues={{ search: '', city: '', country: '', category: '' }}
+				initialValues={{ search: "", city: "", country: "", category: "" }}
 				onSubmit={values => {
 					const queryParams = new URLSearchParams();
 
-					if (values.search) queryParams.append('q', values.search);
-					if (values.city) queryParams.append('city', values.city);
-					if (values.country) queryParams.append('country', values.country);
-					if (values.category) queryParams.append('category', values.category);
+					if (values.search) queryParams.append("q", values.search);
+					if (values.city) queryParams.append("city", values.city);
+					if (values.country) queryParams.append("country", values.country);
+					if (values.category) queryParams.append("category", values.category);
+					queryParams.append("page", "1");
 
 					if (queryParams.toString()) {
 						navigate(`/search?${queryParams}`);
@@ -62,49 +59,49 @@ const HeroSearchBar = () => {
 
 				{({ values, setFieldValue, submitForm, handleChange, handleSubmit }) => (
 					<Form>
-						<div className={'md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]'}>
-							<div className={'md:w-[350px] lg:w-[413px]'}>
+						<div className={"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"}>
+							<div className={"md:w-[350px] lg:w-[413px]"}>
 								<SearchBar
-									id={'search'}
-									name={'search'}
+									id={"search"}
+									name={"search"}
 									value={values.search}
 									onChange={handleChange}
-									placeholder={'Введіть слово для пошуку'}
+									placeholder={"Введіть слово для пошуку"}
 									disabled={false}
 								/>
 							</div>
-							<div className={'my-6 md:my-0 md:w-[350px] lg:w-[197px]'}>
+							<div className={"my-6 md:my-0 md:w-[350px] lg:w-[197px]"}>
 								<DropDown
-								name={'city'}
+									name={"city"}
 									cities={cities}
 									value={values.city}
 									onChange={handleChange}
 									onValueSelected={({ city, country }) => {
-										setFieldValue('city', city);
-										setFieldValue('country', country);
+										setFieldValue("city", city);
+										setFieldValue("country", country);
 										submitForm();
 									}}
-									placeholder={'Країна / місто'}
+									placeholder={"Країна / місто"}
 								/>
 							</div>
 						</div>
-						<div className={'flex overflow-x-auto gap-4 search-mob search-filter'}>
+						<div className={"flex overflow-x-auto gap-4 search-mob search-filter"}>
 							{
-								categories?.map((category, index) =>
+								categories && categories?.map((category, index) =>
 									<React.Fragment key={index}>
 										<FilterButton
 											id={`filter-${category.categoryName}`}
 											label={category.categoryName}
-											name={'category'}
+											name={"category"}
 											value={category.categoryName}
 											onChange={e => {
 												handleChange(e);
 												handleSubmit();
 											}}
 											checked={values.category === category.categoryName}
-											className={'whitespace-nowrap '}
+											className={"whitespace-nowrap "}
 										/>
-									</React.Fragment>
+									</React.Fragment>,
 								)
 							}
 						</div>

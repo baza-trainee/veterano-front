@@ -1,20 +1,25 @@
 import { $host } from "./index.ts";
 
 interface SearchRequestType{
-	q: string,
-	location: string,
-	category: string
+	q: string | null;
+	city: string | null;
+	country: string | null;
+	category: string | null;
+	page: number | null;
 }
-export const searchRequest = async ({q, location, category}: SearchRequestType) => {
+export const searchRequest = async ({q, city, country, category, page}: SearchRequestType) => {
 	try{
 		const {data} = await $host.get('search/card', {
 			params: {
 				q,
-				location,
-				category
+				city,
+				country,
+				category,
+				page,
+				size: "2"
 			}
 		})
-		return [data]
+		return data
 	} catch (e) {
 		console.error('Error:', e);
 		return null;
@@ -34,6 +39,16 @@ export const getCategoryList = async () => {
 export const getCitiesList = async () => {
 	try{
 		const {data} = await $host.get('search/all-countries')
+		return data
+	} catch (e) {
+		console.error('Error:', e);
+		return null;
+	}
+}
+
+export const getCardImage = async (id: string) => {
+	try{
+		const {data} = await $host.get('search/image/get', {params:{id}})
 		return data
 	} catch (e) {
 		console.error('Error:', e);
