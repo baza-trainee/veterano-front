@@ -16,6 +16,7 @@ const SearchResults = () => {
 	const [result, setResults] = useState([])
 
 	console.log(q , location, category );
+	
 	useEffect(() => {
 		//тут фетчим дані з сервера?
 	})
