@@ -1,12 +1,8 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import Container from "../Container/Container";
 import FilterButton from "../FilterButton/FilterButton";
-
-// interface HeroSearchBarProps {
-// 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-// }
 
 interface CheckboxFormState {
 	["Реабілітація"]: boolean;
