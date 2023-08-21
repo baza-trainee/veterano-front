@@ -44,7 +44,7 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 				</nav>
 			</div>
 			<div className="flex justify-center items-center">
-				<Button type="primary" size="wideMob">
+				<Button variant="primary" size="wideMob">
 					Підтримати
 				</Button>
 			</div>

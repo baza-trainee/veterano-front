@@ -11,7 +11,7 @@ interface ButtonProps {
 	size?: ButtonSize;
 	disabled?: boolean;
 	[props: string]: unknown;
-	type?: 'button' | 'submit' | 'reset';
+	type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 	variant = "primary",
 	size = "small",
 	disabled = false,
+	type,
 	...props
 }) => {
 	let buttonStyles =
@@ -79,7 +80,7 @@ const Button: React.FC<ButtonProps> = ({
 			onClick={onClick}
 			className={`${buttonStyles} ${className}`}
 			disabled={disabled}
-			type={props.type}
+			type={type}
 			{...props}
 		>
 			{children}
