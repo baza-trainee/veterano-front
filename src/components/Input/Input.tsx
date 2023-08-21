@@ -56,8 +56,7 @@ const Input: FC<InputProps> = ({error, passwordVisible,id, type, onMouseDown, va
   }
 
   return (
-    <div className={ ` ${props.className} flex flex-col-reverse relative`}>
-
+    <div className={ ` ${props.className} flex flex-col-reverse relative`}
       <input
         id={id}
         placeholder=""

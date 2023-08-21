@@ -7,14 +7,10 @@
 	font-family: "e-Ukraine", sans-serif;
 }
 
-.noScrollbar::-webkit-scrollbar {
-	display: none;
+input {
+	background-color: inherit;
 }
 
-.noScrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
 @layer utilities {
 	.btn-style {
 		@apply font-light rounded py-2 px-10;
@@ -25,9 +21,6 @@
 
 	.input-form {
 		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-	}
-	.btn-style {
-		@apply font-light rounded py-2 px-10;
 	}
 
 	.link-style {
@@ -84,9 +77,6 @@
 
 	.primary-dark-bg:active {
 		@apply bg-yellow100;
-	}
-	.arrow-btn {
-		@apply rounded flex items-center justify-center;
 	}
 
 	.input-form {
@@ -185,7 +175,7 @@
 	}
 
 	.carousel-actions {
-		@apply flex flex-col items-center m-auto mt-[24px] w-[320px] md:w-full lg:w-full;
+		@apply flex flex-col items-center mt-[24px] md:w-full lg:w-full;
 	}
 
 	.filter-input {
@@ -299,5 +289,18 @@
 
 	.scroll-to-top:hover .scroll-to-top-icon {
 		@apply w-[58px] h-[58px];
+	}
+
+	.subscribe-wrapper {
+		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
+	}
+
+	.noScrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.noScrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 }
