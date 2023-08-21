@@ -1,13 +1,15 @@
 import { BsFilter } from "react-icons/bs";
 import React, { FC, useEffect, useState } from "react";
+import { CitiesType } from "../SearchForm/SearchForm.tsx";
+
 
 interface DropDownProps {
-	cities: string[],
+	cities: CitiesType[],
 	value: string,
 	name: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
-	onValueSelected: (city:string) => void,
+	onValueSelected: (location: { city: string; country: string }) => void;
 }
 
 const DropDown: FC<DropDownProps> = ({
@@ -18,9 +20,13 @@ const DropDown: FC<DropDownProps> = ({
 	name,
 	onValueSelected
 }) => {
-	const results = cities.filter((city) =>
-		city.toLowerCase().includes(value.toLowerCase())
+
+	const results = cities.filter((cityObj) =>
+		cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
+		cityObj.country.toLowerCase().includes(value.toLowerCase())
 	);
+
+	console.log(results);
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
@@ -31,8 +37,8 @@ const DropDown: FC<DropDownProps> = ({
 		}
 	}, [value, citySelected]);
 
-	const listOnClickHandler = (city: string) => {
-		onValueSelected(city);
+	const listOnClickHandler = (city: string, country: string) => {
+		onValueSelected({ city, country })
 		setIsOpen(false);
 		setCitySelected(true);
 	};
@@ -50,19 +56,22 @@ const DropDown: FC<DropDownProps> = ({
 							: "w-[125px] text-4 bg-[#F9F6EC]"
 					}
 					value={value}
-					onChange={onChange}
+					onChange={e => {
+						onChange(e);
+						setCitySelected(false);
+					}}
 					name={name}
 				/>
 				<BsFilter size={24} color={value.length > 1 ? "white" : ''} />
 				{isOpen &&
 					<ul id="cities" className={"filter-drop-down"}>
-						{results.map((city, index) => (
+						{results.map((item, index) => (
 							<li
 								key={index}
 								onMouseDown={() => setActiveIndex(index)}
 								onMouseUp={() => setActiveIndex(null)}
 								onClick={() => {
-									listOnClickHandler(city);
+									listOnClickHandler(item.city, item.country);
 								}}
 								style={
 									index === activeIndex
@@ -73,7 +82,7 @@ const DropDown: FC<DropDownProps> = ({
 										}
 										: {}
 								}							>
-								{city}
+								{item.city}/{item.country}
 							</li>
 						))}
 					</ul>}

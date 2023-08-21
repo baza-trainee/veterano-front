@@ -5,18 +5,26 @@ import FilterButton from "../FilterButton/FilterButton";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getCategoryList } from "../../api/SearchAPI.tsx";
+import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
+import React from "react";
+
 
 
 //test cities
-const cities = ["Полтава", "Лондон", "Париж", "Київ", "Прага"];
+// const cities = ["Полтава", "Лондон", "Париж", "Київ", "Прага"];
 interface CategoryType {
 	categoryName: string;
+}
+
+export interface CitiesType {
+	city: string;
+	country: string;
 }
 
 const HeroSearchBar = () => {
 	const navigate = useNavigate();
 	const [categories, setCategories] = useState<CategoryType[]>([])
+	const [cities, setCities] = useState<CitiesType[]>([])
 
 	useEffect(() => {
 		getCategoryList()
@@ -25,18 +33,25 @@ const HeroSearchBar = () => {
 					setCategories(data);
 				}
 			})
+		getCitiesList()
+			.then((data) => {
+				if (data !== null) {
+					setCities(data);
+				}
+		})
 	}, [])
 
 	return (
 
 		<Container>
 			<Formik
-				initialValues={{ search: '', location: '', category: '' }}
+				initialValues={{ search: '', city: '', country: '', category: '' }}
 				onSubmit={values => {
 					const queryParams = new URLSearchParams();
 
 					if (values.search) queryParams.append('q', values.search);
-					if (values.location) queryParams.append('location', values.location);
+					if (values.city) queryParams.append('city', values.city);
+					if (values.country) queryParams.append('country', values.country);
 					if (values.category) queryParams.append('category', values.category);
 
 					if (queryParams.toString()) {
@@ -60,12 +75,13 @@ const HeroSearchBar = () => {
 							</div>
 							<div className={'my-6 md:my-0 md:w-[350px] lg:w-[197px]'}>
 								<DropDown
-									name={'location'}
+								name={'city'}
 									cities={cities}
-									value={values.location}
+									value={values.city}
 									onChange={handleChange}
-									onValueSelected={city => {
-										setFieldValue('location', city);
+									onValueSelected={({ city, country }) => {
+										setFieldValue('city', city);
+										setFieldValue('country', country);
 										submitForm();
 									}}
 									placeholder={'Країна / місто'}
@@ -74,19 +90,21 @@ const HeroSearchBar = () => {
 						</div>
 						<div className={'flex overflow-x-auto gap-4 search-mob search-filter'}>
 							{
-								categories?.map(category =>
-									<FilterButton
-										id={`filter-${category.categoryName}`}
-										label={category.categoryName}
-										name={'category'}
-										value={category.categoryName}
-										onChange={e => {
-											handleChange(e);
-											handleSubmit();
-										}}
-										checked={values.category === category.categoryName}
-										className={'whitespace-nowrap '}
-									/>
+								categories?.map((category, index) =>
+									<React.Fragment key={index}>
+										<FilterButton
+											id={`filter-${category.categoryName}`}
+											label={category.categoryName}
+											name={'category'}
+											value={category.categoryName}
+											onChange={e => {
+												handleChange(e);
+												handleSubmit();
+											}}
+											checked={values.category === category.categoryName}
+											className={'whitespace-nowrap '}
+										/>
+									</React.Fragment>
 								)
 							}
 						</div>

@@ -24,7 +24,17 @@ export const searchRequest = async ({q, location, category}: SearchRequestType) 
 export const getCategoryList = async () => {
 	try{
 		const {data} = await $host.get('search/all-categories')
-		return [data]
+		return data
+	} catch (e) {
+		console.error('Error:', e);
+		return null;
+	}
+}
+
+export const getCitiesList = async () => {
+	try{
+		const {data} = await $host.get('search/all-countries')
+		return data
 	} catch (e) {
 		console.error('Error:', e);
 		return null;
