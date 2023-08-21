@@ -21,7 +21,7 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 						className="border-b border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
 						onClick={toggleMenu}
 					>
-						<NavigationLink to="dsadasda" variant="underlineSideBar">
+						<NavigationLink to="aboutus" variant="underlineSideBar">
 							Про нас
 						</NavigationLink>
 					</li>
@@ -29,7 +29,7 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 						className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
 						onClick={toggleMenu}
 					>
-						<NavigationLink to="dsadasda" variant="underlineSideBar">
+						<NavigationLink to="search" variant="underlineSideBar">
 							Проєкти
 						</NavigationLink>
 					</li>
@@ -37,7 +37,7 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 						className="border-b  border-black w-full list-none pt-4  pb-4 hover:cursor-pointer "
 						onClick={toggleMenu}
 					>
-						<NavigationLink to="dsadasda" variant="underlineSideBar">
+						<NavigationLink to="contact" variant="underlineSideBar">
 							Контакти
 						</NavigationLink>
 					</li>

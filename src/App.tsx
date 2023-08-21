@@ -7,7 +7,6 @@ import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 
-
 function App() {
 	return (
 		<>
@@ -15,8 +14,8 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/aboutus" element={<AboutUs />} />
+						<Route path="/contact" element={<ContactUs />} />
+						<Route path="/aboutus" element={<AboutUs />} />
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
 				</Routes>
