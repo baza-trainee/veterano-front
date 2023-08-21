@@ -7,16 +7,16 @@ interface DropDownProps {
 	name: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
-	setValue: (field: string, value: any) => void;
+	onValueSelected: (city:string) => void,
 }
 
 const DropDown: FC<DropDownProps> = ({
 	cities,
 	value,
-	setValue,
 	onChange,
 	placeholder,
-	name
+	name,
+	onValueSelected
 }) => {
 	const results = cities.filter((city) =>
 		city.toLowerCase().includes(value.toLowerCase())
@@ -32,7 +32,7 @@ const DropDown: FC<DropDownProps> = ({
 	}, [value, citySelected]);
 
 	const listOnClickHandler = (city: string) => {
-		setValue('country', city);
+		onValueSelected(city);
 		setIsOpen(false);
 		setCitySelected(true);
 	};

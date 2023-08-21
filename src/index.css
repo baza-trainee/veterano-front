@@ -293,22 +293,18 @@
 		@apply w-[92px] h-[92px];
 	}
 
-	.scroll-to-top-icon {
-		@apply w-12 h-12 flex-shrink-0;
-	}
+  .scroll-to-top-icon{
+    @apply w-12 h-12 flex-shrink-0
+  }
 
   .scroll-to-top:hover .scroll-to-top-icon{
     @apply w-[58px] h-[58px]
   }
 
-  .search-mob{
-    scrollbar-width: none;
-  }
-
-  .search-mob::-webkit-scrollbar{
-    scrollbar-width: none;
+  .search-filter::-webkit-scrollbar {
     display: none;
   }
+
 
 
 }
