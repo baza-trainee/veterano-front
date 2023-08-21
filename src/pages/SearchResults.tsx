@@ -100,7 +100,7 @@ const SearchResults = () => {
 								<div className={'md:mx-6 lg:mx-[80px]'}>
 									<ProjectCard
 										key={index}
-										imageSrc={'https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60'}
+										imageSrc={findImageSrc(card.imageId)}
 										title={card.title}
 										text={card.description}
 										variant={"search"} />
