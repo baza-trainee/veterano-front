@@ -6,6 +6,7 @@ import ContactUs from "./pages/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
+import ListElement from "./components/AdminPanel/ListElements/ListElement.tsx";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 						<Route path="/aboutus" element={<AboutUs />} />
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
+					<Route path="/admin-panel" element={<ListElement />} />
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />
