@@ -8,6 +8,7 @@ import Pagination from "../components/Pagination/Pagination.tsx";
 import { useMedia } from "../hooks/useMedia.tsx";
 import Button from "../components/Button/Button.tsx";
 import Container from "../components/Container/Container.tsx";
+import React from "react";
 
 interface Card {
 	description: string;
@@ -48,7 +49,17 @@ const SearchResults = () => {
 	const [additionalCards, setAdditionalCards] = useState<Card[]>([]);
 
 	useEffect(() => {
-		searchRequest({ q, city, country, category, page: currentPage, size })
+
+		const params = {
+			q,
+			city,
+			country,
+			category: category === 'Всі' ? null : category,
+			page: currentPage,
+			size,
+		};
+
+		searchRequest(params)
 			.then(data => {
 				setResults(data);
 				const imagesArray: ImagesArrayType[] = [];
@@ -98,23 +109,26 @@ const SearchResults = () => {
 					</Typography>
 					<div className="mt-[32px] lg:mt-6">
 						{cardsToRender && cardsToRender.map((card, index) =>
-							isMobile ?
-								<ProjectCard
-									key={index}
-									imageSrc={findImageSrc(card.imageId)}
-									title={card.title}
-									text={card.description}
-									variant={"carousel"} />
-								:
-								<div className={"md:mx-6 lg:mx-[80px]"}>
-									<ProjectCard
-										key={index}
-										imageSrc={findImageSrc(card.imageId)}
-										title={card.title}
-										text={card.description}
-										variant={"search"} />
-								</div>,
-						)}
+							<React.Fragment key={index}>
+								{
+									isMobile ?
+										<ProjectCard
+											imageSrc={findImageSrc(card.imageId)}
+											title={card.title}
+											text={card.description}
+											variant={"carousel"} />
+										:
+										<div className={"md:mx-6 lg:mx-[80px]"}>
+											<ProjectCard
+												imageSrc={findImageSrc(card.imageId)}
+												title={card.title}
+												text={card.description}
+												variant={"search"} />
+										</div>
+								}
+							</React.Fragment>
+								)}
+
 
 					</div>
 					{isMobile ?

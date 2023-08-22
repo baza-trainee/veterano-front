@@ -22,6 +22,7 @@ const HeroSearchBar = () => {
 	const [categories, setCategories] = useState<CategoryType[]>([]);
 	const [cities, setCities] = useState<CitiesType[]>([]);
 
+
 	useEffect(() => {
 		getCategoryList()
 			.then((data) => {
@@ -86,6 +87,18 @@ const HeroSearchBar = () => {
 							</div>
 						</div>
 						<div className={"flex overflow-x-auto gap-4 search-mob search-filter"}>
+							<FilterButton
+								id={`filter-всі`}
+								label={'Всі'}
+								name={"category"}
+								value={'Всі'}
+								onChange={e => {
+									handleChange(e);
+									handleSubmit();
+								}}
+								checked={values.category === 'Всі'}
+								className={"whitespace-nowrap "}
+							/>
 							{
 								categories && categories?.map((category, index) =>
 									<React.Fragment key={index}>
