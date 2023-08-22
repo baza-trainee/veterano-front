@@ -1,14 +1,15 @@
-import React, { FC, InputHTMLAttributes, useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
+import React, {FC, InputHTMLAttributes, useEffect, useState} from "react";
+import {AiOutlineSearch} from "react-icons/ai";
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
-	id: string;
-	value: string;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	placeholder?: string;
-	disabled?: boolean;
-	error?: string;
-	tabIndex?: number;
+  id?: string,
+  value: string,
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  placeholder?: string,
+  disabled?: boolean
+  error?: string,
+  tabIndex?: number;
+	style?: React.CSSProperties
 }
 
 const SearchBar: FC<SearchBarProps> = ({
@@ -30,30 +31,29 @@ const SearchBar: FC<SearchBarProps> = ({
 		}
 	}, [value]);
 
-	return (
-		<div
-			tabIndex={props.tabIndex}
-			onFocus={() => setIsFocused(true)}
-			onBlur={() => setIsFocused(false)}
-			className={
-				disabled
-					? "search-wrapper-disabled"
-					: errors
-					? "search-wrapper-error"
-					: "search-wrapper"
-			}
-		>
-			<input
+  return (
+    <div tabIndex={props.tabIndex}
+         onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}
+				 className={
+					 disabled
+						 ? "search-wrapper-disabled"
+						 : errors
+							 ? "search-wrapper-error"
+							 : "search-wrapper"
+				 }
+    >
+      <input
 				className={
 					disabled
 						? "search-input-disabled"
 						: "search-input placeholder:text-[#AFAFAF] "
 				}
 				id="search"
-				type="text"
-				value={value}
-				onChange={(e) => onChange(e)}
-				placeholder={placeholder}
+        type="text"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+				{...props}
 			/>
 
 			{disabled ? (

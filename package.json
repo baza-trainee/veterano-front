@@ -24,9 +24,8 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
     "@types/js-cookie": "^3.0.3",
-    "@types/node": "^20.5.0",
+    "@types/node": "^20.5.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
