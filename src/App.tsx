@@ -19,7 +19,7 @@ function App() {
 						<Route path="/aboutus" element={<AboutUs />} />
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
-					<Route path="/admin-panel" element={<AdminLayout />}>
+					<Route path="/admin" element={<AdminLayout />}>
 
 					</Route>
 				</Routes>
