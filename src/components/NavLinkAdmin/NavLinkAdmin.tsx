@@ -9,7 +9,7 @@ type NavLinkAdminProps = {
 const NavLinkAdmin: FC <NavLinkAdminProps> = ({children, icon, to}) => {
 	return (
 
-<div className={'w-[200px] py-6 bg-red-400'}>
+<div className={'w-[200px] py-6 bg-yellow50'}>
 	<NavLink
 		to={to}
 		className={' w-full flex py-3 px-4 gap-3 border border-transparent rounded hover:border hover:border-black bg-inherit hov'}
