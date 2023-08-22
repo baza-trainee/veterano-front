@@ -1,4 +1,3 @@
-import { FormEvent, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import Container from "../Container/Container";

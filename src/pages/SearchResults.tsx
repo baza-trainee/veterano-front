@@ -9,6 +9,7 @@ import { useMedia } from "../hooks/useMedia.tsx";
 import Button from "../components/Button/Button.tsx";
 import Container from "../components/Container/Container.tsx";
 import React from "react";
+import Search404 from "../components/Search404/Search404.tsx";
 
 interface Card {
 	description: string;
@@ -91,6 +92,7 @@ const SearchResults = () => {
 		return imageObj ? imageObj.image : "";
 	};
 	const cardsToRender = isMobile ? [...results?.cards || [], ...additionalCards] : results?.cards;
+	console.log(cardsToRender);
 	return (
 		<>
 			<section
@@ -103,44 +105,48 @@ const SearchResults = () => {
 			</section>
 			<section className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}>
 				<Container>
-					<Typography variant={isMobile ? "h5" : "h4"} component={"h2"}
-											className="text-center md:text-left md:ml-6 lg:ml-[80px]">
+					{cardsToRender?.length
+						?
+					<><Typography variant={isMobile ? "h5" : "h4"} component={"h2"}
+												className="text-center md:text-left md:ml-6 lg:ml-[80px]">
 						Знайдено результатів: {results?.totalSize}
 					</Typography>
-					<div className="mt-[32px] lg:mt-6">
-						{cardsToRender && cardsToRender.map((card, index) =>
-							<React.Fragment key={index}>
-								{
-									isMobile ?
-										<ProjectCard
-											imageSrc={findImageSrc(card.imageId)}
-											title={card.title}
-											text={card.description}
-											variant={"carousel"} />
-										:
-										<div className={"md:mx-6 lg:mx-[80px]"}>
+						<div className="mt-[32px] lg:mt-6">
+							{cardsToRender && cardsToRender.map((card, index) =>
+								<React.Fragment key={index}>
+									{
+										isMobile ?
 											<ProjectCard
 												imageSrc={findImageSrc(card.imageId)}
 												title={card.title}
 												text={card.description}
-												variant={"search"} />
-										</div>
-								}
-							</React.Fragment>
-								)}
-
-
-					</div>
-					{isMobile ?
-						<div className={"flex justify-center"}>
-							<Button variant={"secondary"} size={"wideMob"} className={"mt-[32px]"} onClick={loadMore}>Показати
-								ще</Button>
+												variant={"carousel"} />
+											:
+											<div className={"md:mx-6 lg:mx-[80px]"}>
+												<ProjectCard
+													imageSrc={findImageSrc(card.imageId)}
+													title={card.title}
+													text={card.description}
+													variant={"search"} />
+											</div>
+									}
+								</React.Fragment>
+							)}
 						</div>
+						{isMobile ?
+							<div className={"flex justify-center"}>
+								<Button variant={"secondary"} size={"wideMob"} className={"mt-[32px]"} onClick={loadMore}>Показати
+									ще</Button>
+							</div>
+							:
+							<Pagination
+								pageCount={results?.totalPages || 0}
+								currentPage={currentPage}
+								onSelectedPage={handleSelectedPage} />}</>
 						:
-						<Pagination
-							pageCount={results?.totalPages || 0}
-							currentPage={currentPage}
-							onSelectedPage={handleSelectedPage} />}
+						<Search404/>
+					}
+
 				</Container>
 			</section>
 		</>
