@@ -23,7 +23,7 @@ const CookiesPanel = () => {
 		showPanel && (
 			<div
 				id="cookie-panel"
-				className="fixed bottom-0 left-0 right-0 bg-[#F9F6EC] py-8 px-4 flex flex-col justify-center gap-6 md:px-6 md:py-6 lg:px-[80px] lg:py-4 md:gap-9 lg:flex-row lg:justify-between lg:w-[1440px] lg:items-center  ">
+				className="fixed bottom-0 left-0 right-0 bg-[#F9F6EC] py-8 px-4 flex flex-col justify-center gap-6 md:px-6 md:py-6 lg:px-[80px] lg:py-4 md:gap-9 lg:flex-row lg:justify-between lg:min-w-[1440px] lg:items-center  ">
 					<div className={'flex justify-end flex-shrink-0 lg:order-3'}>
 						<img src="/images/close.svg" alt="close" />
 					</div>

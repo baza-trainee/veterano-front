@@ -8,7 +8,7 @@ type NavLinkAdminProps = {
 }
 const NavLinkAdmin: FC <NavLinkAdminProps> = ({children, icon, to}) => {
 	return (
-
+    
 			<NavLink
 				to={to}
 				className={' w-full flex py-3 px-4 gap-3 border border-transparent rounded hover:border hover:border-black bg-inherit'}
@@ -21,6 +21,7 @@ const NavLinkAdmin: FC <NavLinkAdminProps> = ({children, icon, to}) => {
 				<img src={icon} alt="folder"/>
 				{children}
 			</NavLink>
+
 	);
 };
 
