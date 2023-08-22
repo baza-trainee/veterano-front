@@ -10,11 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.5",
     "@react-icons/all-files": "^4.1.0",
     "axios": "^1.4.0",
     "formik": "^2.4.3",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
+    "react-alert": "^7.0.3",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-paginate": "^8.2.0",
@@ -24,7 +28,6 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@types/node": "^20.5.0",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "^20.5.0",
     "@types/react": "^18.2.15",

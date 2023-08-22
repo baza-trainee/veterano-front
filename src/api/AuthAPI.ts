@@ -12,7 +12,8 @@ export const login = async ({ email, password }: Login) => {
 		});
 		return data;
 	} catch (e) {
-		console.error("Error creating feedback:", e);
-		return null;
+		console.error("Login error", e);
+		throw new Error("Login error");
+		return e;
 	}
 };
