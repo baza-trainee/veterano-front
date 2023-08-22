@@ -2,9 +2,9 @@ import LoginForm from "./LoginForm";
 
 const LoginPage = () => {
 	return (
-		<>
-			<LoginForm />
-		</>
+		<div className="flex justify-center items-center h-screen">
+			<LoginForm className=" max-h-[524px]" />
+		</div>
 	);
 };
 

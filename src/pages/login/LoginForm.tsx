@@ -6,7 +6,7 @@ import { login } from "../../api/AuthAPI";
 import Typography from "../../components/Typography/Typography";
 import { useState } from "react";
 
-const LoginForm = () => {
+const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const validationSchema = object({
 		email: string()
@@ -22,7 +22,14 @@ const LoginForm = () => {
 	});
 
 	return (
-		<div className="rounded-[4px] px-[32px] py-[96px] bg-yellow50 w-[518px]">
+		<div
+			className={
+				"rounded-[4px] px-[32px] py-[64px] bg-yellow50 w-[518px]" +
+				" " +
+				className
+			}
+			{...props}
+		>
 			<Typography variant="h1">Вхід</Typography>
 			<Formik
 				initialValues={{ email: "", password: "" }}
