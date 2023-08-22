@@ -8,6 +8,7 @@ interface FilterButtonProps {
 	name: string;
 	className?: string;
 	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	onClick?: () => void;
 }
 
 const FilterButton: React.FC<FilterButtonProps> = ({
@@ -19,6 +20,7 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 	onChange = ({ target }) => {
 		console.log(target.value);
 	},
+	onClick,
 	className = "",
 	...props
 }) => {
@@ -38,11 +40,12 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 				value={value}
 				checked={checked}
 				onChange={onChange}
+				onClick={onClick}
 			/>
 			<label
 				htmlFor={id}
 				className={
-					"cursor-pointer inline-block text-[14px] px-[8px] rounded-[51px] border-[1px] border-black hover:bg-black hover:text-white whitespace-nowrap " +
+					"cursor-pointer flex text-[14px] px-[8px] rounded-[51px] leading-[26px] border-[1px] border-black hover:bg-black hover:text-white " +
 					checkedClass +
 					" " +
 					className

@@ -11,7 +11,7 @@ interface SectionProps {
 const Section: FC<SectionProps> = ({
   className = "",
   title = "",
-  children,
+  children
 }) => {
   return (
     <section

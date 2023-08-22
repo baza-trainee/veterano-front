@@ -4,7 +4,7 @@ import ArrowButton from "../ArrowButton/ArrowButton.tsx";
 import ReactPaginate from "react-paginate";
 
 interface PaginationProps {
-	pageCount: number,
+	pageCount: number
 	currentPage: number,
 	onSelectedPage: (selectedPage: number) => void;
 }
@@ -13,7 +13,7 @@ type PageClickData = {
 	selected: number;
 };
 
-const Pagination: FC<PaginationProps> = ({ pageCount = 10, currentPage = 1, onSelectedPage}) => {
+const Pagination: FC<PaginationProps> = ({ pageCount = 2, currentPage = 1, onSelectedPage}) => {
 	const navigate = useNavigate();
 
 	const handlePageClick = (data: PageClickData) => {
