@@ -79,7 +79,15 @@ const SearchResults = () => {
 
 	const loadMore = async () => {
 		const nextPage = currentPage + 1;
-		const newItems = await searchRequest({ q, city, country, category, page: nextPage, size });
+		const params = {
+			q,
+			city,
+			country,
+			category: category === 'Всі' ? null : category,
+			page: nextPage,
+			size,
+		};
+		const newItems = await searchRequest(params);
 		setAdditionalCards([...additionalCards, ...newItems.cards]);
 	};
 
@@ -92,7 +100,7 @@ const SearchResults = () => {
 		return imageObj ? imageObj.image : "";
 	};
 	const cardsToRender = isMobile ? [...results?.cards || [], ...additionalCards] : results?.cards;
-	console.log(cardsToRender);
+
 	return (
 		<>
 			<section

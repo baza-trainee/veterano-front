@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
+import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
 
 interface CategoryType {
 	categoryName: string;
 }
 
-export interface CitiesType {
+export interface LocationType {
 	city: string;
 	country: string;
 }
@@ -20,8 +21,8 @@ export interface CitiesType {
 const HeroSearchBar = () => {
 	const navigate = useNavigate();
 	const [categories, setCategories] = useState<CategoryType[]>([]);
-	const [cities, setCities] = useState<CitiesType[]>([]);
-
+	const [cities, setCities] = useState<LocationType[]>([]);
+	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
 
 	useEffect(() => {
 		getCategoryList()
@@ -42,7 +43,7 @@ const HeroSearchBar = () => {
 
 		<Container>
 			<Formik
-				initialValues={{ search: "", city: "", country: "", category: "" }}
+				initialValues={{ search: "", city: "", country: "", category: "Всі" }}
 				onSubmit={values => {
 					const queryParams = new URLSearchParams();
 
@@ -75,7 +76,7 @@ const HeroSearchBar = () => {
 								<DropDown
 									name={"city"}
 									cities={cities}
-									value={values.city}
+									value={values.city }
 									onChange={handleChange}
 									onValueSelected={({ city, country }) => {
 										setFieldValue("city", city);
@@ -104,9 +105,18 @@ const HeroSearchBar = () => {
 									<React.Fragment key={index}>
 										<FilterButton
 											id={`filter-${category.categoryName}`}
-											label={category.categoryName}
+											label={capitalizeFirstLetter(category.categoryName)}
 											name={"category"}
 											value={category.categoryName}
+											onClick={() => {
+												if (onClickCategory === category.categoryName) {
+												setFieldValue("category", "Всі")
+												setOnClickCategory(null)
+												handleSubmit()
+											} else {
+												setOnClickCategory(category.categoryName)
+											}
+											}}
 											onChange={e => {
 												handleChange(e);
 												handleSubmit();

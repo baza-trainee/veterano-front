@@ -199,7 +199,7 @@ input {
 	}
 
 	.filter-label-input {
-		@apply bg-black text-white outline-none ;
+		@apply bg-black text-white outline-none lg:max-w-[150px];
 	}
 
   .filter-input:hover {

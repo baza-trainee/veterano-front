@@ -1,10 +1,11 @@
 import { BsFilter } from "react-icons/bs";
 import React, { FC, useEffect, useState } from "react";
-import { CitiesType } from "../SearchForm/SearchForm.tsx";
+import { LocationType } from "../SearchForm/SearchForm.tsx";
+import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
 
 
 interface DropDownProps {
-	cities: CitiesType[],
+	cities: LocationType[],
 	value: string,
 	name: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
@@ -39,7 +40,7 @@ const DropDown: FC<DropDownProps> = ({
 
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country })
-		setInputValue(`${city} / ${country}`)
+		setInputValue(`${capitalizeFirstLetter(city)}`)
 		setIsOpen(false);
 		setCitySelected(true);
 	};
@@ -84,7 +85,7 @@ const DropDown: FC<DropDownProps> = ({
 										}
 										: {}
 								}							>
-								{item.city}/{item.country}
+								{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
 							</li>
 						))}
 					</ul>}
