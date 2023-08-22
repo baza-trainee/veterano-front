@@ -11,7 +11,7 @@ const NavLinkAdmin: FC <NavLinkAdminProps> = ({children, icon, to}) => {
 
 			<NavLink
 				to={to}
-				className={' w-full flex py-3 px-4 gap-3 border border-transparent rounded hover:border hover:border-black bg-inherit hov'}
+				className={' w-full flex py-3 px-4 gap-3 border border-transparent rounded hover:border hover:border-black bg-inherit'}
 				style={({ isActive }) => {
 					return {
 						backgroundColor: isActive ? "white" : "",
