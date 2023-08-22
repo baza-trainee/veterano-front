@@ -11,7 +11,7 @@ interface ButtonProps {
 	size?: ButtonSize;
 	disabled?: boolean;
 	[props: string]: unknown;
-	type?: 'button' | 'submit' | 'reset';
+	type?: "button" | "submit" | "reset";
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -23,13 +23,14 @@ const Button: React.FC<ButtonProps> = ({
 	variant = "primary",
 	size = "small",
 	disabled = false,
+	type,
 	...props
 }) => {
 	let buttonStyles =
 		"py-2  font-light rounded hover:shadow disabled:bg-[#808080]";
 
 	if (size === "large") {
-		buttonStyles += " text-18 w-full";
+		buttonStyles += " text-18  w-full";
 	} else if (size === "wideMob") {
 		buttonStyles += " text-sm  w-[288px]";
 	} else {
@@ -79,7 +80,7 @@ const Button: React.FC<ButtonProps> = ({
 			onClick={onClick}
 			className={`${buttonStyles} ${className}`}
 			disabled={disabled}
-			type={props.type}
+			type={type}
 			{...props}
 		>
 			{children}
