@@ -1,4 +1,4 @@
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import React, { FC, useEffect, useState } from "react";
 import { getCategoryList } from "../../../api/SearchAPI.tsx";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
@@ -12,10 +12,10 @@ interface AdminDropDownProps {
 	name: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
-	onValueSelected: ( category: string) => void;
+	onValueSelected: (category: string) => void;
 }
 
-const CategoryDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeholder, onValueSelected,  }) => {
+const CategoryDropDown: FC<AdminDropDownProps> = ({ value, name, onChange, placeholder, onValueSelected }) => {
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
@@ -25,9 +25,14 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeh
 
 	useEffect(() => {
 		if (value.length > 1 && !categorySelected) {
-			setIsOpen(true);
+			const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results;
+			if (categoriesList.length > 0) {
+				setIsOpen(true);
+			} else {
+				setIsOpen(false);
+			}
 		}
-	}, [value, categorySelected]);
+	}, [value, categorySelected, results]);
 
 	useEffect(() => {
 		getCategoryList()
@@ -36,23 +41,18 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeh
 
 	const listOnClickHandler = (category: string) => {
 		onValueSelected(category);
-		setInputValue(`${capitalizeFirstLetter(category)}`);
+		setInputValue(`${capitalizeFirstLetter(category.trim())}`);
 		setIsOpen(false);
 		setCategorySelected(true);
 	};
 
+	const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results
+
 	return (
 
-		<label
-			className={value.length > 1 ? "filter-label-chosen" : "filter-input w-full"}
-		>
+		<label className={"admin-filter-input w-full"}>
 			<input
 				placeholder={placeholder}
-				className={
-					value.length > 1
-						? "filter-label-input"
-						: "w-[125px] text-4 bg-[#F9F6EC]"
-				}
 				value={inputValue}
 				onChange={e => {
 					onChange(e);
@@ -61,55 +61,47 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeh
 				}}
 				name={name}
 			/>
-			<BsChevronDown size={24} color={value.length > 1 ? "white" : ""} onClick={() => setIsOpen(!isOpen)} className={'cursor-pointer'} />
+			{isOpen ?
+				<BsChevronUp
+					size={18}
+					onClick={() => {
+						setIsOpen(!isOpen)
+						setInputValue('Оберіть категорію')
+					}}
+					className={"cursor-pointer"} />
+				:
+				<BsChevronDown
+					size={18}
+					onClick={() => {
+						setIsOpen(!isOpen)
+						setInputValue('Оберіть категорію')
+					}}
+					className={"cursor-pointer"} />
+			}
 			{isOpen &&
-				<ul id="categories" className={"filter-drop-down z-10"}>
-					{value.length > 2 ?
-						results.filter(category => category.categoryName.includes(value)).map((item, index) =>
-							<li
-								key={index}
-								onMouseDown={() => setActiveIndex(index)}
-								onMouseUp={() => setActiveIndex(null)}
-								onClick={() => {
-									listOnClickHandler(item.categoryName);
-								}}
-								style={
-									index === activeIndex
-										? {
-											backgroundColor: "black",
-											color: "white",
-											cursor: "pointer",
-										}
-										: {}
-								}
-							>
-								{capitalizeFirstLetter(item.categoryName)}
-							</li>
-						) :
-						results.map((item, index) =>
-							<li
-								key={index}
-								onMouseDown={() => setActiveIndex(index)}
-								onMouseUp={() => setActiveIndex(null)}
-								onClick={() => {
-									listOnClickHandler(item.categoryName);
-								}}
-								style={
-									index === activeIndex
-										? {
-											backgroundColor: "black",
-											color: "white",
-											cursor: "pointer",
-										}
-										: {}
-								}
-							>
-								{capitalizeFirstLetter(item.categoryName)}
-							</li>
-						)
-					}
-
-				</ul> }
+				<ul id="categories" className={"admin-filter-drop-down z-10"}>
+					{categoriesList.map((item, index) =>
+						<li
+							key={index}
+							onMouseDown={() => setActiveIndex(index)}
+							onMouseUp={() => setActiveIndex(null)}
+							onClick={() => {
+								listOnClickHandler(item.categoryName);
+							}}
+							style={
+								index === activeIndex
+									? {
+										backgroundColor: "##F7D67F",
+										cursor: "pointer",
+									}
+									: {}
+							}
+						>
+							{capitalizeFirstLetter(item.categoryName.trim())}
+						</li>
+					)}
+				</ul>
+			}
 		</label>
 
 	);
