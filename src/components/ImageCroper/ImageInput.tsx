@@ -30,6 +30,12 @@ const ImageInput = ({
 			)}
 			<FileDrop
 				src={preview}
+				openEditer={() => {
+					setIsCropeningImg(true);
+				}}
+				removeFile={() => {
+					setPreview("");
+				}}
 				onFileChoise={(file, isCropeting) => {
 					setFile(file);
 					setIsCropeningImg(isCropeting);
