@@ -8,6 +8,8 @@ import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
+import AdminLayout from "./Layout/AdminLayout.tsx";
+import ProjectsPage from "./pages/admin/ProgectsPage/ProjectsPage.tsx";
 
 
 function App() {
@@ -23,6 +25,9 @@ function App() {
 						<Route path="/aboutus" element={<AboutUs />} />
 						<Route path="/search" element={<SearchResults />} />
 						<Route path="*" element={<ErrorPage />} />
+					</Route>
+					<Route path="/admin" element={<AdminLayout />}>
+						<Route path="projects" element={<ProjectsPage />} />
 					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
