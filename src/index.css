@@ -30,9 +30,6 @@ input {
   .input-form {
     @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
   }
-  .btn-style {
-    @apply font-light rounded py-2 px-10;
-  }
 
   .link-style {
     @apply text-white font-light leading-[24px] cursor-pointer;
@@ -90,9 +87,9 @@ input {
     @apply bg-yellow100;
   }
 
-  .input-form {
-    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-  }
+	.input-form {
+		@apply w-full md:w-full lg:w-full text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+	}
 
   .input-form:invalid:not(:placeholder-shown) {
     @apply border-[#D30018];
