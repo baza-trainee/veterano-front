@@ -29,6 +29,7 @@ const ListElement: FC<ListElementProps> = ({ id, onChange, name, status, date, e
 			<div>{date}</div>
 			<div className={"flex"}>
 				<div
+					className={'cursor-pointer'}
 					onClick={editHandler}>
 					<IconPen />
 				</div>
