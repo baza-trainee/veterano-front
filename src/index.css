@@ -347,4 +347,28 @@ input {
   .switch-label:active::after {
     @apply scale-125 shadow-none
   }
+
+  .custom-checkbox .checkmark {
+    @apply relative inline-block w-[24px] h-[24px] border-2 border-[#151515]
+  }
+
+  .custom-checkbox input:checked ~ .checkmark {
+    @apply bg-yellow100
+  }
+
+  .custom-checkbox input:checked ~ .checkmark:after {
+    content: "";
+    position: absolute;
+    width: 13px;
+    height: 7px;
+    border: 2px solid #151515;
+    border-top: none;
+    border-right: none;
+    top: 4px;
+    left: 4px;
+    transform: rotate(-45deg);
+  }
+  .check-wrapper:hover {
+    @apply bg-yellow30 rounded
+  }
 }
