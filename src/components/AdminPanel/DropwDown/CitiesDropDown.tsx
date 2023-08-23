@@ -4,40 +4,35 @@ import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts"
 import { getCitiesList } from "../../../api/SearchAPI.tsx";
 
 
-
 interface CitiesDropDownProps {
 	value: string,
 	name: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (location: { city: string; country: string }) => void;
+	error?: string
 }
 
 interface ResultsType {
 	city: string;
 	country: string;
+	error?: string;
 }
 
-const CitiesDropDown: FC<CitiesDropDownProps> = ({
-value,
-onChange,
-placeholder,
-name,
-onValueSelected
-}) => {
+const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, placeholder, name, onValueSelected }) => {
 
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
-	const [inputValue, setInputValue] = useState('');
+	const [inputValue, setInputValue] = useState("");
 
 
 	useEffect(() => {
 		if (value.length > 1 && !citySelected) {
 			const cities = results.filter((cityObj) =>
 				cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
-				cityObj.country.toLowerCase().includes(value.toLowerCase())
+				cityObj.country.toLowerCase().includes(value.toLowerCase()),
 			);
 			if (cities.length > 0) {
 				setIsOpen(true);
@@ -53,24 +48,23 @@ onValueSelected
 	}, []);
 
 	const listOnClickHandler = (city: string, country: string) => {
-		onValueSelected({ city, country })
-		setInputValue(`${capitalizeFirstLetter(city)}`)
+		onValueSelected({ city, country });
+		setInputValue(`${capitalizeFirstLetter(city)}`);
 		setIsOpen(false);
 		setCitySelected(true);
 	};
 
 
-
 	const cities = results.filter((cityObj) =>
 		cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
-		cityObj.country.toLowerCase().includes(value.toLowerCase())
+		cityObj.country.toLowerCase().includes(value.toLowerCase()),
 	);
 
 	return (
 
 		<label className={"admin-filter-input w-full"}>
 			<input
-				placeholder={placeholder}
+				placeholder={error ? error : placeholder}
 				value={inputValue}
 				onChange={e => {
 					onChange(e);

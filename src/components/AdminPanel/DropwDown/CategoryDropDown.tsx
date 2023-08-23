@@ -13,9 +13,10 @@ interface AdminDropDownProps {
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (category: string) => void;
+	error?: string
 }
 
-const CategoryDropDown: FC<AdminDropDownProps> = ({ value, name, onChange, placeholder, onValueSelected }) => {
+const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange, placeholder, onValueSelected }) => {
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
@@ -46,13 +47,13 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ value, name, onChange, place
 		setCategorySelected(true);
 	};
 
-	const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results
+	const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results;
 
 	return (
 
 		<label className={"admin-filter-input w-full"}>
 			<input
-				placeholder={placeholder}
+				placeholder={error ? error : placeholder}
 				value={inputValue}
 				onChange={e => {
 					onChange(e);
@@ -65,16 +66,16 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ value, name, onChange, place
 				<BsChevronUp
 					size={18}
 					onClick={() => {
-						setIsOpen(!isOpen)
-						setInputValue('Оберіть категорію')
+						setIsOpen(!isOpen);
+						setInputValue("Оберіть категорію");
 					}}
 					className={"cursor-pointer"} />
 				:
 				<BsChevronDown
 					size={18}
 					onClick={() => {
-						setIsOpen(!isOpen)
-						setInputValue('Оберіть категорію')
+						setIsOpen(!isOpen);
+						setInputValue("Оберіть категорію");
 					}}
 					className={"cursor-pointer"} />
 			}
@@ -98,7 +99,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ value, name, onChange, place
 							}
 						>
 							{capitalizeFirstLetter(item.categoryName.trim())}
-						</li>
+						</li>,
 					)}
 				</ul>
 			}

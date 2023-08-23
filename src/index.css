@@ -356,6 +356,10 @@ input {
     @apply shadow-middle;
   }
 
+  .admin-filter-input input:invalid::placeholder{
+    @apply text-error50;
+  }
+
   .admin-filter-input input::placeholder {
     @apply text-[14px] leading-[185%] text-grey50
   }
