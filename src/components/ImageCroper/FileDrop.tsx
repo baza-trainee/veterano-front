@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import { BiSolidTrash, BiSolidPencil } from "react-icons/bi";
+import IconPen from "../AdminPanel/IconButtons/IconPen";
 
 interface FileDropProps {
 	src?: string;
@@ -18,33 +20,33 @@ export const FileDrop: React.FC<FileDropProps> = ({
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
 	return (
-		<div className="flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px]">
+		<div className="flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] ">
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full h-[298px]",
+						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
 				})}
 			>
 				<input {...getInputProps()} required id="photo" type="file" />
 				{src ? (
 					<img height="232" width="265" src={src} alt="Preview" />
 				) : (
-					<p className="flex items-center gap-[12px]">
+					<span className="flex items-center gap-[12px]">
 						<img src="./public/admin/download-icon.svg" alt="" />
 						Завантажити зображення
-					</p>
+					</span>
 				)}
 			</div>
 			{src && (
 				<div className="w-full flex items-center justify-end gap-[12px]">
 					{openEditer && (
 						<button onClick={openEditer} className="w-[36px] h-[36px]">
-							1
+							<BiSolidPencil size={24} />
 						</button>
 					)}
 					{removeFile && (
 						<button onClick={removeFile} className="w-[36px] h-[36px]">
-							2
+							<BiSolidTrash size={24} />
 						</button>
 					)}
 				</div>
