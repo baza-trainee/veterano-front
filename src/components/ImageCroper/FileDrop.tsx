@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiSolidTrash, BiSolidPencil } from "react-icons/bi";
-import IconPen from "../AdminPanel/IconButtons/IconPen";
 
 interface FileDropProps {
 	src?: string;
