@@ -15,7 +15,7 @@ interface AdminDropDownProps {
 	onValueSelected: ( category: string) => void;
 }
 
-const AdminDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeholder, onValueSelected,  }) => {
+const CategoryDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placeholder, onValueSelected,  }) => {
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
@@ -115,4 +115,4 @@ const AdminDropDown: FC<AdminDropDownProps> = ({value, name, onChange, placehold
 	);
 };
 
-export default AdminDropDown;
+export default CategoryDropDown;
