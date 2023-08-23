@@ -10,12 +10,9 @@ import AdminLayout from "./Layout/AdminLayout.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
 
-
 function App() {
-
 	return (
 		<>
-
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Layout />}>
@@ -26,14 +23,13 @@ function App() {
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
 
-					<Route path="/admin" element={<AdminLayout />}>
+					<Route path="/admin" element={<AdminLayout />}></Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />
-
 		</>
 	);
 }
