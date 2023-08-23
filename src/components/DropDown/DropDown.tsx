@@ -67,7 +67,7 @@ const DropDown: FC<DropDownProps> = ({
 				/>
 				<BsFilter size={24} color={value.length > 1 ? "white" : ''} />
 				{isOpen &&
-					<ul id="cities" className={"filter-drop-down"}>
+					<ul id="cities" className={"filter-drop-down z-10"}>
 						{results.map((item, index) => (
 							<li
 								key={index}
@@ -84,7 +84,7 @@ const DropDown: FC<DropDownProps> = ({
 											cursor: "pointer",
 										}
 										: {}
-								}							>
+								}>
 								{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
 							</li>
 						))}
