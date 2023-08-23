@@ -1,122 +1,136 @@
-import { FormEvent, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import Container from "../Container/Container";
 import FilterButton from "../FilterButton/FilterButton";
+import { Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
+import React from "react";
+import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
 
-// interface HeroSearchBarProps {
-// 	onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-// }
-
-interface CheckboxFormState {
-	["Реабілітація"]: boolean;
-	["Навчання"]: boolean;
-	["Юридичні послуги"]: boolean;
-	["Бізнес підтримка"]: boolean;
-	["Всі"]: boolean;
+interface CategoryType {
+	categoryName: string;
 }
-//test cities
-const cities = ["New York", "London", "Paris", "Tokyo", "Sydney"];
+
+export interface LocationType {
+	city: string;
+	country: string;
+}
 
 const HeroSearchBar = () => {
-	const [inputValue, setInputValue] = useState<string>("");
-	const [city, setCity] = useState<string>("");
-	const [checkboxes, setCheckboxes] = useState<CheckboxFormState>({
-		["Реабілітація"]: false,
-		["Навчання"]: false,
-		["Юридичні послуги"]: false,
-		["Бізнес підтримка"]: false,
-		["Всі"]: false,
-	});
+	const navigate = useNavigate();
+	const [categories, setCategories] = useState<CategoryType[]>([]);
+	const [cities, setCities] = useState<LocationType[]>([]);
+	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.target.value);
-	};
-	const handleCityChange = (selectedCity: string) => {
-		setCity(selectedCity);
-	};
-
-	const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, checked } = event.target;
-		setCheckboxes((prevCheckboxes) => ({
-			...prevCheckboxes,
-			[name]: checked,
-		}));
-	};
-
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		console.log("Form submitted:", {
-			inputValue,
-			city,
-			checkboxes,
-		});
-	};
+	useEffect(() => {
+		getCategoryList()
+			.then((data) => {
+				if (data !== null) {
+					setCategories(data);
+				}
+			});
+		getCitiesList()
+			.then((data) => {
+				if (data !== null) {
+					setCities(data);
+				}
+			});
+	}, []);
 
 	return (
+
 		<Container>
-			<form action="" onSubmit={handleSubmit} className=" w-full p-4">
-				<div className="flex flex-col gap-6 justify-start md:flex-row mb-4">
-					<SearchBar
-						id="query"
-						disabled={false}
-						value={inputValue}
-						placeholder="Введіть ключове слово для пошуку"
-						onChange={handleInputChange}
-					/>
-					<DropDown
-						cities={cities}
-						value={city}
-						onChange={handleCityChange}
-						setValue={(element) => {
-							setCity(element);
-						}}
-						placeholder="Країна / місто"
-					/>
-				</div>
-				<div className="noScrollbar flex gap-[17px] overflow-x-scroll">
-					<FilterButton
-						id="filret-1"
-						label="Реабілітація"
-						name="Реабілітація"
-						value="Реабілітація"
-						onChange={handleCheckboxChange}
-						checked={checkboxes["Реабілітація"]}
-					/>
-					<FilterButton
-						id="filret-2"
-						label="Навчання"
-						value="Навчання"
-						name="Навчання"
-						onChange={handleCheckboxChange}
-						checked={checkboxes["Навчання"]}
-					/>
-					<FilterButton
-						id="filret-3"
-						label="Юридичні послуги"
-						value="Юридичні послуги"
-						name="Юридичні послуги"
-						onChange={handleCheckboxChange}
-						checked={checkboxes["Юридичні послуги"]}
-					/>
-					<FilterButton
-						id="filret-4"
-						label="Бізнес підтримка"
-						value="Бізнес підтримка"
-						name="Бізнес підтримка"
-						onChange={handleCheckboxChange}
-						checked={checkboxes["Бізнес підтримка"]}
-					/>
-					<FilterButton
-						id="filret-5"
-						label="Всi"
-						value="Всi"
-						name="Всі"
-						checked={checkboxes["Всі"]}
-						onChange={handleCheckboxChange}
-					/>
-				</div>
-			</form>
+			<Formik
+				initialValues={{ search: "", city: "", country: "", category: "Всі" }}
+				onSubmit={values => {
+					const queryParams = new URLSearchParams();
+
+					if (values.search) queryParams.append("q", values.search);
+					if (values.city) queryParams.append("city", values.city);
+					if (values.country) queryParams.append("country", values.country);
+					if (values.category) queryParams.append("category", values.category);
+					queryParams.append("page", "1");
+
+					if (queryParams.toString()) {
+						navigate(`/search?${queryParams}`);
+					}
+
+				}}>
+
+				{({ values, setFieldValue, submitForm, handleChange, handleSubmit }) => (
+					<Form>
+						<div className={"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"}>
+							<div className={"md:w-[350px] lg:w-[413px]"}>
+								<SearchBar
+									id={"search"}
+									name={"search"}
+									value={values.search}
+									onChange={handleChange}
+									placeholder={"Введіть слово для пошуку"}
+									disabled={false}
+								/>
+							</div>
+							<div className={"my-6 md:my-0 md:w-[350px] lg:w-[197px]"}>
+								<DropDown
+									name={"city"}
+									cities={cities}
+									value={values.city }
+									onChange={handleChange}
+									onValueSelected={({ city, country }) => {
+										setFieldValue("city", city);
+										setFieldValue("country", country);
+										submitForm();
+									}}
+									placeholder={"Країна / місто"}
+								/>
+							</div>
+						</div>
+						<div className={"flex overflow-x-auto gap-4 search-mob search-filter"}>
+							<FilterButton
+								id={`filter-всі`}
+								label={'Всі'}
+								name={"category"}
+								value={'Всі'}
+								onChange={e => {
+									handleChange(e);
+									handleSubmit();
+								}}
+								checked={values.category === 'Всі'}
+								className={"whitespace-nowrap "}
+							/>
+							{
+								categories && categories?.map((category, index) =>
+									<React.Fragment key={index}>
+										<FilterButton
+											id={`filter-${category.categoryName}`}
+											label={capitalizeFirstLetter(category.categoryName)}
+											name={"category"}
+											value={category.categoryName}
+											onClick={() => {
+												if (onClickCategory === category.categoryName) {
+												setFieldValue("category", "Всі")
+												setOnClickCategory(null)
+												handleSubmit()
+											} else {
+												setOnClickCategory(category.categoryName)
+											}
+											}}
+											onChange={e => {
+												handleChange(e);
+												handleSubmit();
+											}}
+											checked={values.category === category.categoryName}
+											className={"whitespace-nowrap "}
+										/>
+									</React.Fragment>,
+								)
+							}
+						</div>
+					</Form>
+				)}
+			</Formik>
 		</Container>
 	);
 };

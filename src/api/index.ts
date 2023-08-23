@@ -1,9 +1,7 @@
 import axios from "axios";
 
 const $host = axios.create({
-	baseURL: 'http://45.94.157.117:8080/api/v1/'
+	baseURL: import.meta.env.VITE_BASE_URL,
 });
 
-export {
-	$host,
-};
+export { $host };

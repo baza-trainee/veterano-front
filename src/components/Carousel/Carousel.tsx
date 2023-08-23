@@ -9,13 +9,7 @@ interface CarouselProps {
 	button?: () => React.ReactElement;
 }
 
-const Carousel: FC<CarouselProps> = ({
-																			 items,
-																			 gap,
-																			 slidesPerView,
-																			 component: Component,
-																			 button,
-																		 }) => {
+const Carousel: FC<CarouselProps> = ({ items, gap, slidesPerView, component: Component, button, }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [slideWidth, setSlideWidth] = useState(0);
