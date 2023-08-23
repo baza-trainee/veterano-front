@@ -321,7 +321,7 @@ input {
 	}
 
 	.switch-label {
-		@apply inline-block w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
+		@apply flex flex-shrink-0 w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
 	}
 
 	.switch-label::after {
@@ -349,7 +349,7 @@ input {
 	}
 
   .admin-filter-input {
-    @apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
+    @apply relative bg-white w-full flex justify-between items-center p-[10px] rounded;
   }
 
   .admin-filter-input:hover {
@@ -416,4 +416,5 @@ input {
   .check-wrapper:hover {
     @apply bg-yellow30 rounded
   }
+
 }

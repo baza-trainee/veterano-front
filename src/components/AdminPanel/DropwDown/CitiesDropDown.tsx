@@ -62,7 +62,7 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 
 	return (
 
-		<label className={"admin-filter-input w-full"}>
+		<label className={"admin-filter-input w-full h-[48px]"}>
 			<input
 				placeholder={error ? error : placeholder}
 				value={inputValue}

@@ -31,7 +31,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 					<img height="232" width="265" src={src} alt="Preview" />
 				) : (
 					<span className="flex items-center gap-[12px]">
-						<img src="./public/admin/download-icon.svg" alt="" />
+						<img src="/admin/download-icon.svg" alt="" />
 						Завантажити зображення
 					</span>
 				)}
