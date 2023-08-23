@@ -348,6 +348,51 @@ input {
 		@apply scale-125 shadow-none;
 	}
 
+  .admin-filter-input {
+    @apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
+  }
+
+  .admin-filter-input:hover {
+    @apply shadow-middle;
+  }
+
+  .admin-filter-input input:invalid::placeholder{
+    @apply text-error50;
+  }
+
+  .admin-filter-input input::placeholder {
+    @apply text-[14px] leading-[185%] text-grey50
+  }
+
+  .admin-filter-input:focus-within > input {
+    @apply outline-none;
+  }
+
+  .admin-filter-drop-down {
+    @apply w-[100%] bg-[#F5F5F5] leading-6 text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px];
+  }
+
+  .admin-filter-drop-down::-webkit-scrollbar {
+    @apply hidden;
+  }
+
+  .admin-filter-drop-down {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .admin-filter-drop-down > li {
+    @apply pl-[10px]  mb-3 ;
+  }
+
+  .admin-filter-drop-down > li:hover {
+    @apply bg-yellow30 text-black cursor-pointer;
+  }
+
+  .admin-filter-drop-down > :last-child {
+    @apply pb-0;
+  }
+
   .custom-checkbox .checkmark {
     @apply relative inline-block w-[24px] h-[24px] border-2 border-[#151515]
   }
