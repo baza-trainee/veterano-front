@@ -11,14 +11,21 @@ input {
   background-color: inherit;
 }
 
-@layer utilities {
-  .btn-style {
-    @apply font-light rounded py-2 px-10;
-  }
+.noScrollbar::-webkit-scrollbar {
+	display: none;
+}
 
-  .arrow-btn {
-    @apply rounded flex items-center justify-center;
-  }
+.noScrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+@layer utilities {
+	.btn-style {
+		@apply font-light rounded py-2 px-10;
+	}
+	.arrow-btn {
+		@apply rounded flex items-center justify-center;
+	}
 
   .input-form {
     @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
@@ -80,9 +87,9 @@ input {
     @apply bg-yellow100;
   }
 
-  .input-form {
-    @apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-  }
+	.input-form {
+		@apply w-full md:w-full lg:w-full text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+	}
 
   .input-form:invalid:not(:placeholder-shown) {
     @apply border-[#D30018];
@@ -137,7 +144,7 @@ input {
   }
 
   .search-wrapper {
-    @apply rounded flex justify-between max-w-[288px] md:w-[349px] lg:w-[413px] p-[10px] items-center bg-[#F9F6EC];
+    @apply rounded flex justify-between md:w-full lg:w-[413px] p-[10px] items-center bg-[#F9F6EC];
   }
 
   .search-wrapper:hover {
@@ -165,7 +172,7 @@ input {
   }
 
   .search-input {
-    @apply min-w-[89%] text-[14px] leading-[26px] lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
+    @apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
   }
 
   .search-input:invalid .search-wrapper {
@@ -181,16 +188,16 @@ input {
   }
 
   .filter-input {
-    @apply relative w-[197px] flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
+    @apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded
   }
 
-  .filter-label-chosen {
-    @apply relative w-[197px] flex justify-between items-center p-[10px] bg-black rounded;
-  }
+	.filter-label-chosen {
+		@apply relative flex justify-between items-center p-[10px] bg-black rounded;
+	}
 
-  .filter-label-input {
-    @apply bg-black text-white outline-none w-[125px];
-  }
+	.filter-label-input {
+		@apply bg-black text-white outline-none lg:max-w-[150px];
+	}
 
   .filter-input:hover {
     @apply bg-yellow50;
@@ -289,6 +296,13 @@ input {
     @apply w-12 h-12 flex-shrink-0;
   }
 
+  .scroll-to-top:hover .scroll-to-top-icon{
+    @apply w-[58px] h-[58px]
+  }
+
+  .search-filter::-webkit-scrollbar {
+    display: none;
+  }
   .scroll-to-top:hover .scroll-to-top-icon {
     @apply w-[58px] h-[58px];
   }
@@ -333,8 +347,4 @@ input {
   .switch-label:active::after {
     @apply scale-125 shadow-none
   }
-
-
-
-
 }
