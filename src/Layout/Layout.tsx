@@ -6,9 +6,11 @@ import ScrollToTop from "../components/ScrollToTop/ScrollToTop.tsx";
 export const Layout = () => {
 	return (
 		<div>
-			<ScrollToTop/>
+			<ScrollToTop />
 			<Header />
-			<Outlet />
+			<div className="flex-grow">
+				<Outlet />
+			</div>
 			<Footer />
 		</div>
 	);

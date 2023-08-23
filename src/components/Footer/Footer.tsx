@@ -12,7 +12,7 @@ const Footer = () => {
 	});
 
 	return (
-		<footer className={"bg-black pb-[70px] md:pb-[35px] lg:pb-[38px] md:h-[361px] "}>
+		<footer className={"bg-black pb-[70px] md:pb-[35px] lg:pb-[38px] md:h-[361px]"}>
 			<Container className={"flex flex-col"}>
 				<div className={"wrapper"}>
 					<div className="footer ">
@@ -103,9 +103,7 @@ const Footer = () => {
 				</div>
 
 				<div
-					className={
-						"text-white text-[12px] ml-4 md:ml-[27px] lg:ml-[80px] mt-4 md:mt-6 lg:mt-[22px] leading-4 w-[169px] md:w-full md:flex"
-					}
+					className={"text-white text-[12px] ml-4 md:ml-[27px] lg:ml-[80px] mt-4 md:mt-6 lg:mt-[22px] leading-4 w-[169px] md:flex"}
 				>
 					<p className={"md:inline-block md:mr-1"}>Baza Trainee Ukraine 2023</p>
 					<p className={"md:inline-block"}>Всі права захищені</p>
