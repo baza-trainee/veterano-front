@@ -4,6 +4,7 @@ import SubscribeSection from "../components/SubscribeSection/SubscribeSection.ts
 import ImageInput from "../components/ImageCroper/ImageInput.tsx";
 
 const HomePage = () => {
+
 	return (
 		<>
 			<ProjectSection />
