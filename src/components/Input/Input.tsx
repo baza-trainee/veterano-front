@@ -29,6 +29,7 @@ const Input: FC<InputProps> = ({
     translate-y-[2.5rem] 
     transition-all 
     duration-300 
+	w-full 
     peer-focus:leading-7 
     peer-focus:text-[14px] 
     peer-focus:translate-y-[1.9rem]  
@@ -48,7 +49,7 @@ const Input: FC<InputProps> = ({
 		return style;
 	};
 	const inputStyles = () => {
-		let style = `input-form peer`;
+		let style = `input-form  peer`;
 
 		if (value.length > 0) {
 			style = `input-form peer !h-[64px]  `;
