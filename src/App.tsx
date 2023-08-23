@@ -7,16 +7,21 @@ import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
+import SearchResults from "./pages/SearchResults.tsx";
+
 
 function App() {
+
 	return (
 		<>
+
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/contact" element={<ContactUs />} />
 						<Route path="/aboutus" element={<AboutUs />} />
+						<Route path="/search" element={<SearchResults />} />
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
 					<Route path="/auth">
@@ -25,6 +30,7 @@ function App() {
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />
+
 		</>
 	);
 }

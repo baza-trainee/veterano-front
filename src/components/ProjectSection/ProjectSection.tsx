@@ -59,8 +59,8 @@ const ProjectSection = () => {
 				<div className={"project-section"}>
 					{items?.slice(0, 3).map((item, index) =>
 						<div key={index}>
-							<ProjectCard imageSrc={item.imageSrc} title={item.title} text={item.text} />
-						</div>,
+							<ProjectCard imageSrc={item.imageSrc} title={item.title} text={item.text} variant={'carousel'} />
+						</div>
 					)
 					}
 					<NavigationLink to={"/project"} variant={"secondary"}>Дивитись всі проекти</NavigationLink>
