@@ -6,7 +6,10 @@ import ContactUs from "./pages/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
+import AdminLayout from "./Layout/AdminLayout.tsx";
+import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
+
 
 function App() {
 
@@ -21,6 +24,11 @@ function App() {
 						<Route path="/aboutus" element={<AboutUs />} />
 						<Route path="/search" element={<SearchResults />} />
 						<Route path="*" element={<ErrorPage />} />
+					</Route>
+
+					<Route path="/admin" element={<AdminLayout />}>
+					<Route path="/auth">
+						<Route path="login" element={<LoginPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
