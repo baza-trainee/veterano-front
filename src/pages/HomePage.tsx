@@ -4,6 +4,7 @@ import SubscribeSection from "../components/SubscribeSection/SubscribeSection.ts
 import Hero from "../components/Hero/Hero.tsx";
 
 const HomePage = () => {
+
 	return (
 		<>
 			<Hero />
