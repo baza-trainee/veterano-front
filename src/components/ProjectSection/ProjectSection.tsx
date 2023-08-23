@@ -3,50 +3,35 @@ import Carousel from "../Carousel/Carousel.tsx";
 import ProjectCard from "../ProjectCard/ProjectCard.tsx";
 import NavigationLink from "../Links/NavigationLink.tsx";
 import { useMedia } from "../../hooks/useMedia.tsx";
+import { searchRequest } from "../../api/SearchAPI.tsx";
+import { useEffect, useState } from "react";
+import { convertBackDataToProjectCardProps } from "../../../utils/backDataToProjectCardProps.ts";
 
 const ProjectSection = () => {
-	const items = [
-		{
-			title: "Проект 1",
-			text: "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-			imageSrc:
-				"https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
-		},
-		{
-			title: "Проект 2",
-			text: "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-			imageSrc:
-				"https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
-		},
-		{
-			title: "Проект 3",
-			text: "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-			imageSrc:
-				"https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
-		},
-		{
-			title: "Проект 4",
-			text: "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-			imageSrc:
-				"https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
-		},
-		{
-			title: "Проект 5",
-			text: "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
-			imageSrc:
-				"https://images.unsplash.com/photo-1529787730-bdcabd22a644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmV0ZXJhbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60",
-		},
-	];
 	const { isDesktop, isTablet, isMobile } = useMedia();
+	const [items, setItems] =
+		useState<{ imageSrc: string; title: string; text: string }[]>();
+
+	useEffect(() => {
+		const params = {
+			page: 1,
+			size: 6,
+		};
+
+		searchRequest(params).then((data) => {
+			console.log();
+			setItems(convertBackDataToProjectCardProps(data.cards));
+		});
+	}, []);
 
 	return (
 		<Section
 			title={"Проєкти"}
 			className={"bg-grey30 md:pl-[38px] md:pr-[10px] lg:px-[80px]"}
 		>
-			{isDesktop && (
+			{isDesktop && items?.length && (
 				<Carousel
-					items={items}
+					items={items || []}
 					gap={20}
 					slidesPerView={3}
 					component={ProjectCard}
@@ -60,7 +45,7 @@ const ProjectSection = () => {
 
 			{isTablet && (
 				<Carousel
-					items={items}
+					items={items || []}
 					gap={20}
 					slidesPerView={2}
 					component={ProjectCard}
