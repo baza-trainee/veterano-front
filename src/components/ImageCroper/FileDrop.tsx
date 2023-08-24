@@ -1,35 +1,43 @@
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiSolidTrash, BiSolidPencil } from "react-icons/bi";
-import IconPen from "../AdminPanel/IconButtons/IconPen";
 
 interface FileDropProps {
 	src?: string;
 	onFileChoise(file: File, isCropening: boolean): void;
 	openEditer?(): void;
 	removeFile?(): void;
+	imgWidth?: number;
+	imgHeight?: number;
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
 	onFileChoise,
 	openEditer,
 	removeFile,
+	imgWidth = 214,
+	imgHeight = 94,
 }) => {
 	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 	useEffect(() => {
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
 	return (
-		<div className="flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] ">
+		<div
+			style={{ minHeight: imgHeight }}
+			className={
+				"inline-flex items-center flex-col p-[10px] min-w-[305px] min-h-[157px] justify-center"
+			}
+		>
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
+						"flex items-center justify-center flex-col w-full min-w-[305px] min-h-[119px] hover:cursor-pointer",
 				})}
 			>
 				<input {...getInputProps()} required id="photo" type="file" />
 				{src ? (
-					<img height="232" width="265" src={src} alt="Preview" />
+					<img height={imgHeight} width={imgWidth} src={src} alt="Preview" />
 				) : (
 					<span className="flex items-center gap-[12px]">
 						<img src="./public/admin/download-icon.svg" alt="" />
