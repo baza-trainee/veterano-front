@@ -8,11 +8,12 @@ import ImageInput from "../../../components/ImageCroper/ImageInput.tsx";
 import Switch from "../../../components/Switch/Switch.tsx";
 import * as Yup from "yup";
 import Button from "../../../components/Button/Button.tsx";
-import { useState } from "react";
+import CustomCalendar from "../../../components/AdminPanel/Calendar/CustomCalendar.tsx";
+
 
 
 const AddProjectPage = () => {
-	const [startDate, setStartDate] = useState(new Date());
+
 	const validationSchema = Yup.object({
 		title: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
@@ -37,7 +38,6 @@ const AddProjectPage = () => {
 
 	});
 
-
 	return (
 		<>
 			<div className={"bg-grey100 "}>
@@ -57,7 +57,7 @@ const AddProjectPage = () => {
 						country: "",
 						image: "",
 						isEnabled: true,
-						publication: "",
+						publication: null,
 						category: "",
 					}}
 					validationSchema={validationSchema}
@@ -123,7 +123,7 @@ const AddProjectPage = () => {
 										<div className="mb-[22px] bg-white rounded">
 											<ImageInput onChange={handleChange} />
 										</div>
-										<div className="h-[226px] bg-white py-6 px-[74px]">
+										<div className="h-[226px] bg-white py-6 px-[74px] relative">
 											<div className={' h-full flex flex-col justify-between' }>
 												<div className={'flex flex-col'}>
 													<div className={'flex items-center mb-4 text-[14px]'}>
@@ -134,15 +134,16 @@ const AddProjectPage = () => {
 														/>
 													</div>
 
-													<div className={'flex items-center text-[14px]'}>
+													<div className={'flex items-center text-[14px] relative'}>
 														Дата публікації:
-
 													</div>
 												</div>
 
 												<Button variant={'primary'} size={'large'} type={'submit'}>Опублікувати</Button>
 											</div>
-
+											<CustomCalendar
+												onChange={handleChange}
+											/>
 										</div>
 									</div>
 								</div>
