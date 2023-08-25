@@ -44,7 +44,6 @@ const ProjectsPage = () => {
 	}, [currentPage]);
 
 
-
 	const handleSelectedPage = (selectedPage: number) => {
 		setCurrentPage(selectedPage);
 	};

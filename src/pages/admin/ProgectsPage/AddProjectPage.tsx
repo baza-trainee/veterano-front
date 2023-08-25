@@ -11,7 +11,7 @@ import Button from "../../../components/Button/Button.tsx";
 import CustomCalendar from "../../../components/AdminPanel/Calendar/CustomCalendar.tsx";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import { createCard } from "../../../api/CardsApi.ts";
 
 const AddProjectPage = () => {
 
@@ -34,7 +34,6 @@ const AddProjectPage = () => {
 			.required("Поле обов'язкове до заповнення"),
 		category: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
-
 	});
 
 	const currentDate = new Date();
@@ -54,7 +53,7 @@ const AddProjectPage = () => {
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>
-				<Typography variant={"h4"} component={"h4"} className={"text-black"}>Додати проєкт</Typography>
+				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Додати проєкт</Typography>
 				<Formik
 					initialValues={{
 						title: "",
@@ -69,8 +68,14 @@ const AddProjectPage = () => {
 					}}
 					validationSchema={validationSchema}
 					onSubmit={(values) => {
-						console.log(values);
+						const { isEnabled, city, country, category, ...rest } = values;
+						const location = { city, country };
+						const categories = [{ categoryName: category }];
+						const cardData = { ...rest, location, categories };
+						console.log(cardData);
+						createCard(cardData);
 					}}
+
 				>
 
 					{({ values, setFieldValue, errors, handleChange, handleSubmit }) => (
