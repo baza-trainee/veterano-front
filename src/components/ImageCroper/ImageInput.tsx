@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
+import { blobToBase64 } from "../AdminPanel/BlobToBase64.ts";
 interface ImageInput {
 	onSelectedImg: (preview: string) => void;
 
@@ -11,11 +12,19 @@ onSelectedImg
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
 	const [file, setFile] = useState<Blob>();
+
 	useEffect(() => {
 		if (preview !== "") {
-			onSelectedImg(preview);
+			// Перетворення Blob на Base64
+			blobToBase64(file)
+				.then((base64String) => {
+					onSelectedImg(base64String);
+				})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
 		}
-	}, [preview]);
+	}, [preview, file, onSelectedImg]);
 	return (
 		<>
 			{isCropeningImg && file && (
