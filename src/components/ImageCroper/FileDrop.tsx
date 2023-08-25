@@ -8,6 +8,7 @@ interface FileDropProps {
 	openEditer?(): void;
 	removeFile?(): void;
 	className: string;
+	id?: string;
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
@@ -15,6 +16,8 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	openEditer,
 	removeFile,
 	className = "",
+	id,
+	...props
 }) => {
 	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 	useEffect(() => {
@@ -30,7 +33,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 						className,
 				})}
 			>
-				<input {...getInputProps()} required id="photo" type="file" />
+				<input id={id} {...getInputProps()} required type="file" {...props} />
 				{src ? (
 					<img height="232" width="265" src={src} alt="Preview" />
 				) : (

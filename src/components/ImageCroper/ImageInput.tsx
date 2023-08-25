@@ -4,19 +4,22 @@ import { ImageCroper } from "./ImageCroper";
 interface ImageInput {
 	onChange: (preview: string) => void;
 	className?: string;
+	id?: string;
 }
 const ImageInput = ({
 	onChange = (preview: string) => {
 		console.log(preview);
 	},
+	id = "",
 	className = "",
+	...props
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
 	const [file, setFile] = useState<Blob>();
 	useEffect(() => {
 		onChange(preview);
-	}, [onChange, preview]);
+	}, [preview]);
 	return (
 		<>
 			{isCropeningImg && file && (
@@ -31,6 +34,8 @@ const ImageInput = ({
 				/>
 			)}
 			<FileDrop
+				{...props}
+				id={id}
 				className={className}
 				src={preview}
 				openEditer={() => {
