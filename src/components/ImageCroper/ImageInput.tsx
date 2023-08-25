@@ -1,20 +1,21 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
 interface ImageInput {
-	onChange: (preview: string) => void;
+	onSelectedImg: (preview: string) => void;
+
 }
-const ImageInput = ({
-	onChange = (preview: string) => {
-		console.log(preview);
-	},
+const ImageInput: FC<ImageInput> = ({
+onSelectedImg
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
 	const [file, setFile] = useState<Blob>();
 	useEffect(() => {
-		onChange(preview);
-	}, [onChange, preview]);
+		if (preview !== "") {
+			onSelectedImg(preview);
+		}
+	}, [preview]);
 	return (
 		<>
 			{isCropeningImg && file && (
@@ -22,7 +23,6 @@ const ImageInput = ({
 					aspect={265 / 232}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {
-						console.log(isCropeningImg);
 						setPreview(url);
 						setIsCropeningImg(false);
 					}}

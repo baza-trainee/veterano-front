@@ -356,12 +356,11 @@ input {
     @apply shadow-middle;
   }
 
-  .admin-filter-input input:invalid::placeholder{
-    @apply text-error50;
-  }
-
-  .admin-filter-input input::placeholder {
+  .placeholder-grey {
     @apply text-[14px] leading-[185%] text-grey50
+  }
+  .placeholder-error {
+    @apply text-[14px] leading-[185%] text-error30
   }
 
   .admin-filter-input:focus-within > input {

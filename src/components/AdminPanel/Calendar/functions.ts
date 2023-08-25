@@ -49,17 +49,20 @@ export function getDayOfWeek(date: Date): number {
 
 export function getMonthData(year: number, month: number): (Date | undefined)[][] {
 	const result: (Date | undefined)[][] = [];
-	const date = new Date(year, month);
+	const date = new Date(year, month, 1);
 	const daysInMonth = getDaysInMonth(date);
 	const monthStartsOn = getDayOfWeek(date);
 	let day = 1;
+	const previousMonthDays = new Date(year, month, 0).getDate();
 
-	for (let i = 0; i < (daysInMonth + monthStartsOn) / DAYS_IN_WEEK; i++) {
+	for (let i = 0; i < 6; i++) { // 6 рядків
 		result[i] = [];
 
 		for (let j = 0; j < DAYS_IN_WEEK; j++) {
-			if ((i === 0 && j < monthStartsOn) || day > daysInMonth) {
-				result[i][j] = undefined;
+			if (i === 0 && j < monthStartsOn) {
+				result[i][j] = new Date(year, month - 1, previousMonthDays - monthStartsOn + j + 1);
+			} else if (day > daysInMonth) {
+				result[i][j] = new Date(year, month + 1, day++ - daysInMonth);
 			} else {
 				result[i][j] = new Date(year, month, day++);
 			}

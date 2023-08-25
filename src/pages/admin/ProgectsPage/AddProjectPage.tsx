@@ -9,10 +9,12 @@ import Switch from "../../../components/Switch/Switch.tsx";
 import * as Yup from "yup";
 import Button from "../../../components/Button/Button.tsx";
 import CustomCalendar from "../../../components/AdminPanel/Calendar/CustomCalendar.tsx";
-
+import { useState } from "react";
 
 
 const AddProjectPage = () => {
+
+	const [isOpen, setIsOpen] = useState(false)
 
 	const validationSchema = Yup.object({
 		title: Yup.string()
@@ -22,20 +24,23 @@ const AddProjectPage = () => {
 		description: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
 		city: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
+			.required("Місто та країна обовязкове"),
 		country: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
+			.required("Місто та країна обовязкове"),
 		image: Yup.mixed()
-			.required("Поле обов'язкове до заповнення")
-			.test('fileType', 'Непідтримуваний тип файлу', (value) => {
-				const supportedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/svg'];
-				return value && supportedTypes.includes((value as File).type);
-			}),
+			.required("Поле обов'язкове до заповнення"),
 		publication: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
 		category: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
 
+	});
+
+	const currentDate = new Date();
+	const formattedCurrentDate = currentDate.toLocaleDateString('uk-UA', {
+		day: '2-digit',
+		month: '2-digit',
+		year: 'numeric'
 	});
 
 	return (
@@ -57,25 +62,27 @@ const AddProjectPage = () => {
 						country: "",
 						image: "",
 						isEnabled: true,
-						publication: null,
+						publication: formattedCurrentDate,
 						category: "",
 					}}
 					validationSchema={validationSchema}
-					onSubmit={values => {
+					onSubmit={(values) => {
 						console.log(values);
-					}}>
+					}}
+				>
 
-					{({ values, setFieldValue, errors, submitForm, handleChange, handleSubmit }) => (
-						<Form>
-							<div className="flex gap-[20px]" >
+					{({ values, setFieldValue, errors, handleChange, handleSubmit }) => (
+						<Form onSubmit={handleSubmit}>
+							<div className="flex gap-[20px]">
 								<div className="flex flex-col w-2/3">
 									<div className="mb-[22px]">
 										<AdminInput
 											type={"text"}
 											value={values.title}
-											placeholder={"Додати назву"}
+											placeholder={"Додати назву проекту"}
 											name={"title"}
-											onChange={handleChange} />
+											onChange={handleChange}
+											error={errors.title} />
 									</div>
 									<div className="mb-[22px]">
 										<AdminInput
@@ -83,14 +90,15 @@ const AddProjectPage = () => {
 											value={values.url}
 											placeholder={"Додати посилання"}
 											name={"url"}
-											onChange={handleChange} />
+											onChange={handleChange}
+											error={errors.url} />
 									</div>
 									<div>
 										<textarea
-											name={'description'}
+											name={"description"}
 											value={values.description}
 											onChange={handleChange}
-											className="resize-none pt-[10px] pl-[10px] pr-[53px] w-full h-[548px] border rounded placeholder:text-[14px] placeholder:text-grey50 invalid:placeholder:text-error30"
+											className={`resize-none pt-[10px] pl-[10px] pr-[53px] w-full h-[548px] border rounded ${errors.description ? "placeholder:text-error30" : "placeholder:text-grey50"} placeholder:text-[14px] `}
 											placeholder={errors.description ? errors.description : "Введіть текст тут"}
 										/>
 									</div>
@@ -101,11 +109,12 @@ const AddProjectPage = () => {
 											value={values.city}
 											name={"city"}
 											onChange={handleChange}
-											placeholder={"Країна / місто"}
+											placeholder={"Місто / країна"}
 											onValueSelected={({ city, country }) => {
 												setFieldValue("city", city);
 												setFieldValue("country", country);
-											}} />
+											}}
+											error={errors.city || errors.country} />
 									</div>
 									<div className="mb-[22px]">
 										<CategoryDropDown
@@ -117,33 +126,48 @@ const AddProjectPage = () => {
 											placeholder={"Категорія"}
 											onValueSelected={(category) => {
 												setFieldValue("category", category);
-											}} />
+											}}
+											error={errors.city}
+										/>
 									</div>
 									<div className="flex flex-col">
 										<div className="mb-[22px] bg-white rounded">
-											<ImageInput onChange={handleChange} />
+											<ImageInput
+												onSelectedImg={(preview) => setFieldValue("image", preview)}
+											/>
 										</div>
 										<div className="h-[226px] bg-white py-6 px-[74px] relative">
-											<div className={' h-full flex flex-col justify-between' }>
-												<div className={'flex flex-col'}>
-													<div className={'flex items-center mb-4 text-[14px]'}>
-														Стан: <span className={'block underline ml-4 w-[100px]'}>{values.isEnabled ? "активний" : "неактивний"}</span>
+											<div className={" h-full flex flex-col justify-between"}>
+												<div className={"flex flex-col"}>
+													<div className={"flex items-center mb-4 text-[14px]"}>
+														Стан: <span
+														className={"block underline ml-4 w-[100px]"}>{values.isEnabled ? "активний" : "неактивний"}</span>
 														<Switch
 															isChecked={values.isEnabled}
 															setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
 														/>
 													</div>
 
-													<div className={'flex items-center text-[14px] relative'}>
+													<div className={"flex items-center text-[14px] relative"}>
 														Дата публікації:
+														<button onClick={() => setIsOpen(!isOpen)} className={'underline cursor-pointer p-2'}>
+															{values.publication}
+														</button>
 													</div>
 												</div>
-
-												<Button variant={'primary'} size={'large'} type={'submit'}>Опублікувати</Button>
+												<Button variant={"primary"} size={"large"} type={"submit"}>Опублікувати</Button>
 											</div>
-											<CustomCalendar
-												onChange={handleChange}
-											/>
+											{isOpen &&
+												<CustomCalendar
+													setIsOpen={setIsOpen}
+													onValueSelected={(date) => {
+														if(date){
+															setFieldValue("publication", date)
+														} else {
+															setFieldValue("publication", formattedCurrentDate)
+														}
+													}}
+												/>}
 										</div>
 									</div>
 								</div>

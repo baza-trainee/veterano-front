@@ -49,7 +49,7 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country });
-		setInputValue(`${capitalizeFirstLetter(city)}`);
+		setInputValue(`${capitalizeFirstLetter(city)}/${capitalizeFirstLetter(country)}`);
 		setIsOpen(false);
 		setCitySelected(true);
 	};
@@ -66,12 +66,32 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 			<input
 				placeholder={error ? error : placeholder}
 				value={inputValue}
-				onChange={e => {
-					onChange(e);
-					setCitySelected(false);
+				onChange={(e) => {
 					setInputValue(e.target.value);
+					setCitySelected(false);
+
+					const separatorIndex = e.target.value.indexOf('/');
+					if (separatorIndex !== -1) {
+						const city = e.target.value.slice(0, separatorIndex).trim();
+						const country = e.target.value.slice(separatorIndex + 1).trim();
+						onValueSelected({ city, country });
+					} else {
+						onValueSelected({ city: e.target.value.trim(), country: '' });
+					}
+
+					onChange(e);
+				}}
+				onBlur={() => {
+					const separatorIndex = inputValue.indexOf('/');
+					if (separatorIndex !== -1) {
+						const city = inputValue.slice(0, separatorIndex).trim();
+						const country = inputValue.slice(separatorIndex + 1).trim();
+						onValueSelected({ city, country });
+						setInputValue(`${city} / ${country}`); // Встановлюємо значення з роздільником
+					}
 				}}
 				name={name}
+				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
 			/>
 			<BsFilter size={24} />
 			{isOpen &&
@@ -87,7 +107,7 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 							style={
 								index === activeIndex
 									? {
-										backgroundColor: "##F7D67F",
+										backgroundColor: "#F7D67F",
 										cursor: "pointer",
 									}
 									: {}

@@ -55,12 +55,18 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 			<input
 				placeholder={error ? error : placeholder}
 				value={inputValue}
-				onChange={e => {
-					onChange(e);
+				onChange={(e) => {
+					setInputValue(e.target.value);
 					setCategorySelected(false);
+					onValueSelected(e.target.value);
+					onChange(e);
+				}}
+				onBlur={(e) => {
+					onValueSelected(e.target.value);
 					setInputValue(e.target.value);
 				}}
 				name={name}
+				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
 			/>
 			{isOpen ?
 				<BsChevronUp

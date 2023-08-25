@@ -26,7 +26,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
 				})}
 			>
-				<input {...getInputProps()} required id="photo" type="file" />
+				<input {...getInputProps({ name: 'image' })} id="photo" type="file"/>
 				{src ? (
 					<img height="232" width="265" src={src} alt="Preview" />
 				) : (

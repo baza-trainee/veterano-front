@@ -1,10 +1,9 @@
 .calendar{
   position: absolute;
-  left: -62%;
+  left: -276px;
   top: 0;
   background-color: #FDF5E1;
   padding: 16px;
-
 }
 
 
@@ -55,8 +54,16 @@
   cursor: pointer;
 }
 
+.calendar .grey {
+  color: #BCBCBC;
+  pointer-events: none;
+}
+
 .calendar .day.selected {
-  border: 2px solid dodgerblue;
+  color: white;
+  border-radius: 4px;
+  background: #313131;
+  cursor: pointer;
 }
 
 .calendar .day.today {
@@ -83,9 +90,16 @@
   font-weight: 300;
   line-height: 26px;
   background-color: #FDF5E1;
-
 }
 
 .custom-select::-ms-expand {
   display: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
