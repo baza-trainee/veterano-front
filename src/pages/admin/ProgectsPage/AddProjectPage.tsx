@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import Button from "../../../components/Button/Button.tsx";
 import CustomCalendar from "../../../components/AdminPanel/Calendar/CustomCalendar.tsx";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 
 const AddProjectPage = () => {
@@ -48,7 +49,8 @@ const AddProjectPage = () => {
 			<div className={"bg-grey100 "}>
 				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>Проєкти</Typography>
-					<IconClose />
+					<NavLink to={'/admin/projects/'}><IconClose /></NavLink>
+
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>

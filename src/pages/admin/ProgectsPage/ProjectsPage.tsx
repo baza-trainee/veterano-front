@@ -13,15 +13,17 @@ interface ProjectType {
 	isEnabled: boolean,
 	title: string,
 	publication: string,
-
+	totalSize: number,
+	totalPages: number
 }
+
 const ProjectsPage = () => {
 	const [value, setValue] = useState("")
 	const [projects, setProjects] = useState<ProjectType[]>([])
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
-
+	console.log(projects);
 	const handleRemove = (index: number) => {
 		const newProjects = [...projects];
 		newProjects.splice(index, 1);
@@ -31,8 +33,8 @@ const ProjectsPage = () => {
 	useEffect(() => {
 		getAllCards()
 			.then((resp) => {
-				setProjects(resp);
-				setCheckedItems(new Array(resp.length).fill(false));
+				setProjects(resp.cards);
+				setCheckedItems(new Array(resp.cards.length).fill(false));
 			})
 	}, []);
 

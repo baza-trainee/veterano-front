@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { getCategoryList } from "../../../api/SearchAPI.tsx";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 
+
 interface ResultsType {
 	categoryName: string;
 }
