@@ -171,6 +171,10 @@ input {
 		@apply bg-black text-white outline-none;
 	}
 
+  .search-wrapper:focus-within input:focus {
+    @apply outline-none;
+  }
+
 	.search-input {
 		@apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
 	}

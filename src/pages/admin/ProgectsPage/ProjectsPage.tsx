@@ -7,6 +7,7 @@ import { getAllCards } from "../../../api/CardsApi.ts";
 import Pagination from "../../../components/Pagination/Pagination.tsx";
 import React from "react";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectType {
 	cardId: number,
@@ -18,12 +19,14 @@ interface ProjectType {
 }
 
 const ProjectsPage = () => {
+	const navigate = useNavigate();
 	const [value, setValue] = useState("")
 	const [projects, setProjects] = useState<ProjectType[]>([])
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
-	console.log(projects);
+	const [totalPages, setTotalPages] = useState(0);
+
 	const handleRemove = (index: number) => {
 		const newProjects = [...projects];
 		newProjects.splice(index, 1);
@@ -31,12 +34,15 @@ const ProjectsPage = () => {
 	};
 
 	useEffect(() => {
-		getAllCards()
+		navigate(`/admin/projects?page=${currentPage}`, { replace: true });
+		getAllCards(currentPage)
 			.then((resp) => {
 				setProjects(resp.cards);
 				setCheckedItems(new Array(resp.cards.length).fill(false));
+				setTotalPages(resp.totalPages);
 			})
-	}, []);
+	}, [currentPage]);
+
 
 
 	const handleSelectedPage = (selectedPage: number) => {
@@ -117,7 +123,7 @@ const ProjectsPage = () => {
 					)}
 				</div>
 				<div>
-					<Pagination pageCount={6} currentPage={1} onSelectedPage={handleSelectedPage} prevClassName={'md:pl-[141px]'}/>
+					<Pagination pageCount={totalPages} currentPage={1} onSelectedPage={handleSelectedPage} prevClassName={'md:pl-[141px]'}/>
 				</div>
 			</div>
 		</>
