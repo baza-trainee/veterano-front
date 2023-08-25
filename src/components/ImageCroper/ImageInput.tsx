@@ -3,11 +3,13 @@ import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
 interface ImageInput {
 	onChange: (preview: string) => void;
+	className?: string;
 }
 const ImageInput = ({
 	onChange = (preview: string) => {
 		console.log(preview);
 	},
+	className = "",
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
@@ -29,6 +31,7 @@ const ImageInput = ({
 				/>
 			)}
 			<FileDrop
+				className={className}
 				src={preview}
 				openEditer={() => {
 					setIsCropeningImg(true);

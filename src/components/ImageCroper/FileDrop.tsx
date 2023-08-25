@@ -7,12 +7,14 @@ interface FileDropProps {
 	onFileChoise(file: File, isCropening: boolean): void;
 	openEditer?(): void;
 	removeFile?(): void;
+	className: string;
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
 	onFileChoise,
 	openEditer,
 	removeFile,
+	className = "",
 }) => {
 	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 	useEffect(() => {
@@ -23,7 +25,9 @@ export const FileDrop: React.FC<FileDropProps> = ({
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
+						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer" +
+						" " +
+						className,
 				})}
 			>
 				<input {...getInputProps()} required id="photo" type="file" />

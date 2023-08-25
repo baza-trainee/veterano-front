@@ -9,6 +9,7 @@ import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 import AdminLayout from "./Layout/AdminLayout.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
+import AddPartnerPage from "./pages/AddPartnerPage/addPartnerPage.tsx";
 
 function App() {
 	return (
@@ -23,7 +24,12 @@ function App() {
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
 
-					<Route path="/admin" element={<AdminLayout />}></Route>
+					<Route path="/admin" element={<AdminLayout />}>
+						<Route path="partner">
+							<Route path=":id" element={<AddPartnerPage />} />
+							<Route path="add" element={<AddPartnerPage />} />
+						</Route>
+					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
 					</Route>
