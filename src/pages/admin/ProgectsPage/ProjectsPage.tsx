@@ -65,6 +65,10 @@ const ProjectsPage = () => {
 		return `${parts[2]}.${parts[1]}.${parts[0]}`
 	}
 
+	const editHandler = (cardId: number) => () => {
+		navigate(`/admin/projects/edit-project/${cardId}`);
+	}
+
 	const filteredProjects = value ? projects.filter((project) => project.title.includes(value)) : projects;
 
 	return (
@@ -117,6 +121,8 @@ const ProjectsPage = () => {
 							removeHandler={() => handleRemove(project.cardId)}
 							checked={checkedItems[index]}
 							onChange={handleCheckedChange(index)}
+							editHandler={editHandler(project.cardId)}
+
 						/>
 					</React.Fragment>
 					)}

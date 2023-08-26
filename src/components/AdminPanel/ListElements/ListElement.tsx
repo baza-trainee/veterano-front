@@ -6,7 +6,7 @@ type ListElementProps = {
 	name: string,
 	status: string,
 	date: string,
-	editHandler?: () => void,
+	editHandler?: (cardId: number) => void;
 	removeHandler?: () => void,
 	checked: boolean,
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,7 +30,7 @@ const ListElement: FC<ListElementProps> = ({ id, onChange, name, status, date, e
 			<div className={"flex"}>
 				<div
 					className={'cursor-pointer'}
-					onClick={editHandler}>
+					onClick={() => editHandler && editHandler(id)}>
 					<IconPen />
 				</div>
 				<div

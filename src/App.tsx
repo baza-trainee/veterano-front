@@ -11,6 +11,7 @@ import SearchResults from "./pages/SearchResults.tsx";
 import AdminLayout from "./Layout/AdminLayout.tsx";
 import ProjectsPage from "./pages/admin/ProgectsPage/ProjectsPage.tsx";
 import AddProjectPage from "./pages/admin/ProgectsPage/AddProjectPage.tsx";
+import EditProjectPage from "./pages/admin/ProgectsPage/EditProjectPage.tsx";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 					<Route path="/admin" element={<AdminLayout />}>
 						<Route path="projects" element={<ProjectsPage />} />
 						<Route path="projects/new-project" element={<AddProjectPage />} />
+						<Route path="projects/edit-project/:id" element={<EditProjectPage />} />
 					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />

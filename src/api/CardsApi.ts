@@ -53,3 +53,13 @@ export const getAllCards = async (currentPage: number) => {
 		return null;
 	}
 };
+
+export const getCardById = async (id: string) => {
+	try {
+		const { data } = await $host.get("card/get?id=" + id);
+		return data;
+	} catch (e) {
+		console.error("Error creating feedback:", e);
+		return null;
+	}
+};
