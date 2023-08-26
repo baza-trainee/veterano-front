@@ -9,9 +9,9 @@ import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
 import AdminLayout from "./Layout/AdminLayout.tsx";
-import ProjectsPage from "./pages/admin/ProgectsPage/ProjectsPage.tsx";
-import AddProjectPage from "./pages/admin/ProgectsPage/AddProjectPage.tsx";
-import EditProjectPage from "./pages/admin/ProgectsPage/EditProjectPage.tsx";
+import ProjectsPage from "./pages/admin/ProjectsPage/ProjectsPage.tsx";
+import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
+import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 
 
 function App() {

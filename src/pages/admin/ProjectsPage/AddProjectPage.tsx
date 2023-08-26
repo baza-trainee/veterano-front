@@ -1,8 +1,6 @@
 import Typography from "../../../components/Typography/Typography.tsx";
-import { NavLink, useParams } from "react-router-dom";
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 import { Form, Formik } from "formik";
-import { createCard, getCardById } from "../../../api/CardsApi.ts";
 import AdminInput from "../../../components/AdminPanel/Input/AdminInput.tsx";
 import CitiesDropDown from "../../../components/AdminPanel/DropwDown/CitiesDropDown.tsx";
 import CategoryDropDown from "../../../components/AdminPanel/DropwDown/CategoryDropDown.tsx";
@@ -10,59 +8,28 @@ import ImageInput from "../../../components/ImageCroper/ImageInput.tsx";
 import Switch from "../../../components/Switch/Switch.tsx";
 import Button from "../../../components/Button/Button.tsx";
 import CustomCalendar from "../../../components/AdminPanel/Calendar/CustomCalendar.tsx";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { createCard } from "../../../api/CardsApi.ts";
+import { validationSchema } from "./validationShema.ts";
+import { useFormatDate } from "../../../hooks/useFormatDate.tsx";
 
-const EditProjectPage = () => {
-	const [isOpen, setIsOpen] = useState(false);
-	const [cardInfo, setCardInfo] = useState();
-	const { id } = useParams<string>();
-	console.log(cardInfo);
+const AddProjectPage = () => {
 
-	useEffect(() => {
-		if (id) {
-			getCardById(id)
-				.then(data => setCardInfo(data));
-		}
-	}, [id]);
-
-	const validationSchema = Yup.object({
-		title: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
-		url: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
-		description: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
-		city: Yup.string()
-			.required("Місто та країна обовязкове"),
-		country: Yup.string()
-			.required("Місто та країна обовязкове"),
-		image: Yup.mixed()
-			.required("Поле обов'язкове до заповнення"),
-		publication: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
-		category: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
-	});
-
-	const currentDate = new Date();
-	const formattedCurrentDate = currentDate.toLocaleDateString("uk-UA", {
-		day: "2-digit",
-		month: "2-digit",
-		year: "numeric",
-	});
+	const [isOpen, setIsOpen] = useState(false)
+	const formatDate = useFormatDate();
 
 	return (
 		<>
 			<div className={"bg-grey100 "}>
 				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>Проєкти</Typography>
-					<NavLink to={"/admin/projects/"}><IconClose /></NavLink>
+					<NavLink to={'/admin/projects/'}><IconClose /></NavLink>
 
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>
-				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Редагувати проєкт</Typography>
+				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Додати проєкт</Typography>
 				<Formik
 					initialValues={{
 						title: "",
@@ -72,7 +39,7 @@ const EditProjectPage = () => {
 						country: "",
 						image: "",
 						isEnabled: true,
-						publication: formattedCurrentDate,
+						publication: formatDate,
 						category: "",
 					}}
 					validationSchema={validationSchema}
@@ -166,7 +133,7 @@ const EditProjectPage = () => {
 
 													<div className={"flex items-center text-[14px] relative"}>
 														Дата публікації:
-														<button onClick={() => setIsOpen(!isOpen)} className={"underline cursor-pointer p-2"}>
+														<button onClick={() => setIsOpen(!isOpen)} className={'underline cursor-pointer p-2'}>
 															{values.publication}
 														</button>
 													</div>
@@ -177,10 +144,10 @@ const EditProjectPage = () => {
 												<CustomCalendar
 													setIsOpen={setIsOpen}
 													onValueSelected={(date) => {
-														if (date) {
-															setFieldValue("publication", date);
+														if(date){
+															setFieldValue("publication", date)
 														} else {
-															setFieldValue("publication", formattedCurrentDate);
+															setFieldValue("publication", formattedCurrentDate)
 														}
 													}}
 												/>}
@@ -197,4 +164,4 @@ const EditProjectPage = () => {
 	);
 };
 
-export default EditProjectPage;
+export default AddProjectPage;
