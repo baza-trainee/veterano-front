@@ -5,18 +5,21 @@ import { blobToBase64 } from "../AdminPanel/BlobToBase64.ts";
 
 interface ImageInput {
 	onSelectedImg: (preview: string) => void;
+	initialImage?: string
 }
 
 const ImageInput: FC<ImageInput> = ({
-onSelectedImg
+onSelectedImg,
+	initialImage
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
-	const [preview, setPreview] = useState<string>("");
+	const [preview, setPreview] = useState<string | undefined>('');
 	const [file, setFile] = useState<Blob | undefined>();
 
 	useEffect(() => {
+
 		if (preview !== "" && file) {
-			// Перетворення Blob на Base64
+
 			blobToBase64(file)
 				.then((base64String) => {
 					if (typeof base64String === "string") {
@@ -27,7 +30,14 @@ onSelectedImg
 					console.error("Error:", error);
 				});
 		}
-	}, [preview, file, onSelectedImg]);
+	}, [preview, file, onSelectedImg, initialImage]);
+
+	useEffect(() => {
+
+		if (initialImage) {
+			setPreview(initialImage)
+		}
+	}, [initialImage]);
 
 	return (
 		<>

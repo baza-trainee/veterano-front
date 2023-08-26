@@ -7,10 +7,11 @@ import { getCitiesList } from "../../../api/SearchAPI.tsx";
 interface CitiesDropDownProps {
 	value: string,
 	name: string,
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (location: { city: string; country: string }) => void;
 	error?: string
+	inputDisplayValue?: string
 }
 
 interface ResultsType {
@@ -19,17 +20,20 @@ interface ResultsType {
 	error?: string;
 }
 
-const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, placeholder, name, onValueSelected }) => {
+const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, value, placeholder, name, onValueSelected }) => {
 
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
-	const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState(inputDisplayValue);
 
 
 	useEffect(() => {
-		if (value.length > 1 && !citySelected) {
+		if (inputDisplayValue) {
+			setIsOpen(false);
+			setInputValue(inputDisplayValue)
+		} else if (value.length > 1 && !citySelected) {
 			const cities = results.filter((cityObj) =>
 				cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
 				cityObj.country.toLowerCase().includes(value.toLowerCase()),
@@ -40,6 +44,8 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 				setIsOpen(false);
 			}
 		}
+
+
 	}, [value, citySelected]);
 
 	useEffect(() => {
@@ -69,27 +75,17 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ error, value, onChange, place
 				onChange={(e) => {
 					setInputValue(e.target.value);
 					setCitySelected(false);
-
-					const separatorIndex = e.target.value.indexOf('/');
-					if (separatorIndex !== -1) {
-						const city = e.target.value.slice(0, separatorIndex).trim();
-						const country = e.target.value.slice(separatorIndex + 1).trim();
-						onValueSelected({ city, country });
-					} else {
-						onValueSelected({ city: e.target.value.trim(), country: '' });
-					}
-
-					onChange(e);
 				}}
 				onBlur={() => {
-					const separatorIndex = inputValue.indexOf('/');
-					if (separatorIndex !== -1) {
-						const city = inputValue.slice(0, separatorIndex).trim();
-						const country = inputValue.slice(separatorIndex + 1).trim();
-						onValueSelected({ city, country });
-						setInputValue(`${city} / ${country}`); // Встановлюємо значення з роздільником
-					}
-				}}
+					if (inputValue) {
+						const separatorIndex = inputValue.indexOf('/');
+						if (separatorIndex !== -1) {
+							const city = inputValue.slice(0, separatorIndex).trim();
+							const country = inputValue.slice(separatorIndex + 1).trim();
+							onValueSelected({ city, country });
+							setInputValue(`${city} / ${country}`);
+						}
+				}}}
 				name={name}
 				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
 			/>

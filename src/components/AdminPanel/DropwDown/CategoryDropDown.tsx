@@ -22,11 +22,14 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [categorySelected, setCategorySelected] = useState(false);
-	const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState(value);
 
 
 	useEffect(() => {
-		if (value.length > 1 && !categorySelected) {
+		if (inputValue) {
+			setIsOpen(false);
+
+		} else if (value.length > 1 && !categorySelected) {
 			const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results;
 			if (categoriesList.length > 0) {
 				setIsOpen(true);
@@ -34,6 +37,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 				setIsOpen(false);
 			}
 		}
+		setInputValue(value);
 	}, [value, categorySelected, results]);
 
 	useEffect(() => {

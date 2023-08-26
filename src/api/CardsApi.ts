@@ -1,6 +1,7 @@
 import { $host } from "./index.ts";
 
 interface CardType {
+	cardId?: number
 	title: string;
 	description: string;
 	image: string;
@@ -57,6 +58,39 @@ export const getAllCards = async (currentPage: number) => {
 export const getCardById = async (id: string) => {
 	try {
 		const { data } = await $host.get("card/get?id=" + id);
+		return data;
+	} catch (e) {
+		console.error("Error creating feedback:", e);
+		return null;
+	}
+};
+
+export const getCardImage = async (id: number) => {
+	try {
+		const { data } = await $host.get("search/image/get?id=" + id);
+		const formattedImage = formatImageBinary(data);
+
+		return formattedImage;
+	} catch (e) {
+		console.error("Error getting image:", e);
+		return null;
+	}
+};
+
+const formatImageBinary = (binaryString: string): string => {
+	const imageArrayBuffer = new TextEncoder().encode(binaryString);
+	const imageUint8Array = new Uint8Array(imageArrayBuffer);
+	const imageBlob = new Blob([imageUint8Array]);
+	const imageUrl = URL.createObjectURL(imageBlob);
+	return imageUrl;
+};
+
+
+
+
+	export const editCard = async (card: CardType) => {
+	try {
+		const { data } = await $host.patch("card/update", card);
 		return data;
 	} catch (e) {
 		console.error("Error creating feedback:", e);

@@ -18,6 +18,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	useEffect(() => {
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
+
 	return (
 		<div className="flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] ">
 			<div

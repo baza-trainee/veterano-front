@@ -8,15 +8,8 @@ import Pagination from "../../../components/Pagination/Pagination.tsx";
 import React from "react";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 import { useNavigate } from "react-router-dom";
+import { ProjectType } from "./interfaces/ProjectType.ts";
 
-interface ProjectType {
-	cardId: number,
-	isEnabled: boolean,
-	title: string,
-	publication: string,
-	totalSize: number,
-	totalPages: number
-}
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
@@ -59,11 +52,6 @@ const ProjectsPage = () => {
 		newCheckedItems[index] = event.target.checked;
 		setCheckedItems(newCheckedItems);
 	};
-
-	const convertToDate = (date: string) => {
-		const parts = date.split("-");
-		return `${parts[2]}.${parts[1]}.${parts[0]}`
-	}
 
 	const editHandler = (cardId: number) => () => {
 		navigate(`/admin/projects/edit-project/${cardId}`);
@@ -117,7 +105,7 @@ const ProjectsPage = () => {
 							id={project.cardId}
 							name={capitalizeFirstLetter(project.title)}
 							status={project.isEnabled ? 'активний' : 'неактивний'}
-							date={convertToDate(project.publication)}
+							date={project.publication}
 							removeHandler={() => handleRemove(project.cardId)}
 							checked={checkedItems[index]}
 							onChange={handleCheckedChange(index)}
