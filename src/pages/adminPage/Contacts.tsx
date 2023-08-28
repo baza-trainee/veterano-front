@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Typography from "../../components/Typography/Typography";
 import { AdminHeader } from "../../components/AdminHeader";
 import Button from "../../components/Button/Button";

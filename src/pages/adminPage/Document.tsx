@@ -5,7 +5,7 @@ import Button from "../../components/Button/Button";
 import { AdminInputFile } from "../../components/AdminPanel/Input/AdminInputFile";
 
 export const DocumentPage = () => {
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	const [, setSelectedFile] = useState<File | null>(null);
 
 	const handleFileSelect = (file: File | null) => {
 		setSelectedFile(file);

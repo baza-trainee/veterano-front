@@ -1,5 +1,4 @@
 import React, { FC, ChangeEvent } from "react";
-import Typography from "../../Typography/Typography";
 
 interface AdminInputProps {
 	placeholder: string;
@@ -13,7 +12,6 @@ export const AdminInputFile: FC<AdminInputProps> = ({
 	onSelect,
 	name,
 	placeholder,
-	error,
 	children,
 }) => {
 	const handleFileSelect = (e: ChangeEvent<HTMLInputElement>) => {
