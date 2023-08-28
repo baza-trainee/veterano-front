@@ -6,7 +6,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	className?: string;
 	placeholder?: string;
 	onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-	error?: string
+	error?: string;
 }
 const Textarea: React.FC<TextareaProps> = ({
 	label = "",
@@ -17,6 +17,7 @@ const Textarea: React.FC<TextareaProps> = ({
 	onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
 		console.log(event);
 	},
+	error,
 	...props
 }) => {
 	return (
@@ -26,15 +27,24 @@ const Textarea: React.FC<TextareaProps> = ({
 				<textarea
 					minLength={300}
 					placeholder={placeholder}
-					className="block p-[12px] w-[100%] min-h-[120px] max-h-[520px] border-[1px] border-black rounded-[4px] hover:border-[black] md:max-h-[480px] lg:max-h-[320px]"
+					peer-invalid:text-error100
+					className={
+						"block p-[12px] w-[100%] min-h-[120px] max-h-[520px] border-[1px] border-black rounded-[4px] hover:border-[black] md:max-h-[480px] lg:max-h-[320px] " +
+						" " +
+						error +
+						" placeholder-error100"
+					}
 					id={id}
 					onChange={onChange}
 					value={value}
 					{...props}
 				/>
-				{props.error &&  <p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[26px]">{props.error} </p>}
+				{error && (
+					<p className="absolute left-[10px] bottom-[-30px] text-error100 text-[14px] leading-[26px]">
+						{error}
+					</p>
+				)}
 			</label>
-
 		</>
 	);
 };

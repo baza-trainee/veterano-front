@@ -75,7 +75,7 @@ const ContactUsForm = () => {
 				{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
 					<Form
 						className={
-							"md:flex md:w-[55%] md:flex-col lg:w-[55%] lg:flex-row lg:flex-wrap lg:max-w-[800px] "
+							"md:flex md:w-[55%] md:flex-col lg:w-[55%]  lg:flex-wrap lg:max-w-[800px] "
 						}
 					>
 						<Input
@@ -89,7 +89,7 @@ const ContactUsForm = () => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							className={
-								"md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink lg:basis-[305px] "
+								"md:mb-[28px] md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink  lg:basis-[64px]"
 							}
 						/>
 						<Input
@@ -102,7 +102,7 @@ const ContactUsForm = () => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							className={
-								"md:w-full lg:flex-grow lg:flex-shrink-0 lg:basis-[413px] "
+								"md:w-full lg:flex-grow lg:flex-shrink-0  lg:basis-[64px]"
 							}
 						/>
 
@@ -117,7 +117,7 @@ const ContactUsForm = () => {
 								errors.message && touched.message ? errors.message : undefined
 							}
 							className={
-								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[785px] lg:flex-grow lg:flex-shrink-0 "
+								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[785px] lg:mt-[54px] lg:flex-grow lg:flex-shrink-0 "
 							}
 						/>
 
