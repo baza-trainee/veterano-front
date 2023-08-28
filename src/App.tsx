@@ -9,6 +9,8 @@ import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
 import AdminLayout from "./Layout/AdminLayout.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
+import { Contacts } from "./pages/adminPage/Contacts.tsx";
+import { DocumentPage } from "./pages/adminPage/Document.tsx";
 
 function App() {
 	return (
@@ -23,7 +25,10 @@ function App() {
 						<Route path="*" element={<ErrorPage />} />
 					</Route>
 
-					<Route path="/admin" element={<AdminLayout />}></Route>
+					<Route path="/admin" element={<AdminLayout />}>
+						<Route path="contacts" element={<Contacts />} />
+						<Route path="documents" element={<DocumentPage />} />
+					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
 					</Route>
