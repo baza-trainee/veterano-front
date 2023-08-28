@@ -5,6 +5,7 @@ interface ImageInput {
 	onChange: (preview: string) => void;
 	className?: string;
 	id?: string;
+	src?: string;
 }
 const ImageInput = ({
 	onChange = (preview: string) => {
@@ -12,6 +13,7 @@ const ImageInput = ({
 	},
 	id = "",
 	className = "",
+	src = "",
 	...props
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
@@ -37,7 +39,7 @@ const ImageInput = ({
 				{...props}
 				id={id}
 				className={className}
-				src={preview}
+				src={preview || src}
 				openEditer={() => {
 					setIsCropeningImg(true);
 				}}

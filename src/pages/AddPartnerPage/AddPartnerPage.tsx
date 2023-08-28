@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import AdminInput from "../../components/AdminPanel/Input/AdminInput";
-import ImageInput from "../../components/ImageCroper/ImageInput";
+
 import Typography from "../../components/Typography/Typography";
-import { useParams } from "react-router-dom";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
+import { NavLink, useParams } from "react-router-dom";
+import PartnerForm from "../../components/PartnerForm/PartnerForm";
+import IconClose from "../../components/AdminPanel/IconButtons/IconClose";
 
 const AddPartnerPage = () => {
 	const { id } = useParams();
@@ -12,17 +11,6 @@ const AddPartnerPage = () => {
 	const [name, setName] = useState<string>("");
 	const [link, setLink] = useState<string>("");
 
-	const validationSchema = Yup.object({
-		name: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Заповніть пусте поле"),
-		link: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Заповніть пусте поле"),
-		img: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Заповніть пусте поле"),
-	});
 	useEffect(() => {
 		console.log(id);
 		if (id) {
@@ -34,90 +22,30 @@ const AddPartnerPage = () => {
 		}
 	}, [id]);
 	return (
-		<div>
-			<Typography variant="h4" component="h2">
-				{id ? "Редагувати партнера" : "Додати партнера"}
-			</Typography>
-			{id
-				? name && (
-						<Formik
-							initialValues={{
-								name: name,
-								link: link,
-								img: img,
-							}}
-							validationSchema={validationSchema}
-							onSubmit={async (values, { setSubmitting }) => {
-								try {
-									if (id) {
-										console.log({ id, ...values });
-									} else {
-										console.log({ ...values });
-									}
-								} catch (error) {
-									console.log(error);
-								} finally {
-									setSubmitting(false);
-								}
-							}}
-							validateOnChange={false}
-							validateOnBlur={true}
-						>
-							{({
-								values,
-								handleChange,
-								errors,
-								touched,
-								isValid,
-								setFieldValue,
-							}) => (
-								<Form>
-									<div className="grid grid-cols-3">
-										<div className="col-span-2 flex gap-[24px] flex-col">
-											<AdminInput
-												id="name"
-												value={values.name}
-												error={
-													errors.name && touched.name ? errors.name : undefined
-												}
-												name={"name"}
-												onChange={handleChange}
-												placeholder={"Додати назву"}
-											/>
-											<AdminInput
-												id="link"
-												value={values.link}
-												error={
-													errors.link && touched.link ? errors.link : undefined
-												}
-												name={"link"}
-												onChange={handleChange}
-												placeholder={"Додати посилання"}
-											/>
-										</div>
-										<div className="col-span-1">
-											<ImageInput
-												id="img"
-												name="img"
-												className="bg-[white]"
-												onChange={(img) => setFieldValue("img", img)}
-												style={{
-													display: "block",
-													opacity: 0,
-													width: "0px",
-													overflow: "hidden",
-													position: "absolute",
-												}}
-											/>
-										</div>
-										<button type="submit">submit</button>
-									</div>
-								</Form>
-							)}
-						</Formik>
-				  )
-				: ""}
-		</div>
+		<>
+			<div className="flex items-center pl-[36px] pr-[80px] py-[38px] h-[108px] bg-grey100 place-content-between">
+				<Typography
+					variant="h3"
+					component="h1"
+					className="text-[#FCFCFC] block"
+				>
+					Партнери
+				</Typography>
+				<NavLink to={"/admin/partners/"}>
+					<IconClose />
+				</NavLink>
+			</div>
+			<div className="px-[36px] pt-[48px]">
+				<Typography variant="h4" component="h2" className="mb-[36px]">
+					{id ? "Редагувати партнера" : "Додати партнера"}
+				</Typography>
+				{id ? (
+					name && <PartnerForm id={id} name={name} link={link} img={img} />
+				) : (
+					<PartnerForm />
+				)}
+			</div>
+		</>
 	);
 };
 export default AddPartnerPage;

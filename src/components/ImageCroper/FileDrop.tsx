@@ -24,13 +24,17 @@ export const FileDrop: React.FC<FileDropProps> = ({
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
 	return (
-		<div className="flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] ">
+		<div
+			className={
+				"flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] " +
+				" " +
+				className
+			}
+		>
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer" +
-						" " +
-						className,
+						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
 				})}
 			>
 				<input id={id} {...getInputProps()} required type="file" {...props} />
