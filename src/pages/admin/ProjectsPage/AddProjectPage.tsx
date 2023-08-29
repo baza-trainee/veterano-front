@@ -21,8 +21,8 @@ const AddProjectPage = () => {
 
 				</div>
 			</div>
-			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>
-				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Додати проєкт</Typography>
+			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 min-h-[100vh]"}>
+				<Typography variant={"h4"} component={"h4"} className={"text-black mb-[36px]"}>Додати проєкт</Typography>
 				<Formik
 					initialValues={{
 						title: "",

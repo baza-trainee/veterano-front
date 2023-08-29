@@ -113,7 +113,7 @@ const ProjectsPage = () => {
 					</React.Fragment>
 					)}
 				</div>
-				<div>
+				<div className={'mt-[30px]'}>
 					<Pagination pageCount={totalPages} currentPage={1} onSelectedPage={handleSelectedPage} prevClassName={'md:pl-[141px]'}/>
 				</div>
 			</div>
