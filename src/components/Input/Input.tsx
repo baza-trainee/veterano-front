@@ -29,7 +29,7 @@ const Input: FC<InputProps> = ({
     translate-y-[2.5rem] 
     transition-all 
     duration-300 
-	w-full 
+		w-full 
     peer-focus:leading-7 
     peer-focus:text-[14px] 
     peer-focus:translate-y-[1.9rem]  
