@@ -41,7 +41,6 @@ const AddProjectPage = () => {
 							const location = { city, country };
 							const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 							const cardData = { ...rest, location, categories: categoryArray };
-							console.log(cardData);
 							createCard(cardData);
 							setSubmitting(true);
 							navigate("/admin/projects");
