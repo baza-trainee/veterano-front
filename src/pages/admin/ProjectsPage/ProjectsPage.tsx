@@ -3,7 +3,7 @@ import SearchBar from "../../../components/SearchBar/SearchBar.tsx";
 import NavigationLink from "../../../components/Links/NavigationLink.tsx";
 import { useEffect, useState } from "react";
 import ListElement from "../../../components/AdminPanel/ListElements/ListElement.tsx";
-import { getAllCards } from "../../../api/CardsApi.ts";
+import { getAllCards, removeCard } from "../../../api/CardsApi.ts";
 import Pagination from "../../../components/Pagination/Pagination.tsx";
 import React from "react";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
@@ -20,10 +20,10 @@ const ProjectsPage = () => {
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
-	const handleRemove = (index: number) => {
-		const newProjects = [...projects];
-		newProjects.splice(index, 1);
-		setProjects(newProjects);
+	const handleRemove = (cardId: number) => {
+		removeCard(cardId)
+			.then(data => setProjects(data.cards))
+
 	};
 
 	useEffect(() => {
@@ -35,7 +35,6 @@ const ProjectsPage = () => {
 				setTotalPages(resp.totalPages);
 			})
 	}, [currentPage]);
-
 
 	const handleSelectedPage = (selectedPage: number) => {
 		setCurrentPage(selectedPage);
@@ -93,7 +92,7 @@ const ProjectsPage = () => {
 							<div>Назва проєкту</div>
 						</div>
 						<div>Стан</div>
-						<div>Дата</div>
+						<div className={'ml-[32px]'}>Дата</div>
 							<div
 								className={"w-[36px] h-[36px] ml-[78px] flex items-center justify-center cursor-pointer "}>
 								<img src="/images/admin/bin.svg" alt="bin"/>
@@ -110,7 +109,6 @@ const ProjectsPage = () => {
 							checked={checkedItems[index]}
 							onChange={handleCheckedChange(index)}
 							editHandler={editHandler(project.cardId)}
-
 						/>
 					</React.Fragment>
 					)}

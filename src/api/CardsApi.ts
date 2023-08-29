@@ -1,12 +1,12 @@
 import { $host } from "./index.ts";
 
 interface CardType {
-	cardId?: number
+	cardId?: number;
 	title: string;
 	description: string;
 	image: string;
 	url: string;
-	categories: { categoryName: string }[]
+	categories: { categoryName: string }[];
 	publication: string;
 	location: {
 		city: string;
@@ -35,7 +35,7 @@ export const createCard = async ({
 		});
 		return data;
 	} catch (e) {
-		console.error("Error creating feedback:", e);
+		console.error("Error creating card:", e);
 		return null;
 	}
 };
@@ -50,7 +50,7 @@ export const getAllCards = async (currentPage: number) => {
 		});
 		return data;
 	} catch (e) {
-		console.error("Error creating feedback:", e);
+		console.error("Error getting cards:", e);
 		return null;
 	}
 };
@@ -60,7 +60,7 @@ export const getCardById = async (id: string) => {
 		const { data } = await $host.get("card/get?id=" + id);
 		return data;
 	} catch (e) {
-		console.error("Error creating feedback:", e);
+		console.error("Error getting card:", e);
 		return null;
 	}
 };
@@ -86,14 +86,22 @@ const formatImageBinary = (binaryString: string): string => {
 };
 
 
-
-
-	export const editCard = async (card: CardType) => {
+export const editCard = async (card: CardType) => {
 	try {
 		const { data } = await $host.patch("card/update", card);
 		return data;
 	} catch (e) {
-		console.error("Error creating feedback:", e);
+		console.error("Error editing card:", e);
+		return null;
+	}
+};
+
+export const removeCard = async (cardId : number) => {
+	try {
+		const { data } = await $host.delete("card/delete?id=" + cardId);
+		return data;
+	} catch (e) {
+		console.error("Error deleting card:", e);
 		return null;
 	}
 };

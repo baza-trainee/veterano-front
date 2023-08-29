@@ -28,7 +28,6 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, val
 	const [citySelected, setCitySelected] = useState(false);
 	const [inputValue, setInputValue] = useState(inputDisplayValue);
 
-
 	useEffect(() => {
 		if (inputDisplayValue) {
 			setIsOpen(false);

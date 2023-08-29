@@ -9,6 +9,7 @@ import CustomCalendar from "../Calendar/CustomCalendar.tsx";
 import { Form, FormikErrors } from "formik";
 import { FC, useState } from "react";
 import { useFormatDate } from "../../../hooks/useFormatDate.tsx";
+
 interface FormValues {
 	title?: string;
 	url?: string;
@@ -20,6 +21,7 @@ interface FormValues {
 	publication?: string;
 	category?: string;
 }
+
 interface ProjectFormProps {
 	values: FormValues;
 	errors: FormikErrors<FormValues>;
@@ -27,6 +29,7 @@ interface ProjectFormProps {
 	handleChange: (e: React.ChangeEvent<any>) => void;
 	handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
 }
+
 const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, handleChange, handleSubmit }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const formatDate = useFormatDate();
@@ -67,7 +70,7 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 					<div className="mb-[22px]">
 
 						<CitiesDropDown
-							inputDisplayValue={`${capitalizeFirstLetter(values.city || '') }/${capitalizeFirstLetter(values.country|| '') }`}
+							inputDisplayValue={values.city ? `${capitalizeFirstLetter(values.city || "")}/${capitalizeFirstLetter(values.country || "")}` : ""}
 							value={values.city || ""}
 							name={"city"}
 							onChange={handleChange}
@@ -89,7 +92,7 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 							onValueSelected={(category) => {
 								setFieldValue("category", category);
 							}}
-							error={errors.city as string}
+							error={errors.category as string}
 						/>
 					</div>
 					<div className="flex flex-col">
