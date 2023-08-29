@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
 import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
+import { useMedia } from "../../hooks/useMedia.tsx";
 
 interface CategoryType {
 	categoryName: string;
@@ -23,6 +24,7 @@ const HeroSearchBar = () => {
 	const [categories, setCategories] = useState<CategoryType[]>([]);
 	const [cities, setCities] = useState<LocationType[]>([]);
 	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
+	const {isMobile} = useMedia()
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -88,7 +90,7 @@ const HeroSearchBar = () => {
 									name={"search"}
 									value={values.search}
 									onChange={handleChange}
-									placeholder={"Введіть слово для пошуку"}
+									placeholder={isMobile ? "Cлово для пошуку" : "Введіть ключове слово для пошуку"}
 									disabled={false}
 								/>
 							</div>
