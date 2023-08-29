@@ -43,7 +43,7 @@ const EditProjectPage = () => {
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 "}>
-				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Редагувати проєкт</Typography>
+				<Typography variant={"h4"} component={"h4"} className={"text-black mb-[36px]"}>Редагувати проєкт</Typography>
 				<Formik
 					initialValues={{
 						cardId: cardInfo?.cardId || 0,

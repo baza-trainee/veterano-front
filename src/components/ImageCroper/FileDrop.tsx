@@ -24,7 +24,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	}, [acceptedFiles]);
 	return (
 		<div
-			style={{ minHeight: imgHeight }}
+			style={{ height: imgHeight }}
 			className={
 				"inline-flex items-center flex-col p-[10px] min-w-[305px] min-h-[157px] justify-center"
 			}
