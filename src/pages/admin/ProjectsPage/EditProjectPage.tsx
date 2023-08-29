@@ -42,7 +42,7 @@ const EditProjectPage = () => {
 
 				</div>
 			</div>
-			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>
+			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 "}>
 				<Typography variant={"h4"} component={"h4"} className={"text-black mb-5"}>Редагувати проєкт</Typography>
 				<Formik
 					initialValues={{
@@ -59,6 +59,8 @@ const EditProjectPage = () => {
 					}}
 					validationSchema={validationSchema}
 					enableReinitialize={true}
+					validateOnChange={false}
+					validateOnBlur={true}
 					onSubmit={(values) => {
 						const { city, country, category, ...rest } = values;
 						const location = { city, country };
@@ -69,13 +71,14 @@ const EditProjectPage = () => {
 
 					}}
 				>
-					{({ values, setFieldValue, errors, handleChange, handleSubmit }) => (
+					{({ values, setFieldValue, errors, handleChange, isValid, handleSubmit }) => (
 						<ProjectForm
 							values={values}
 							errors={errors}
 							setFieldValue={setFieldValue}
 							handleChange={handleChange}
 							handleSubmit={handleSubmit}
+							isValid={isValid}
 						/>
 					)}
 				</Formik>

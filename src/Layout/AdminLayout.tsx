@@ -4,12 +4,12 @@ import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
 	return (
-		<div className={'flex h-[1024px]'}>
+		<div className={'flex'}>
 			<div className={'w-[272px] bg-yellow50'}>
 				<header className={'bg-grey100 h-[118px]'}>
 					<div className={'px-[32px] pt-[40px] pb-[38px]'}><img src="/images/logo-white-sm.svg" alt="" /></div>
 				</header>
-				<div className={'px-[32px] pt-[112px] mb-[120px] flex flex-col gap-[250px]'}>
+				<div className={'px-[32px] pt-[112px] mb-[120px] flex flex-col gap-[350px]'}>
 					<div className={'flex flex-col gap-6'}>
 						<NavLinkAdmin icon={"/images/admin/folder.svg"} to={'projects'}>Проєкти</NavLinkAdmin>
 						<NavLinkAdmin icon={"/images/admin/case.svg"} to={'partners'}>Партнери</NavLinkAdmin>

@@ -36,23 +36,26 @@ const AddProjectPage = () => {
 						category: "",
 					}}
 					validationSchema={validationSchema}
-					onSubmit={(values) => {
+					onSubmit={(values, {setSubmitting}) => {
+						setSubmitting(false);
 						const { isEnabled, city, country, category, ...rest } = values;
 						const location = { city, country };
 						const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 						const cardData = { ...rest, location, categories: categoryArray };
-						console.log(cardData);
 						createCard(cardData);
 						navigate('/admin/projects')
 					}}
+					validateOnChange={false}
+					validateOnBlur={true}
 				>
-					{({ values, setFieldValue, errors, handleChange, handleSubmit }) => (
+					{({ values, setFieldValue, errors, handleChange, isValid, handleSubmit }) => (
 						<ProjectForm
 							values={values}
 							errors={errors}
 							setFieldValue={setFieldValue}
 							handleChange={handleChange}
 							handleSubmit={handleSubmit}
+							isValid={isValid}
 						/>
 					)}
 				</Formik>

@@ -28,9 +28,10 @@ interface ProjectFormProps {
 	setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
 	handleChange: (e: React.ChangeEvent<any>) => void;
 	handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+	isValid: boolean
 }
 
-const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, handleChange, handleSubmit }) => {
+const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, handleChange, handleSubmit, isValid }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const formatDate = useFormatDate();
 
@@ -121,7 +122,7 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 										</button>
 									</div>
 								</div>
-								<Button variant={"primary"} size={"large"} type={"submit"}>Опублікувати</Button>
+								<Button variant={"primary"} size={"large"} type={"submit"} disabled={!isValid}>Опублікувати</Button>
 							</div>
 							{isOpen &&
 								<CustomCalendar
