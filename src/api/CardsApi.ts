@@ -78,11 +78,9 @@ export const getCardImage = async (id: number) => {
 };
 
 const formatImageBinary = (binaryString: string): string => {
-	const imageArrayBuffer = new TextEncoder().encode(binaryString);
-	const imageUint8Array = new Uint8Array(imageArrayBuffer);
-	const imageBlob = new Blob([imageUint8Array]);
-	const imageUrl = URL.createObjectURL(imageBlob);
-	return imageUrl;
+	const arrayBuffer = new Uint8Array(binaryString.split('').map(char => char.charCodeAt(0)));
+	const blob = new Blob([arrayBuffer], { type: "image/png" });
+	return URL.createObjectURL(blob);
 };
 
 
@@ -100,6 +98,17 @@ export const removeCard = async (cardId : number) => {
 	try {
 		const { data } = await $host.delete("card/delete?id=" + cardId);
 		return data;
+	} catch (e) {
+		console.error("Error deleting card:", e);
+		return null;
+	}
+};
+
+export const removeCheckedCards = async (cardIds: number[]) => {
+	try {
+		await Promise.all(
+			cardIds.map(cardId => $host.delete("card/delete?id=" + cardId))
+		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
 		return null;

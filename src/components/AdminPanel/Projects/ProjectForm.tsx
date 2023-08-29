@@ -69,7 +69,6 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 				</div>
 				<div className="flex flex-col w-1/3">
 					<div className="mb-[22px]">
-
 						<CitiesDropDown
 							inputDisplayValue={values.city ? `${capitalizeFirstLetter(values.city || "")}/${capitalizeFirstLetter(values.country || "")}` : ""}
 							value={values.city || ""}
@@ -117,12 +116,17 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 
 									<div className={"flex items-center text-[14px] relative"}>
 										Дата публікації:
-										<button onClick={() => setIsOpen(!isOpen)} className={"underline cursor-pointer p-2"}>
+										<button
+											onClick={(e) => {
+												e.preventDefault()
+												setIsOpen(!isOpen);
+											}}
+											className={"underline cursor-pointer p-2"}>
 											{values.publication}
 										</button>
 									</div>
 								</div>
-								<Button variant={"primary"} size={"large"} type={"submit"} disabled={!isValid}>Опублікувати</Button>
+								<Button variant={"primary"} size={"large"} type={"submit"} >Опублікувати</Button>
 							</div>
 							{isOpen &&
 								<CustomCalendar

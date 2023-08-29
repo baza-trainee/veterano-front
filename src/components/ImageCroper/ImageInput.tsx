@@ -17,9 +17,7 @@ onSelectedImg,
 	const [file, setFile] = useState<Blob | undefined>();
 
 	useEffect(() => {
-
 		if (preview !== "" && file) {
-
 			blobToBase64(file)
 				.then((base64String) => {
 					if (typeof base64String === "string") {
@@ -33,9 +31,8 @@ onSelectedImg,
 	}, [preview, file, onSelectedImg, initialImage]);
 
 	useEffect(() => {
-
 		if (initialImage) {
-			setPreview(initialImage)
+			setPreview(initialImage);
 		}
 	}, [initialImage]);
 

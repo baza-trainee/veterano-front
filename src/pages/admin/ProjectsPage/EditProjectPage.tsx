@@ -66,9 +66,7 @@ const EditProjectPage = () => {
 						const location = { city, country };
 						const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 						const cardData = { ...rest, location, categories: categoryArray };
-						console.log(cardData);
 						editCard(cardData)
-
 					}}
 				>
 					{({ values, setFieldValue, errors, handleChange, isValid, handleSubmit }) => (

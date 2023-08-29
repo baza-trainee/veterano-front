@@ -10,7 +10,7 @@ import ProjectForm from "../../../components/AdminPanel/Projects/ProjectForm.tsx
 const AddProjectPage = () => {
 
 	const formatDate = useFormatDate();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -18,7 +18,6 @@ const AddProjectPage = () => {
 				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>Проєкти</Typography>
 					<NavLink to={"/admin/projects/"}><IconClose /></NavLink>
-
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 min-h-[100vh]"}>
@@ -36,14 +35,21 @@ const AddProjectPage = () => {
 						category: "",
 					}}
 					validationSchema={validationSchema}
-					onSubmit={(values, {setSubmitting}) => {
-						setSubmitting(false);
-						const { isEnabled, city, country, category, ...rest } = values;
-						const location = { city, country };
-						const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
-						const cardData = { ...rest, location, categories: categoryArray };
-						createCard(cardData);
-						navigate('/admin/projects')
+					onSubmit={(values, { setSubmitting }) => {
+						try {
+							const { isEnabled, city, country, category, ...rest } = values;
+							const location = { city, country };
+							const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
+							const cardData = { ...rest, location, categories: categoryArray };
+							console.log(cardData);
+							createCard(cardData);
+							setSubmitting(true);
+							navigate("/admin/projects");
+						} catch (e) {
+							console.log("Error submitting", e);
+						} finally {
+							setSubmitting(false);
+						}
 					}}
 					validateOnChange={false}
 					validateOnBlur={true}
@@ -62,7 +68,8 @@ const AddProjectPage = () => {
 			</div>
 
 		</>
-	);
+	)
+		;
 };
 
 export default AddProjectPage;

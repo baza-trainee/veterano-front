@@ -67,16 +67,15 @@ const CustomCalendar: FC<CalendarProps> = ({
 		const formattedDate = selectedDate.toLocaleDateString("uk-UA", {
 			day: "2-digit",
 			month: "2-digit",
-			year: "2-digit",
+			year: "numeric",
 		});
-
+		console.log(formattedDate);
 		if (onValueSelected) {
 			onValueSelected(formattedDate);
 		}
 		setIsOpen(false);
 
 	};
-
 
 	const monthData = getMonthData(year, month);
 
