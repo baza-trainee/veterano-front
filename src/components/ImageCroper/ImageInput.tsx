@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
 import { blobToBase64 } from "../AdminPanel/BlobToBase64.ts";
 
 interface ImageInput {
-	onChange: (preview: string) => void;
+	onChange?: (preview: string) => void;
 	height?: number;
 	width?: number;
 	onSelectedImg: (preview: string) => void;
 	initialImage?: string,
 
 }
-const ImageInput = ({
+const ImageInput: FC<ImageInput> = ({
 	onChange = (preview: string) => {
 		console.log(preview);
 	},

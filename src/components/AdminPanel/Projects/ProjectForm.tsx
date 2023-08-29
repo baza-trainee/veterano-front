@@ -98,6 +98,8 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 					<div className="flex flex-col">
 						<div className="mb-[22px] bg-white rounded">
 							<ImageInput
+								width={305}
+								height={298}
 								initialImage={values.image}
 								onSelectedImg={(preview) => setFieldValue("image", preview)}
 							/>
@@ -126,7 +128,7 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 										</button>
 									</div>
 								</div>
-								<Button variant={"primary"} size={"large"} type={"submit"} >Опублікувати</Button>
+								<Button variant={"primary"} size={"large"} type={"submit"} disabled={!isValid} >Опублікувати</Button>
 							</div>
 							{isOpen &&
 								<CustomCalendar
