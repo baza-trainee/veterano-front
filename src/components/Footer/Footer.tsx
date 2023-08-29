@@ -12,7 +12,11 @@ const Footer = () => {
 	});
 
 	return (
-		<footer className={"bg-black pb-[70px] md:pb-[35px] lg:pb-[38px] md:h-[361px]"}>
+		<footer
+			className={
+				"bg-[#313131] pb-[70px] md:pb-[35px] lg:pb-[38px] md:h-[361px]"
+			}
+		>
 			<Container className={"flex flex-col"}>
 				<div className={"wrapper"}>
 					<div className="footer ">
@@ -35,7 +39,7 @@ const Footer = () => {
 							)}
 						</div>
 						<div className={"footer-nav "}>
-							<ul>
+							<ul className="text-white">
 								<li>
 									<NavigationLink to={"/about"} variant={"underlineNoneFooter"}>
 										Про нас
@@ -72,7 +76,7 @@ const Footer = () => {
 									<p className={"pl-[10px]"}>info@baza-trainee.tech</p>
 								</li>
 							</ul>
-							<ul className={"md:self-center lg:self-start lg:mt-0 "}>
+							<ul className={"md:self-center lg:self-start lg:mt-0 text-white"}>
 								<li>
 									<Link to={"/#"} variant={"underlineFooter"}>
 										Політика конфіденційності
@@ -93,6 +97,7 @@ const Footer = () => {
 									<Link to={"/#"} variant={"underlineFooter"}>
 										<BsFacebook color={"#BCBCBC"} size={42} />
 									</Link>
+
 									<Link to={"/#"} variant={"underlineFooter"}>
 										<BsTelegram color={"#BCBCBC"} size={42} />
 									</Link>
@@ -103,10 +108,11 @@ const Footer = () => {
 				</div>
 
 				<div
-					className={"text-white text-[12px] ml-4 md:ml-[27px] lg:ml-[80px] mt-4 md:mt-6 lg:mt-[22px] leading-4 w-[169px] md:flex"}
+					className={
+						"text-white text-[12px] ml-4 md:ml-[27px] lg:ml-[80px] mt-4 md:mt-6 lg:mt-[22px] leading-4 w-[212px] md:w-[382px] mt-6 sm:mt-[22px]"
+					}
 				>
-					<p className={"md:inline-block md:mr-1"}>Baza Trainee Ukraine 2023</p>
-					<p className={"md:inline-block"}>Всі права захищені</p>
+					Розробка Baza Trainee Ukraine 2023 @ Всі права захищені
 				</div>
 			</Container>
 		</footer>
