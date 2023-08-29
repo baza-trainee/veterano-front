@@ -4,7 +4,7 @@ import Container from "../Container/Container";
 import FilterButton from "../FilterButton/FilterButton";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
 import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
@@ -25,6 +25,7 @@ const HeroSearchBar = () => {
 	const [cities, setCities] = useState<LocationType[]>([]);
 	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
 	const {isMobile} = useMedia()
+	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		getCategoryList()
@@ -39,7 +40,26 @@ const HeroSearchBar = () => {
 					setCities(data);
 				}
 			});
+
+		const scrollContainer = scrollContainerRef.current;
+
+		const handleScroll = (event: WheelEvent) => {
+			if (!scrollContainer) return;
+			event.preventDefault();
+
+			const scrollAmount = event.deltaY;
+			scrollContainer.scrollLeft += scrollAmount;
+		};
+
+		if (scrollContainer) {
+			scrollContainer.addEventListener('wheel', handleScroll);
+			return () => {
+				scrollContainer.removeEventListener('wheel', handleScroll);
+			};
+		}
 	}, []);
+
+
 
 	return (
 
@@ -89,7 +109,7 @@ const HeroSearchBar = () => {
 								/>
 							</div>
 						</div>
-						<div className={"flex overflow-x-auto gap-4 search-mob search-filter"}>
+						<div ref={scrollContainerRef} className={"flex overflow-x-auto gap-4 search-filter lg:w-[630px]"}>
 							<FilterButton
 								id={`filter-всі`}
 								label={'Всі'}
@@ -100,7 +120,7 @@ const HeroSearchBar = () => {
 									handleSubmit();
 								}}
 								checked={values.category === 'Всі'}
-								className={"whitespace-nowrap "}
+								className={"whitespace-nowrap"}
 							/>
 							{
 								categories && categories?.map((category, index) =>

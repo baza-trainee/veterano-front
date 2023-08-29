@@ -47,7 +47,7 @@ const Footer = () => {
 								</li>
 								<li>
 									<NavigationLink
-										to={"/projects"}
+										to={"/search"}
 										variant={"underlineNoneFooter"}
 									>
 										Проєкти
@@ -78,12 +78,18 @@ const Footer = () => {
 							</ul>
 							<ul className={"md:self-center lg:self-start lg:mt-0 text-white"}>
 								<li>
-									<Link to={"/#"} variant={"underlineFooter"}>
+									<Link
+										to={"/public/files/pol_conf.pdf"}
+										variant={"underlineFooter"}
+									>
 										Політика конфіденційності
 									</Link>
 								</li>
 								<li>
-									<Link to={"/#"} variant={"underlineFooter"}>
+									<Link
+										to={"/public/files/site_rules.pdf"}
+										variant={"underlineFooter"}
+									>
 										Правила користування сайтом
 									</Link>
 								</li>

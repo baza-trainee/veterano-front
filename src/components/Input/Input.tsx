@@ -35,7 +35,7 @@ const Input: FC<InputProps> = ({
     peer-focus:translate-y-[1.9rem]  
     peer-focus:text-grey50
     peer-disabled:text-grey50 
-    peer-invalid:text-error100
+	placeholder-error100
     `;
 		if (value.length > 0) {
 			style = `
@@ -46,6 +46,10 @@ const Input: FC<InputProps> = ({
       translate-y-[1.9rem]
       text-grey50`;
 		}
+		if (error) {
+			style += " " + "text-error100";
+		}
+
 		return style;
 	};
 	const inputStyles = () => {
@@ -55,7 +59,7 @@ const Input: FC<InputProps> = ({
 			style = `input-form peer !h-[64px]  `;
 		}
 		if (error) {
-			style = `input-form !h-[64px] peer border-error100 focus:border-black`;
+			style = `text-error100 input-form !h-[64px] peer border-error100 focus:border-black placeholder-error100`;
 		}
 		if (error && value.length > 0) {
 			style = `input-form peer !h-[64px]`;
