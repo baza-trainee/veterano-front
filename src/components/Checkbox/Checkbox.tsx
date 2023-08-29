@@ -35,8 +35,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
 				<BiCheck
 					fill={checked ? "black" : "transparent"}
 					className={
-						"block rounded-[4px] bg-yellow100 border-black border-[2px] w-[24px] h-[24px] " +
-						(!checked && " bg-inherit")
+						"block rounded-[4px]  border-black border-[2px] w-[24px] h-[24px] " +
+						(checked && " bg-yellow100")
 					}
 				/>
 				{label || children}
