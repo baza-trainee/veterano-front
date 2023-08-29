@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 import { ErrorPage } from "./pages/ErrorPage";
 import { AboutUs } from "./pages/AboutUs";
-import ContactUs from "./pages/ContactUs.tsx";
+import ContactUs from "./pages/ContactUs/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
