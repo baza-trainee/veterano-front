@@ -25,7 +25,7 @@ const AdminLayout = () => {
 					</button>
 				</div>
 			</div>
-			<div className={'flex-grow'}>
+			<div className={"flex-grow bg-[#FCFCFC]"}>
 				<Outlet />
 			</div>
 		</div>

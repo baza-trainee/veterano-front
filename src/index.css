@@ -356,9 +356,9 @@ input {
     @apply relative bg-white w-full flex justify-between items-center p-[10px] rounded;
   }
 
-  .admin-filter-input:hover {
-    @apply shadow-middle;
-  }
+	.admin-filter-input:hover {
+		@apply shadow-middle;
+	}
 
   .placeholder-grey {
     @apply text-[14px] leading-[185%] text-grey50
@@ -367,30 +367,30 @@ input {
     @apply text-[14px] leading-[185%] text-error30
   }
 
-  .admin-filter-input:focus-within > input {
-    @apply outline-none;
-  }
+	.admin-filter-input:focus-within > input {
+		@apply outline-none;
+	}
 
-  .admin-filter-drop-down {
-    @apply w-[100%] bg-[#F5F5F5] leading-6 text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px];
-  }
+	.admin-filter-drop-down {
+		@apply w-[100%] bg-[#F5F5F5] leading-6 text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px];
+	}
 
-  .admin-filter-drop-down::-webkit-scrollbar {
-    @apply hidden;
-  }
+	.admin-filter-drop-down::-webkit-scrollbar {
+		@apply hidden;
+	}
 
-  .admin-filter-drop-down {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+	.admin-filter-drop-down {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
 
-  .admin-filter-drop-down > li {
-    @apply pl-[10px]  mb-3 ;
-  }
+	.admin-filter-drop-down > li {
+		@apply pl-[10px]  mb-3;
+	}
 
-  .admin-filter-drop-down > li:hover {
-    @apply bg-yellow30 text-black cursor-pointer;
-  }
+	.admin-filter-drop-down > li:hover {
+		@apply bg-yellow30 text-black cursor-pointer;
+	}
 
   .admin-filter-drop-down > :last-child {
     @apply pb-0;

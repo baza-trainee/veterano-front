@@ -1,9 +1,9 @@
 import { FC } from "react";
 
 interface AdminInputProps {
-	value: string,
-	placeholder: string,
-	name: string,
+	value: string;
+	placeholder: string;
+	name: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error?: string;
 	type: string;

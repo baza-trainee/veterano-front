@@ -1,20 +1,29 @@
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
 import { blobToBase64 } from "../AdminPanel/BlobToBase64.ts";
 
 interface ImageInput {
+	onChange: (preview: string) => void;
+	height?: number;
+	width?: number;
 	onSelectedImg: (preview: string) => void;
-	initialImage?: string
-}
+	initialImage?: string,
 
-const ImageInput: FC<ImageInput> = ({
-onSelectedImg,
+}
+const ImageInput = ({
+	onChange = (preview: string) => {
+		console.log(preview);
+	},
+	height = 94,
+	width = 215,
+	onSelectedImg,
 	initialImage
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string | undefined>('');
 	const [file, setFile] = useState<Blob | undefined>();
+
 
 	useEffect(() => {
 		if (preview !== "" && file) {
@@ -40,7 +49,7 @@ onSelectedImg,
 		<>
 			{isCropeningImg && file && (
 				<ImageCroper
-					aspect={265 / 232}
+					aspect={width / height}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {
 						setPreview(url);
@@ -50,6 +59,8 @@ onSelectedImg,
 			)}
 			<FileDrop
 				src={preview}
+				imgHeight={height}
+				imgWidth={width}
 				openEditer={() => {
 					setIsCropeningImg(true);
 				}}

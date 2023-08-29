@@ -12,10 +12,10 @@ import AdminLayout from "./Layout/AdminLayout.tsx";
 import ProjectsPage from "./pages/admin/ProjectsPage/ProjectsPage.tsx";
 import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
-
+import { Contacts } from "./pages/adminPage/Contacts.tsx";
+import { DocumentPage } from "./pages/adminPage/Document.tsx";
 
 function App() {
-
 	return (
 		<>
 			<BrowserRouter>
@@ -31,6 +31,8 @@ function App() {
 						<Route path="projects" element={<ProjectsPage />} />
 						<Route path="projects/new-project" element={<AddProjectPage />} />
 						<Route path="projects/edit-project/:id" element={<EditProjectPage />} />
+						<Route path="contacts" element={<Contacts />} />
+						<Route path="documents" element={<DocumentPage />} />
 					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
@@ -38,6 +40,7 @@ function App() {
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />
+
 		</>
 	);
 }
