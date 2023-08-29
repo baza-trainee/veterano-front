@@ -122,7 +122,7 @@ const SubscribeSection = () => {
 											Я погоджуюся з{" "}
 											<Link
 												variant={"underlineFooter"}
-												to={"/rules"}
+												to={"/public/files/site_rules.pdf"}
 												style={{ color: "black" }}
 											>
 												правилами
