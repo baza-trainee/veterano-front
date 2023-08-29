@@ -4,13 +4,13 @@ import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
 	return (
-		<div className={'flex h-full'}>
-			<div className={'w-[272px] bg-yellow50 grid grid-rows-[1fr,auto]'}>
+		<div className={'flex'}>
+			<div className={'w-[272px] bg-yellow50'}>
 				<header className={'bg-grey100 h-[118px]'}>
 					<div className={'px-[32px] pt-[40px] pb-[38px]'}><img src="/images/logo-white-sm.svg" alt="" /></div>
 				</header>
-				<div className={' h-[100vh] px-[32px] pt-[112px] flex flex-col pb-[120px] justify-between'}>
-					<div className={'flex flex-col gap-6 '}>
+				<div className={'px-[32px] pt-[119px] flex flex-col pb-[120px] justify-between'}>
+					<div className={'flex flex-col gap-6 mb-[270px]'}>
 						<NavLinkAdmin icon={"/images/admin/folder.svg"} to={'projects'}>Проєкти</NavLinkAdmin>
 						<NavLinkAdmin icon={"/images/admin/case.svg"} to={'partners'}>Партнери</NavLinkAdmin>
 						<NavLinkAdmin icon={"/images/admin/contacts.svg"} to={'contacts'}>Контакти</NavLinkAdmin>
@@ -23,7 +23,6 @@ const AdminLayout = () => {
 						<img src="/images/admin/logout.svg" alt="logout"/>
 						Вийти
 					</button>
-
 				</div>
 			</div>
 			<div className={'flex-grow'}>

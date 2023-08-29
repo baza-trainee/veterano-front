@@ -60,7 +60,7 @@ const ProjectsPage = () => {
 
 	return (
 		<>
-			<div className={"bg-grey100 "}>
+			<div className={"bg-grey100"}>
 				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>Проєкти</Typography>
 					<div className={"flex gap-16"}>
@@ -75,7 +75,7 @@ const ProjectsPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className={"pt-6 pl-6 pr-[80px] pb-[128px] bg-grey30 h-[100vh]"}>
+			<div className={"pt-6 pl-6 pr-[80px] pb-[128px] bg-grey30 min-h-[100vh]"}>
 				<div>
 					<div className={"flex mt-6 border-b border-black items-center justify-between "}>
 						<div className={"flex gap-[18px] w-[439px] items-center"}>
