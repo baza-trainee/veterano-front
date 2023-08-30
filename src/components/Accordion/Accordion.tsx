@@ -11,10 +11,14 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ data }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(null);
+	const [activeIndexes, setActiveIndexes] = useState<number[]>([]);
 
 	const toggleAccordion = (index: number) => {
-		setActiveIndex(activeIndex === index ? null : index);
+		if (activeIndexes.includes(index)) {
+			setActiveIndexes(activeIndexes.filter((item) => item !== index));
+		} else {
+			setActiveIndexes([...activeIndexes, index]);
+		}
 	};
 
 	return (
@@ -23,13 +27,13 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
 				<div key={index}>
 					<div
 						className={`flex items-center justify-between cursor-pointer pb-3 pt-3 ${
-							activeIndex === index ? "" : "border-b border-black"
+							activeIndexes.includes(index) ? "" : "border-b border-black"
 						}`}
 						onClick={() => toggleAccordion(index)}
 					>
 						<div className="text-lg text-black font-medium">{item.title}</div>
 						<div>
-							{activeIndex === index ? (
+							{activeIndexes.includes(index) ? (
 								<ArrowButton disabled={false} direction="top" variant="faq" />
 							) : (
 								<ArrowButton
@@ -40,7 +44,7 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
 							)}
 						</div>
 					</div>
-					{activeIndex === index && (
+					{activeIndexes.includes(index) && (
 						<div className="pt-4 text-grey100">{item.content}</div>
 					)}
 				</div>

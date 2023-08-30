@@ -6,6 +6,7 @@ interface AdminInputProps {
 	name: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error?: string;
+	type?: string;
 }
 
 const AdminInput: FC<AdminInputProps> = ({
@@ -13,6 +14,7 @@ const AdminInput: FC<AdminInputProps> = ({
 	value,
 	name,
 	placeholder,
+	type = "text",
 	...props
 }) => {
 	return (
@@ -23,7 +25,7 @@ const AdminInput: FC<AdminInputProps> = ({
 		>
 			<input
 				value={value}
-				type="text"
+				type={type}
 				placeholder={error ? error : placeholder}
 				name={name}
 				className={

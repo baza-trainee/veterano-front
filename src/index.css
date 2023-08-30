@@ -344,7 +344,6 @@ input {
 		@apply w-[58px] h-[58px];
 	}
 
-
 	.scroll-to-top:hover .scroll-to-top-icon {
 		@apply w-[58px] h-[58px];
 	}
@@ -496,7 +495,7 @@ input {
 	}
 
 	.search-filter::-webkit-scrollbar {
-    display: none;
+		display: none;
 	}
 
 	.subscribe-wrapper {
