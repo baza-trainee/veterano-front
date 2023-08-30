@@ -124,7 +124,7 @@ const ProjectsPage = () => {
 				</div>
 				<div className={"mt-[25px]"}>
 					<Pagination pageCount={totalPages} currentPage={1} onSelectedPage={handleSelectedPage}
-											prevClassName={"md:pl-[141px]"} />
+											prevClassName={"md:!pl-[141px]"} />
 				</div>
 			</div>
 		</>
