@@ -35,7 +35,7 @@ const Header: React.FC = () => {
 						<NavLink to="/">
 							<img
 								className="h-[30px] w-[135px] mr-2 hover:cursor-pointer"
-								src="./images/logo-black.svg"
+								src="/images/logo-black.svg"
 								alt="Logo"
 							/>
 						</NavLink>
