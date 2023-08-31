@@ -1,6 +1,5 @@
 import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
-import Container from "../Container/Container";
 import FilterButton from "../FilterButton/FilterButton";
 import { Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
