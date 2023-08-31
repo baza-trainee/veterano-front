@@ -21,3 +21,8 @@ body {
 	border-radius: 12px;
 	background: var(--grey-50, #808080);
 }
+
+.hero-scrollbar {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none;
+}
