@@ -40,12 +40,12 @@ export const createCard = async ({
 	}
 };
 
-export const getAllCards = async (currentPage: number) => {
+export const getAllCards = async (currentPage: number, size: number) => {
 	try {
 		const { data } = await $host.get("card/get-all", {
 			params: {
 				page: currentPage,
-				size: 7,
+				size: size,
 			},
 		});
 		return data;

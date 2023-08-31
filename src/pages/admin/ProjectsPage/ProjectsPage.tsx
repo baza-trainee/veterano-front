@@ -15,6 +15,7 @@ const ProjectsPage = () => {
 	const navigate = useNavigate();
 	const [value, setValue] = useState("");
 	const [projects, setProjects] = useState<ProjectType[]>([]);
+	const [searchData, setSearchData] = useState<ProjectType[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
@@ -27,13 +28,22 @@ const ProjectsPage = () => {
 
 	useEffect(() => {
 		navigate(`/admin/projects?page=${currentPage}`, { replace: true });
-		getAllCards(currentPage)
+		getAllCards(currentPage, 7)
 			.then((resp) => {
 				setProjects(resp.cards);
 				setCheckedItems(new Array(resp.cards.length).fill(false));
 				setTotalPages(resp.totalPages);
 			});
 	}, [currentPage]);
+
+	useEffect(() => {
+		getAllCards(currentPage, 100)
+			.then((resp) => {
+				setSearchData(resp.cards);
+				setCheckedItems(new Array(resp.cards.length).fill(false));
+				setTotalPages(resp.totalPages);
+			});
+	}, [value]);
 
 	const handleSelectedPage = (selectedPage: number) => {
 		setCurrentPage(selectedPage);
@@ -64,7 +74,7 @@ const ProjectsPage = () => {
 		navigate(`/admin/projects/edit-project/${cardId}`);
 	};
 
-	const filteredProjects = value ? projects.filter((project) => project.title.includes(value)) : projects;
+	const filteredProjects = value ? searchData.filter((project) => project.title.includes(value)) : projects;
 
 	return (
 		<>
