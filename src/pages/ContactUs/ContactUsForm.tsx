@@ -85,7 +85,7 @@ const ContactUsForm = () => {
 				{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
 					<Form
 						className={
-							"md:flex md:w-[55%] md:flex-col lg:w-[55%]  lg:flex-wrap lg:max-w-[800px] "
+							"md:flex md:w-[55%] md:flex-col lg:w-[100%]  lg:flex-wrap lg:max-w-[100%] "
 						}
 					>
 						<Input
