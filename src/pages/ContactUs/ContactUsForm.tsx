@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { createFeedback } from "../../api/FeedbackAPI";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
-import NavigationLink from "../../components/Links/NavigationLink.tsx";
 import ModalWindow from "../../components/Modal/ModalWindow.tsx";
 import Textarea from "../../components/Textarea/Textarea";
 import Typography from "../../components/Typography/Typography";
