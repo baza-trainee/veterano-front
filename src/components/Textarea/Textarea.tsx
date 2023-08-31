@@ -25,7 +25,6 @@ const Textarea: React.FC<TextareaProps> = ({
 			<label className={"block" + " " + className}>
 				{label}
 				<textarea
-					minLength={300}
 					placeholder={placeholder}
 					peer-invalid:text-error100
 					className={
