@@ -47,7 +47,7 @@ const Input: FC<InputProps> = ({
       text-grey50`;
 		}
 		if (error) {
-			style += " " + "text-error100";
+			style += " " + " text-error100";
 		}
 
 		return style;
@@ -62,7 +62,7 @@ const Input: FC<InputProps> = ({
 			style = `text-error100 input-form !h-[64px] peer border-error100 focus:border-black placeholder-error100`;
 		}
 		if (error && value.length > 0) {
-			style = `input-form peer !h-[64px]`;
+			style = `input-form peer !h-[64px] border-error100`;
 		}
 		return style;
 	};
