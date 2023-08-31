@@ -63,6 +63,7 @@ const DropDown: FC<DropDownProps> = ({
 						setCitySelected(false);
 						setInputValue(e.target.value);
 					}}
+					onBlur={() => setIsOpen(false)}
 					name={name}
 				/>
 				<BsFilter size={24} color={value.length > 1 ? "white" : ''} />

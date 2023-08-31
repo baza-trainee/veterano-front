@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
+// 265 / 232
+
 interface ImageInput {
 	onChange: (preview: string) => void;
 	className?: string;
 	id?: string;
 	src?: string;
+	height?: number;
+	width?: number;
 }
 const ImageInput = ({
 	onChange = (preview: string) => {
@@ -15,6 +19,8 @@ const ImageInput = ({
 	className = "",
 	src = "",
 	...props
+	height = 94,
+	width = 215,
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
@@ -26,7 +32,7 @@ const ImageInput = ({
 		<>
 			{isCropeningImg && file && (
 				<ImageCroper
-					aspect={265 / 232}
+					aspect={width / height}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {
 						console.log(isCropeningImg);
@@ -40,6 +46,8 @@ const ImageInput = ({
 				id={id}
 				className={className}
 				src={preview || src}
+				imgHeight={height}
+				imgWidth={width}
 				openEditer={() => {
 					setIsCropeningImg(true);
 				}}

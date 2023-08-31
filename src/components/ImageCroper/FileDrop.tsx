@@ -9,6 +9,8 @@ interface FileDropProps {
 	removeFile?(): void;
 	className: string;
 	id?: string;
+	imgWidth?: number;
+	imgHeight?: number;
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
@@ -17,7 +19,10 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	removeFile,
 	className = "",
 	id,
+	imgWidth = 214,
+	imgHeight = 94,
 	...props
+
 }) => {
 	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 	useEffect(() => {
@@ -34,12 +39,12 @@ export const FileDrop: React.FC<FileDropProps> = ({
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full h-[298px] hover:cursor-pointer",
+						"flex items-center justify-center flex-col w-full min-w-[305px] min-h-[119px] hover:cursor-pointer",
 				})}
 			>
 				<input id={id} {...getInputProps()} required type="file" {...props} />
 				{src ? (
-					<img height="232" width="265" src={src} alt="Preview" />
+					<img height={imgHeight} width={imgWidth} src={src} alt="Preview" />
 				) : (
 					<span className="flex items-center gap-[12px]">
 						<img src="/admin/download-icon.svg" alt="" />

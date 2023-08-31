@@ -122,12 +122,12 @@ const SubscribeSection = () => {
 											Я погоджуюся з{" "}
 											<Link
 												variant={"underlineFooter"}
-												to={"/rules"}
+												to={"/public/files/site_rules.pdf"}
 												style={{ color: "black" }}
 											>
 												правилами
 											</Link>{" "}
-											сайту khyst.site
+											сайту hyst.site
 										</p>
 									</Checkbox>
 									{errors.check && touched.check && (

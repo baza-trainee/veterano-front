@@ -1,5 +1,5 @@
-import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
 import { Outlet } from "react-router-dom";
+import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
 
 
 const AdminLayout = () => {

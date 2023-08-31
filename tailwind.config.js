@@ -11,7 +11,8 @@ export default {
 
 		extend: {
 			gridTemplateColumns: {
-				footer: "200px 300px 420px",
+				lg: "200px 300px 420px",
+				md: "276px 236px",
 			},
 			gridTemplateRows: {
 				footer: "130px auto",
@@ -23,8 +24,7 @@ export default {
 					"0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08)",
 				large:
 					"0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08)",
-				switch:
-				"0 0 20px 0px rgba(247, 214, 127, 0.16)"
+				switch: "0 0 20px 0px rgba(247, 214, 127, 0.16)",
 			},
 
 			fontSize: {
