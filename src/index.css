@@ -313,7 +313,7 @@ input {
 	}
 
 	.contact-info {
-		@apply flex flex-col gap-7 w-full md:flex-row md:gap-2 lg:gap-2 mb-11 md:mb-1;
+		@apply flex flex-col gap-7 w-full md:flex-row md:gap-2 lg:gap-[30px] mb-11 md:mb-1;
 	}
 
 	.contact-info > ul > li {
@@ -343,7 +343,6 @@ input {
 	.scroll-to-top:hover .scroll-to-top-icon {
 		@apply w-[58px] h-[58px];
 	}
-
 
 	.scroll-to-top:hover .scroll-to-top-icon {
 		@apply w-[58px] h-[58px];
@@ -496,7 +495,7 @@ input {
 	}
 
 	.search-filter::-webkit-scrollbar {
-    display: none;
+		display: none;
 	}
 
 	.subscribe-wrapper {

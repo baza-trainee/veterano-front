@@ -43,12 +43,12 @@ const ContactUsForm = () => {
 			.required("Введіть ваше повідомлення"),
 	});
 	return (
-		<div className={"contact-feedback"}>
+		<div className={"contact-feedback md:gap-[26px] lg:gap-[30px]"}>
 			<div className={"md:w-[22%] lg:w-[298px]"}>
 				<Typography
 					variant={isDesktop ? "h4" : "h5"}
 					component={isDesktop ? "h4" : "h5"}
-					className={"mt-11"}
+					className={"mt-11 lg:w-[295px]"}
 				>
 					Напишіть нам
 				</Typography>
@@ -60,7 +60,7 @@ const ContactUsForm = () => {
 					message: "",
 				}}
 				validationSchema={validationSchema}
-				onSubmit={async (values, { setSubmitting }) => {
+				onSubmit={async (values, { setSubmitting, resetForm }) => {
 					try {
 						const response = await createFeedback({
 							name: values.name,
@@ -69,6 +69,7 @@ const ContactUsForm = () => {
 						});
 						if (response) {
 							setIsModalOpen(true);
+							resetForm();
 						} else {
 							console.log("Помилка від сервера");
 						}
@@ -126,7 +127,7 @@ const ContactUsForm = () => {
 								errors.message && touched.message ? errors.message : undefined
 							}
 							className={
-								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px] lg:basis-[785px] lg:mt-[54px] lg:flex-grow lg:flex-shrink-0 "
+								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px]  lg:mt-[54px] lg:flex-grow lg:flex-shrink-0 "
 							}
 						/>
 
