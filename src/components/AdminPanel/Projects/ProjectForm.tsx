@@ -7,7 +7,7 @@ import Switch from "../../Switch/Switch.tsx";
 import Button from "../../Button/Button.tsx";
 import CustomCalendar from "../Calendar/CustomCalendar.tsx";
 import { Form, FormikErrors } from "formik";
-import { FC, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useFormatDate } from "../../../hooks/useFormatDate.tsx";
 
 interface FormValues {
@@ -34,7 +34,9 @@ interface ProjectFormProps {
 const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, handleChange, handleSubmit, isValid }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const formatDate = useFormatDate();
-
+	const onSelectedImg = useCallback((preview) => {
+		setFieldValue("image", preview);
+	}, [setFieldValue]);
 	return (
 		<Form onSubmit={handleSubmit}>
 			<div className="flex gap-[20px]">
@@ -101,7 +103,7 @@ const ProjectForm: FC<ProjectFormProps> = ({ values, setFieldValue, errors, hand
 								width={305}
 								height={298}
 								initialImage={values.image}
-								onSelectedImg={(preview) => setFieldValue("image", preview)}
+								onSelectedImg={onSelectedImg}
 							/>
 						</div>
 						<div className="h-[226px] bg-white py-6 px-[74px] relative">

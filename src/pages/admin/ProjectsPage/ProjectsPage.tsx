@@ -77,7 +77,7 @@ const ProjectsPage = () => {
 							onChange={(e) => setValue(e.target.value)}
 							placeholder={"Введіть ключове слово для пошуку"}
 							disabled={false}
-							className={"md:w-[280px] lg:w-[400px]"}
+							className={"md:w-[280px] lg:w-[400px] text-[14px]"}
 						/>
 						<NavigationLink to={"new-project"} variant={"primaryDarkBg"} size={"large"}>Додати</NavigationLink>
 					</div>

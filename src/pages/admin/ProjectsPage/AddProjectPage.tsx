@@ -35,19 +35,17 @@ const AddProjectPage = () => {
 						category: "",
 					}}
 					validationSchema={validationSchema}
-					onSubmit={(values, { setSubmitting }) => {
+					onSubmit={(values ) => {
+
 						try {
 							const { isEnabled, city, country, category, ...rest } = values;
 							const location = { city, country };
 							const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 							const cardData = { ...rest, location, categories: categoryArray };
-							createCard(cardData);
-							setSubmitting(true);
-							navigate("/admin/projects");
+							createCard(cardData)
+								.then(() => navigate("/admin/projects"))
 						} catch (e) {
 							console.log("Error submitting", e);
-						} finally {
-							setSubmitting(false);
 						}
 					}}
 					validateOnChange={false}

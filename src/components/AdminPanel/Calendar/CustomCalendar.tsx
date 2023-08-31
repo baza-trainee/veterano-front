@@ -69,7 +69,6 @@ const CustomCalendar: FC<CalendarProps> = ({
 			month: "2-digit",
 			year: "numeric",
 		});
-		console.log(formattedDate);
 		if (onValueSelected) {
 			onValueSelected(formattedDate);
 		}

@@ -9,7 +9,6 @@ interface ImageInput {
 	width?: number;
 	onSelectedImg: (preview: string) => void;
 	initialImage?: string,
-
 }
 const ImageInput: FC<ImageInput> = ({
 	onChange = (preview: string) => {
@@ -21,8 +20,9 @@ const ImageInput: FC<ImageInput> = ({
 	initialImage
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
-	const [preview, setPreview] = useState<string | undefined>('');
+	const [preview, setPreview] = useState<string>('');
 	const [file, setFile] = useState<Blob | undefined>();
+
 
 
 	useEffect(() => {
@@ -36,8 +36,10 @@ const ImageInput: FC<ImageInput> = ({
 				.catch((error) => {
 					console.error("Error:", error);
 				});
+
 		}
-	}, [preview, file, onSelectedImg, initialImage]);
+
+	}, [preview, file, onSelectedImg]);
 
 	useEffect(() => {
 		if (initialImage) {
