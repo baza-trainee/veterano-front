@@ -27,7 +27,7 @@ const ContactUsForm = () => {
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
-			.test("domain", "Введіть дійсний email", (value) => {
+			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
 			.matches(/^[a-zA-Z0-9 @ . _ -]*$/, "Не дозволено спеціальні символи")
