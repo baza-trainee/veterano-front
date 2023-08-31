@@ -152,7 +152,7 @@ input {
 	}
 
 	.footer {
-		@apply flex flex-col justify-between md:flex-row mx-4 md:ml-6 md:mr-12 lg:mx-[80px] pb-[96px] md:pb-[20px] lg:pb-0 relative;
+		@apply flex flex-col justify-between md:flex-row mx-4    pb-[96px] md:pb-[20px] lg:pb-0 relative;
 	}
 
 	.wrapper {
