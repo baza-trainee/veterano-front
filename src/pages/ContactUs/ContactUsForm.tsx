@@ -144,11 +144,13 @@ const ContactUsForm = () => {
 				)}
 			</Formik>
 			<ModalWindow
-				className={"p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[400px]"}
+				className={
+					"overflow-y-scroll px-[16px] h-[568px] w-full bg-yellow50 w-full md:overflow-y-hidden md:w-[523px] md:px-[98px] md:h-[284px] lg:w-[628px] lg:h-[286px] lg:px-[104px]"
+				}
 				active={isModalOpen}
 				setActive={setIsModalOpen}
 			>
-				<div className={"text-black mt-[30px]"}>
+				<div className={"text-black  flex h-full justify-center items-center"}>
 					<Typography
 						variant={"h4"}
 						component={"p"}
@@ -156,14 +158,6 @@ const ContactUsForm = () => {
 					>
 						Ваше повідомлення надіслане
 					</Typography>
-					<div className={"flex justify-center mt-10"}>
-						<img src="/images/success-sent.svg" alt="check" />
-					</div>
-					<div className={"flex justify-center w-full mt-12"}>
-						<NavigationLink to={"/"} variant={"primary"} size={"large"}>
-							До головної
-						</NavigationLink>
-					</div>
 				</div>
 			</ModalWindow>
 		</div>
