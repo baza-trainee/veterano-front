@@ -26,7 +26,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	return (
 		<div
 			className={
-				"flex items-center justify-start flex-col p-[10px] w-[305px] h-[298px] " +
+				"flex items-center justify-start flex-col p-[10px] " +
 				" " +
 				className
 			}
@@ -42,7 +42,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 					<img height="232" width="265" src={src} alt="Preview" />
 				) : (
 					<span className="flex items-center gap-[12px]">
-						<img src="./public/admin/download-icon.svg" alt="" />
+						<img src="/admin/download-icon.svg" alt="" />
 						Завантажити зображення
 					</span>
 				)}

@@ -6,7 +6,7 @@ interface AdminInputProps {
 	name: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error?: string;
-	id?: string;
+	type: string;
 }
 
 const AdminInput: FC<AdminInputProps> = ({
@@ -14,27 +14,18 @@ const AdminInput: FC<AdminInputProps> = ({
 	value,
 	name,
 	placeholder,
-	id,
+	type,
 	...props
 }) => {
 	return (
-		<label
-			className={
-				"w-full bg-white px-[10px] py-[11px] hover:shadow-middle rounded "
-			}
-		>
-			<input
-				id={id}
-				value={value}
-				type="text"
-				placeholder={error ? error : placeholder}
-				name={name}
-				className={
-					"w-full focus:outline-none placeholder:text-[14px] placeholder:text-grey50 invalid:placeholder:text-error30"
-				}
-				{...props}
-			/>
-		</label>
+		<input
+			value={value}
+			type={type}
+			placeholder={error ? error : placeholder}
+			name={name}
+			className={`w-full h-[48px] bg-white hover:shadow-middle rounded px-[10px] py-[11px] focus:outline-none placeholder:text-[14px] placeholder:font-300 ${error ? 'placeholder:text-error30' : 'placeholder:text-grey50'} `}
+			{...props}
+		/>
 	);
 };
 

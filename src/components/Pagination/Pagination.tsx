@@ -7,13 +7,15 @@ interface PaginationProps {
 	pageCount: number
 	currentPage: number,
 	onSelectedPage: (selectedPage: number) => void;
+	className?: string
+	prevClassName?: string
 }
 
 type PageClickData = {
 	selected: number;
 };
 
-const Pagination: FC<PaginationProps> = ({ pageCount = 2, currentPage = 1, onSelectedPage}) => {
+const Pagination: FC<PaginationProps> = ({ pageCount = 2, currentPage = 1, onSelectedPage, className, prevClassName }) => {
 	const navigate = useNavigate();
 
 	const handlePageClick = (data: PageClickData) => {
@@ -23,7 +25,7 @@ const Pagination: FC<PaginationProps> = ({ pageCount = 2, currentPage = 1, onSel
 	};
 
 	return (
-		<div className={'flex justify-end mr-[24px] lg:mr-[80px]'}>
+		<div className={className + " " + "flex justify-end "}>
 			<ReactPaginate
 				previousLabel={<ArrowButton direction={"left"} variant={'carousel'} disabled={currentPage === 1}/>}
 				nextLabel={<ArrowButton direction={"right"} variant={'carousel'} disabled={currentPage === pageCount}/>}
@@ -36,7 +38,7 @@ const Pagination: FC<PaginationProps> = ({ pageCount = 2, currentPage = 1, onSel
 				pageClassName={'w-[28px] h-[28px] px-[10px] rounded inline-flex items-center justify-end mr-[34px] hover:bg-yellow100 hover:text-white'}
 				containerClassName={'flex justify-between items-center text-[18px] font-light leading-[28px] mt-[50px] lg:mt-[59px] '}
 				activeClassName={'bg-black text-white'}
-				previousClassName={'previous order-2 mr-2 md:pl-[155px] lg:pl-[419px]'}
+				previousClassName={prevClassName + " " +  'previous order-2 mr-2 md:pl-[155px] lg:pl-[419px]'}
 				nextClassName={'order-3'}
 				forcePage={currentPage - 1}
 			/>

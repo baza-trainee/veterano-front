@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import Typography from "../../components/Typography/Typography";
+import Typography from "../../../components/Typography/Typography.tsx";
 import { NavLink, useParams } from "react-router-dom";
-import PartnerForm from "../../components/PartnerForm/PartnerForm";
-import IconClose from "../../components/AdminPanel/IconButtons/IconClose";
+import PartnerForm from "../../../components/PartnerForm/PartnerForm.tsx";
+import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 
 const AddPartnerPage = () => {
 	const { id } = useParams();
@@ -23,7 +23,7 @@ const AddPartnerPage = () => {
 	}, [id]);
 	return (
 		<>
-			<div className="flex items-center pl-[36px] pr-[80px] py-[38px] h-[108px] bg-grey100 place-content-between">
+			<div className="flex items-center pl-[36px] pr-[80px] py-[38px] h-[118px] bg-grey100 place-content-between">
 				<Typography
 					variant="h3"
 					component="h1"
