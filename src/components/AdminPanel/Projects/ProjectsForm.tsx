@@ -58,12 +58,10 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 
 					if (values && type === 'add') {
 						const cardData = { ...rest, image: base64Image, location, categories: categoryArray };
-						console.log(cardData);
 						createCard(cardData)
 							.then(() => navigate("/admin/projects"))
 					} else {
 						const cardData = { ...rest, cardId, isEnabled, image: base64Image, location, categories: categoryArray };
-						console.log(cardData);
 						editCard(cardData)
 							.then(() => navigate("/admin/projects"))
 					}
@@ -75,6 +73,7 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 			}}
 			validateOnChange={false}
 			validateOnBlur={true}
+			enableReinitialize={true}
 
 		>
 			{({ values,  setFieldValue, errors, handleChange, isValid, handleSubmit }) => (

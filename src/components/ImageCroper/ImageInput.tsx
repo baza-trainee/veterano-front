@@ -11,8 +11,6 @@ interface ImageInput {
 	src?: string;
 	name?: string;
 	error? : string
-
-
 }
 
 const ImageInput: FC<ImageInput> = ({
@@ -29,11 +27,7 @@ const ImageInput: FC<ImageInput> = ({
 	const [file, setFile] = useState<Blob | undefined>();
 
 	useEffect(() => {
-		if (src) {
-			onChange(src);
-		} else {
-			onChange(preview);
-		}
+		onChange(preview);
 	}, [preview]);
 
 	return (

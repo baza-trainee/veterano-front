@@ -40,10 +40,8 @@ const ProjectsPage = () => {
 		getAllCards(currentPage, 100)
 			.then((resp) => {
 				setSearchData(resp.cards);
-				setCheckedItems(new Array(resp.cards.length).fill(false));
-				setTotalPages(resp.totalPages);
 			});
-	}, [value]);
+	}, []);
 
 	const handleSelectedPage = (selectedPage: number) => {
 		setCurrentPage(selectedPage);

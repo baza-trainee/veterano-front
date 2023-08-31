@@ -14,15 +14,7 @@ interface CardType {
 	};
 }
 
-export const createCard = async ({
-																	 title,
-																	 description,
-																	 image,
-																	 url,
-																	 categories,
-																	 publication,
-																	 location,
-																 }: CardType) => {
+export const createCard = async ({ title, description, image, url, categories, publication, location, }: CardType) => {
 	try {
 		const { data } = await $host.post("card/add", {
 			title,
@@ -78,7 +70,7 @@ export const getCardImage = async (id: number) => {
 };
 
 const formatImageBinary = (binaryString: string): string => {
-	const arrayBuffer = new Uint8Array(binaryString.split('').map(char => char.charCodeAt(0)));
+	const arrayBuffer = new Uint8Array(binaryString.split("").map(char => char.charCodeAt(0)));
 	const blob = new Blob([arrayBuffer], { type: "image/png" });
 	return URL.createObjectURL(blob);
 };
@@ -94,7 +86,7 @@ export const editCard = async (card: CardType) => {
 	}
 };
 
-export const removeCard = async (cardId : number) => {
+export const removeCard = async (cardId: number) => {
 	try {
 		const { data } = await $host.delete("card/delete?id=" + cardId);
 		return data;
@@ -107,10 +99,11 @@ export const removeCard = async (cardId : number) => {
 export const removeCheckedCards = async (cardIds: number[]) => {
 	try {
 		await Promise.all(
-			cardIds.map(cardId => $host.delete("card/delete?id=" + cardId))
+			cardIds.map(cardId => $host.delete("card/delete?id=" + cardId)),
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
 		return null;
 	}
 };
+
