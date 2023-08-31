@@ -1,7 +1,7 @@
 {
 	"name": "veterano-front",
 	"private": true,
-	"homepage": "./public_ftp/hyst.site",
+	"homepage": "./",
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
