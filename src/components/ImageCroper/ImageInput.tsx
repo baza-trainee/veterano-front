@@ -1,57 +1,46 @@
 import { FC, useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
-import { blobToBase64 } from "../AdminPanel/BlobToBase64.ts";
 
 interface ImageInput {
-	onChange?: (preview: string) => void;
+	onChange: (preview: string) => void;
 	height?: number;
 	width?: number;
-	onSelectedImg: (preview: string) => void;
-	initialImage?: string,
+	className?: string;
+	id?: string;
+	src?: string;
+	name?: string;
+	error? : string
+
+
 }
+
 const ImageInput: FC<ImageInput> = ({
-	onChange = (preview: string) => {
-		console.log(preview);
-	},
-	height = 94,
-	width = 215,
-	onSelectedImg,
-	initialImage
-}) => {
+																			onChange = (preview: string) => {
+																				console.log(preview);
+																			},
+																			id = "",
+																			className = "",
+																			src = "",
+																			...props
+																		}) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
-	const [preview, setPreview] = useState<string>('');
+	const [preview, setPreview] = useState<string>("");
 	const [file, setFile] = useState<Blob | undefined>();
 
-
-
 	useEffect(() => {
-		if (preview !== "" && file) {
-			blobToBase64(file)
-				.then((base64String) => {
-					if (typeof base64String === "string") {
-						onSelectedImg(base64String);
-					}
-				})
-				.catch((error) => {
-					console.error("Error:", error);
-				});
-
+		if (src) {
+			onChange(src);
+		} else {
+			onChange(preview);
 		}
-
-	}, [preview, file, onSelectedImg]);
-
-	useEffect(() => {
-		if (initialImage) {
-			setPreview(initialImage);
-		}
-	}, [initialImage]);
+	}, [preview]);
 
 	return (
 		<>
 			{isCropeningImg && file && (
 				<ImageCroper
-					aspect={width / height}
+					aspect={265 / 232}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {
 						setPreview(url);
@@ -60,9 +49,10 @@ const ImageInput: FC<ImageInput> = ({
 				/>
 			)}
 			<FileDrop
-				src={preview}
-				imgHeight={height}
-				imgWidth={width}
+				{...props}
+				id={id}
+				className={className}
+				src={preview || src}
 				openEditer={() => {
 					setIsCropeningImg(true);
 				}}
