@@ -127,7 +127,7 @@ const SubscribeSection = () => {
 											>
 												правилами
 											</Link>{" "}
-											сайту khyst.site
+											сайту hyst.site
 										</p>
 									</Checkbox>
 									{errors.check && touched.check && (

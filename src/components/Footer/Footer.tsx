@@ -62,7 +62,7 @@ const Footer = () => {
 									</NavigationLink>
 								</li>
 							</ul>
-							<ul className={"md:justify-self-end lg:justify-self-start "}>
+							<ul className={"lg:justify-self-start "}>
 								<li className={"text-white flex items-center leading-6"}>
 									<FaPhoneAlt size={24} color={"white"} />
 									<p className={"pl-[10px]"}>+38 044 XXX XX XX</p>

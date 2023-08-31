@@ -7,7 +7,7 @@ export const sizeClassNames: sizeClassType = {
 };
 
 export const variantClassNames = {
-	underlineFooter: " link-style underline decoration-1 underline-offset-[5px]",
+	underlineFooter: " link-style underline decoration-1 underline-offset-[5px] font-light",
 	underlineNoneFooter: "link-style ",
 	underlineSideBar:
 		" transition-transform transform hover:delay-200 hover:translate-x-2 text-lg ",
