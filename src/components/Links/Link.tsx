@@ -8,7 +8,7 @@ const Link: FC<LinkPropsType> = ({
 	children,
 	size,
 	disabled,
-	className= '',
+	className = "",
 	...props
 }) => {
 	const linkSizeClass = size ? sizeClassNames[size] : "";
@@ -28,7 +28,7 @@ const Link: FC<LinkPropsType> = ({
 			<a
 				href={to}
 				className={`${className} ${variantClassName} ${linkSizeClass} `}
-				style={props.style }
+				style={props.style}
 				{...props}
 			>
 				{children}
