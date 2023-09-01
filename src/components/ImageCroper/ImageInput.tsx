@@ -11,7 +11,9 @@ interface ImageInput {
 	id?: string;
 	src?: string;
 	name?: string;
-	error? : string
+	error? : string;
+	page? : string;
+	style?: React.CSSProperties;
 }
 const ImageInput: FC<ImageInput>= ({
 	onChange = (preview: string) => {

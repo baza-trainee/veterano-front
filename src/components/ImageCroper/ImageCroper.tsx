@@ -61,7 +61,6 @@ export const ImageCroper: React.FC<ImageCroperProps> = ({
 			/>
 
 			<Button
-				type={'button'}
 				style={{
 					position: "absolute",
 					right: 16,

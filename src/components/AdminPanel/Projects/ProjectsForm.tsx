@@ -153,6 +153,13 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 											setFieldValue("image", image);
 										}}
 										error={errors.image}
+										style={{
+											display: "block",
+											opacity: 0,
+											width: "0px",
+											overflow: "hidden",
+											position: "absolute",
+										}}
 									/>
 
 								</div>

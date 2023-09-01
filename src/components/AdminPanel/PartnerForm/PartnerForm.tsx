@@ -104,7 +104,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 								<div className="mb-[22px] bg-white rounded">
 									<ImageInput
 										id="image"
-										src={values.image}
+										src={image}
 										name="image"
 										className="bg-[white] !h-[121px] rounded"
 										onChange={(img) => setFieldValue("image", img)}
@@ -116,6 +116,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 											overflow: "hidden",
 											position: "absolute",
 										}}
+										error={errors.image}
 									/>
 								</div>
 
