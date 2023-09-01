@@ -41,7 +41,7 @@ const ProjectCard: React.FC<CardProps> = ({
 			<div className={className + " " + cardStyle[variant].info + " " + "bg-white"}>
 				<Typography variant={isTablet ? 'h5' : 'h4'} component={'h3'}>{title}</Typography>
 				<Typography variant={'p'} component={'p'} className={'mt-3 mb-6 lg:mb-[1px]'}>{text}</Typography>
-				<Link to="my offer" variant="primary" size={isDesktop ? "large" : "small"} className={'w-[136px] md:w-[165px] lg:w-[170px]'}>
+				<Link to="my offer" variant="primary" size={isDesktop ? "large" : "small"} className={'w-[136px] md:w-[165px] lg:w-[170px] lg:text-[16px]'}>
 					Детальніше
 				</Link>
 			</div>
