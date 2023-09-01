@@ -20,6 +20,7 @@ const SubscribeSection = () => {
 		name: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(30, "Ім’я повинно бути не більше 30 знаків")
+			.matches(/^[a-zA-Z\s]*$/, 'Тільки літери та пробіли дозволені')
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
