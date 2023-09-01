@@ -148,6 +148,8 @@ const SearchResults = () => {
 							</div>
 							:
 							<Pagination
+								className={'mr-[24px] lg:mr-[80px]'}
+								prevClassName={'md:pl-[155px] lg:pl-[419px]'}
 								pageCount={results?.totalPages || 0}
 								currentPage={currentPage}
 								onSelectedPage={handleSelectedPage} />}</>
