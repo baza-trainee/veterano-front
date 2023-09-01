@@ -5,7 +5,7 @@ import Typography from "../components/Typography/Typography.tsx";
 import { useMedia } from "../hooks/useMedia.tsx";
 
 export const AboutUs: FC = () => {
-	const {isMobile, isTablet} = useMedia()
+	const { isMobile, isTablet } = useMedia();
 	const accordionData = [
 		{
 			title: "Як працює агрегатор ветеранських ініціатив?",
@@ -37,7 +37,6 @@ export const AboutUs: FC = () => {
 				"Написати нам на електронну пошту info@baza-trainee.tech або зателефонувати за вказаними на сайті номерами. Дякуємо за вашу активність!",
 			customProp: "Custom Property Value 3",
 		},
-
 	];
 
 	return (
@@ -47,8 +46,8 @@ export const AboutUs: FC = () => {
 					backgroundImage: isMobile
 						? "url(/images/about-sm.svg)"
 						: isTablet
-							? "url(/images/about-md.svg)"
-							: "url(/images/about-lg.svg)",
+						? "url(/images/about-md.svg)"
+						: "url(/images/about-lg.svg)",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}
@@ -61,7 +60,9 @@ export const AboutUs: FC = () => {
 					<Typography
 						variant={"h1"}
 						component={"h1"}
-						className={"text-white w-[209px] mb-7 ml-[26px] md:ml-[34px] md:w-full lg:ml-[80px] "}
+						className={
+							"text-white w-[209px] mb-7 ml-[26px] md:ml-[34px] md:w-full lg:ml-[80px] "
+						}
 					>
 						Про нас
 					</Typography>
@@ -73,7 +74,7 @@ export const AboutUs: FC = () => {
 			{/*>*/}
 
 			{/*</div>*/}
-			<Container className="p-4 mb-20">
+			<Container className="p-4 mb-20 mx-auto">
 				<Accordion data={accordionData} />
 			</Container>
 		</>
