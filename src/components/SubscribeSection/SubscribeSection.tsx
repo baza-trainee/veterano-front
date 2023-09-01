@@ -9,7 +9,6 @@ import Link from "../Links/Link.tsx";
 import { useState } from "react";
 import { createSubscription } from "../../api/SubscribeAPI.ts";
 import ModalWindow from "../Modal/ModalWindow.tsx";
-import NavigationLink from "../Links/NavigationLink.tsx";
 import Container from "../Container/Container.tsx";
 
 const SubscribeSection = () => {
@@ -150,26 +149,36 @@ const SubscribeSection = () => {
 					</Formik>
 					<ModalWindow
 						className={
-							"p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[500px] md:h-[400px]"
+							"p-4 bg-yellow50 top-0 md:top-[92px] h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded "
 						}
 						active={isModalOpen}
 						setActive={setIsModalOpen}
 					>
-						<div className={"text-black mt-[30px]"}>
+						<div className={"text-black mt-[80px] md:mt-[108px]"}>
 							<Typography
 								variant={"h4"}
 								component={"p"}
-								className={"text-center font-bold"}
+								className={"text-center font-medium"}
 							>
 								Ви успішно підписались на новини{" "}
 							</Typography>
 							<div className={"flex justify-center mt-10"}>
 								<img src="/images/success-sent.svg" alt="success" />
 							</div>
-							<div className={"flex justify-center w-full mt-12"}>
-								<NavigationLink to={"/"} variant={"primary"} size={"large"}>
-									До головної
-								</NavigationLink>
+							<div className={"flex justify-center w-full  mt-12"}>
+
+								<div className={'w-full md:w-[185px]'}>
+									<Button
+										variant={"primary"}
+										size={"large"}
+										className={'text-[18px] font-light leading-[28px]'}
+										onClick={(e) => {
+											e.preventDefault();
+											setIsModalOpen(false);
+										}}>
+										До головної
+									</Button>
+								</div>
 							</div>
 						</div>
 					</ModalWindow>

@@ -26,9 +26,6 @@ const ModalWindow: FC<ModalWindowProps> = ({
 			<div
 				style={{
 					position: "absolute",
-					top: "50%",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
 				}}
 				className={`${className} modal-content relative`}
 				onClick={(e) => e.stopPropagation()}
@@ -36,7 +33,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 				<div
 					onClick={() => setActive(false)}
 					className={
-						"absolute right-[24px] top-[24px] flex justify-end cursor-pointer"
+						"absolute right-[16px] md:right-[24px] top-[24px] flex justify-end cursor-pointer"
 					}
 				>
 					<img src="/images/close.svg" alt="close" />
