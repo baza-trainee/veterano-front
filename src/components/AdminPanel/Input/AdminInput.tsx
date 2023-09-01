@@ -9,14 +9,7 @@ interface AdminInputProps {
 	type: string;
 }
 
-const AdminInput: FC<AdminInputProps> = ({
-	error,
-	value,
-	name,
-	placeholder,
-	type,
-	...props
-}) => {
+const AdminInput: FC<AdminInputProps> = ({error, type, value, name, placeholder, ...props }) => {
 	return (
 		<input
 			value={value}

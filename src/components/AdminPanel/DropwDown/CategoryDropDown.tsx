@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from "react";
 import { getCategoryList } from "../../../api/SearchAPI.tsx";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 
+
 interface ResultsType {
 	categoryName: string;
 }
@@ -21,11 +22,14 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [categorySelected, setCategorySelected] = useState(false);
-	const [inputValue, setInputValue] = useState("");
+	const [inputValue, setInputValue] = useState(value);
 
 
 	useEffect(() => {
-		if (value.length > 1 && !categorySelected) {
+		if (inputValue) {
+			setIsOpen(false);
+
+		} else if (value.length > 1 && !categorySelected) {
 			const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results;
 			if (categoriesList.length > 0) {
 				setIsOpen(true);
@@ -33,6 +37,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 				setIsOpen(false);
 			}
 		}
+		setInputValue(value);
 	}, [value, categorySelected, results]);
 
 	useEffect(() => {
@@ -51,16 +56,22 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 
 	return (
 
-		<label className={"admin-filter-input w-full"}>
+		<label className={"admin-filter-input w-full h-[48px]"}>
 			<input
 				placeholder={error ? error : placeholder}
 				value={inputValue}
-				onChange={e => {
-					onChange(e);
+				onChange={(e) => {
+					setInputValue(e.target.value);
 					setCategorySelected(false);
+					onValueSelected(e.target.value);
+					onChange(e);
+				}}
+				onBlur={(e) => {
+					onValueSelected(e.target.value);
 					setInputValue(e.target.value);
 				}}
 				name={name}
+				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
 			/>
 			{isOpen ?
 				<BsChevronUp

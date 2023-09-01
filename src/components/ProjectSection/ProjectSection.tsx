@@ -19,7 +19,6 @@ const ProjectSection = () => {
 		};
 
 		searchRequest(params).then((data) => {
-			console.log();
 			setItems(convertBackDataToProjectCardProps(data.cards));
 		});
 	}, []);

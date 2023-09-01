@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { FileDrop } from "./FileDrop";
 import { ImageCroper } from "./ImageCroper";
 // 265 / 232
 
 interface ImageInput {
 	onChange: (preview: string) => void;
+	height?: number;
+	width?: number;
 	className?: string;
 	id?: string;
 	src?: string;
-	height?: number;
-	width?: number;
+	name?: string;
+	error? : string
 }
-const ImageInput = ({
+const ImageInput: FC<ImageInput>= ({
 	onChange = (preview: string) => {
 		console.log(preview);
 	},
@@ -30,6 +32,7 @@ const ImageInput = ({
 	useEffect(() => {
 		onChange(preview);
 	}, [preview]);
+
 	return (
 		<>
 			{isCropeningImg && file && (
