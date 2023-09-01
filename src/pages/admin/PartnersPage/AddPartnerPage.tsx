@@ -4,20 +4,24 @@ import Typography from "../../../components/Typography/Typography.tsx";
 import { NavLink, useParams } from "react-router-dom";
 import PartnerForm from "../../../components/AdminPanel/PartnerForm/PartnerForm.tsx";
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
+import { getPartnerById } from "../../../api/PartnersAPI.ts";
+import { PartnersType } from "./PartnersPage.tsx";
+
+
 
 const AddPartnerPage = () => {
 	const { id } = useParams();
-	const [img, setImg] = useState<string>("");
-	const [name, setName] = useState<string>("");
-	const [link, setLink] = useState<string>("");
+	const [initialImage, setInitialImage] = useState<string>("");
+
+	const [partnerData, setPartnerData] = useState<PartnersType>()
 
 	useEffect(() => {
 		if (id) {
-			setImg(
-				"https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1nfGVufDB8fDB8fHww&w=1000&q=80"
-			);
-			setName("name");
-			setLink("link");
+			getPartnerById(Number(id))
+				.then((data) => {
+					setPartnerData(data);
+					setInitialImage(`http://45.94.157.117:8080/api/v1/search/image/get?id=${data.image}`);
+				})
 		}
 	}, [id]);
 	return (
@@ -39,7 +43,14 @@ const AddPartnerPage = () => {
 					{id ? "Редагувати партнера" : "Додати партнера"}
 				</Typography>
 				{id ? (
-					name && <PartnerForm id={Number(id)} partnerName={name} url={link} image={img} />
+					<PartnerForm
+						id={partnerData?.id}
+						partnerName={partnerData?.partnerName}
+						url={partnerData?.url}
+						image={initialImage}
+						publication={partnerData?.publication}
+						isEnabled={partnerData?.isEnabled}
+					/>
 				) : (
 					<PartnerForm />
 				)}

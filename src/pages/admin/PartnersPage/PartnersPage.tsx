@@ -9,7 +9,7 @@ import HeaderComponent from "../../../components/AdminPanel/HeaderComponent.tsx"
 import TableHeader from "../../../components/AdminPanel/ListElements/TableHeader.tsx";
 
 
-interface PartnersType {
+export interface PartnersType {
 	id: number,
 	partnerName: string,
 	image: string,
@@ -17,7 +17,6 @@ interface PartnersType {
 	publication: string,
 	isEnabled: boolean
 }
-
 
 const PartnersPage = () => {
 	const navigate = useNavigate();
@@ -76,8 +75,8 @@ const PartnersPage = () => {
 		setCheckedItems(newCheckedItems);
 	};
 
-	const editHandler = (cardId: number) => () => {
-		navigate(`/admin/projects/edit-project/${cardId}`);
+	const editHandler = (id: number) => () => {
+		navigate(`/admin/partners/${id}`);
 	};
 
 	const filteredProjects = value ? searchData.filter((project) => project.partnerName.includes(value)) : partners;
@@ -93,26 +92,26 @@ const PartnersPage = () => {
 				<div className={"min-h-[609px]"}>
 					<TableHeader
 						checked={isAllChecked}
-						name={'Назва проєкту'}
+						name={'Назва'}
 						onChange={handleAllCheckedChange}
 						onClick={handleRemoveSelected}/>
-					{filteredProjects && filteredProjects.map((project, index) =>
-						<React.Fragment key={project.id}>
+					{filteredProjects && filteredProjects.map((partner, index) =>
+						<React.Fragment key={partner.id}>
 							<ListElement
-								id={project.id}
-								name={capitalizeFirstLetter(project.partnerName)}
-								status={project.isEnabled ? "активний" : "неактивний"}
-								date={project.publication}
-								removeHandler={() => handleRemove(project.id)}
+								id={partner.id}
+								name={capitalizeFirstLetter(partner.partnerName)}
+								status={partner.isEnabled ? "активний" : "неактивний"}
+								date={partner.publication}
+								removeHandler={() => handleRemove(partner.id)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
-								editHandler={editHandler(project.id)}
+								editHandler={editHandler(partner.id)}
 							/>
 						</React.Fragment>,
 					)}
 				</div>
 				<div className={"mt-[25px]"}>
-					<Pagination pageCount={totalPages} currentPage={1} onSelectedPage={handleSelectedPage}
+					<Pagination pageCount={totalPages} currentPage={currentPage} onSelectedPage={handleSelectedPage}
 											prevClassName={"md:!pl-[141px]"} />
 				</div>
 			</div>

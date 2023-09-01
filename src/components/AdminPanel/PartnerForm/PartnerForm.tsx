@@ -1,7 +1,7 @@
 import AdminInput from "../Input/AdminInput.tsx";
 import ImageInput from "../../ImageCroper/ImageInput.tsx";
 import * as Yup from "yup";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useFormatDate } from "../../../hooks/useFormatDate.ts";
 import { createPartner, editPartner } from "../../../api/PartnersAPI.ts";
 import { blobUrlToBase64 } from "../BlobToBase64.ts";
@@ -53,10 +53,11 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 					const base64Image = await blobUrlToBase64(image);
 					if (id) {
 						const data = { id, image: base64Image, ...rest }
+						console.log(data);
 						editPartner(data)
+							.then(() => navigate("/admin/partners"));
 					} else {
 						const data = { image: base64Image, ...rest }
-						console.log(data);
 						createPartner(data)
 							.then(() => navigate("/admin/partners"));
 					}
@@ -70,7 +71,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 			validateOnBlur={true}
 			enableReinitialize={true}
 		>
-			{({ values, handleSubmit, handleChange, errors, touched, isValid, setFieldValue }) => (
+			{({ values, handleSubmit, handleChange, errors, isValid, setFieldValue }) => (
 
 				<Form onSubmit={e => {
 					e.preventDefault();
@@ -110,7 +111,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 										onChange={(img) => setFieldValue("image", img)}
 										page={"partners"}
 										error={errors.image}
-										onReset={(resetFunc) => setResetImage(() => resetFunc)}
 									/>
 								</div>
 
