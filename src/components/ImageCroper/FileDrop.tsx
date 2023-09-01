@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiSolidTrash, BiSolidPencil } from "react-icons/bi";
+import { MdOutlineFileDownload } from "react-icons/md";
 
 interface FileDropProps {
 	src?: string;
@@ -11,6 +12,8 @@ interface FileDropProps {
 	id?: string;
 	imgWidth?: number;
 	imgHeight?: number;
+	page?: string;
+	error?: string;
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
@@ -28,10 +31,12 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	useEffect(() => {
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
+
 	return (
 		<div
 			className={
-				"flex items-center justify-start flex-col p-[10px] " +
+			"flex items-center justify-start p-[10px]"
+				+
 				" " +
 				className
 			}
@@ -39,7 +44,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 			<div
 				{...getRootProps({
 					className:
-						"flex items-center justify-center flex-col w-full min-w-[305px] min-h-[119px] hover:cursor-pointer",
+						`${props.page ? 'min-w-[245px]' : 'min-w-[205px]'} flex items-center justify-center flex-col w-full min-h-[119px] hover:cursor-pointer`
 				})}
 			>
 				<input id={id} {...getInputProps()} required type="file" {...props} />
@@ -47,20 +52,22 @@ export const FileDrop: React.FC<FileDropProps> = ({
 					<img height={imgHeight} width={imgWidth} src={src} alt="Preview" />
 				) : (
 					<span className="flex items-center gap-[12px]">
-						<img src="/admin/download-icon.svg" alt="" />
+						<MdOutlineFileDownload size={27}/>
 						Завантажити зображення
 					</span>
 				)}
 			</div>
 			{src && (
-				<div className="w-full flex items-center justify-end gap-[12px]">
+				<div className={
+					`${props.page ? "flex flex-col gap-[20px]" : "flex gap-[12px]"}  w-full items-center justify-end `
+				}>
 					{openEditer && (
-						<button onClick={openEditer} className="w-[36px] h-[36px]">
+						<button onClick={openEditer} className="w-[36px] h-[36px]" type="button">
 							<BiSolidPencil size={24} />
 						</button>
 					)}
 					{removeFile && (
-						<button onClick={removeFile} className="w-[36px] h-[36px]">
+						<button onClick={removeFile} className="w-[36px] h-[36px]" type="button" >
 							<BiSolidTrash size={24} />
 						</button>
 					)}

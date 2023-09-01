@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Typography from "../../../components/Typography/Typography.tsx";
 import { NavLink, useParams } from "react-router-dom";
-import PartnerForm from "../../../components/PartnerForm/PartnerForm.tsx";
+import PartnerForm from "../../../components/AdminPanel/PartnerForm/PartnerForm.tsx";
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 
 const AddPartnerPage = () => {
@@ -12,7 +12,6 @@ const AddPartnerPage = () => {
 	const [link, setLink] = useState<string>("");
 
 	useEffect(() => {
-		console.log(id);
 		if (id) {
 			setImg(
 				"https://images.unsplash.com/photo-1508919801845-fc2ae1bc2a28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1nfGVufDB8fDB8fHww&w=1000&q=80"
@@ -40,7 +39,7 @@ const AddPartnerPage = () => {
 					{id ? "Редагувати партнера" : "Додати партнера"}
 				</Typography>
 				{id ? (
-					name && <PartnerForm id={id} name={name} link={link} img={img} />
+					name && <PartnerForm id={Number(id)} partnerName={name} url={link} image={img} />
 				) : (
 					<PartnerForm />
 				)}

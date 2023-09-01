@@ -1,6 +1,7 @@
 import { $host } from "./index.ts";
 
 interface PartnerType{
+	id?: number,
 	partnerName: string,
 	image: string,
 	url: string,
@@ -39,7 +40,7 @@ export const getAllPartners = async (currentPage: number, size: number) => {
 	}
 };
 
-export const getPartnerById = async (id: string) => {
+export const getPartnerById = async (id: number) => {
 	try {
 		const { data } = await $host.get("info/partner/get?id=" + id);
 		return data;
@@ -68,9 +69,9 @@ const formatImageBinary = (binaryString: string): string => {
 };
 
 
-export const editPartner = async (card: PartnerType) => {
+export const editPartner = async (partner: PartnerType) => {
 	try {
-		const { data } = await $host.patch("info/partner/update", card);
+		const { data } = await $host.patch("info/partner/update", partner);
 		return data;
 	} catch (e) {
 		console.error("Error editing card:", e);

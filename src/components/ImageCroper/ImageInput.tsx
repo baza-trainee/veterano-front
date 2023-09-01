@@ -18,13 +18,15 @@ const ImageInput = ({
 	id = "",
 	className = "",
 	src = "",
-	...props
 	height = 94,
 	width = 215,
+	...props
+
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
 	const [file, setFile] = useState<Blob>();
+
 	useEffect(() => {
 		onChange(preview);
 	}, [preview]);
@@ -35,7 +37,6 @@ const ImageInput = ({
 					aspect={width / height}
 					src={file && URL.createObjectURL(file)}
 					onClose={(url: string) => {
-						console.log(isCropeningImg);
 						setPreview(url);
 						setIsCropeningImg(false);
 					}}

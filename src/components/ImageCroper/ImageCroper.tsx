@@ -73,6 +73,7 @@ export const ImageCroper: React.FC<ImageCroperProps> = ({
 					const url = await showCroppedImage();
 					onClose(`${url}`);
 				}}
+				type={'button'}
 			>
 				Обрізати
 			</Button>
