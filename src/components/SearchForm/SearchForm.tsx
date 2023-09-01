@@ -24,22 +24,20 @@ const HeroSearchBar = () => {
 	const [categories, setCategories] = useState<CategoryType[]>([]);
 	const [cities, setCities] = useState<LocationType[]>([]);
 	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
-	const {isMobile} = useMedia()
+	const { isMobile } = useMedia();
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		getCategoryList()
-			.then((data) => {
-				if (data !== null) {
-					setCategories(data);
-				}
-			});
-		getCitiesList()
-			.then((data) => {
-				if (data !== null) {
-					setCities(data);
-				}
-			});
+		getCategoryList().then((data) => {
+			if (data !== null) {
+				setCategories(data);
+			}
+		});
+		getCitiesList().then((data) => {
+			if (data !== null) {
+				setCities(data);
+			}
+		});
 
 		const scrollContainer = scrollContainerRef.current;
 
@@ -52,21 +50,18 @@ const HeroSearchBar = () => {
 		};
 
 		if (scrollContainer) {
-			scrollContainer.addEventListener('wheel', handleScroll);
+			scrollContainer.addEventListener("wheel", handleScroll);
 			return () => {
-				scrollContainer.removeEventListener('wheel', handleScroll);
+				scrollContainer.removeEventListener("wheel", handleScroll);
 			};
 		}
 	}, []);
 
-
-
 	return (
-
 		<Container>
 			<Formik
 				initialValues={{ search: "", city: "", country: "", category: "Всі" }}
-				onSubmit={values => {
+				onSubmit={(values) => {
 					const queryParams = new URLSearchParams();
 
 					if (values.search) queryParams.append("q", values.search);
@@ -78,19 +73,32 @@ const HeroSearchBar = () => {
 					if (queryParams.toString()) {
 						navigate(`/search?${queryParams}`);
 					}
-
-				}}>
-
-				{({ values, setFieldValue, submitForm, handleChange, handleSubmit }) => (
+				}}
+			>
+				{({
+					values,
+					setFieldValue,
+					submitForm,
+					handleChange,
+					handleSubmit,
+				}) => (
 					<Form>
-						<div className={"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"}>
+						<div
+							className={
+								"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"
+							}
+						>
 							<div className={"md:w-[350px] lg:w-[413px]"}>
 								<SearchBar
 									id={"search"}
 									name={"search"}
 									value={values.search}
 									onChange={handleChange}
-									placeholder={isMobile ? "Cлово для пошуку" : "Введіть ключове слово для пошуку"}
+									placeholder={
+										isMobile
+											? "Cлово для пошуку"
+											: "Введіть ключове слово для пошуку"
+									}
 									disabled={false}
 								/>
 							</div>
@@ -98,7 +106,7 @@ const HeroSearchBar = () => {
 								<DropDown
 									name={"city"}
 									cities={cities}
-									value={values.city }
+									value={values.city}
 									onChange={handleChange}
 									onValueSelected={({ city, country }) => {
 										setFieldValue("city", city);
@@ -109,21 +117,26 @@ const HeroSearchBar = () => {
 								/>
 							</div>
 						</div>
-						<div ref={scrollContainerRef} className={"flex overflow-x-auto gap-4 search-filter lg:w-[630px]"}>
+						<div
+							ref={scrollContainerRef}
+							className={
+								"flex hero-scrollbar overflow-x-auto gap-4 search-filter lg:w-[630px]"
+							}
+						>
 							<FilterButton
 								id={`filter-всі`}
-								label={'Всі'}
+								label={"Всі"}
 								name={"category"}
-								value={'Всі'}
-								onChange={e => {
+								value={"Всі"}
+								onChange={(e) => {
 									handleChange(e);
 									handleSubmit();
 								}}
-								checked={values.category === 'Всі'}
+								checked={values.category === "Всі"}
 								className={"whitespace-nowrap"}
 							/>
-							{
-								categories && categories?.map((category, index) =>
+							{categories &&
+								categories?.map((category, index) => (
 									<React.Fragment key={index}>
 										<FilterButton
 											id={`filter-${category.categoryName}`}
@@ -132,23 +145,22 @@ const HeroSearchBar = () => {
 											value={category.categoryName}
 											onClick={() => {
 												if (onClickCategory === category.categoryName) {
-												setFieldValue("category", "Всі")
-												setOnClickCategory(null)
-												handleSubmit()
-											} else {
-												setOnClickCategory(category.categoryName)
-											}
+													setFieldValue("category", "Всі");
+													setOnClickCategory(null);
+													handleSubmit();
+												} else {
+													setOnClickCategory(category.categoryName);
+												}
 											}}
-											onChange={e => {
+											onChange={(e) => {
 												handleChange(e);
 												handleSubmit();
 											}}
 											checked={values.category === category.categoryName}
 											className={"whitespace-nowrap "}
 										/>
-									</React.Fragment>,
-								)
-							}
+									</React.Fragment>
+								))}
 						</div>
 					</Form>
 				)}
