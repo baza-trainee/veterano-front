@@ -15,7 +15,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	const validationSchema = object({
 		email: string()
 			.email("Введіть дійсний email")
-			.test("domain", "Введіть дійсний email", (value) => {
+			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
 			.required("Введіть дійсний email"),
