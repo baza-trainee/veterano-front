@@ -80,13 +80,13 @@ export const removePartner = async (id: number) => {
 	}
 };
 
-export const removeCheckedPartners = async (ids: number[]) => {
+export const removeCheckedPartners = async (ids: number[]): Promise<void> => {
 	try {
 		await Promise.all(
 			ids.map(id => $host.delete("info/partner/delete?id=" + id)),
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
-		return null;
+		return;
 	}
 };

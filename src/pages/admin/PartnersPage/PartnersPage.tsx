@@ -7,6 +7,11 @@ import Pagination from "../../../components/Pagination/Pagination.tsx";
 import React from "react";
 import HeaderComponent from "../../../components/AdminPanel/HeaderComponent.tsx";
 import TableHeader from "../../../components/AdminPanel/ListElements/TableHeader.tsx";
+import {
+	handleAllCheckedChange,
+	handleRemove,
+	handleRemoveSelected,
+} from "../../../../utils/functions/admin/adminFnc.ts";
 
 
 export interface PartnersType {
@@ -28,11 +33,6 @@ const PartnersPage = () => {
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
-	const handleRemove = (id: number) => {
-		removePartner(id)
-			.then(() => setPartners(prevProjects => prevProjects.filter(project => project.id !== id)));
-	};
-
 	useEffect(() => {
 		navigate(`/admin/partners?page=${currentPage}`, { replace: true });
 		getAllPartners()
@@ -50,35 +50,10 @@ const PartnersPage = () => {
 	// 		});
 	// }, []);
 
-	const handleSelectedPage = (selectedPage: number) => {
-		setCurrentPage(selectedPage);
-	};
-
-	const handleRemoveSelected = () => {
-		const selectedIds = partners.filter((_, index) => checkedItems[index]).map(p => p.id);
-
-		removeCheckedPartners(selectedIds)
-			.then(() => {
-				setPartners(prev => prev.filter(p => !selectedIds.includes(p.id)));
-				setCheckedItems(new Array(partners.length).fill(false));
-			});
-
-	};
-
-	const handleAllCheckedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const isChecked = event.target.checked;
-		setAllChecked(isChecked);
-		setCheckedItems(new Array(partners.length).fill(isChecked));
-	};
-
 	const handleCheckedChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedItems = [...checkedItems];
 		newCheckedItems[index] = event.target.checked;
 		setCheckedItems(newCheckedItems);
-	};
-
-	const editHandler = (id: number) => () => {
-		navigate(`/admin/partners/${id}`);
 	};
 
 	const filteredProjects = value ? searchData.filter((project) => project.partnerName.includes(value)) : partners;
@@ -95,25 +70,28 @@ const PartnersPage = () => {
 					<TableHeader
 						checked={isAllChecked}
 						name={'Назва'}
-						onChange={handleAllCheckedChange}
-						onClick={handleRemoveSelected}/>
-					{filteredProjects && filteredProjects.map((partner, index) =>
+						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, partners.length)}
+						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, 'id')}
+						/>
+						{filteredProjects && filteredProjects.map((partner, index) =>
 						<React.Fragment key={partner.id}>
 							<ListElement
 								id={partner.id}
 								name={capitalizeFirstLetter(partner.partnerName)}
 								status={partner.isEnabled ? "активний" : "неактивний"}
 								date={partner.publication}
-								removeHandler={() => handleRemove(partner.id)}
+								removeHandler={() => handleRemove(partner.id, setPartners, 'id', removePartner)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
-								editHandler={editHandler(partner.id)}
+								editHandler={() => navigate(`/admin/partners/${partner.id}`)}
 							/>
 						</React.Fragment>,
 					)}
 				</div>
 				<div className={"mt-[25px]"}>
-					<Pagination pageCount={totalPages} currentPage={currentPage} onSelectedPage={handleSelectedPage}
+					<Pagination pageCount={totalPages} currentPage={currentPage} onSelectedPage={(selectedPage: number) => {
+						setCurrentPage(selectedPage);
+					}}
 											prevClassName={"md:!pl-[141px]"} />
 				</div>
 			</div>
