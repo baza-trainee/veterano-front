@@ -88,7 +88,7 @@ const HeroSearchBar = () => {
 								onChange={handleChange}
 								placeholder={
 									isMobile
-										? "Cлово для пошуку"
+										? "Ключове слово для пошуку"
 										: "Введіть ключове слово для пошуку"
 								}
 								disabled={false}
