@@ -9,7 +9,6 @@ import Link from "../Links/Link.tsx";
 import { useState } from "react";
 import { createSubscription } from "../../api/SubscribeAPI.ts";
 import ModalWindow from "../Modal/ModalWindow.tsx";
-import NavigationLink from "../Links/NavigationLink.tsx";
 import Container from "../Container/Container.tsx";
 
 const SubscribeSection = () => {
@@ -67,13 +66,13 @@ const SubscribeSection = () => {
 						validateOnBlur={true}
 					>
 						{({
-							values,
-							handleBlur,
-							handleChange,
-							errors,
-							touched,
-							isValid,
-						}) => (
+								values,
+								handleBlur,
+								handleChange,
+								errors,
+								touched,
+								isValid,
+							}) => (
 							<Form className={"flex flex-col md:items-start md:ml-[50%] "}>
 								<div>
 									<Input
@@ -150,12 +149,12 @@ const SubscribeSection = () => {
 					</Formik>
 					<ModalWindow
 						className={
-							"p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[500px] md:h-[400px]"
+							"p-5 bg-yellow50 w-full top-[31%] md:top-[50%] md:w-[480px] h-[500px] md:h-[518px]"
 						}
 						active={isModalOpen}
 						setActive={setIsModalOpen}
 					>
-						<div className={"text-black mt-[30px]"}>
+						<div className={"text-black mt-[80px] md:mt-[108px]"}>
 							<Typography
 								variant={"h4"}
 								component={"p"}
@@ -166,10 +165,19 @@ const SubscribeSection = () => {
 							<div className={"flex justify-center mt-10"}>
 								<img src="/images/success-sent.svg" alt="success" />
 							</div>
-							<div className={"flex justify-center w-full mt-12"}>
-								<NavigationLink to={"/"} variant={"primary"} size={"large"}>
-									До головної
-								</NavigationLink>
+							<div className={"flex justify-center w-full  mt-12"}>
+
+								<div className={'w-full md:w-[185px]'}>
+									<Button
+										variant={"primary"}
+										size={"large"}
+										onClick={(e) => {
+											e.preventDefault();
+											setIsModalOpen(false);
+										}}>
+										До головної
+									</Button>
+								</div>
 							</div>
 						</div>
 					</ModalWindow>
