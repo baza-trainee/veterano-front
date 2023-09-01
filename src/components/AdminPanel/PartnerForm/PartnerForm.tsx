@@ -1,14 +1,13 @@
 import AdminInput from "../Input/AdminInput.tsx";
 import ImageInput from "../../ImageCroper/ImageInput.tsx";
-import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import Button from "../../Button/Button.tsx";
 import { FC, useState } from "react";
 import { useFormatDate } from "../../../hooks/useFormatDate.ts";
-import Switch from "../../Switch/Switch.tsx";
-import CustomCalendar from "../Calendar/CustomCalendar.tsx";
 import { createPartner, editPartner } from "../../../api/PartnersAPI.ts";
 import { blobUrlToBase64 } from "../BlobToBase64.ts";
+import { Form, Formik } from "formik";
+import PublishComponent from "../PublishComponent.tsx";
+import { useNavigate } from "react-router-dom";
 
 interface PartnerFormProps {
 	id?: number;
@@ -20,8 +19,8 @@ interface PartnerFormProps {
 }
 const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerName, url, image }) => {
 
-	const [isOpen, setIsOpen] = useState(false);
 	const formatDate = useFormatDate();
+	const navigate = useNavigate();
 
 	const validationSchema = Yup.object({
 		partnerName: Yup.string()
@@ -35,6 +34,8 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 		publication: Yup.string()
 			.required("Поле обов'язкове до заповнення"),
 	});
+
+
 	return (
 		<Formik
 			initialValues={{
@@ -47,7 +48,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 			}}
 			validationSchema={validationSchema}
 			onSubmit={async (values, { setSubmitting }) => {
-				console.log(values);
 				try {
 					const { id, image, ...rest } = values;
 					const base64Image = await blobUrlToBase64(image);
@@ -58,6 +58,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 						const data = { image: base64Image, ...rest }
 						console.log(data);
 						createPartner(data)
+							.then(() => navigate("/admin/partners"));
 					}
 				} catch (error) {
 					console.log(error);
@@ -67,14 +68,13 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 			}}
 			validateOnChange={false}
 			validateOnBlur={true}
+			enableReinitialize={true}
 		>
 			{({ values, handleSubmit, handleChange, errors, touched, isValid, setFieldValue }) => (
 
 				<Form onSubmit={e => {
 					e.preventDefault();
-					console.log('click')
 					handleSubmit();
-					console.log('click2')
 				}}>
 					<div className="flex gap-[20px]">
 						<div className="flex flex-col w-[738px]">
@@ -91,7 +91,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 							<div className="mb-[22px]">
 								<AdminInput
 									value={values.url}
-									error={errors.url && touched.url ? errors.url : undefined}
+									error={errors.url}
 									name={"url"}
 									onChange={handleChange}
 									placeholder={"Додати посилання"}
@@ -109,62 +109,25 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 										className="bg-[white] !h-[121px] rounded"
 										onChange={(img) => setFieldValue("image", img)}
 										page={"partners"}
-										style={{
-											display: "block",
-											opacity: 0,
-											width: "0px",
-											overflow: "hidden",
-											position: "absolute",
-										}}
 										error={errors.image}
+										onReset={(resetFunc) => setResetImage(() => resetFunc)}
 									/>
 								</div>
 
-								<div className="h-[226px] bg-white py-6 px-[42px] relative rounded ">
-									<div className={"h-full flex flex-col justify-between min-w-[200px]"}>
-										<div className={"flex flex-col"}>
-											<div className={"flex items-center mb-4 text-[14px] text-grey100"}>
-												Стан: <span
-												className={"block underline ml-4 w-[100px]"}>{values.isEnabled ? "активний" : "неактивний"}</span>
-												<Switch
-													isChecked={values.isEnabled || false}
-													setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
-												/>
-											</div>
+								<PublishComponent
+									isEnabled={values.isEnabled}
+									setIsChecked={(isChecked: boolean) => setFieldValue("isEnabled", isChecked)}
+									publication={values.publication}
+									isValid={isValid}
+									onValueSelected={(date: string) => {
+										if (date) {
+											setFieldValue("publication", date);
+										} else {
+											setFieldValue("publication", formatDate);
+										}
+									}}
 
-											<div className={"flex items-center text-[14px] relative"}>
-												Дата публікації:
-												<button
-													onClick={(e) => {
-														e.preventDefault()
-														setIsOpen(!isOpen);
-													}}
-													className={"underline cursor-pointer p-2"}>
-													{values.publication}
-												</button>
-											</div>
-										</div>
-										<div className={'w-[210px]'}>
-											<Button
-												variant={"primary"}
-												size={"large"}
-												type="submit"
-												disabled={!isValid}
-											>Опублікувати</Button>
-										</div>
-									</div>
-									{isOpen &&
-										<CustomCalendar
-											setIsOpen={setIsOpen}
-											onValueSelected={(date) => {
-												if (date) {
-													setFieldValue("publication", date);
-												} else {
-													setFieldValue("publication", formatDate);
-												}
-											}}
-										/>}
-								</div>
+								/>
 							</div>
 						</div>
 					</div>

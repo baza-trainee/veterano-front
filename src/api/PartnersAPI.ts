@@ -25,14 +25,24 @@ export const createPartner = async ({ partnerName, image, url, publication, isEn
 	}
 };
 
-export const getAllPartners = async (currentPage: number, size: number) => {
+// export const getAllPartners = async (currentPage: number, size: number) => {
+// 	try {
+// 		const { data } = await $host.get("info/partner/get-all", {
+// 			params: {
+// 				page: currentPage,
+// 				size: size,
+// 			},
+// 		});
+// 		return data;
+// 	} catch (e) {
+// 		console.error("Error getting cards:", e);
+// 		return null;
+// 	}
+// };
+
+export const getAllPartners = async () => {
 	try {
-		const { data } = await $host.get("info/partner/get-all", {
-			params: {
-				page: currentPage,
-				size: size,
-			},
-		});
+		const { data } = await $host.get("info/partner/get-all");
 		return data;
 	} catch (e) {
 		console.error("Error getting cards:", e);
@@ -79,9 +89,9 @@ export const editPartner = async (partner: PartnerType) => {
 	}
 };
 
-export const removePartner = async (cardId: number) => {
+export const removePartner = async (id: number) => {
 	try {
-		const { data } = await $host.delete("info/partner/delete?id=" + cardId);
+		const { data } = await $host.delete("info/partner/delete?id=" + id);
 		return data;
 	} catch (e) {
 		console.error("Error deleting card:", e);
@@ -89,10 +99,10 @@ export const removePartner = async (cardId: number) => {
 	}
 };
 
-export const removeCheckedPartners = async (cardIds: number[]) => {
+export const removeCheckedPartners = async (ids: number[]) => {
 	try {
 		await Promise.all(
-			cardIds.map(cardId => $host.delete("info/partner/delete?id=" + cardId)),
+			ids.map(id => $host.delete("info/partner/delete?id=" + id)),
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);

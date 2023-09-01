@@ -10,10 +10,11 @@ interface FileDropProps {
 	removeFile?(): void;
 	className: string;
 	id?: string;
+	error?: string;
 	imgWidth?: number;
 	imgHeight?: number;
 	page?: string;
-	error?: string;
+
 }
 export const FileDrop: React.FC<FileDropProps> = ({
 	src,
@@ -34,7 +35,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	return (
 		<div
 			className={
-				"flex items-center justify-center flex-col rounded p-[10px] w-[305px] h-[298px]"
+			`${props.page ? 'flex' : 'flex flex-col'}  items-center justify-center rounded p-[10px] w-[305px] h-[298px]`
 				+ " " +
 				className
 			}
@@ -45,14 +46,16 @@ export const FileDrop: React.FC<FileDropProps> = ({
 						`${props.page ? 'min-w-[245px]' : 'min-w-[305px]'} flex items-center justify-center flex-col w-full min-h-[119px] hover:cursor-pointer`
 				})}
 			>
-				<input id={id} {...getInputProps()} required type="file" {...props} />
+				<input id={id}  {...getInputProps()} type="file" {...props}/>
 				{src ? (
 					<img height={imgHeight} width={imgWidth} src={src} alt="Preview" />
 				) : (
-					<span className="flex items-center gap-[12px]">
+					<span className={`${props.error ? 'text-error30' : ''} flex items-center gap-[12px]`}>
 						<MdOutlineFileDownload size={27}/>
 						Завантажити зображення
 					</span>
+
+
 				)}
 			</div>
 			{src && (

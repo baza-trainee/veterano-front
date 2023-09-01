@@ -31,7 +31,7 @@ function App() {
 					</Route>
 					<Route path="/admin" element={<AdminLayout />}>
 						<Route path="projects" element={<ProjectsPage />} />
-						<Route path="projects/new-project" element={<AddProjectPage />} />
+						<Route path="projects/add" element={<AddProjectPage />} />
 						<Route path="projects/edit-project/:id" element={<EditProjectPage />} />
 						<Route path="contacts" element={<Contacts />} />
 						<Route path="documents" element={<DocumentPage />} />

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Form, Formik } from "formik";
 import { validationSchema } from "../../../pages/admin/ProjectsPage/validationShema.ts";
 import { createCard, editCard } from "../../../api/CardsApi.ts";
@@ -7,16 +7,14 @@ import CitiesDropDown from "../DropwDown/CitiesDropDown.tsx";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 import CategoryDropDown from "../DropwDown/CategoryDropDown.tsx";
 import ImageInput from "../../ImageCroper/ImageInput.tsx";
-import Switch from "../../Switch/Switch.tsx";
-import Button from "../../Button/Button.tsx";
-import CustomCalendar from "../Calendar/CustomCalendar.tsx";
 import { useFormatDate } from "../../../hooks/useFormatDate.tsx";
 import { useNavigate } from "react-router-dom";
 import { blobUrlToBase64 } from "../BlobToBase64.ts";
+import PublishComponent from "../PublishComponent.tsx";
 
 
 interface ProjectsFormProps {
-	cardId?: number
+	cardId?: number;
 	title?: string;
 	url?: string;
 	description?: string;
@@ -26,11 +24,22 @@ interface ProjectsFormProps {
 	isEnabled?: boolean;
 	publication?: string;
 	category?: string;
-	type?: string
+	type?: string;
 }
 
-const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, description, city, country, image, isEnabled, publication, category  }) => {
-	const [isOpen, setIsOpen] = useState(false);
+const ProjectsForm: FC<ProjectsFormProps> = ({
+ type,
+ cardId,
+ title,
+ url,
+ description,
+ city,
+ country,
+ image,
+ isEnabled,
+ publication,
+ category,
+ }) => {
 	const formatDate = useFormatDate();
 	const navigate = useNavigate();
 
@@ -49,21 +58,21 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 				category: category || "",
 			}}
 			validationSchema={validationSchema}
-			onSubmit={ async (values, {setSubmitting} ) => {
+			onSubmit={async (values, { setSubmitting }) => {
 				try {
 					const { cardId, isEnabled, city, country, category, image, ...rest } = values;
 					const location = { city, country };
 					const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 					const base64Image = await blobUrlToBase64(image);
 
-					if (values && type === 'add') {
+					if (values && type === "add") {
 						const cardData = { ...rest, image: base64Image, location, categories: categoryArray };
 						createCard(cardData)
-							.then(() => navigate("/admin/projects"))
+							.then(() => navigate("/admin/projects"));
 					} else {
 						const cardData = { ...rest, cardId, isEnabled, image: base64Image, location, categories: categoryArray };
 						editCard(cardData)
-							.then(() => navigate("/admin/projects"))
+							.then(() => navigate("/admin/projects"));
 					}
 				} catch (e) {
 					console.log("Error submitting", e);
@@ -76,7 +85,7 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 			enableReinitialize={true}
 
 		>
-			{({ values,  setFieldValue, errors, handleChange, isValid, handleSubmit }) => (
+			{({ values, setFieldValue, errors, handleChange, isValid, handleSubmit }) => (
 
 				<Form onSubmit={e => {
 					e.preventDefault();
@@ -153,60 +162,21 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 											setFieldValue("image", image);
 										}}
 										error={errors.image}
-										style={{
-											display: "block",
-											opacity: 0,
-											width: "0px",
-											overflow: "hidden",
-											position: "absolute",
-										}}
 									/>
-
 								</div>
+								<PublishComponent
+									isEnabled={values.isEnabled}
+									setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
+									publication={values.publication}
+									isValid={isValid}
+									onValueSelected={(date) => {
+										if (date) {
+											setFieldValue("publication", date);
+										} else {
+											setFieldValue("publication", formatDate);
+										}
+									}} />
 
-								<div className="h-[226px] bg-white py-6 px-[42px] relative rounded">
-									<div className={" h-full flex flex-col justify-between min-w-[200px]"}>
-										<div className={"flex flex-col"}>
-											<div className={"flex items-center mb-4 text-[14px] text-grey100"}>
-												Стан: <span
-												className={"block underline ml-4 w-[100px]"}>{values.isEnabled ? "активний" : "неактивний"}</span>
-												<Switch
-													isChecked={values.isEnabled || false}
-													setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
-												/>
-											</div>
-
-											<div className={"flex items-center text-[14px] relative"}>
-												Дата публікації:
-												<button
-													onClick={(e) => {
-														e.preventDefault()
-														setIsOpen(!isOpen);
-													}}
-													className={"underline cursor-pointer p-2"}>
-													{values.publication}
-												</button>
-											</div>
-										</div>
-										<Button
-											variant={"primary"}
-											size={"large"}
-											type="submit"
-											disabled={!isValid}
-										>Опублікувати</Button>
-									</div>
-									{isOpen &&
-										<CustomCalendar
-											setIsOpen={setIsOpen}
-											onValueSelected={(date) => {
-												if (date) {
-													setFieldValue("publication", date);
-												} else {
-													setFieldValue("publication", formatDate);
-												}
-											}}
-										/>}
-								</div>
 							</div>
 						</div>
 					</div>

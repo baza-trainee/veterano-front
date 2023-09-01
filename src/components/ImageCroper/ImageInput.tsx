@@ -13,7 +13,6 @@ interface ImageInput {
 	name?: string;
 	error? : string;
 	page? : string;
-	style?: React.CSSProperties;
 }
 const ImageInput: FC<ImageInput>= ({
 	onChange = (preview: string) => {
@@ -29,11 +28,12 @@ const ImageInput: FC<ImageInput>= ({
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
 	const [preview, setPreview] = useState<string>("");
-	const [file, setFile] = useState<Blob>();
+	const [file, setFile] = useState<Blob | null>();
 
 	useEffect(() => {
 		onChange(preview);
 	}, [preview]);
+
 
 	return (
 		<>
