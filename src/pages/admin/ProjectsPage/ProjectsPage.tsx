@@ -52,6 +52,7 @@ const ProjectsPage = () => {
 		removeCheckedCards(selectedIds)
 			.then(() => {
 				setProjects(prev => prev.filter(p => !selectedIds.includes(p.cardId)));
+				setCheckedItems(new Array(projects.length).fill(false));
 			});
 	};
 

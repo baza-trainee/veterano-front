@@ -25,7 +25,7 @@ const PartnersPage = () => {
 	const [searchData, setSearchData] = useState<PartnersType[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isAllChecked, setAllChecked] = useState(false);
-	const [checkedItems, setCheckedItems] = useState(new Array(3).fill(false));
+	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
 	const handleRemove = (id: number) => {
@@ -60,7 +60,9 @@ const PartnersPage = () => {
 		removeCheckedPartners(selectedIds)
 			.then(() => {
 				setPartners(prev => prev.filter(p => !selectedIds.includes(p.id)));
+				setCheckedItems(new Array(partners.length).fill(false));
 			});
+
 	};
 
 	const handleAllCheckedChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -60,25 +60,6 @@ export const getPartnerById = async (id: number) => {
 	}
 };
 
-export const getPartnerImage = async (id: number) => {
-	try {
-		const { data } = await $host.get("search/image/get?id=" + id);
-		const formattedImage = formatImageBinary(data);
-
-		return formattedImage;
-	} catch (e) {
-		console.error("Error getting image:", e);
-		return null;
-	}
-};
-
-const formatImageBinary = (binaryString: string): string => {
-	const arrayBuffer = new Uint8Array(binaryString.split("").map(char => char.charCodeAt(0)));
-	const blob = new Blob([arrayBuffer], { type: "image/png" });
-	return URL.createObjectURL(blob);
-};
-
-
 export const editPartner = async (partner: PartnerType) => {
 	try {
 		const { data } = await $host.patch("info/partner/update", partner);
