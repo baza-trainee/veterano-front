@@ -72,9 +72,7 @@ input {
 	.input-form {
 		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
 	}
-	.input-form {
-		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-	}
+
 	main .link-style {
 		@apply text-white font-light leading-[24px] cursor-pointer;
 	}
@@ -215,6 +213,10 @@ input {
 		@apply bg-black text-white outline-none;
 	}
 
+	.search-wrapper:focus-within input:focus {
+		@apply outline-none;
+	}
+
 	.search-input {
 		@apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
 	}
@@ -344,6 +346,9 @@ input {
 		@apply w-[58px] h-[58px];
 	}
 
+	.search-filter::-webkit-scrollbar {
+		display: none;
+	}
 	.scroll-to-top:hover .scroll-to-top-icon {
 		@apply w-[58px] h-[58px];
 	}
@@ -362,7 +367,7 @@ input {
 	}
 
 	.switch-label {
-		@apply inline-block w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
+		@apply flex flex-shrink-0 w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
 	}
 
 	.switch-label::after {
@@ -390,19 +395,18 @@ input {
 	}
 
 	.admin-filter-input {
-		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
+		@apply relative bg-white w-full flex justify-between items-center p-[10px] rounded;
 	}
 
 	.admin-filter-input:hover {
 		@apply shadow-middle;
 	}
 
-	.admin-filter-input input:invalid::placeholder {
-		@apply text-error50;
-	}
-
-	.admin-filter-input input::placeholder {
+	.placeholder-grey {
 		@apply text-[14px] leading-[185%] text-grey50;
+	}
+	.placeholder-error {
+		@apply text-[14px] leading-[185%] text-error30;
 	}
 
 	.admin-filter-input:focus-within > input {
@@ -434,16 +438,28 @@ input {
 		@apply pb-0;
 	}
 
-	.project-section {
-		@apply flex flex-col items-center;
+	.custom-checkbox .checkmark {
+		@apply relative inline-block w-[24px] h-[24px] border-2 border-[#151515];
 	}
 
-	.project-section > div {
-		@apply mb-16;
+	.custom-checkbox input:checked ~ .checkmark {
+		@apply bg-yellow100;
 	}
 
-	.project-section > div:last-of-type {
-		@apply mb-12;
+	.custom-checkbox input:checked ~ .checkmark:after {
+		content: "";
+		position: absolute;
+		width: 13px;
+		height: 7px;
+		border: 2px solid #151515;
+		border-top: none;
+		border-right: none;
+		top: 4px;
+		left: 4px;
+		transform: rotate(-45deg);
+	}
+	.check-wrapper:hover {
+		@apply bg-yellow30 rounded;
 	}
 
 	.modal {

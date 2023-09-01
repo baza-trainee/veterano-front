@@ -55,24 +55,28 @@ export const Contacts = () => {
 						placeholder="Телефон"
 						name="phone"
 						onChange={(e) => setFirstPhone(e.target.value)}
+						type={'text'}
 					/>
 					<AdminInput
 						value={secondPhone}
 						placeholder="Телефон"
 						name="secondPhone"
 						onChange={(e) => setSecondPhone(e.target.value)}
+						type={'text'}
 					/>
 					<AdminInput
 						value={email}
 						placeholder="Контактний e-mail"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
+						type={'text'}
 					/>
 					<AdminInput
 						value={secondEmail}
 						placeholder="e-mail для обробки звернень через форму зворотнього зв’язку"
 						name="secondEmail"
 						onChange={(e) => setSecondEmail(e.target.value)}
+						type={'text'}
 					/>
 				</div>
 			</div>
