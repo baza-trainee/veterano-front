@@ -8,7 +8,7 @@ import { useFormatDate } from "../../../hooks/useFormatDate.ts";
 import Switch from "../../Switch/Switch.tsx";
 import CustomCalendar from "../Calendar/CustomCalendar.tsx";
 import { createPartner, editPartner } from "../../../api/PartnersAPI.ts";
-import { blobUrlToBase64 } from "../BlobToBase64.tsx";
+import { blobUrlToBase64 } from "../BlobToBase64.ts";
 
 interface PartnerFormProps {
 	id?: number;
@@ -103,8 +103,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 							<div className="flex flex-col">
 								<div className="mb-[22px] bg-white rounded">
 									<ImageInput
-										imgHeight={100}
-										imgWidth={200}
 										id="image"
 										src={values.image}
 										name="image"
@@ -121,8 +119,8 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 									/>
 								</div>
 
-								<div className="h-[226px] bg-white py-6 px-[42px] relative ">
-									<div className={" h-full flex flex-col justify-between min-w-[200px]"}>
+								<div className="h-[226px] bg-white py-6 px-[42px] relative rounded ">
+									<div className={"h-full flex flex-col justify-between min-w-[200px]"}>
 										<div className={"flex flex-col"}>
 											<div className={"flex items-center mb-4 text-[14px] text-grey100"}>
 												Стан: <span

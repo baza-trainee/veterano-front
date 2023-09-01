@@ -83,7 +83,7 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 					handleSubmit();
 				}}>
 					<div className="flex gap-[20px]">
-						<div className="flex flex-col w-2/3">
+						<div className="flex flex-col w-[738px]">
 							<div className="mb-[22px]">
 								<AdminInput
 									type={"text"}
@@ -112,7 +112,7 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 										/>
 							</div>
 						</div>
-						<div className="flex flex-col w-1/3">
+						<div className="flex flex-col w-[305px]">
 							<div className="mb-[22px]">
 								<CitiesDropDown
 									inputDisplayValue={values.city ? `${capitalizeFirstLetter(values.city || "")}/${capitalizeFirstLetter(values.country || "")}` : ""}
@@ -147,6 +147,8 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 										name="image"
 										className="bg-[white]"
 										src={image}
+										width={265}
+										height={232}
 										onChange={(image) => {
 											setFieldValue("image", image);
 										}}
@@ -155,10 +157,10 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 
 								</div>
 
-								<div className="h-[226px] bg-white py-6 px-[74px] relative">
-									<div className={" h-full flex flex-col justify-between"}>
+								<div className="h-[226px] bg-white py-6 px-[42px] relative rounded">
+									<div className={" h-full flex flex-col justify-between min-w-[200px]"}>
 										<div className={"flex flex-col"}>
-											<div className={"flex items-center mb-4 text-[14px]"}>
+											<div className={"flex items-center mb-4 text-[14px] text-grey100"}>
 												Стан: <span
 												className={"block underline ml-4 w-[100px]"}>{values.isEnabled ? "активний" : "неактивний"}</span>
 												<Switch
@@ -179,7 +181,12 @@ const ProjectsForm: FC<ProjectsFormProps>= ({type, cardId, title, url, descripti
 												</button>
 											</div>
 										</div>
-										<Button variant={"primary"} size={"large"} type={"submit"} disabled={!isValid} >Опублікувати</Button>
+										<Button
+											variant={"primary"}
+											size={"large"}
+											type="submit"
+											disabled={!isValid}
+										>Опублікувати</Button>
 									</div>
 									{isOpen &&
 										<CustomCalendar

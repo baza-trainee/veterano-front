@@ -34,7 +34,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	return (
 		<div
 			className={
-				"flex items-center justify-center flex-col p-[10px] w-[305px] h-[298px]"
+				"flex items-center justify-center flex-col rounded p-[10px] w-[305px] h-[298px]"
 				+ " " +
 				className
 			}
@@ -42,7 +42,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 			<div
 				{...getRootProps({
 					className:
-						`${props.page ? 'min-w-[245px]' : 'min-w-[205px]'} flex items-center justify-center flex-col w-full min-h-[119px] hover:cursor-pointer`
+						`${props.page ? 'min-w-[245px]' : 'min-w-[305px]'} flex items-center justify-center flex-col w-full min-h-[119px] hover:cursor-pointer`
 				})}
 			>
 				<input id={id} {...getInputProps()} required type="file" {...props} />
