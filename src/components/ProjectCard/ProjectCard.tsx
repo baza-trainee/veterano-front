@@ -20,7 +20,7 @@ const ProjectCard: React.FC<CardProps> = ({
 																					}) => {
 
 	const {isTablet, isDesktop} = useMedia()
-	console.log('imageSrc', imageSrc);
+
 	const cardStyle = {
 		carousel: {
 			wrapper: '',
