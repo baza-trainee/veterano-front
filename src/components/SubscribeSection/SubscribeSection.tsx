@@ -15,6 +15,7 @@ import Container from "../Container/Container.tsx";
 const SubscribeSection = () => {
 	const { isDesktop, isMobile } = useMedia();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [fieldsFilled, setFieldsFilled] = useState(false);
 
 	const validationSchema = Yup.object({
 		name: Yup.string()
@@ -31,6 +32,7 @@ const SubscribeSection = () => {
 			.oneOf([true], "Це поле є обов’язковим")
 			.required("Це поле є обов’язковим"),
 	});
+
 
 	return (
 		<section>
@@ -62,9 +64,17 @@ const SubscribeSection = () => {
 								setSubmitting(false);
 							}
 							resetForm();
+							setFieldsFilled(false);
 						}}
 						validateOnChange={true}
 						validateOnBlur={true}
+						validate={values => {
+							if (values.name && values.email && values.check) {
+								setFieldsFilled(true);
+							} else {
+								setFieldsFilled(false);
+							}
+						}}
 					>
 						{({
 							values,
@@ -138,7 +148,7 @@ const SubscribeSection = () => {
 									<Button
 										className={"md:w-[167px] mt-[38px] lg:mt-[42px]"}
 										variant={"primary"}
-										disabled={!isValid}
+										disabled={!isValid || !fieldsFilled}
 										size={"large"}
 										type={"submit"}
 									>
