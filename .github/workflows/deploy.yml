@@ -21,7 +21,7 @@ jobs:
         env:
           VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
         run: |
-          echo "BASE_URL=$VITE_BASE_URL" >> $GITHUB_ENV
+          echo $VITE_BASE_URL
 
       - name: 🔨 Build Project
         run: |

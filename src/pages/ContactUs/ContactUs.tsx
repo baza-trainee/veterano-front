@@ -37,7 +37,7 @@ const ContactUs = () => {
 			</div>
 
 			<Section>
-				<div className={"contact-info"}>
+				<div className={"contact-info md:gap-[26px] lg:gap-[30px]"}>
 					<div className={"md:w-[22%] lg:w-[295px]"}>
 						<Typography
 							variant={isDesktop ? "h4" : "h5"}

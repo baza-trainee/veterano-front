@@ -16,7 +16,7 @@ const Section: FC<SectionProps> = ({
 	return (
 		<section
 			className={
-				className + " " + "py-section-sm md:py-section-md lg:py-section-lg"
+				"py-section-sm md:py-section-md lg:py-section-lg" + " " + className
 			}
 		>
 			<Container>
