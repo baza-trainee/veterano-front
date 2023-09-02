@@ -13,7 +13,6 @@ import {
 	handleRemoveSelected,
 } from "../../../../utils/functions/admin/adminFnc.ts";
 
-
 export interface PartnersType {
 	id: number,
 	partnerName: string,
@@ -35,20 +34,20 @@ const PartnersPage = () => {
 
 	useEffect(() => {
 		navigate(`/admin/partners?page=${currentPage}`, { replace: true });
-		getAllPartners()
+		getAllPartners(currentPage, 7)
 			.then((resp) => {
-				setPartners(resp);
-				setCheckedItems(new Array(resp.length).fill(false));
-				// setTotalPages(1);
+				setPartners(resp.partnerDTOList);
+				setCheckedItems(new Array(resp.partnerDTOList.length).fill(false));
+				setTotalPages(resp.totalPages);
 			});
 	}, [currentPage]);
 
-	// useEffect(() => {
-	// 	getAllPartners(currentPage, 100)
-	// 		.then((resp) => {
-	// 			setSearchData(resp.cards);
-	// 		});
-	// }, []);
+	useEffect(() => {
+		getAllPartners(currentPage, 100)
+			.then((resp) => {
+				setSearchData(resp.partnerDTOList);
+			});
+	}, []);
 
 	const handleCheckedChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedItems = [...checkedItems];

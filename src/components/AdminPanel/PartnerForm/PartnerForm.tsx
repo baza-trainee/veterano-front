@@ -53,7 +53,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 					const base64Image = await blobUrlToBase64(image);
 					if (id) {
 						const data = { id, image: base64Image, ...rest }
-						console.log(data);
 						editPartner(data)
 							.then(() => navigate("/admin/partners"));
 					} else {

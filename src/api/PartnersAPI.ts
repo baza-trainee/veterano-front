@@ -25,24 +25,14 @@ export const createPartner = async ({ partnerName, image, url, publication, isEn
 	}
 };
 
-// export const getAllPartners = async (currentPage: number, size: number) => {
-// 	try {
-// 		const { data } = await $host.get("info/partner/get-all", {
-// 			params: {
-// 				page: currentPage,
-// 				size: size,
-// 			},
-// 		});
-// 		return data;
-// 	} catch (e) {
-// 		console.error("Error getting cards:", e);
-// 		return null;
-// 	}
-// };
-
-export const getAllPartners = async () => {
+export const getAllPartners = async (currentPage: number, size: number) => {
 	try {
-		const { data } = await $host.get("info/partner/get-all");
+		const { data } = await $host.get("info/partner/get-all", {
+			params: {
+				page: currentPage,
+				size: size
+			}
+		});
 		return data;
 	} catch (e) {
 		console.error("Error getting cards:", e);
