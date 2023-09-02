@@ -16,12 +16,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "18"
-          
-      - name: 🔏 Set up environment variables
-        env:
-          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
-        run: |
-          echo $VITE_BASE_URL
 
       - name: 🔨 Build Project
         run: |
