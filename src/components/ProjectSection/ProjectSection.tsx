@@ -36,7 +36,7 @@ const ProjectSection = () => {
 					component={ProjectCard}
 					button={() => (
 						<NavigationLink to={"/search"} variant={"secondary"}>
-							Дивитись всі проекти
+							Дивитися всі проєкти
 						</NavigationLink>
 					)}
 				/>
@@ -50,7 +50,7 @@ const ProjectSection = () => {
 					component={ProjectCard}
 					button={() => (
 						<NavigationLink to={"/search"} variant={"secondary"}>
-							Дивитись всі проекти
+							Дивитися всі проєкти
 						</NavigationLink>
 					)}
 				/>
@@ -69,7 +69,7 @@ const ProjectSection = () => {
 						</div>
 					))}
 					<NavigationLink to={"/search"} variant={"secondary"}>
-						Дивитись всі проекти
+						Дивитися всі проєкти
 					</NavigationLink>
 				</div>
 			)}
