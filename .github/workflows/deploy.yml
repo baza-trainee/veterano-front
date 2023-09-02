@@ -3,7 +3,10 @@ on:
     branches:
       - main
 name: 🚀 Deploy website on push
-
+env:
+  VITE_BASE_URL: Monday
+  DAY_OF_WEEK: Monday
+  
 jobs:
   web-deploy:
     name: 🎉 Deploy
