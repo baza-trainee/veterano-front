@@ -4,7 +4,7 @@ on:
       - main
 name: 🚀 Deploy website on push
 env:
-  VITE_BASE_URL: ${{env.VITE_BASE_URL}}
+  VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
   
 jobs:
   web-deploy:
