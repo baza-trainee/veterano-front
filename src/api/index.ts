@@ -1,6 +1,6 @@
 import axios from "axios";
 
-console.log(import.meta.env.VITE_BASE_URL);
+console.table(import.meta.env);
 const $host = axios.create({
 	baseURL: import.meta.env.VITE_BASE_URL,
 });
