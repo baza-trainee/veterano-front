@@ -162,8 +162,10 @@ const SubscribeSection = () => {
 							>
 								Ви успішно підписались на новини{" "}
 							</Typography>
-							<div className={"flex justify-center mt-10"}>
-								<img src="/images/success-sent.svg" alt="success" />
+							<div className={"flex justify-center mt-10 "}>
+								<div >
+									<img className={'md:w-[114px] md:h-[114px]'} src="/images/success-sent.svg" alt="success" />
+								</div>
 							</div>
 							<div className={"flex justify-center w-full  mt-12"}>
 
