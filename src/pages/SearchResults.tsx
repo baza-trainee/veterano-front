@@ -117,8 +117,8 @@ const SearchResults = () => {
 					>
 						Проєкти
 					</Typography>
+					<HeroSearchBar />
 				</Container>
-				<HeroSearchBar />
 			</section>
 			<section
 				className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}
