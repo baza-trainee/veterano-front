@@ -67,7 +67,7 @@ export const AboutUs: FC = () => {
 				</Container>
 			</div>
 			<Container className="p-4 mb-20 mx-auto">
-				<div className="lg:max-w-[1240px]">
+				<div className="lg:max-w-[1124px]">
 					<Accordion data={accordionData} />
 				</div>
 			</Container>
