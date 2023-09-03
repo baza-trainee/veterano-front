@@ -1,11 +1,11 @@
-import { FC, ReactNode, useEffect } from "react";
-import { useMedia } from "../../hooks/useMedia.tsx";
+import React, { FC, ReactNode, useEffect } from "react";
 
 interface ModalWindowProps {
 	className: string;
 	children?: ReactNode;
 	active: boolean;
 	setActive: React.Dispatch<React.SetStateAction<boolean>>;
+	style?: React.CSSProperties
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({
@@ -13,8 +13,9 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	setActive,
 	className,
 	children,
+	...props
 }) => {
-	const {isMobile} = useMedia()
+
 	useEffect(() => {
 		active
 			? (document.body.style.overflow = "hidden")
@@ -26,12 +27,9 @@ const ModalWindow: FC<ModalWindowProps> = ({
 			onClick={() => setActive(false)}
 		>
 			<div
-				style={{
-					position: "absolute",
-					top: isMobile? '0' : '92px'
-				}}
-				className={`${className} modal-content relative`}
+				className={`${className} modal-content relative absolute top-0 md:top-[92px]`}
 				onClick={(e) => e.stopPropagation()}
+				{...props}
 			>
 				<div
 					onClick={() => setActive(false)}
