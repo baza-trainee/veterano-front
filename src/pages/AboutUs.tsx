@@ -68,12 +68,7 @@ export const AboutUs: FC = () => {
 					</Typography>
 				</Container>
 			</div>
-			{/*<div*/}
-			{/*	className="bg-cover bg-center h-60 mb-20 md:mb-24 flex flex-col justify-end"*/}
-			{/*	style={{ backgroundImage: "url(\"./images/aboutUsBg.jpeg\")" }}*/}
-			{/*>*/}
 
-			{/*</div>*/}
 			<Container className="p-4 mb-20 mx-auto">
 				<Accordion data={accordionData} />
 			</Container>
