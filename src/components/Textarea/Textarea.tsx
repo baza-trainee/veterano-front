@@ -25,13 +25,12 @@ const Textarea: React.FC<TextareaProps> = ({
 			<label className={"block" + " " + className}>
 				{label}
 				<textarea
-					minLength={300}
 					placeholder={placeholder}
 					peer-invalid:text-error100
 					className={
 						"block p-[12px] w-[100%] min-h-[120px] max-h-[520px] border-[1px] border-black rounded-[4px] hover:border-[black] md:max-h-[480px] lg:max-h-[320px] " +
 						" " +
-						(error && " placeholder-error100")
+						(error && " placeholder-error100 border-error100")
 					}
 					id={id}
 					onChange={onChange}

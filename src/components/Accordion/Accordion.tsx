@@ -41,7 +41,7 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
 						</div>
 					</div>
 					{activeIndex === index && (
-						<div className="pt-4 text-grey100 md:max-w-[675px] lg:max-w-[1070px]">
+						<div className="font-light pt-4 text-grey100 md:max-w-[675px] lg:max-w-[1070px]">
 							{item.content}
 						</div>
 					)}
