@@ -12,6 +12,7 @@ import {
 	handleRemove,
 	handleRemoveSelected,
 } from "../../../../utils/functions/admin/adminFnc.ts";
+import Search404 from "../../../components/Search404/Search404.tsx";
 
 export interface PartnersType {
 	id: number,
@@ -56,7 +57,7 @@ const PartnersPage = () => {
 	};
 
 	const filteredProjects = value ? searchData.filter((project) => project.partnerName.includes(value)) : partners;
-
+	console.log(filteredProjects.length);
 	return (
 		<>
 			<HeaderComponent
@@ -72,6 +73,7 @@ const PartnersPage = () => {
 						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, partners.length)}
 						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, 'id')}
 						/>
+					{filteredProjects.length < 1 && <Search404/>}
 						{filteredProjects && filteredProjects.map((partner, index) =>
 						<React.Fragment key={partner.id}>
 							<ListElement

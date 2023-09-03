@@ -13,6 +13,7 @@ import {
 	handleRemove,
 	handleRemoveSelected,
 } from "../../../../utils/functions/admin/adminFnc.ts";
+import Search404 from "../../../components/Search404/Search404.tsx";
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
@@ -64,6 +65,7 @@ const ProjectsPage = () => {
 						name={"Назва проєкту"}
 						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, projects.length)}
 						onClick={() => handleRemoveSelected(projects, checkedItems, setProjects, setCheckedItems, removeCheckedCards, "cardId")} />
+					{filteredProjects.length < 1 && <Search404/>}
 					{filteredProjects && filteredProjects.map((project, index) =>
 						<React.Fragment key={project.cardId}>
 							<ListElement
