@@ -69,10 +69,6 @@ input {
 		@apply rounded flex items-center justify-center;
 	}
 
-	.input-form {
-		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-	}
-
 	main .link-style {
 		@apply text-white font-light leading-[24px] cursor-pointer;
 	}
@@ -130,7 +126,7 @@ input {
 	}
 
 	.input-form {
-		@apply w-full md:w-full lg:w-full text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+		@apply w-full md:w-[340px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
 	}
 
 	.input-form:invalid:not(:placeholder-shown) {
@@ -354,7 +350,7 @@ input {
 	}
 
 	.subscribe-wrapper {
-		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
+		@apply  py-[80px] md:pt-[100px] lg:pt-[120px] flex flex-col;
 	}
 
 	.noScrollbar::-webkit-scrollbar {
@@ -512,10 +508,6 @@ input {
 
 	.search-filter::-webkit-scrollbar {
 		display: none;
-	}
-
-	.subscribe-wrapper {
-		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
 	}
 
 	.noScrollbar::-webkit-scrollbar {
