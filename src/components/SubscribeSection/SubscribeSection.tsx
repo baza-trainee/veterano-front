@@ -24,6 +24,10 @@ const SubscribeSection = () => {
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
+			.matches(
+				/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				"Введіть дійсний email"
+			)
 			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
