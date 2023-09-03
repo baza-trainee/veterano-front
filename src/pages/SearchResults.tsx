@@ -1,16 +1,15 @@
-import Typography from "../components/Typography/Typography.tsx";
-import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import HeroSearchBar from "../components/SearchForm/SearchForm.tsx";
+import { useSearchParams } from "react-router-dom";
+import { convertBackDataToProjectCardProps } from "../../utils/backDataToProjectCardProps.ts";
 import { searchRequest } from "../api/SearchAPI.tsx";
-import ProjectCard from "../components/ProjectCard/ProjectCard.tsx";
-import Pagination from "../components/Pagination/Pagination.tsx";
-import { useMedia } from "../hooks/useMedia.tsx";
 import Button from "../components/Button/Button.tsx";
 import Container from "../components/Container/Container.tsx";
-import React from "react";
+import Pagination from "../components/Pagination/Pagination.tsx";
+import ProjectCard from "../components/ProjectCard/ProjectCard.tsx";
 import Search404 from "../components/Search404/Search404.tsx";
-import { convertBackDataToProjectCardProps } from "../../utils/backDataToProjectCardProps.ts";
+import HeroSearchBar from "../components/SearchForm/SearchForm.tsx";
+import Typography from "../components/Typography/Typography.tsx";
+import { useMedia } from "../hooks/useMedia.tsx";
 
 interface Card {
 	description: string;
