@@ -30,7 +30,7 @@ const CookiesPanel = () => {
 					</div>
 					<p className="text-[16px] leading-6 lg:order-1 lg:min-w-[845px]">
 						Цей сайт використовує файли cookies для правильної роботи і покращення сервісу. Якщо ви погоджуєтесь з їхнім
-						використанням, натисніть ОК. Більше інформації в <Link to={'/ddddd'} variant={'underlineFooter'} style={{color: 'black'}}>Політика конфіденційності</Link>.
+						використанням, натисніть ОК. Більше інформації в <Link to={'/files/pol_conf.pdf'} variant={'underlineFooter'} style={{color: 'black'}}>Політика конфіденційності</Link>.
 					</p>
 				<div className="w-full flex justify-center md:w-[95px] lg:w-[93px] lg:order-2">
 					<Button id="accept-cookies" variant={'primary'} size={'large'} onClick={acceptCookies} className={'py-[10px] h-[48px]'}>OK</Button>
