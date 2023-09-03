@@ -13,10 +13,10 @@ const ContactUs = () => {
 			<div
 				style={{
 					backgroundImage: isMobile
-						? "url(/images/contact-320w.svg)"
+						? "url(/images/contact-320w.jpeg)"
 						: isTablet
-						? "url(/images/contact-720w.svg)"
-						: "url(/images/contact-1440w.svg)",
+						? "url(/images/contact-768w.jpeg)"
+						: "url(/images/contact-1440w.jpeg)",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}

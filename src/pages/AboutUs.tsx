@@ -44,10 +44,10 @@ export const AboutUs: FC = () => {
 			<div
 				style={{
 					backgroundImage: isMobile
-						? "url(/images/about-sm.svg)"
+						? "url(/images/about-sm.jpeg)"
 						: isTablet
-						? "url(/images/about-md.svg)"
-						: "url(/images/about-lg.svg)",
+						? "url(/images/about-md.jpeg)"
+						: "url(/images/about-lg.jpeg)",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}

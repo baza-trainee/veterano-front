@@ -354,7 +354,7 @@ input {
 	}
 
 	.subscribe-wrapper {
-		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
+		@apply py-[80px] flex flex-col;
 	}
 
 	.noScrollbar::-webkit-scrollbar {
@@ -514,9 +514,6 @@ input {
 		display: none;
 	}
 
-	.subscribe-wrapper {
-		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
-	}
 
 	.noScrollbar::-webkit-scrollbar {
 		display: none;
