@@ -15,15 +15,21 @@ import Container from "../Container/Container.tsx";
 const SubscribeSection = () => {
 	const { isDesktop, isMobile } = useMedia();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [fieldsFilled, setFieldsFilled] = useState(false);
 
 	const validationSchema = Yup.object({
 		name: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(30, "Ім’я повинно бути не більше 30 знаків")
+			.matches(/^[a-zA-Z\s]*$/, 'Тільки літери та пробіли дозволені')
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
-			.test("domain", "Введіть дійсний email", (value) => {
+			.matches(
+				/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				"Введіть дійсний email"
+			)
+			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
 			.required("Введіть дійсний email"),
@@ -31,6 +37,7 @@ const SubscribeSection = () => {
 			.oneOf([true], "Це поле є обов’язковим")
 			.required("Це поле є обов’язковим"),
 	});
+
 
 	return (
 		<section>
@@ -62,9 +69,17 @@ const SubscribeSection = () => {
 								setSubmitting(false);
 							}
 							resetForm();
+							setFieldsFilled(false);
 						}}
 						validateOnChange={true}
 						validateOnBlur={true}
+						validate={values => {
+							if (values.name && values.email && values.check) {
+								setFieldsFilled(true);
+							} else {
+								setFieldsFilled(false);
+							}
+						}}
 					>
 						{({
 							values,
@@ -138,7 +153,7 @@ const SubscribeSection = () => {
 									<Button
 										className={"md:w-[167px] mt-[38px] lg:mt-[42px]"}
 										variant={"primary"}
-										disabled={!isValid}
+										disabled={!isValid || !fieldsFilled}
 										size={"large"}
 										type={"submit"}
 									>
