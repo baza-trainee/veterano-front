@@ -60,15 +60,12 @@ export const AboutUs: FC = () => {
 					<Typography
 						variant={"h1"}
 						component={"h1"}
-						className={
-							"text-white w-[209px] mb-7 ml-[26px] md:ml-[34px] md:w-full lg:ml-[80px] "
-						}
+						className={"text-white w-[209px] mb-7 md:w-full  "}
 					>
 						Про нас
 					</Typography>
 				</Container>
 			</div>
-
 			<Container className="p-4 mb-20 mx-auto">
 				<Accordion data={accordionData} />
 			</Container>
