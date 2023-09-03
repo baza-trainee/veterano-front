@@ -118,7 +118,7 @@ input {
 	}
 
 	.primary-dark-bg {
-		@apply flex items-center justify-center;
+		@apply flex items-center justify-center text-[18px] leading-[28px];
 	}
 
 	.primary-dark-bg:hover {
