@@ -14,14 +14,15 @@ interface PartnerType {
 	isEnabled: boolean
 
 }
+
 const PartnersSection = () => {
 	const { isDesktop, isTablet, isMobile } = useMedia();
- const [images, setImages] = useState<string[]>()
+	const [images, setImages] = useState<string[]>();
 
 	useEffect(() => {
 		searchPartners()
 			.then((data) => {
-				const arrayImg = data.map((partner: PartnerType)  => `http://45.94.157.117:8080/api/v1/search/image/get?id=${partner.image}`);
+				const arrayImg = data.partnerDTOList.map((partner: PartnerType) => `http://45.94.157.117:8080/api/v1/search/image/get?id=${partner.image}`);
 				setImages(arrayImg);
 			});
 
