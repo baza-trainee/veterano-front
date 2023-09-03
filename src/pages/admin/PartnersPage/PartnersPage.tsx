@@ -57,7 +57,7 @@ const PartnersPage = () => {
 	};
 
 	const filteredProjects = value ? searchData.filter((project) => project.partnerName.includes(value)) : partners;
-	console.log(filteredProjects.length);
+
 	return (
 		<>
 			<HeaderComponent
