@@ -8,6 +8,7 @@ interface CardProps {
 	text: string;
 	buttonText?: string;
 	variant: "carousel" | "search";
+	url: string;
 	className?: string;
 }
 
@@ -16,6 +17,7 @@ const ProjectCard: React.FC<CardProps> = ({
 	title = "Проект",
 	text = "Короткий опис. Інформаційний блок з описом трьох зовнішніх проєктів. ороткий опис. Інформаційний блок з описом трьох зовнішніх проєктів.",
 	variant = "carousel",
+	url,
 	className,
 }) => {
 	const { isTablet, isDesktop } = useMedia();
@@ -56,7 +58,7 @@ const ProjectCard: React.FC<CardProps> = ({
 					{text}
 				</Typography>
 				<Link
-					to="my offer"
+					to={url}
 					variant="primary"
 					size={isDesktop ? "large" : "small"}
 					className={
