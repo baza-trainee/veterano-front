@@ -149,7 +149,7 @@ const SubscribeSection = () => {
 					</Formik>
 					<ModalWindow
 						className={
-							"p-5 bg-yellow50 w-full top-[31%] md:top-[50%] md:w-[480px] h-[500px] md:h-[518px]"
+							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded"
 						}
 						active={isModalOpen}
 						setActive={setIsModalOpen}
@@ -158,19 +158,20 @@ const SubscribeSection = () => {
 							<Typography
 								variant={"h4"}
 								component={"p"}
-								className={"text-center font-bold"}
+								className={"text-center font-medium"}
 							>
 								Ви успішно підписались на новини{" "}
 							</Typography>
 							<div className={"flex justify-center mt-10"}>
-								<img src="/images/success-sent.svg" alt="success" />
+								<img className={'md:w-[114px] md:h-[114px]'} src="/images/success-sent.svg" alt="success" />
 							</div>
-							<div className={"flex justify-center w-full  mt-12"}>
+							<div className={"flex justify-center w-full mt-12"}>
 
 								<div className={'w-full md:w-[185px]'}>
 									<Button
 										variant={"primary"}
 										size={"large"}
+										className={'text-[18px] font-light leading-[28px] h-[48px]'}
 										onClick={(e) => {
 											e.preventDefault();
 											setIsModalOpen(false);

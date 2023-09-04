@@ -5,6 +5,7 @@ interface ModalWindowProps {
 	children?: ReactNode;
 	active: boolean;
 	setActive: React.Dispatch<React.SetStateAction<boolean>>;
+	style?: React.CSSProperties
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({
@@ -12,6 +13,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	setActive,
 	className,
 	children,
+  ...props
 }) => {
 	useEffect(() => {
 		active
@@ -24,13 +26,9 @@ const ModalWindow: FC<ModalWindowProps> = ({
 			onClick={() => setActive(false)}
 		>
 			<div
-				style={{
-					position: "absolute",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
-				}}
-				className={`${className} modal-content relative`}
+				className={`${className} modal-content relative absolute top-0 md:top-[92px]`}
 				onClick={(e) => e.stopPropagation()}
+				{...props}
 			>
 				<div
 					onClick={() => setActive(false)}
