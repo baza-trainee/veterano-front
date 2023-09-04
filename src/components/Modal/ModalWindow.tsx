@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect } from "react";
+import React, { FC, ReactNode, useEffect } from "react";
 
 
 interface ModalWindowProps {
@@ -16,6 +16,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	children,
 	...props
 }) => {
+
 	useEffect(() => {
 		active
 			? (document.body.style.overflow = "hidden")
@@ -35,7 +36,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 				<div
 					onClick={() => setActive(false)}
 					className={
-						"absolute right-[24px] top-[24px] flex justify-end cursor-pointer"
+						"absolute right-[16px] md:right-[24px] top-[24px] flex justify-end cursor-pointer"
 					}
 				>
 					<img src="/images/close.svg" alt="close" />
