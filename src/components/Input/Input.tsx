@@ -31,21 +31,26 @@ const Input: FC<InputProps> = ({
     duration-300 
 		w-full 
 		font-light
-    peer-focus:leading-7 
+		leading-[24px] 
+		${error ? 'text-error100' : 'text-grey100'}
+    peer-focus:leading-[26px] 
     peer-focus:text-[14px] 
     peer-focus:translate-y-[1.9rem]  
     peer-focus:text-grey50
     peer-disabled:text-grey50 
-	placeholder-error100
+	
     `;
 		if (value.length > 0) {
 			style = `
       peer 
       peer-invalid:text-error100
-      pl-[10px] leading-7 
+      pl-[10px] 
+      leading-[26px]
       text-[14px]  
       translate-y-[1.9rem]
-      text-grey50`;
+      text-grey50
+      `
+
 		}
 		if (error) {
 			style += " " + " text-error100 ";
@@ -54,10 +59,10 @@ const Input: FC<InputProps> = ({
 		return style;
 	};
 	const inputStyles = () => {
-		let style = `input-form  peer`;
+		let style = `input-form peer `;
 
 		if (value.length > 0) {
-			style = `input-form peer !h-[64px]  `;
+			style = `input-form peer !h-[64px] `;
 		}
 		if (error) {
 			style = `text-error100 input-form !h-[64px] peer border-error100 focus:border-black placeholder-error100`;
@@ -93,7 +98,7 @@ const Input: FC<InputProps> = ({
 				</div>
 			)}
 			{error ? (
-				<p className="absolute left-[10px] top-[100%] md:top-[110%] text-error100 text-[14px] leading-[26px] font-light">
+				<p className="absolute left-[10px] top-[100%] md:top-[104%] text-error100 text-[14px] leading-[26px] font-light">
 					{error}
 				</p>
 			) : null}
