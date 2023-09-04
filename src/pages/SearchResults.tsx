@@ -1,21 +1,21 @@
-import Typography from "../components/Typography/Typography.tsx";
-import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import HeroSearchBar from "../components/SearchForm/SearchForm.tsx";
-import { getCardImage, searchRequest } from "../api/SearchAPI.tsx";
-import ProjectCard from "../components/ProjectCard/ProjectCard.tsx";
-import Pagination from "../components/Pagination/Pagination.tsx";
-import { useMedia } from "../hooks/useMedia.tsx";
+import { useSearchParams } from "react-router-dom";
+import { convertBackDataToProjectCardProps } from "../../utils/backDataToProjectCardProps.ts";
+import { searchRequest } from "../api/SearchAPI.tsx";
 import Button from "../components/Button/Button.tsx";
 import Container from "../components/Container/Container.tsx";
-import React from "react";
+import Pagination from "../components/Pagination/Pagination.tsx";
+import ProjectCard from "../components/ProjectCard/ProjectCard.tsx";
 import Search404 from "../components/Search404/Search404.tsx";
+import HeroSearchBar from "../components/SearchForm/SearchForm.tsx";
+import Typography from "../components/Typography/Typography.tsx";
+import { useMedia } from "../hooks/useMedia.tsx";
 
 interface Card {
 	description: string;
 	title: string;
 	url: string;
-	imageId: number;
+	imageSrc: string;
 	publication: string;
 	category: string;
 	location: {
@@ -30,13 +30,8 @@ type ResultsType = {
 	totalSize: number;
 };
 
-interface ImagesArrayType {
-	imageId: number;
-	image: string;
-}
-
 const SearchResults = () => {
-	const { isMobile } = useMedia();
+	const { isMobile, isTablet } = useMedia();
 
 	const [searchParams] = useSearchParams();
 	const q = searchParams.get("q");
@@ -46,7 +41,6 @@ const SearchResults = () => {
 	const size = isMobile ? 6 : 4;
 	const [results, setResults] = useState<ResultsType | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [images, setImages] = useState<ImagesArrayType[]>([]);
 	const [additionalCards, setAdditionalCards] = useState<Card[]>([]);
 
 	useEffect(() => {
@@ -60,17 +54,12 @@ const SearchResults = () => {
 		};
 
 		searchRequest(params).then((data) => {
-			setResults(data);
-			const imagesArray: ImagesArrayType[] = [];
-			data.cards.forEach((card: Card) => {
-				getCardImage(card.imageId.toString()).then((resp) => {
-					imagesArray.push({
-						imageId: card.imageId,
-						image: resp,
-					});
-				});
+			console.log(data);
+			convertBackDataToProjectCardProps(data.cards);
+			setResults({
+				...data,
+				cards: convertBackDataToProjectCardProps(data.cards),
 			});
-			setImages(imagesArray);
 		});
 	}, [q, city, country, category, currentPage]);
 
@@ -92,10 +81,6 @@ const SearchResults = () => {
 		setCurrentPage(selectedPage);
 	};
 
-	const findImageSrc = (imageId: number) => {
-		const imageObj = images.find((image) => image.imageId === imageId);
-		return imageObj ? imageObj.image : "";
-	};
 	const cardsToRender = isMobile
 		? [...(results?.cards || []), ...additionalCards]
 		: results?.cards;
@@ -117,44 +102,33 @@ const SearchResults = () => {
 					>
 						Проєкти
 					</Typography>
+					<HeroSearchBar />
 				</Container>
-				<HeroSearchBar />
 			</section>
 			<section
-				className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}
+				className={"py-section-sm bg-[#ECECEC]"}
 			>
 				<Container>
 					{cardsToRender?.length ? (
 						<>
 							<Typography
-								variant={isMobile ? "h5" : "h4"}
+								variant={isMobile ? "h5" : isTablet ? "h4" : "h3"}
 								component={"h2"}
-								className="text-center md:text-left md:ml-6 lg:ml-[80px]"
+								className="text-center md:text-left"
 							>
 								Знайдено результатів: {results?.totalSize}
 							</Typography>
 							<div className="mt-[32px] lg:mt-6">
 								{cardsToRender &&
 									cardsToRender.map((card, index) => (
-										<React.Fragment key={index}>
-											{isMobile ? (
-												<ProjectCard
-													imageSrc={findImageSrc(card.imageId)}
-													title={card.title}
-													text={card.description}
-													variant={"carousel"}
-												/>
-											) : (
-												<div className={"md:mx-6 lg:mx-[80px]"}>
-													<ProjectCard
-														imageSrc={findImageSrc(card.imageId)}
-														title={card.title}
-														text={card.description}
-														variant={"search"}
-													/>
-												</div>
-											)}
-										</React.Fragment>
+										<ProjectCard
+											key={index}
+											imageSrc={card.imageSrc}
+											url={card.url}
+											title={card.title}
+											text={card.description}
+											variant={isMobile ? "carousel" : "search"}
+										/>
 									))}
 							</div>
 							{isMobile ? (

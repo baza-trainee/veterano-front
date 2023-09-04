@@ -30,6 +30,7 @@ const Input: FC<InputProps> = ({
     transition-all 
     duration-300 
 		w-full 
+		font-light
     peer-focus:leading-7 
     peer-focus:text-[14px] 
     peer-focus:translate-y-[1.9rem]  
@@ -49,7 +50,7 @@ const Input: FC<InputProps> = ({
       text-grey50`;
 		}
 		if (error) {
-			style += " " + " text-error100";
+			style += " " + " text-error100 ";
 		}
 
 		return style;
@@ -94,7 +95,7 @@ const Input: FC<InputProps> = ({
 				</div>
 			)}
 			{error ? (
-				<p className="absolute left-[10px] top-[100%] md:top-[110%] text-error100 text-[14px] leading-[26px] md:leading-4">
+				<p className="absolute left-[10px] top-[100%] md:top-[110%] text-error100 text-[14px] leading-[26px] font-light">
 					{error}
 				</p>
 			) : null}
