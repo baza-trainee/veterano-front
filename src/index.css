@@ -323,7 +323,7 @@ input {
 	}
 
 	.contact-feedback {
-		@apply mr-4 md:mr-0 md:flex md:w-[702px] lg:w-full;
+		@apply md:flex md:w-[702px] lg:w-full;
 	}
 
 	.scroll-to-top {
@@ -350,12 +350,12 @@ input {
 	}
 
 	.subscribe-wrapper {
-		@apply  py-[80px] md:pt-[100px] lg:pt-[120px] flex flex-col;
+		@apply py-[80px] md:pt-[100px] lg:pt-[120px] flex flex-col;
 	}
 
-  .switch-label {
-    @apply inline-block w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
-  }
+	.switch-label {
+		@apply inline-block w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
+	}
 
 	.switch-label::after {
 		@apply absolute content-[''] z-10 h-[24px] w-[24px] rounded-[17px] bg-white top-[4px] left-[4px] transition-all duration-300;
