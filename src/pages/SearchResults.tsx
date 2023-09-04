@@ -36,7 +36,7 @@ interface ImagesArrayType {
 }
 
 const SearchResults = () => {
-	const { isMobile } = useMedia();
+	const { isMobile, isTablet } = useMedia();
 
 	const [searchParams] = useSearchParams();
 	const q = searchParams.get("q");
@@ -117,8 +117,8 @@ const SearchResults = () => {
 					>
 						Проєкти
 					</Typography>
+					<HeroSearchBar />
 				</Container>
-				<HeroSearchBar />
 			</section>
 			<section
 				className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}
@@ -127,9 +127,9 @@ const SearchResults = () => {
 					{cardsToRender?.length ? (
 						<>
 							<Typography
-								variant={isMobile ? "h5" : "h4"}
+								variant={isMobile ? "h5" : isTablet ? "h4" : "h3"}
 								component={"h2"}
-								className="text-center md:text-left md:ml-6 lg:ml-[80px]"
+								className="text-center md:text-left md:ml-6 lg:ml-[80px] "
 							>
 								Знайдено результатів: {results?.totalSize}
 							</Typography>
