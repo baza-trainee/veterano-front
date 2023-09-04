@@ -156,9 +156,9 @@ export default {
 				],
 			},
 			spacing: {
-				"section-sm": "80px",
-				"section-md": "100px",
-				"section-lg": "120px",
+				"section-sm": "50px",
+				"section-md": "50px",
+				"section-lg": "50px",
 				"section-content-sm": "24px",
 				"section-content-md": "48px",
 				"section-content-lg": "48px",

@@ -26,7 +26,7 @@ const ProjectSection = () => {
 	return (
 		<Section
 			title={"Проєкти"}
-			className={"bg-grey30 md:pl-[38px] md:pr-[10px] lg:px-[80px]"}
+			className={"bg-grey30"}
 		>
 			{isDesktop && items?.length && (
 				<Carousel
