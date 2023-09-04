@@ -11,7 +11,7 @@ const Hero = () => {
 					" " +
 					"lg:pt-[92px] lg:pb-[80px] lg:bg-[url('/hero/hero-lg.jpeg')] lg:bg-[bottom_10px_right_80px] " +
 					" " +
-					"md:px-[24px] md:py-[60px]  md:bg-[url('/hero/hero-md.jpg')] md:bg-[top_20px_right_28px]"
+					"md:px-[24px] md:py-[60px]  md:bg-[url('/hero/hero-md.jpeg')] md:bg-[top_20px_right_28px]"
 				}
 			>
 				<div
