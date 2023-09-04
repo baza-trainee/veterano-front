@@ -15,6 +15,8 @@ import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 import { Contacts } from "./pages/adminPage/Contacts.tsx";
 import { DocumentPage } from "./pages/adminPage/Document.tsx";
 import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
+import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";
+import { TermsSite } from "./ruleFiles/TermsSite.tsx";
 
 function App() {
 	return (
@@ -42,6 +44,8 @@ function App() {
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
 					</Route>
+					<Route path="/privacy" element={<PrivacyPolic />} />
+					<Route path="/terms" element={<TermsSite />} />
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />

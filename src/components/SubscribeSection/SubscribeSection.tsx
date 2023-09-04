@@ -41,7 +41,7 @@ const SubscribeSection = () => {
 	return (
 		<section>
 				<Container
-					className={'bg-[url("/images/subscribe-320w.svg")] md:bg-[url("/images/subscribe-768w.svg")] lg:bg-[url("/images/subscribe-1440w.svg")]'}>
+					className={'bg-[url("/images/subscribe-320w.jpeg")] md:bg-[url("/images/subscribe-768w.jpeg")] lg:bg-[url("/images/subscribe-1440w.jpeg")]'}>
 					<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
 						<div className={"text-center md:text-left md:ml-[53%]"}>
 							<Typography

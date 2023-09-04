@@ -106,7 +106,7 @@ const SearchResults = () => {
 				</Container>
 			</section>
 			<section
-				className={"py-section-sm md:py-[80px] lg:py-[100px] bg-[#ECECEC]"}
+				className={"py-section-sm bg-[#ECECEC]"}
 			>
 				<Container>
 					{cardsToRender?.length ? (
