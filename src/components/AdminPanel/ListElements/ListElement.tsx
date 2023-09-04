@@ -2,21 +2,24 @@ import IconPen from "../IconButtons/IconPen.tsx";
 import { FC } from "react";
 
 type ListElementProps = {
+	id: number,
 	name: string,
 	status: string,
 	date: string,
-	editHandler?: () => void,
+	editHandler?: (cardId: number) => void;
 	removeHandler?: () => void,
+	checked: boolean,
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 }
-const ListElement: FC<ListElementProps> = ({ name, status, date, editHandler, removeHandler }) => {
+const ListElement: FC<ListElementProps> = ({ id, onChange, name, status, date, editHandler, removeHandler, checked }) => {
 
 	return (
-		<div className={"bg-white flex mx-10 mt-6 items-center justify-between "}>
-			<div className={"flex gap-[18px] items-center"}>
+		<div id={id.toString()} className={"bg-white flex mt-4 items-center justify-between py-2 px-1 "}>
+			<div className={"flex gap-[18px] w-[439px]  items-center"}>
 				<div className={"w-[48px] h-[48px] p-3 check-wrapper "}>
 					<label className="custom-checkbox">
-						<input type="checkbox" className={"hidden"} />
+						<input type="checkbox" className={"hidden"} checked={checked} onChange={onChange}/>
 						<span className="checkmark"></span>
 					</label>
 				</div>
@@ -26,11 +29,12 @@ const ListElement: FC<ListElementProps> = ({ name, status, date, editHandler, re
 			<div>{date}</div>
 			<div className={"flex"}>
 				<div
-					onClick={editHandler}>
+					className={'cursor-pointer'}
+					onClick={() => editHandler && editHandler(id)}>
 					<IconPen />
 				</div>
 				<div
-					className={"w-[36px] h-[36px] flex items-center justify-center "}
+					className={"w-[36px] h-[36px] flex items-center justify-center cursor-pointer "}
 					onClick={removeHandler}>
 					<img src="/images/admin/bin.svg" alt="bin" />
 				</div>

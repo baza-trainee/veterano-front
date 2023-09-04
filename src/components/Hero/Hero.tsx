@@ -9,9 +9,9 @@ const Hero = () => {
 				className={
 					"bg-no-repeat pt-[24px] pb-[80px] px-[16px]" +
 					" " +
-					"lg:pt-[92px] lg:pb-[80px] lg:bg-[url('/hero/hero-lg.png')] lg:bg-[bottom_right_-150px] lg:bg-contain " +
+					"lg:pt-[92px] lg:pb-[80px] lg:bg-[url('/hero/hero-lg.jpeg')] lg:bg-[bottom_10px_right_80px] " +
 					" " +
-					"md:px-[24px] md:py-[60px]  md:bg-[url('/hero/hero-md.png')] md:bg-[top_20px_right_0px] "
+					"md:px-[24px] md:py-[60px]  md:bg-[url('/hero/hero-md.jpeg')] md:bg-[top_20px_right_28px]"
 				}
 			>
 				<div

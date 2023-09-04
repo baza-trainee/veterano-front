@@ -63,3 +63,19 @@ export const getCardImage = async (id: string) => {
 		return null;
 	}
 };
+
+export const searchPartners = async () => {
+	try {
+		const { data } = await $host.get("search/all-partners", {
+			params:{
+				page:1,
+				size: 20
+			}
+		})
+		return data;
+	} catch (e) {
+		console.error("Error:", e);
+		return null;
+	}
+
+}

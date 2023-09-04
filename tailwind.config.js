@@ -11,7 +11,8 @@ export default {
 
 		extend: {
 			gridTemplateColumns: {
-				footer: "200px 300px 420px",
+				lg: "200px 300px 420px",
+				md: "276px 236px",
 			},
 			gridTemplateRows: {
 				footer: "130px auto",
@@ -184,5 +185,6 @@ export default {
 			},
 		},
 	},
-	plugins: [],
+	// eslint-disable-next-line no-undef
+	plugins: [require("@tailwindcss/line-clamp")],
 };

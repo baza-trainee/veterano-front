@@ -1,7 +1,7 @@
 import Container from "../Container/Container.tsx";
 import Link from "../Links/Link.tsx";
 import NavigationLink from "../Links/NavigationLink.tsx";
-import { BsFacebook, BsTelegram } from "react-icons/bs";
+import { BsTelegram, BsLinkedin } from "react-icons/bs";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
@@ -23,17 +23,17 @@ const Footer = () => {
 						<div className="footer-info">
 							<img
 								srcSet="/images/logo-white-sm.svg 135w, /images/logo-white-md.svg 164w, /images/logo-white-lg.svg 172w"
-								sizes="(max-width: 480px) 135px, (max-width: 769px) 164px, (min-width: 769px) 172px"
+								sizes="(max-width: 480px) 135px, (max-width: 768px) 164px, (min-width: 769px) 172px"
 								src="/images/logo-white-lg.svg"
 								alt="Хист Лого"
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Link to="/" variant="secondary" size="wideMob">
+								<Link to="/" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
 									Підтримати
 								</Link>
 							) : (
-								<Link to="/" variant="primaryDarkBg">
+								<Link to="/" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
 									Підтримати
 								</Link>
 							)}
@@ -41,7 +41,10 @@ const Footer = () => {
 						<div className={"footer-nav "}>
 							<ul className="text-white">
 								<li>
-									<NavigationLink to={"/about"} variant={"underlineNoneFooter"}>
+									<NavigationLink
+										to={"/aboutus"}
+										variant={"underlineNoneFooter"}
+									>
 										Про нас
 									</NavigationLink>
 								</li>
@@ -55,21 +58,21 @@ const Footer = () => {
 								</li>
 								<li>
 									<NavigationLink
-										to={"/contacts"}
+										to={"/contact"}
 										variant={"underlineNoneFooter"}
 									>
 										Контакти
 									</NavigationLink>
 								</li>
 							</ul>
-							<ul className={"md:justify-self-end lg:justify-self-start "}>
+							<ul className={"lg:justify-self-start font-light "}>
 								<li className={"text-white flex items-center leading-6"}>
 									<FaPhoneAlt size={24} color={"white"} />
-									<p className={"pl-[10px]"}>+38 044 XXX XX XX</p>
+									<p className={"pl-[10px]"}>+38 067 568 17 88</p>
 								</li>
 								<li className={"text-white flex items-center"}>
 									<FaPhoneAlt size={24} color={"white"} />
-									<p className={"pl-[10px]"}>+38 044 XXX XX XX</p>
+									<p className={"pl-[10px]"}>+38 063 628 66 30</p>
 								</li>
 								<li className={"text-white flex items-center"}>
 									<MdEmail size={24} color={"white"} />
@@ -78,16 +81,13 @@ const Footer = () => {
 							</ul>
 							<ul className={"md:self-center lg:self-start lg:mt-0 text-white"}>
 								<li>
-									<Link
-										to={"/public/files/pol_conf.pdf"}
-										variant={"underlineFooter"}
-									>
+									<Link to={"/files/pol_conf.pdf"} variant={"underlineFooter"}>
 										Політика конфіденційності
 									</Link>
 								</li>
 								<li>
 									<Link
-										to={"/public/files/site_rules.pdf"}
+										to={"/files/site_rules.pdf"}
 										variant={"underlineFooter"}
 									>
 										Правила користування сайтом
@@ -100,11 +100,19 @@ const Footer = () => {
 								}
 							>
 								<li className={"social-icons "}>
-									<Link to={"/#"} variant={"underlineFooter"}>
-										<BsFacebook color={"#BCBCBC"} size={42} />
+									<Link
+										to={
+											"https://www.linkedin.com/company/baza-trainee-ukraine/"
+										}
+										variant={"underlineFooter"}
+									>
+										<BsLinkedin color={"#BCBCBC"} size={42} />
 									</Link>
 
-									<Link to={"/#"} variant={"underlineFooter"}>
+									<Link
+										to={"https://t.me/+CBXkAJlsCy83ZDYy"}
+										variant={"underlineFooter"}
+									>
 										<BsTelegram color={"#BCBCBC"} size={42} />
 									</Link>
 								</li>
@@ -115,7 +123,7 @@ const Footer = () => {
 
 				<div
 					className={
-						"text-white text-[12px] ml-4 md:ml-[27px] lg:ml-[80px] mt-4 md:mt-6 lg:mt-[22px] leading-4 w-[212px] md:w-[382px] mt-6 sm:mt-[22px]"
+						"w-full text-white text-[12px] mt-4 md:mt-6 lg:mt-[22px] leading-4 mt-6 sm:mt-[22px]"
 					}
 				>
 					Розробка Baza Trainee Ukraine 2023 @ Всі права захищені

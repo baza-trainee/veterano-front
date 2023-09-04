@@ -13,10 +13,10 @@ const ContactUs = () => {
 			<div
 				style={{
 					backgroundImage: isMobile
-						? "url(/images/contact-320w.svg)"
+						? "url(/images/contact-320w.jpeg)"
 						: isTablet
-						? "url(/images/contact-720w.svg)"
-						: "url(/images/contact-1440w.svg)",
+						? "url(/images/contact-768w.jpeg)"
+						: "url(/images/contact-1440w.jpeg)",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}
@@ -37,7 +37,7 @@ const ContactUs = () => {
 			</div>
 
 			<Section>
-				<div className={"contact-info"}>
+				<div className={"contact-info md:gap-[26px] lg:gap-[30px]"}>
 					<div className={"md:w-[22%] lg:w-[295px]"}>
 						<Typography
 							variant={isDesktop ? "h4" : "h5"}
@@ -46,14 +46,14 @@ const ContactUs = () => {
 							Ми завжди на зв’язку
 						</Typography>
 					</div>
-					<ul className={"text-black text-[18px] leading-7 font-normal"}>
+					<ul className={"text-black text-[18px] leading-7 font-light"}>
 						<li>
 							<MdPhone size={24} />
-							<p>+38 044 XXX XX XX</p>
+							<p>+38 067 568 17 88</p>
 						</li>
 						<li>
 							<MdPhone size={24} />
-							<p>+38 044 XXX XX XX</p>
+							<p>+38 063 628 66 30</p>
 						</li>
 						<li>
 							<MdEmail size={24} />
