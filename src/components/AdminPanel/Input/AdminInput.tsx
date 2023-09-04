@@ -6,6 +6,7 @@ interface AdminInputProps {
 	name: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error?: string;
+	type?: string;
 }
 
 const AdminInput: FC<AdminInputProps> = ({
