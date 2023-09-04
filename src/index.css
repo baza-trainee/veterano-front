@@ -126,7 +126,7 @@ input {
 	}
 
 	.input-form {
-		@apply w-full md:w-[340px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+		@apply w-full md:w-[340px] lg:w-[413px] leading-[24px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
 	}
 
 	.input-form:invalid:not(:placeholder-shown) {
@@ -142,7 +142,7 @@ input {
 	}
 
 	.input-form:focus {
-		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
+		@apply outline-none bg-inherit leading-[24px] p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
 
 	.footer {
