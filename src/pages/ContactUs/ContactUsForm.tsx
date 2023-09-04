@@ -98,7 +98,7 @@ const ContactUsForm = () => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							className={
-								"md:mb-[28px] md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink  lg:basis-[64px]"
+								"md:mb-[28px] md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink lg:basis-[64px]"
 							}
 						/>
 						<Input
@@ -131,7 +131,7 @@ const ContactUsForm = () => {
 						/>
 
 						<Button
-							className={"md:w-[167px]"}
+							className={"md:w-[167px] text-[18px] leading-[28px]"}
 							variant={"primary"}
 							disabled={!isValid}
 							size={"large"}
