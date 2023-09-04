@@ -1,10 +1,12 @@
 import { FC, ReactNode, useEffect } from "react";
 
+
 interface ModalWindowProps {
 	className: string;
 	children?: ReactNode;
 	active: boolean;
 	setActive: React.Dispatch<React.SetStateAction<boolean>>;
+	style?: React.CSSProperties
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({
@@ -12,26 +14,23 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	setActive,
 	className,
 	children,
+	...props
 }) => {
 	useEffect(() => {
 		active
 			? (document.body.style.overflow = "hidden")
 			: (document.body.style.overflowY = "auto");
 	}, [active]);
+
 	return (
 		<div
 			className={active ? "modal active relative" : "modal"}
 			onClick={() => setActive(false)}
 		>
 			<div
-				style={{
-					position: "absolute",
-					top: "50%",
-					left: "50%",
-					transform: "translate(-50%, -50%)",
-				}}
-				className={`${className} modal-content relative`}
+				className={`${className} modal-content relative absolute top-0 md:top-[92px]`}
 				onClick={(e) => e.stopPropagation()}
+				{...props}
 			>
 				<div
 					onClick={() => setActive(false)}
