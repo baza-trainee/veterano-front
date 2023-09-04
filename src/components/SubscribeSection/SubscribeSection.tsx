@@ -14,14 +14,20 @@ import Container from "../Container/Container.tsx";
 const SubscribeSection = () => {
 	const { isDesktop, isMobile } = useMedia();
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [fieldsFilled, setFieldsFilled] = useState(false);
 
 	const validationSchema = Yup.object({
 		name: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(30, "Ім’я повинно бути не більше 30 знаків")
+			.matches(/^[a-zA-Z\s]*$/, 'Тільки літери та пробіли дозволені')
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
+			.matches(
+				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				"Введіть дійсний email"
+			)
 			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
@@ -31,9 +37,12 @@ const SubscribeSection = () => {
 			.required("Це поле є обов’язковим"),
 	});
 
+
 	return (
 		<section>
-			<Container>
+			<Container
+				className={'bg-[url("/images/subscribe-320w.jpeg")] md:bg-[url("/images/subscribe-768w.jpeg")] lg:bg-[url("/images/subscribe-1440w.jpeg")]'}>
+
 				<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
 					<div className={"text-center md:ml-[38%] lg:ml-[23%]"}>
 						<Typography
@@ -61,9 +70,17 @@ const SubscribeSection = () => {
 								setSubmitting(false);
 							}
 							resetForm();
+							setFieldsFilled(false);
 						}}
 						validateOnChange={true}
 						validateOnBlur={true}
+						validate={values => {
+							if (values.name && values.email && values.check) {
+								setFieldsFilled(true);
+							} else {
+								setFieldsFilled(false);
+							}
+						}}
 					>
 						{({
 							values,
@@ -137,7 +154,7 @@ const SubscribeSection = () => {
 									<Button
 										className={"md:w-[167px] mt-[38px] lg:mt-[42px]"}
 										variant={"primary"}
-										disabled={!isValid}
+										disabled={!isValid || !fieldsFilled}
 										size={"large"}
 										type={"submit"}
 									>

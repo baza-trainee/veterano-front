@@ -1,5 +1,6 @@
 import React, { FC, ReactNode, useEffect } from "react";
 
+
 interface ModalWindowProps {
 	className: string;
 	children?: ReactNode;
@@ -21,6 +22,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 			? (document.body.style.overflow = "hidden")
 			: (document.body.style.overflowY = "auto");
 	}, [active]);
+
 	return (
 		<div
 			className={active ? "modal active relative" : "modal"}
