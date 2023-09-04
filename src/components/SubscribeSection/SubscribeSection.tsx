@@ -26,7 +26,7 @@ const SubscribeSection = () => {
 		email: Yup.string()
 			.email("Введіть дійсний email")
 			.matches(
-				/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 				"Введіть дійсний email"
 			)
 			.test("domain", "Корабель там 🖕", (value) => {
@@ -41,6 +41,7 @@ const SubscribeSection = () => {
 
 	return (
 		<section>
+
 
 				<Container
 					className={'bg-[url("/images/subscribe-320w.svg")] md:bg-[url("/images/subscribe-768w.svg")] lg:bg-[url("/images/subscribe-1440w.svg")]'}>
@@ -162,30 +163,29 @@ const SubscribeSection = () => {
 								</Form>
 							)}
 						</Formik>
-						<ModalWindow
-							className={
-								"p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[500px] md:h-[400px]"
-							}
-							active={isModalOpen}
-							setActive={setIsModalOpen}
-						>
-							<div className={"text-black mt-[30px]"}>
-								<Typography
-									variant={"h4"}
-									component={"p"}
-									className={"text-center font-bold"}
-								>
-									Ви успішно підписались на новини{" "}
-								</Typography>
-								<div className={"flex justify-center mt-10"}>
-									<img src="/images/success-sent.svg" alt="success" />
-								</div>
-								<div className={"flex justify-center w-full mt-12"}>
-									<NavigationLink to={"/"} variant={"primary"} size={"large"}>
-										До головної
-									</NavigationLink>
-								</div>
+							<ModalWindow
+						className={
+							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded"
+						}
+						active={isModalOpen}
+						setActive={setIsModalOpen}
+					>
+						<div className={"text-black mt-[30px]"}>
+							<Typography
+								variant={"h4"}
+								component={"p"}
+								className={"text-center font-bold"}
+							>
+								Ви успішно підписались на новини{" "}
+							</Typography>
+							<div className={"flex justify-center mt-10"}>
+								<img src="/images/success-sent.svg" alt="success" />
 							</div>
+							<div className={"flex justify-center w-full mt-12"}>
+								<NavigationLink to={"/"} variant={"primary"} size={"large"}>
+									До головної
+								</NavigationLink>
+								</div>
 						</ModalWindow>
 					</div>
 				</Container>

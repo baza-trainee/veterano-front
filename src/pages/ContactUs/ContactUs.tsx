@@ -13,10 +13,10 @@ const ContactUs = () => {
 			<div
 				style={{
 					backgroundImage: isMobile
-						? "url(/images/contact-320w.svg)"
+						? "url(/images/contact-320w.jpeg)"
 						: isTablet
-						? "url(/images/contact-720w.svg)"
-						: "url(/images/contact-1440w.svg)",
+						? "url(/images/contact-768w.jpeg)"
+						: "url(/images/contact-1440w.jpeg)",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}
@@ -46,7 +46,7 @@ const ContactUs = () => {
 							Ми завжди на зв’язку
 						</Typography>
 					</div>
-					<ul className={"text-black text-[18px] leading-7 font-normal"}>
+					<ul className={"text-black text-[18px] leading-7 font-light"}>
 						<li>
 							<MdPhone size={24} />
 							<p>+38 067 568 17 88</p>
