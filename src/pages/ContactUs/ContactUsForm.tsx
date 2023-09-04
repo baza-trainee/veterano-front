@@ -84,7 +84,7 @@ const ContactUsForm = () => {
 				{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
 					<Form
 						className={
-							"md:flex md:w-[55%] md:flex-col lg:w-[100%]  lg:flex-wrap lg:max-w-[100%] "
+							" w-[100%] md:flex md:] md:flex-col lg:w-[100%]  lg:flex-wrap lg:max-w-[100%] "
 						}
 					>
 						<Input
@@ -98,7 +98,7 @@ const ContactUsForm = () => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							className={
-								"md:mb-[28px] md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink  lg:basis-[64px]"
+								"md:mb-[28px] md:w-full md:mr-[20px] lg:flex-grow-0 lg:flex-shrink lg:basis-[64px]"
 							}
 						/>
 						<Input
@@ -131,7 +131,7 @@ const ContactUsForm = () => {
 						/>
 
 						<Button
-							className={"md:w-[167px]"}
+							className={"md:w-[167px] text-[18px] leading-[28px]"}
 							variant={"primary"}
 							disabled={!isValid}
 							size={"large"}
@@ -144,16 +144,21 @@ const ContactUsForm = () => {
 			</Formik>
 			<ModalWindow
 				className={
-					"overflow-y-scroll px-[16px] h-[568px] w-full bg-yellow50 w-full md:overflow-y-hidden md:w-[523px] md:px-[98px] md:h-[284px] lg:w-[628px] lg:h-[286px] lg:px-[104px]"
+					"h-[568px] w-full rounded bg-yellow50 flex items-center md:justify-center w-full md:w-[523px] md:h-[284px] lg:w-[628px] lg:h-[286px]"
 				}
 				active={isModalOpen}
+				style={{ top: isMobile ? "0px" : "30%" }}
 				setActive={setIsModalOpen}
 			>
-				<div className={"text-black  flex h-full justify-center items-center"}>
+				<div
+					className={
+						"text-black w-[272px] h-[160px] mt-[232px] md:mt-0 md:w-full flex justify-center items-center "
+					}
+				>
 					<Typography
-						variant={"h4"}
+						variant={isDesktop ? "h4" : "h5"}
 						component={"p"}
-						className={"text-center font-bold"}
+						className={"text-center"}
 					>
 						Ваше повідомлення надіслане
 					</Typography>

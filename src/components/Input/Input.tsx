@@ -36,6 +36,7 @@ const Input: FC<InputProps> = ({
     peer-focus:text-grey50
     peer-disabled:text-grey50 
 	placeholder-error100
+	font-light
     `;
 		if (value.length > 0) {
 			style = `
@@ -44,6 +45,7 @@ const Input: FC<InputProps> = ({
       pl-[10px] leading-7 
       text-[14px]  
       translate-y-[1.9rem]
+	  font-light
       text-grey50`;
 		}
 		if (error) {
