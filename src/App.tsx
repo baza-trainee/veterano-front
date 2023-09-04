@@ -14,11 +14,13 @@ import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 import { Contacts } from "./pages/adminPage/Contacts.tsx";
 import { DocumentPage } from "./pages/adminPage/Document.tsx";
+import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
 
 function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />
@@ -30,7 +32,10 @@ function App() {
 					<Route path="/admin" element={<AdminLayout />}>
 						<Route path="projects" element={<ProjectsPage />} />
 						<Route path="projects/new-project" element={<AddProjectPage />} />
-						<Route path="projects/edit-project/:id" element={<EditProjectPage />} />
+						<Route
+							path="projects/edit-project/:id"
+							element={<EditProjectPage />}
+						/>
 						<Route path="contacts" element={<Contacts />} />
 						<Route path="documents" element={<DocumentPage />} />
 					</Route>
