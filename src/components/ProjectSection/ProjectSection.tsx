@@ -10,7 +10,9 @@ import { convertBackDataToProjectCardProps } from "../../../utils/backDataToProj
 const ProjectSection = () => {
 	const { isDesktop, isTablet, isMobile } = useMedia();
 	const [items, setItems] =
-		useState<{ imageSrc: string; title: string; text: string }[]>();
+		useState<
+			{ imageSrc: string; title: string; text: string; url: string }[]
+		>();
 
 	useEffect(() => {
 		const params = {
@@ -24,10 +26,7 @@ const ProjectSection = () => {
 	}, []);
 
 	return (
-		<Section
-			title={"Проєкти"}
-			className={"bg-grey30 md:pl-[38px] md:pr-[10px] lg:px-[80px]"}
-		>
+		<Section title={"Проєкти"} className={"bg-grey30"}>
 			{isDesktop && items?.length && (
 				<Carousel
 					items={items || []}
@@ -63,6 +62,7 @@ const ProjectSection = () => {
 							<ProjectCard
 								imageSrc={item.imageSrc}
 								title={item.title}
+								url={item.url}
 								text={item.text}
 								variant={"carousel"}
 							/>
