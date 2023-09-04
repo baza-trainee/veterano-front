@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Container from "../Container/Container.tsx";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "../Links/Link";
 import Sidebar from "./Sidebar";
 import Backdrop from "./Backdrop";
