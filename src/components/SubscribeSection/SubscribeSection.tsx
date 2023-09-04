@@ -40,8 +40,6 @@ const SubscribeSection = () => {
 
 	return (
 		<section>
-
-
 				<Container
 					className={'bg-[url("/images/subscribe-320w.svg")] md:bg-[url("/images/subscribe-768w.svg")] lg:bg-[url("/images/subscribe-1440w.svg")]'}>
 					<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
@@ -164,7 +162,7 @@ const SubscribeSection = () => {
 						</Formik>
 							<ModalWindow
 						className={
-							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded "
+							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded"
 						}
 						active={isModalOpen}
 						setActive={setIsModalOpen}
@@ -177,17 +175,15 @@ const SubscribeSection = () => {
 							>
 								Ви успішно підписались на новини{" "}
 							</Typography>
-							<div className={"flex justify-center mt-10 "}>
-								<div >
-									<img className={'md:w-[114px] md:h-[114px]'} src="/images/success-sent.svg" alt="success" />
-								</div>
+							<div className={"flex justify-center mt-10"}>
+								<img className={'md:w-[114px] md:h-[114px]'} src="/images/success-sent.svg" alt="success" />
 							</div>
-							<div className={"flex justify-center w-full  mt-12"}>
+							<div className={"flex justify-center w-full mt-12"}>
 								<div className={'w-full md:w-[185px]'}>
 									<Button
 										variant={"primary"}
 										size={"large"}
-										className={'text-[18px] font-light leading-[28px]'}
+										className={'text-[18px] font-light leading-[28px] h-[48px]'}
 										onClick={(e) => {
 											e.preventDefault();
 											setIsModalOpen(false);

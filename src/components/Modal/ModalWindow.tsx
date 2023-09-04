@@ -14,7 +14,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	setActive,
 	className,
 	children,
-	...props
+  ...props
 }) => {
 
 	useEffect(() => {
