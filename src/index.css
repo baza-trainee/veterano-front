@@ -323,7 +323,7 @@ input {
 	}
 
 	.contact-feedback {
-		@apply mr-4 md:mr-0 md:flex md:w-[702px] lg:w-full;
+		@apply md:flex md:w-[702px] lg:w-full;
 	}
 
 	.scroll-to-top {
