@@ -22,17 +22,17 @@ const Footer = () => {
 						<div className="footer-info">
 							<img
 								srcSet="/images/logo-white-sm.svg 135w, /images/logo-white-md.svg 164w, /images/logo-white-lg.svg 172w"
-								sizes="(max-width: 480px) 135px, (max-width: 769px) 164px, (min-width: 769px) 172px"
+								sizes="(max-width: 480px) 135px, (max-width: 768px) 164px, (min-width: 769px) 172px"
 								src="/images/logo-white-lg.svg"
 								alt="Хист Лого"
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Link to="/" variant="secondary" size="wideMob">
+								<Link to="/" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
 									Підтримати
 								</Link>
 							) : (
-								<Link to="/" variant="primaryDarkBg">
+								<Link to="/" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
 									Підтримати
 								</Link>
 							)}
@@ -64,7 +64,7 @@ const Footer = () => {
 									</NavigationLink>
 								</li>
 							</ul>
-							<ul className={"lg:justify-self-start "}>
+							<ul className={"lg:justify-self-start font-light "}>
 								<li className={"text-white flex items-center leading-6"}>
 									<FaPhoneAlt size={24} color={"white"} />
 									<p className={"pl-[10px]"}>+38 067 568 17 88</p>
