@@ -30,7 +30,10 @@ const ContactUsForm = () => {
 			.test("domain", "Корабель там 🖕", (value) => {
 				return !value?.endsWith(".ru") && !value?.endsWith(".by");
 			})
-			.matches(/^[a-zA-Z0-9 @ . _ -]*$/, "Не дозволено спеціальні символи")
+			.matches(
+				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+				"Введіть дійсний email"
+			)
 			.required("Введіть дійсний email"),
 		message: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
@@ -84,7 +87,7 @@ const ContactUsForm = () => {
 				{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
 					<Form
 						className={
-							"md:flex md:w-[55%] md:flex-col lg:w-[100%]  lg:flex-wrap lg:max-w-[100%] "
+							"w-[100%] md:flex md:flex-col lg:w-[100%]  lg:flex-wrap lg:max-w-[100%] "
 						}
 					>
 						<Input
@@ -126,12 +129,12 @@ const ContactUsForm = () => {
 								errors.message && touched.message ? errors.message : undefined
 							}
 							className={
-								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px]  lg:mt-[54px] lg:flex-grow lg:flex-shrink-0 "
+								"md:w-full relative mt-[38px] mb-[54px] md:mb-[46px]  lg:mt-[54px] lg:flex-grow lg:flex-shrink-0 lg:w-[738px]"
 							}
 						/>
 
 						<Button
-							className={"md:w-[167px] text-[18px] leading-[28px]"}
+							className={"h-[48px] md:w-[167px] text-[18px] leading-[28px]"}
 							variant={"primary"}
 							disabled={!isValid}
 							size={"large"}
@@ -147,10 +150,14 @@ const ContactUsForm = () => {
 					"h-[568px] w-full rounded bg-yellow50 flex items-center md:justify-center w-full md:w-[523px] md:h-[284px] lg:w-[628px] lg:h-[286px]"
 				}
 				active={isModalOpen}
-				style={{ top: isMobile ? '0px' : '30%' }}
+				style={{ top: isMobile ? "0px" : "30%" }}
 				setActive={setIsModalOpen}
 			>
-				<div className={"text-black w-[272px] h-[160px] mt-[232px] md:mt-0 md:w-full flex justify-center items-center "}>
+				<div
+					className={
+						"text-black w-[272px] h-[160px] mt-[232px] md:mt-0 md:w-full flex justify-center items-center "
+					}
+				>
 					<Typography
 						variant={isDesktop ? "h4" : "h5"}
 						component={"p"}

@@ -10,7 +10,6 @@ const Footer = () => {
 	const isMobile = useMediaQuery({
 		query: "(max-width: 480px)",
 	});
-
 	return (
 		<footer
 			className={
@@ -81,15 +80,12 @@ const Footer = () => {
 							</ul>
 							<ul className={"md:self-center lg:self-start lg:mt-0 text-white"}>
 								<li>
-									<Link to={"/files/pol_conf.pdf"} variant={"underlineFooter"}>
+									<Link to={"/privacy"} variant={"underlineFooter"}>
 										Політика конфіденційності
 									</Link>
 								</li>
 								<li>
-									<Link
-										to={"/files/site_rules.pdf"}
-										variant={"underlineFooter"}
-									>
+									<Link to={"/terms"} variant={"underlineFooter"}>
 										Правила користування сайтом
 									</Link>
 								</li>
