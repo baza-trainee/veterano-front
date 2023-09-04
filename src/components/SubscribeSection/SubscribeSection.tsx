@@ -167,7 +167,7 @@ const SubscribeSection = () => {
 					</Formik>
 					<ModalWindow
 						className={
-							"p-5 bg-yellow50 w-full md:mt-[10%] md:w-[480px] h-[500px] md:h-[400px]"
+							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded"
 						}
 						active={isModalOpen}
 						setActive={setIsModalOpen}
