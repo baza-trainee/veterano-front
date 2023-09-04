@@ -11,6 +11,7 @@ import { createSubscription } from "../../api/SubscribeAPI.ts";
 import ModalWindow from "../Modal/ModalWindow.tsx";
 import Container from "../Container/Container.tsx";
 
+
 const SubscribeSection = () => {
 	const { isDesktop } = useMedia();
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +22,9 @@ const SubscribeSection = () => {
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(30, "Ім’я повинно бути не більше 30 знаків")
 			.matches(/^[a-zA-Z\u0400-\u04FF\s]*$/, 'Тільки літери та пробіли дозволені')
+			.test('no-only-spaces', "Ім'я повинно містити літери", value => {
+				return !/^\s+$/.test(value!);
+			})
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
