@@ -46,7 +46,7 @@ const ContactUs = () => {
 							Ми завжди на зв’язку
 						</Typography>
 					</div>
-					<ul className={"text-black text-[18px] leading-7 font-normal"}>
+					<ul className={"text-black text-[18px] leading-7 font-light"}>
 						<li>
 							<MdPhone size={24} />
 							<p>+38 067 568 17 88</p>
