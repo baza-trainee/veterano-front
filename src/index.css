@@ -137,13 +137,10 @@ input {
 		@apply bg-yellow50 lg:shadow-small;
 	}
 
-	<<<<<<< HEAD .input-form:disabled {
+	.input-form:disabled {
 		@apply border-b-[1px] border-grey50 bg-inherit;
 	}
-	======= .input-form:disabled {
-		@apply border-b-[1px] border-grey50 bg-inherit;
-	}
-	>>>>>>>main .input-form:focus {
+	.input-form:focus {
 		@apply outline-none bg-inherit leading-[24px] p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
 
@@ -215,13 +212,11 @@ input {
 		@apply outline-none;
 	}
 
-	<<<<<<< HEAD .search-input {
+	.search-input {
 		@apply min-w-[89%] text-[14px] font-light leading-[26px] md:w-full lg:text-[16px] lg:leading-[24px]  bg-inherit outline-none;
 	}
-	======= .search-input {
-		@apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
-	}
-	>>>>>>>main .search-input:invalid .search-wrapper {
+
+	.search-input:invalid .search-wrapper {
 		@apply bg-error50;
 	}
 
@@ -233,13 +228,10 @@ input {
 		@apply flex flex-col items-center mt-[24px] md:w-full lg:w-full;
 	}
 
-	<<<<<<< HEAD .filter-input {
+	.filter-input {
 		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded text-[14px] leading-[26px] font-light;
 	}
-	======= .filter-input {
-		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
-	}
-	>>>>>>>main .filter-label-chosen {
+	.filter-label-chosen {
 		@apply relative flex justify-between items-center p-[10px] bg-black rounded;
 	}
 
