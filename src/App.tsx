@@ -14,6 +14,7 @@ import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 import { Contacts } from "./pages/adminPage/Contacts.tsx";
 import { DocumentPage } from "./pages/adminPage/Document.tsx";
+import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
 import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";
 import { TermsSite } from "./ruleFiles/TermsSite.tsx";
 
@@ -21,6 +22,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />

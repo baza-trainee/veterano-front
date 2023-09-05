@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Container from "../Container/Container.tsx";
-import { GiHamburgerMenu } from "react-icons/gi";
 import Link from "../Links/Link";
 import Sidebar from "./Sidebar";
 import Backdrop from "./Backdrop";
@@ -25,16 +24,16 @@ const Header: React.FC = () => {
 		<header className="bg-yellow100 ">
 			<Container className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center relative">
 				<div className="flex items-center">
-					<div className="flex gap-2 items-center">
-						<div className=" sm:hidden md:block">
-							<GiHamburgerMenu
-								className="text-black w-8 h-8 hover:cursor-pointer"
-								onClick={toggleMenu}
-							/>
+					<div className="flex gap-[20px] items-center">
+						<div
+							className=" sm:hidden md:block hover:cursor-pointer"
+							onClick={toggleMenu}
+						>
+							<img src="./images/burger-menu.svg" />
 						</div>
 						<NavLink to="/">
 							<img
-								className="h-[30px] w-[135px] mr-2 hover:cursor-pointer"
+								className="h-[30px] w-[135px] md:w-[164px] md:h-[36px] lg:h-[37px] lg:w-[172px] mr-2 hover:cursor-pointer"
 								src="/images/logo-black.svg"
 								alt="Logo"
 							/>
@@ -43,25 +42,27 @@ const Header: React.FC = () => {
 				</div>
 				<div className="md:hidden">
 					{!isOpen && (
-						<GiHamburgerMenu
-							className="text-black w-8 h-8 hover:cursor-pointer block md:hidden"
+						<div
+							className="hover:cursor-pointer   block md:hidden"
 							onClick={toggleMenu}
-						/>
+						>
+							<img src="./images/burger-menu.svg" />
+						</div>
 					)}
 				</div>
-				{isOpen && (
-					<div className="absolute top-0 left-0 w-full md:w-[320px] z-20 duration-500 transition-all">
-						<Sidebar toggleMenu={toggleMenu} />
-					</div>
-				)}
 
-				<div className=" hidden md:flex">
+				<div className="hidden md:flex">
 					<Link to="my offer" variant="primary" size="large">
 						Підтримати
 					</Link>
 				</div>
 				{isOpen && <Backdrop isOpen={isOpen} onClose={toggleMenu} />}
 			</Container>
+			{isOpen && (
+				<div className="absolute top-0 left-0 w-full md:w-[320px] z-20 duration-500 transition-all">
+					<Sidebar toggleMenu={toggleMenu} />
+				</div>
+			)}
 		</header>
 	);
 };

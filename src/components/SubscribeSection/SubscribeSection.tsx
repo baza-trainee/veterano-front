@@ -24,6 +24,9 @@ const SubscribeSection = () => {
 				/^[a-zA-Z\u0400-\u04FF\s]*$/,
 				"Тільки літери та пробіли дозволені"
 			)
+			.test("no-only-spaces", "Ім'я повинно містити літери", (value) => {
+				return !/^\s+$/.test(value!);
+			})
 			.required("Заповніть пусте поле"),
 		email: Yup.string()
 			.email("Введіть дійсний email")
