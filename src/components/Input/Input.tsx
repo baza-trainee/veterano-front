@@ -24,7 +24,6 @@ const Input: FC<InputProps> = ({
 	...props
 }) => {
 
-	console.log(error);
 	const labelStyles = () => {
 		let style = `  
     pl-[10px] 
