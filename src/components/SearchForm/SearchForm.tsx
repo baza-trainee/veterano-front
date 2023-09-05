@@ -74,7 +74,7 @@ const HeroSearchBar = () => {
 			}}
 		>
 			{({ values, setFieldValue, submitForm, handleChange, handleSubmit }) => (
-				<Form>
+				<Form className={'md:w-[720px]'}>
 					<div
 						className={
 							"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"
