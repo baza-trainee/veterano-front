@@ -11,7 +11,6 @@ import { createSubscription } from "../../api/SubscribeAPI.ts";
 import ModalWindow from "../Modal/ModalWindow.tsx";
 import Container from "../Container/Container.tsx";
 
-
 const SubscribeSection = () => {
 	const { isDesktop } = useMedia();
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,8 +20,11 @@ const SubscribeSection = () => {
 		name: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(30, "Ім’я повинно бути не більше 30 знаків")
-			.matches(/^[a-zA-Z\u0400-\u04FF\s]*$/, 'Тільки літери та пробіли дозволені')
-			.test('no-only-spaces', "Ім'я повинно містити літери", value => {
+			.matches(
+				/^[a-zA-Z\u0400-\u04FF\s]*$/,
+				"Тільки літери та пробіли дозволені"
+			)
+			.test("no-only-spaces", "Ім'я повинно містити літери", (value) => {
 				return !/^\s+$/.test(value!);
 			})
 			.required("Заповніть пусте поле"),
@@ -41,130 +43,138 @@ const SubscribeSection = () => {
 			.required("Це поле є обов’язковим"),
 	});
 
-
 	return (
 		<section>
-				<Container
-					className={'bg-[url("/images/subscribe-320w.jpeg")] md:bg-[url("/images/subscribe-768w.jpeg")] lg:bg-[url("/images/subscribe-1440w.jpeg")]'}>
-					<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
-						<div className={"text-center md:text-left md:ml-[53%]"}>
-							<Typography
-								variant={isDesktop ? "h2" : "h3"}
-								component={isDesktop ? "h2" : "h3"}
-							>
-								Підписка на новини
-							</Typography>
-						</div>
-						<Formik
-							initialValues={{ name: "", email: "", check: false }}
-							validationSchema={validationSchema}
-							onSubmit={async (values, { setSubmitting, resetForm }) => {
-								try {
-									const response = await createSubscription({
-										name: values.name,
-										email: values.email,
-									});
-									if (response) {
-										setIsModalOpen(true);
-									}
-								} catch (e) {
-									console.log(e);
-								} finally {
-									setSubmitting(false);
-								}
-								resetForm();
-								setFieldsFilled(false);
-							}}
-							validateOnChange={true}
-							validateOnBlur={true}
-							validate={values => {
-								if (values.name && values.email && values.check) {
-									setFieldsFilled(true);
-								} else {
-									setFieldsFilled(false);
-								}
-							}}
+			<Container
+				className={
+					'bg-[url("/images/subscribe-320w.jpeg")] md:bg-[url("/images/subscribe-768w.jpeg")] lg:bg-[url("/images/subscribe-1440w.jpeg")]'
+				}
+			>
+				<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
+					<div className={"text-center md:text-left md:ml-[53%]"}>
+						<Typography
+							variant={isDesktop ? "h2" : "h3"}
+							component={isDesktop ? "h2" : "h3"}
 						>
-							{({
-									values,
-									handleBlur,
-									handleChange,
-									errors,
-									touched,
-									isValid,
-								}) => (
-								<Form className={"flex flex-col md:items-start md:ml-[53%] font-light "}>
-									<div>
-										<Input
-											id={"name"}
-											value={values.name}
-											error={
-												errors.name && touched.name ? errors.name : undefined
-											}
-											name={"name"}
-											minLength={2}
-											type={"text"}
-											label={"Ім'я"}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
+							Підписка на новини
+						</Typography>
+					</div>
+					<Formik
+						initialValues={{ name: "", email: "", check: false }}
+						validationSchema={validationSchema}
+						onSubmit={async (values, { setSubmitting, resetForm }) => {
+							try {
+								const response = await createSubscription({
+									name: values.name,
+									email: values.email,
+								});
+								if (response) {
+									setIsModalOpen(true);
+								}
+							} catch (e) {
+								console.log(e);
+							} finally {
+								setSubmitting(false);
+							}
+							resetForm();
+							setFieldsFilled(false);
+						}}
+						validateOnChange={true}
+						validateOnBlur={true}
+						validate={(values) => {
+							if (values.name && values.email && values.check) {
+								setFieldsFilled(true);
+							} else {
+								setFieldsFilled(false);
+							}
+						}}
+					>
+						{({
+							values,
+							handleBlur,
+							handleChange,
+							errors,
+							touched,
+							isValid,
+						}) => (
+							<Form
+								className={
+									"flex flex-col md:items-start md:ml-[53%] font-light "
+								}
+							>
+								<div>
+									<Input
+										id={"name"}
+										value={values.name}
+										error={
+											errors.name && touched.name ? errors.name : undefined
+										}
+										name={"name"}
+										minLength={2}
+										type={"text"}
+										label={"Ім'я"}
+										onChange={handleChange}
+										onBlur={handleBlur}
+									/>
 
-										<Input
-											id={"email"}
-											value={values.email}
-											error={
-												errors.email && touched.email ? errors.email : undefined
-											}
-											name={"email"}
-											type={"email"}
-											label={"Email"}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-									</div>
+									<Input
+										id={"email"}
+										value={values.email}
+										error={
+											errors.email && touched.email ? errors.email : undefined
+										}
+										name={"email"}
+										type={"email"}
+										label={"Email"}
+										onChange={handleChange}
+										onBlur={handleBlur}
+									/>
+								</div>
 
-									<div className={"mt-[56px] md:w-[350px] lg:w-full"}>
-										<Checkbox
-											name={"check"}
-											id={"subscribe"}
-											checked={values.check}
-											onCheck={handleChange}
+								<div className={"mt-[56px] md:w-[350px] lg:w-full"}>
+									<Checkbox
+										name={"check"}
+										id={"subscribe"}
+										checked={values.check}
+										onCheck={handleChange}
+									>
+										<p
+											className={
+												"text-[14px] leading-[26px] lg:leading-[28px] md:w-[230px] lg:w-full lg:text-[18px]"
+											}
 										>
-											<p
-												className={
-													"text-[14px] leading-[26px] lg:leading-[28px] md:w-[230px] lg:w-full lg:text-[18px]"
-												}
+											Я погоджуюся з{" "}
+											<Link
+												variant={"underlineFooter"}
+												to={"/terms"}
+												style={{ color: "black" }}
 											>
-												Я погоджуюся з{" "}
-												<Link
-													variant={"underlineFooter"}
-													to={"/public/files/site_rules.pdf"}
-													style={{ color: "black" }}
-												>
-													правилами
-												</Link>{" "}
-												сайту hyst.site
-											</p>
-										</Checkbox>
-										{errors.check && touched.check && (
-											<p className={"text-error100 mt-3 pl-[10px] text-[14px]"}>
-												{errors.check}
-											</p>
-										)}
-										<Button
-											className={"md:w-[167px] h-[48px] mt-[38px] lg:mt-[42px] text-[18px] leading-[28px]"}
-											variant={"primary"}
-											disabled={!isValid || !fieldsFilled}
-											size={"large"}
-											type={"submit"}
-										>
-											Надіслати
-										</Button>
-									</div>
-								</Form>
-							)}
-						</Formik>
-							<ModalWindow
+												правилами
+											</Link>{" "}
+											сайту hyst.site
+										</p>
+									</Checkbox>
+									{errors.check && touched.check && (
+										<p className={"text-error100 mt-3 pl-[10px] text-[14px]"}>
+											{errors.check}
+										</p>
+									)}
+									<Button
+										className={
+											"md:w-[167px] h-[48px] mt-[38px] lg:mt-[42px] text-[18px] leading-[28px]"
+										}
+										variant={"primary"}
+										disabled={!isValid || !fieldsFilled}
+										size={"large"}
+										type={"submit"}
+									>
+										Надіслати
+									</Button>
+								</div>
+							</Form>
+						)}
+					</Formik>
+					<ModalWindow
 						className={
 							"p-4 bg-yellow50 h-[478px] w-full md:w-[480px] md:h-[518px] md:rounded"
 						}
@@ -180,18 +190,23 @@ const SubscribeSection = () => {
 								Ви успішно підписались на новини{" "}
 							</Typography>
 							<div className={"flex justify-center mt-10"}>
-								<img className={'md:w-[114px] md:h-[114px]'} src="/images/success-sent.svg" alt="success" />
+								<img
+									className={"md:w-[114px] md:h-[114px]"}
+									src="/images/success-sent.svg"
+									alt="success"
+								/>
 							</div>
 							<div className={"flex justify-center w-full mt-12"}>
-								<div className={'w-full md:w-[185px]'}>
+								<div className={"w-full md:w-[185px]"}>
 									<Button
 										variant={"primary"}
 										size={"large"}
-										className={'text-[18px] font-light leading-[28px] h-[48px]'}
+										className={"text-[18px] font-light leading-[28px] h-[48px]"}
 										onClick={(e) => {
 											e.preventDefault();
 											setIsModalOpen(false);
-										}}>
+										}}
+									>
 										До головної
 									</Button>
 								</div>
