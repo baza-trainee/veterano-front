@@ -24,9 +24,9 @@ const ProjectCard: React.FC<CardProps> = ({
 
 	const cardStyle = {
 		carousel: {
-			wrapper: "",
-			image: "w-full h-auto",
-			info: "p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8 ",
+			wrapper: "h-[606px] md:h-[588px] lg:h-[692px]",
+			image: "w-full h-[240px] md:h-[246px] lg:h-[266px]",
+			info: "p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8 h-[366px] md:h-[342px] lg:h-[426px] ",
 		},
 		search: {
 			wrapper: "flex flex-col md:flex-row justify-between mb-[32px]",
@@ -38,25 +38,34 @@ const ProjectCard: React.FC<CardProps> = ({
 	return (
 		<div
 			className={
-				cardStyle[variant].wrapper + " " + "sm:w-full md:w-full lg:w-full"
+				cardStyle[variant].wrapper + " " + " sm:w-full md:w-full lg:w-full"
 			}
 		>
 			<img src={imageSrc} alt={title} className={cardStyle[variant].image} />
 			<div
-				className={className + " " + cardStyle[variant].info + " " + "bg-white"}
+				className={
+					className +
+					" " +
+					cardStyle[variant].info +
+					" flex flex-col justify-between " +
+					"bg-white"
+				}
 			>
-				<Typography variant={isTablet ? "h5" : "h4"} component={"h3"}>
-					{title}
-				</Typography>
-				<Typography
-					variant={"p"}
-					component={"p"}
-					className={
-						"h-[216px] line-clamp-[9] overflow-y-hidden text-ellipsis whitespace-normal mt-3 mb-6 md:line-clamp-[8] md:h-[192px] lg:h-[110px] lg:mb-[32px] lg:h-[252px] lg:line-clamp-[9]"
-					}
-				>
-					{text}
-				</Typography>
+				<div>
+					<Typography variant={isTablet ? "h5" : "h4"} component={"h3"}>
+						{title}
+					</Typography>
+					<Typography
+						variant={"p"}
+						component={"p"}
+						className={
+							"h-[216px] line-clamp-[9] overflow-y-hidden text-ellipsis whitespace-normal mt-3 mb-6 md:line-clamp-[8] md:h-[192px] lg:h-[110px] lg:mb-auto lg:h-[252px] lg:line-clamp-[9]"
+						}
+					>
+						{text}
+					</Typography>
+				</div>
+
 				<Link
 					to={url}
 					variant="primary"
