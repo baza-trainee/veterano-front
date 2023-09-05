@@ -3,7 +3,9 @@ on:
     branches:
       - main
 name: 🚀 Deploy website on push
-
+env:
+  VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+  
 jobs:
   web-deploy:
     name: 🎉 Deploy

@@ -29,6 +29,7 @@ const Link: FC<LinkPropsType> = ({
 				href={to}
 				className={`${className} ${variantClassName} ${linkSizeClass} `}
 				style={props.style}
+				target="_blank"
 				{...props}
 			>
 				{children}

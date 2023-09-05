@@ -16,11 +16,15 @@ import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 import { Contacts } from "./pages/adminPage/Contacts.tsx";
 import { DocumentPage } from "./pages/adminPage/Document.tsx";
+import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
+import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";
+import { TermsSite } from "./ruleFiles/TermsSite.tsx";
 
 function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<ScrollToTop />
 				<Routes>
 					<Route path="/" element={<Layout />}>
 						<Route index element={<HomePage />} />
@@ -32,16 +36,21 @@ function App() {
 					<Route path="/admin" element={<AdminLayout />}>
 						<Route path="projects" element={<ProjectsPage />} />
 						<Route path="projects/add" element={<AddProjectPage />} />
-						<Route path="projects/edit-project/:id" element={<EditProjectPage />} />
+						<Route
+							path="projects/edit-project/:id"
+							element={<EditProjectPage />}
+						/>
 						<Route path="contacts" element={<Contacts />} />
 						<Route path="documents" element={<DocumentPage />} />
-						<Route path="partners" element={<PartnersPage />}/>
+						<Route path="partners" element={<PartnersPage />} />
 						<Route path="partners/:id" element={<AddPartnerPage />} />
 						<Route path="partners/add" element={<AddPartnerPage />} />
 					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />
 					</Route>
+					<Route path="/privacy" element={<PrivacyPolic />} />
+					<Route path="/terms" element={<TermsSite />} />
 				</Routes>
 			</BrowserRouter>
 			<CookiesPanel />

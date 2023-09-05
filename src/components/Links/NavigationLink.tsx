@@ -14,6 +14,7 @@ const NavigationLink: FC<LinkPropsType> = ({
 	const NavLinkClass = size ? sizeClassNames[size] : "";
 	const variantStyles = variantClassNames[variant] || "";
 
+
 	let variantClassName = "";
 	if (typeof variantStyles === "string") {
 		variantClassName = variantStyles;

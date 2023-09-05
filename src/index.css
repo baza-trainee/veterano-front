@@ -69,10 +69,6 @@ input {
 		@apply rounded flex items-center justify-center;
 	}
 
-	.input-form {
-		@apply w-[288px] md:w-[320px] lg:w-[413px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
-	}
-
 	main .link-style {
 		@apply text-white font-light leading-[24px] cursor-pointer;
 	}
@@ -118,7 +114,7 @@ input {
 	}
 
 	.primary-dark-bg {
-		@apply flex items-center justify-center;
+		@apply flex items-center justify-center text-[18px] leading-[28px];
 	}
 
 	.primary-dark-bg:hover {
@@ -130,7 +126,7 @@ input {
 	}
 
 	.input-form {
-		@apply w-full md:w-full lg:w-full text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
+		@apply w-full md:w-[340px] lg:w-[413px] leading-[24px] text-base h-[48px] p-[10px] pb-[1px] pt-[20px] font-light border-b-[1px] border-black text-black;
 	}
 
 	.input-form:invalid:not(:placeholder-shown) {
@@ -146,11 +142,11 @@ input {
 	}
 
 	.input-form:focus {
-		@apply outline-none bg-inherit p-[10px] pt-[20px] pb-[1px] h-[64px];
+		@apply outline-none bg-inherit leading-[24px] p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
 
 	.footer {
-		@apply flex flex-col justify-between md:flex-row mx-4 md:ml-6 md:mr-8 lg:mx-[80px] pb-[96px] md:pb-[20px] lg:pb-0 relative;
+		@apply flex flex-col justify-between md:flex-row pb-[96px] md:pb-[20px] lg:pb-0 relative;
 	}
 
 	.wrapper {
@@ -162,7 +158,7 @@ input {
 	}
 
 	.footer-info {
-		@apply mt-[67px] mb-[57px] md:mt-12 md:w-[163px] lg:mt-[80px];
+		@apply mt-[67px] mb-[57px] md:mt-12 md:w-[163px] lg:w-[172px] lg:mt-[80px];
 	}
 
 	.footer-nav {
@@ -213,9 +209,9 @@ input {
 		@apply bg-black text-white outline-none;
 	}
 
-  .search-wrapper:focus-within input:focus {
-    @apply outline-none;
-  }
+	.search-wrapper:focus-within input:focus {
+		@apply outline-none;
+	}
 
 	.search-input {
 		@apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
@@ -315,7 +311,7 @@ input {
 	}
 
 	.contact-info {
-		@apply flex flex-col gap-7 w-full md:flex-row md:gap-2 lg:gap-2 mb-11 md:mb-1;
+		@apply flex flex-col gap-7 w-full md:flex-row md:gap-2 lg:gap-[30px] mb-11 md:mb-1;
 	}
 
 	.contact-info > ul > li {
@@ -327,7 +323,7 @@ input {
 	}
 
 	.contact-feedback {
-		@apply mr-4 md:mr-0 md:flex md:w-[702px] lg:w-full;
+		@apply md:flex md:w-[702px] lg:w-full;
 	}
 
 	.scroll-to-top {
@@ -354,60 +350,51 @@ input {
 	}
 
 	.subscribe-wrapper {
-		@apply bg-[url('/images/subscribe-320w.svg')] md:bg-[url('/images/subscribe-768w.svg')] lg:bg-[url('/images/subscribe-1440w.svg')] py-[80px] px-4 bg-cover flex flex-col md:pr-6;
+		@apply py-[80px] md:pt-[100px] lg:pt-[120px] flex flex-col;
 	}
 
-	.noScrollbar::-webkit-scrollbar {
-		display: none;
+	.switch-label {
+		@apply inline-block w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
 	}
 
-	.noScrollbar {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
+	.switch-label::after {
+		@apply absolute content-[''] z-10 h-[24px] w-[24px] rounded-[17px] bg-white top-[4px] left-[4px] transition-all duration-300;
 	}
 
-  .switch-label {
-    @apply flex flex-shrink-0 w-[52px] h-[32px] rounded-[19px] bg-[#BCBCBC] z-0 m-0 p-0 border-none cursor-pointer relative transition-all duration-300;
-  }
+	.switch-on {
+		@apply bg-[black];
+	}
 
-  .switch-label::after {
-    @apply absolute content-[''] z-10 h-[24px] w-[24px] rounded-[17px] bg-white top-[4px] left-[4px] transition-all duration-300;
-  }
+	.switch-on::after {
+		@apply left-[23px] bg-yellow100;
+	}
 
-  .switch-on {
-    @apply bg-[black];
-  }
+	.switch-on::after:hover {
+		@apply shadow-switch shadow-yellow100/[16];
+	}
 
-  .switch-on::after {
-    @apply left-[23px] bg-yellow100;
-  }
+	.switch-focused:after {
+		@apply h-[34px] w-[34px];
+	}
 
-  .switch-on::after:hover {
-    @apply shadow-switch shadow-yellow100/[16];
-  }
+	.switch-label:active::after {
+		@apply scale-125 shadow-none;
+	}
 
-  .switch-focused:after {
-    @apply h-[34px] w-[34px];
-  }
-
-  .switch-label:active::after {
-    @apply scale-125 shadow-none;
-  }
-
-  .admin-filter-input {
-    @apply relative bg-white w-full flex justify-between items-center p-[10px] rounded;
-  }
+	.admin-filter-input {
+		@apply relative bg-white w-full flex justify-between items-center p-[10px] rounded;
+	}
 
 	.admin-filter-input:hover {
 		@apply shadow-middle;
 	}
 
-  .placeholder-grey {
-    @apply text-[14px] leading-[185%] text-grey50
-  }
-  .placeholder-error {
-    @apply text-[14px] leading-[185%] text-error30
-  }
+	.placeholder-grey {
+		@apply text-[14px] leading-[185%] text-grey50;
+	}
+	.placeholder-error {
+		@apply text-[14px] leading-[185%] text-error30;
+	}
 
 	.admin-filter-input:focus-within > input {
 		@apply outline-none;
@@ -434,32 +421,38 @@ input {
 		@apply bg-yellow30 text-black cursor-pointer;
 	}
 
-  .admin-filter-drop-down > :last-child {
-    @apply pb-0;
-  }
+	.admin-filter-drop-down > :last-child {
+		@apply pb-0;
+	}
 
-  .custom-checkbox .checkmark {
-    @apply relative inline-block w-[24px] h-[24px] border-2 border-[#151515]
-  }
+	.custom-checkbox .checkmark {
+		@apply relative inline-block w-[24px] h-[24px] border-2 border-[#151515];
+	}
 
-  .custom-checkbox input:checked ~ .checkmark {
-    @apply bg-yellow100;
-  }
+	.custom-checkbox input:checked ~ .checkmark {
+		@apply bg-yellow100;
+	}
 
-  .custom-checkbox input:checked ~ .checkmark:after {
-    content: "";
-    position: absolute;
-    width: 13px;
-    height: 7px;
-    border: 2px solid #151515;
-    border-top: none;
-    border-right: none;
-    top: 4px;
-    left: 4px;
-    transform: rotate(-45deg);
-  }
-  .check-wrapper:hover {
-    @apply bg-yellow30 rounded
-  }
+	.custom-checkbox input:checked ~ .checkmark:after {
+		content: "";
+		position: absolute;
+		width: 13px;
+		height: 7px;
+		border: 2px solid #151515;
+		border-top: none;
+		border-right: none;
+		top: 4px;
+		left: 4px;
+		transform: rotate(-45deg);
+	}
+	.check-wrapper:hover {
+		@apply bg-yellow30 rounded;
+	}
 
+	.search-filter::-webkit-scrollbar {
+		display: none;
+	}
+	.check-wrapper:hover {
+		@apply bg-yellow30 rounded;
+	}
 }
