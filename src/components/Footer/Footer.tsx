@@ -119,7 +119,7 @@ const Footer = () => {
 
 				<div
 					className={
-						"w-full w-[212px]  text-white text-[12px] leading-4 font-light mt-6 md:w-full md:mt-[23px] lg:mt-[22px]"
+						"w-[212px]  text-white text-[12px] leading-4 font-light mt-6 md:w-full md:mt-[23px] lg:mt-[22px]"
 					}
 				>
 					Розробка Baza Trainee Ukraine 2023 @ Всі права захищені
