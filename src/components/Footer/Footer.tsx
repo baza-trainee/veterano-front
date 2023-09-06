@@ -28,11 +28,11 @@ const Footer = () => {
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Link to="/" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
+								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
 									Підтримати
 								</Link>
 							) : (
-								<Link to="/" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
+								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
 									Підтримати
 								</Link>
 							)}

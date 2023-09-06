@@ -52,7 +52,11 @@ const Header: React.FC = () => {
 				</div>
 
 				<div className="hidden md:flex">
-					<Link to="my offer" variant="primary" size="large">
+					<Link
+						to="https://secure.wayforpay.com/button/b004f79dab8cb"
+						variant="primary"
+						size="large"
+					>
 						Підтримати
 					</Link>
 				</div>
