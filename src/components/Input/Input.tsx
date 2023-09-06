@@ -23,6 +23,7 @@ const Input: FC<InputProps> = ({
 	label,
 	...props
 }) => {
+
 	const labelStyles = () => {
 		let style = `  
     pl-[10px] 
@@ -48,7 +49,7 @@ const Input: FC<InputProps> = ({
       leading-[26px]
       text-[14px]  
       translate-y-[1.9rem]
-      text-grey50
+      ${error ? 'text-error100' : 'text-grey50'}
       `
 
 		}
