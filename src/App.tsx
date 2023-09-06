@@ -6,9 +6,11 @@ import ContactUs from "./pages/ContactUs/ContactUs.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import "./App.css";
 import CookiesPanel from "./components/Cookies/CookiesPanel.tsx";
+import AdminLayout from "./Layout/AdminLayout.tsx";
 import LoginPage from "./pages/login/LoginPage.tsx";
 import SearchResults from "./pages/SearchResults.tsx";
-import AdminLayout from "./Layout/AdminLayout.tsx";
+import PartnersPage from "./pages/admin/PartnersPage/PartnersPage.tsx";
+import AddPartnerPage from "./pages/admin/PartnersPage/AddPartnerPage.tsx";
 import ProjectsPage from "./pages/admin/ProjectsPage/ProjectsPage.tsx";
 import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
@@ -33,13 +35,16 @@ function App() {
 					</Route>
 					<Route path="/admin" element={<AdminLayout />}>
 						<Route path="projects" element={<ProjectsPage />} />
-						<Route path="projects/new-project" element={<AddProjectPage />} />
+						<Route path="projects/add" element={<AddProjectPage />} />
 						<Route
 							path="projects/edit-project/:id"
 							element={<EditProjectPage />}
 						/>
 						<Route path="contacts" element={<Contacts />} />
 						<Route path="documents" element={<DocumentPage />} />
+						<Route path="partners" element={<PartnersPage />} />
+						<Route path="partners/:id" element={<AddPartnerPage />} />
+						<Route path="partners/add" element={<AddPartnerPage />} />
 					</Route>
 					<Route path="/auth">
 						<Route path="login" element={<LoginPage />} />

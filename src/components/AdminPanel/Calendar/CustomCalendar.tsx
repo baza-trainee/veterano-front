@@ -105,7 +105,7 @@ const CustomCalendar: FC<CalendarProps> = ({
 					)}
 				</select>
 				<button onClick={handleNextYearButtonClick}><LiaAngleRightSolid size={20} /></button>
-				<button className={"text-[12px]"}
+				<button className={"text-[12px]"} type="button"
 								onClick={() => {
 									if (selectedDate) {
 										OkBtnClickHandler(selectedDate);
@@ -156,5 +156,3 @@ const CustomCalendar: FC<CalendarProps> = ({
 };
 
 export default CustomCalendar;
-
-

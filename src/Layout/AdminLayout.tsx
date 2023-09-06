@@ -2,6 +2,7 @@ import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
 import { Outlet } from "react-router-dom";
 
 
+
 const AdminLayout = () => {
 	return (
 		<div className={'flex'}>
@@ -25,7 +26,7 @@ const AdminLayout = () => {
 					</button>
 				</div>
 			</div>
-			<div className={"flex-grow bg-[#FCFCFC]"}>
+			<div className={"flex-grow bg-grey30"}>
 				<Outlet />
 			</div>
 		</div>

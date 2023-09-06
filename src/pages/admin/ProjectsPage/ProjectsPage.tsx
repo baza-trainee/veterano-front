@@ -1,6 +1,3 @@
-import Typography from "../../../components/Typography/Typography.tsx";
-import SearchBar from "../../../components/SearchBar/SearchBar.tsx";
-import NavigationLink from "../../../components/Links/NavigationLink.tsx";
 import { useEffect, useState } from "react";
 import ListElement from "../../../components/AdminPanel/ListElements/ListElement.tsx";
 import { getAllCards, removeCard, removeCheckedCards } from "../../../api/CardsApi.ts";
@@ -9,7 +6,14 @@ import React from "react";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 import { useNavigate } from "react-router-dom";
 import { ProjectType } from "./interfaces/ProjectType.ts";
-
+import HeaderComponent from "../../../components/AdminPanel/HeaderComponent.tsx";
+import TableHeader from "../../../components/AdminPanel/ListElements/TableHeader.tsx";
+import {
+	handleAllCheckedChange,
+	handleRemove,
+	handleRemoveSelected,
+} from "../../../../utils/functions/admin/adminFnc.ts";
+import Search404 from "../../../components/Search404/Search404.tsx";
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
@@ -20,11 +24,6 @@ const ProjectsPage = () => {
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
-
-	const handleRemove = (cardId: number) => {
-		removeCard(cardId)
-			.then(() => setProjects(prevProjects => prevProjects.filter(project => project.cardId !== cardId)));
-	};
 
 	useEffect(() => {
 		navigate(`/admin/projects?page=${currentPage}`, { replace: true });
@@ -43,78 +42,30 @@ const ProjectsPage = () => {
 			});
 	}, []);
 
-	const handleSelectedPage = (selectedPage: number) => {
-		setCurrentPage(selectedPage);
-	};
-
-	const handleRemoveSelected = () => {
-		const selectedIds = projects.filter((_, index) => checkedItems[index]).map(p => p.cardId);
-
-		removeCheckedCards(selectedIds)
-			.then(() => {
-				setProjects(prev => prev.filter(p => !selectedIds.includes(p.cardId)));
-			});
-	};
-
-	const handleAllCheckedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const isChecked = event.target.checked;
-		setAllChecked(isChecked);
-		setCheckedItems(new Array(projects.length).fill(isChecked));
-	};
-
 	const handleCheckedChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedItems = [...checkedItems];
 		newCheckedItems[index] = event.target.checked;
 		setCheckedItems(newCheckedItems);
 	};
 
-	const editHandler = (cardId: number) => () => {
-		navigate(`/admin/projects/edit-project/${cardId}`);
-	};
-
 	const filteredProjects = value ? searchData.filter((project) => project.title.includes(value)) : projects;
 
 	return (
 		<>
-			<div className={"bg-grey100"}>
-				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
-					<Typography variant={"h3"} component={"h3"} className={"text-white"}>Проєкти</Typography>
-					<div className={"flex gap-16"}>
-						<SearchBar
-							value={value}
-							onChange={(e) => setValue(e.target.value)}
-							placeholder={"Введіть ключове слово для пошуку"}
-							disabled={false}
-							className={"md:w-[280px] lg:w-[400px] text-[14px]"}
-						/>
-						<NavigationLink to={"new-project"} variant={"primaryDarkBg"} size={"large"}>Додати</NavigationLink>
-					</div>
-				</div>
-			</div>
+			<HeaderComponent
+				name={"Проєкти"}
+				value={value}
+				onChange={(e) => setValue(e.target.value)}
+			/>
+
 			<div className={"pt-6 pl-6 pr-[80px] pb-[128px] bg-grey30 min-h-[100vh]"}>
-				<div className={'min-h-[609px]'}>
-					<div className={"flex mt-6 border-b border-black items-center justify-between "}>
-						<div className={"flex gap-[18px] w-[439px] items-center"}>
-							<div className={"w-[48px] h-[48px] p-3 check-wrapper "}>
-								<label className="custom-checkbox">
-									<input
-										type="checkbox"
-										className={"hidden"}
-										checked={isAllChecked}
-										onChange={handleAllCheckedChange} />
-									<span className="checkmark"></span>
-								</label>
-							</div>
-							<div>Назва проєкту</div>
-						</div>
-						<div>Стан</div>
-						<div className={"ml-[32px]"}>Дата</div>
-						<div
-							className={"w-[36px] h-[36px] ml-[78px] flex items-center justify-center cursor-pointer "}
-							onClick={handleRemoveSelected}>
-							<img src="/images/admin/bin.svg" alt="bin" />
-						</div>
-					</div>
+				<div className={"min-h-[609px]"}>
+					<TableHeader
+						checked={isAllChecked}
+						name={"Назва проєкту"}
+						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, projects.length)}
+						onClick={() => handleRemoveSelected(projects, checkedItems, setProjects, setCheckedItems, removeCheckedCards, "cardId")} />
+					{filteredProjects.length < 1 && <Search404/>}
 					{filteredProjects && filteredProjects.map((project, index) =>
 						<React.Fragment key={project.cardId}>
 							<ListElement
@@ -122,17 +73,20 @@ const ProjectsPage = () => {
 								name={capitalizeFirstLetter(project.title)}
 								status={project.isEnabled ? "активний" : "неактивний"}
 								date={project.publication}
-								removeHandler={() => handleRemove(project.cardId)}
+								removeHandler={() => handleRemove(project.cardId, setProjects, "cardId", removeCard)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
-								editHandler={editHandler(project.cardId)}
+								editHandler={() => navigate(`/admin/projects/edit-project/${project.cardId}`)}
 							/>
 						</React.Fragment>,
 					)}
 				</div>
 				<div className={"mt-[25px]"}>
-					<Pagination pageCount={totalPages} currentPage={1} onSelectedPage={handleSelectedPage}
-											prevClassName={"md:!pl-[141px]"} />
+					<Pagination
+						pageCount={totalPages}
+						currentPage={1}
+						onSelectedPage={(selectedPage: number) => {setCurrentPage(selectedPage)}}
+						prevClassName={"md:!pl-[141px]"} />
 				</div>
 			</div>
 		</>

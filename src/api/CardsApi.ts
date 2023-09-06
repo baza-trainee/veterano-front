@@ -96,14 +96,14 @@ export const removeCard = async (cardId: number) => {
 	}
 };
 
-export const removeCheckedCards = async (cardIds: number[]) => {
+export const removeCheckedCards = async (cardIds: number[]): Promise<void> => {
 	try {
 		await Promise.all(
 			cardIds.map(cardId => $host.delete("card/delete?id=" + cardId)),
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
-		return null;
+		return;
 	}
 };
 
