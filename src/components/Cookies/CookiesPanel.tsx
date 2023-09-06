@@ -22,13 +22,13 @@ const CookiesPanel = () => {
 		showPanel && (
 			<div
 				id="cookie-panel"
-				className="fixed bottom-0 left-0 right-0 bg-[#F9F6EC] py-8 px-4 flex flex-col justify-center gap-6 h-[378px] md:h-[166px] md:px-6 md:py-6 lg:px-[80px] lg:h-[104px] lg:py-4 md:flex-row md:justify-between lg:min-w-[1440px] md:items-center  "
+				className="fixed bottom-0 left-0 right-0 bg-[#F9F6EC] justify-between py-8 px-4 flex flex-col gap-6 md:h-[166px] md:flex-row md:gap-[36px] md:px-6 md:py-6 md:items-center lg:px-[80px] lg:h-[104px] lg:py-4 lg:gap-[72px] lg:min-w-[1440px]   "
 			>
 				<div className={"flex justify-end flex-shrink-0 md:order-3"}>
 					<CloseBtn onClick={() => setShowPanel(!showPanel)} />
 				</div>
 
-				<p className="text-[16px] leading-6 font-light md:w-[457px] md:order-1 lg:min-w-[845px]">
+				<p className="text-[16px] leading-6 font-light md:min-w-[457px] md:order-1 lg:min-w-[845px]">
 					Цей сайт використовує файли cookies для правильної роботи і покращення
 					сервісу. Якщо ви погоджуєтесь з їхнім використанням, натисніть ОК.
 					Більше інформації в{" "}
@@ -41,7 +41,7 @@ const CookiesPanel = () => {
 					</Link>
 					.
 				</p>
-				<div className="w-full flex justify-center md:w-[95px] lg:w-[93px] md:order-2">
+				<div className="w-full flex justify-center md:w-[95px] flex-shrink-0 lg:w-[93px] md:order-2">
 					<Button
 						id="accept-cookies"
 						variant={"primary"}
