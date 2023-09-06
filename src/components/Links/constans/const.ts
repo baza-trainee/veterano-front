@@ -2,8 +2,8 @@ import { sizeClassType } from "../interfaces/Interfaces.ts";
 
 export const sizeClassNames: sizeClassType = {
 	small: "h-[36px] leading-[24px] ",
-	large: " text-[18px] leading-[28px]",
-	wideMob: " bg-white text-[18px] w-[288px] ",
+	large: " text-[18px] leading-[28px] px-10",
+	wideMob: " text-[18px] w-[288px] ",
 };
 
 export const variantClassNames = {

@@ -4,26 +4,26 @@ import Typography from "../components/Typography/Typography";
 
 export const ErrorPage = () => {
 	return (
-		<Container className="flex justify-center items-center flex-col p-4 min-h-[575px]">
+		<Container className="flex justify-center items-center flex-col p-4 min-h-[575px] text-[#313131]">
 			<Typography
 				variant="span"
-				className="text-grey100 text-[130px] font-extralight md:text-[170px] lg:text-[200px]"
+				className=" text-[130px] font-extralight md:text-[170px] lg:text-[200px] leading-[130px] md:leading-[170px] lg:leading-[200px]"
 			>
 				404
 			</Typography>
 			<Typography
 				variant="span"
-				className="font-medium text-black text-lg mb-6 md:text-[32px] md:text-bold md:mt-[-30px]"
+				className="font-medium md:font-bolt text-lg mb-6 md:text-[32px] leading-[28px] md:leading-[40px]"
 			>
 				Сторінка не знайдена
 			</Typography>
 			<Typography
 				variant="span"
-				className="text-grey100 text-base md:text-lg  font-light text-center leading-6 mb-9"
+				className=" text-base md:text-lg font-light text-center mb-9"
 			>
 				Ми не змогли знайти сторінку, яку Ви шукаєте. Можливо, сталася помилка
 			</Typography>
-			<NavigationLink to="/" variant="primary" size="large">
+			<NavigationLink to="/" variant="primary" size="wideMob">
 				Повернутись на головну
 			</NavigationLink>
 		</Container>

@@ -63,7 +63,7 @@ input {
 }
 @layer utilities {
 	.btn-style {
-		@apply font-light rounded py-2 px-10;
+		@apply font-light rounded py-2;
 	}
 	.arrow-btn {
 		@apply rounded flex items-center justify-center;
