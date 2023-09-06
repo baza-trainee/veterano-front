@@ -140,7 +140,6 @@ input {
 	.input-form:disabled {
 		@apply border-b-[1px] border-grey50 bg-inherit;
 	}
-
 	.input-form:focus {
 		@apply outline-none bg-inherit leading-[24px] p-[10px] pt-[20px] pb-[1px] h-[64px];
 	}
@@ -214,7 +213,7 @@ input {
 	}
 
 	.search-input {
-		@apply min-w-[89%] text-[14px] leading-[26px] md:w-full lg:text-[16px]  lg:leading-[24px]  bg-inherit outline-none;
+		@apply min-w-[89%] text-[14px] font-light leading-[26px] md:w-full lg:text-[16px] lg:leading-[24px]  bg-inherit outline-none;
 	}
 
 	.search-input:invalid .search-wrapper {
@@ -230,15 +229,14 @@ input {
 	}
 
 	.filter-input {
-		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded;
+		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded text-[14px] leading-[26px] font-light;
 	}
-
 	.filter-label-chosen {
 		@apply relative flex justify-between items-center p-[10px] bg-black rounded;
 	}
 
 	.filter-label-input {
-		@apply bg-black text-white outline-none lg:max-w-[150px];
+		@apply bg-black text-white outline-none font-light leading-[24px] lg:max-w-[150px];
 	}
 
 	.filter-input:hover {
@@ -258,7 +256,7 @@ input {
 	}
 
 	.filter-drop-down {
-		@apply w-[100%] h-[258px] bg-[#F9F6EC] text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px];
+		@apply w-[100%] h-[258px] bg-[#F9F6EC] text-[16px] font-light text-grey100 absolute left-0 top-[100%] rounded border border-grey50 overflow-auto py-[10px];
 	}
 
 	.filter-drop-down::-webkit-scrollbar {
@@ -283,7 +281,7 @@ input {
 	}
 
 	.project-section {
-		@apply flex flex-col items-center;
+		@apply flex flex-col md:items-center;
 	}
 
 	.project-section > div {

@@ -46,7 +46,7 @@ const SearchBar: FC<SearchBarProps> = ({
 				className={
 					disabled
 						? "search-input-disabled"
-						: "search-input placeholder:text-[#AFAFAF] "
+						: "search-input placeholder:text-grey50"
 				}
 				id="search"
         type="text"

@@ -48,14 +48,14 @@ const DropDown: FC<DropDownProps> = ({
 	return (
 
 			<label
-				className={value.length > 1 ? "filter-label-chosen" : "filter-input w-full"}
+				className={value.length > 1 ? "filter-label-chosen" : "filter-input  w-full"}
 			>
 				<input
 					placeholder={placeholder}
 					className={
 						value.length > 1
 							? "filter-label-input"
-							: "w-[125px] text-4 bg-[#F9F6EC]"
+							: "w-[125px] bg-[#F9F6EC] font-light text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px] placeholder:text-grey50"
 					}
 					value={inputValue}
 					onChange={e => {
