@@ -1,7 +1,6 @@
 import { FC } from "react";
-
-import Button from "../Button/Button";
 import NavigationLink from "../Links/NavigationLink";
+import Link from "../Links/Link";
 
 interface SidebarProps {
 	toggleMenu: () => void;
@@ -46,9 +45,13 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 				</nav>
 			</div>
 			<div className="flex justify-center items-center">
-				<Button variant="primary" size="wideMob">
+				<Link
+					to="https://secure.wayforpay.com/button/b004f79dab8cb"
+					variant="primary"
+					className="w-full h-48px"
+				>
 					Підтримати
-				</Button>
+				</Link>
 			</div>
 		</div>
 	);
