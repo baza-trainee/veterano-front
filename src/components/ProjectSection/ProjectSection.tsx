@@ -73,6 +73,7 @@ const ProjectSection = () => {
 					</NavigationLink>
 				</div>
 			)}
+
 		</Section>
 	);
 };
