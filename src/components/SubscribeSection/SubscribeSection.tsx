@@ -44,10 +44,10 @@ const SubscribeSection = () => {
 	});
 	// bg-[url("/images/subscribe-320.png")]
 	return (
-		<section className={'bg-[#8F9FB1]  md:bg-[url("/images/subscribe-768.png")] bg-no-repeat bg-contain lg:bg-none'  }>
+		<section className={'bg-[#8F9FB1] md:bg-[url("/images/subscribe-768.png")] bg-no-repeat bg-contain lg:bg-none'  }>
 			<Container
 				className={
-					'bg-none lg:bg-[url("/images/subscribe-1280.png")] bg-no-repeat bg-contain'
+					'lg:bg-[url("/images/subscribe-1280.png")] bg-no-repeat bg-contain'
 				}
 			>
 				<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>
