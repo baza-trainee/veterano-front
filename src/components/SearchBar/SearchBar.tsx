@@ -36,10 +36,10 @@ const SearchBar: FC<SearchBarProps> = ({
          onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)}
 				 className={
 					 disabled
-						 ? "search-wrapper-disabled"
+						 ? "search-wrapper-disabled h-[48px]"
 						 : errors
-							 ? "search-wrapper-error"
-							 : "search-wrapper"
+							 ? "search-wrapper-error h-[48px]"
+							 : "search-wrapper h-[48px]"
 				 }
     >
       <input
