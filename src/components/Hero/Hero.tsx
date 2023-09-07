@@ -22,7 +22,7 @@ const Hero = () => {
 					<div className="flex flex-col gap-[24px] lg:gap-[44px] md:gap-[36px]">
 						<Typography variant="h1">Захистив. Захистимо.</Typography>
 						<Typography
-							className="w-[288px] md:w-[250px] lg:block lg:w-[450px]"
+							className="min-w-[288px] md:w-[350px]  lg:min-w-[542px]"
 							variant="p"
 						>
 							Ми підтримуємо кожного з наших героїв - ветеранів війни з Росією і
