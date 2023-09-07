@@ -333,7 +333,7 @@ input {
 	}
 
 	.scroll-to-top-icon {
-		@apply w-12 h-12 flex-shrink-0;
+		@apply w-12 h-12 flex-shrink-0 justify-center transition-all duration-500 ease-in-out;
 	}
 
 	.scroll-to-top:hover .scroll-to-top-icon {

@@ -7,21 +7,20 @@ import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx"
 import { getPartnerById } from "../../../api/PartnersAPI.ts";
 import { PartnersType } from "./PartnersPage.tsx";
 
-
-
 const AddPartnerPage = () => {
 	const { id } = useParams();
 	const [initialImage, setInitialImage] = useState<string>("");
 
-	const [partnerData, setPartnerData] = useState<PartnersType>()
+	const [partnerData, setPartnerData] = useState<PartnersType>();
 
 	useEffect(() => {
 		if (id) {
-			getPartnerById(Number(id))
-				.then((data) => {
-					setPartnerData(data);
-					setInitialImage(`http://45.94.157.117:8080/api/v1/search/image/get?id=${data.image}`);
-				})
+			getPartnerById(Number(id)).then((data) => {
+				setPartnerData(data);
+				setInitialImage(
+					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${data.image}`
+				);
+			});
 		}
 	}, [id]);
 	return (

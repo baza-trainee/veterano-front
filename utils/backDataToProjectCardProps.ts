@@ -5,8 +5,10 @@ export const convertBackDataToProjectCardProps = (data: Card[]) => {
 		return {
 			text: elem.description,
 			title: elem.title,
-			imageSrc: `http://45.94.157.117:8080/api/v1/search/image/get?id=${elem.imageId}`,
-			url: `http://45.94.157.117:8080/api/v1/url/redirect?id=${elem.url}`,
+			imageSrc: `${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
+				elem.imageId
+			}`,
+			url: `${import.meta.env.VITE_BASE_URL}/url/redirect?id=${elem.url}`,
 		};
 	});
 	return tmp;
