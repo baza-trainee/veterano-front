@@ -28,11 +28,20 @@ const Footer = () => {
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
+								<Link
+									to="https://secure.wayforpay.com/button/b004f79dab8cb"
+									variant="secondary"
+									size="wideMob"
+									style={{ padding: "10px 32px" }}
+								>
 									Підтримати
 								</Link>
 							) : (
-								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
+								<Link
+									to="https://secure.wayforpay.com/button/b004f79dab8cb"
+									variant="primaryDarkBg"
+									style={{ padding: "10px 32px", height: "48px" }}
+								>
 									Підтримати
 								</Link>
 							)}
@@ -102,14 +111,28 @@ const Footer = () => {
 										}
 										variant={"underlineFooter"}
 									>
-										<BsLinkedin color={"#BCBCBC"} size={42} />
+										<div className="group">
+											<img
+												src="./images/linkedin.svg"
+												className="group-hover:hidden group-active:hidden"
+											/>
+											<img
+												src="./images/linkedin-hover.svg"
+												className="hidden group-hover:block group-active:hidden"
+											/>
+											<img
+												src="./images/linkedin-focus.svg"
+												className="hidden group-active:block "
+											/>
+										</div>
 									</Link>
 
 									<Link
 										to={"https://t.me/+CBXkAJlsCy83ZDYy"}
 										variant={"underlineFooter"}
+										className="text-[#BCBCBC] hover:text-[#F9E1A1] active:text-[#151515]"
 									>
-										<BsTelegram color={"#BCBCBC"} size={42} />
+										<BsTelegram size={35} />
 									</Link>
 								</li>
 							</ul>
