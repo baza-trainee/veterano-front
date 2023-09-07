@@ -1,26 +1,6 @@
 body {
 	overflow-x: hidden;
 }
-/* width */
-::-webkit-scrollbar {
-	width: 12px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-	border-radius: 12px;
-	background: var(--white, #fcfcfc);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-	border-radius: 12px;
-	background: var(--grey-40, #bcbcbc);
-}
-::-webkit-scrollbar-thumb:hover {
-	border-radius: 12px;
-	background: var(--grey-50, #808080);
-}
 
 .hero-scrollbar {
 	-ms-overflow-style: none; /* IE and Edge */
