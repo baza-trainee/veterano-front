@@ -1,7 +1,7 @@
 import Container from "../Container/Container.tsx";
 import Link from "../Links/Link.tsx";
 import NavigationLink from "../Links/NavigationLink.tsx";
-import { BsTelegram, BsLinkedin } from "react-icons/bs";
+import { BsTelegram } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 
 const Footer = () => {
@@ -26,11 +26,20 @@ const Footer = () => {
 								className={"mb-[55px] md:mb-[97px] lg:mb-[82px]"}
 							/>
 							{isMobile ? (
-								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="secondary" size="wideMob" style={{ padding: '10px 32px' }}>
+								<Link
+									to="https://secure.wayforpay.com/button/b004f79dab8cb"
+									variant="secondary"
+									size="wideMob"
+									style={{ padding: "10px 32px" }}
+								>
 									Підтримати
 								</Link>
 							) : (
-								<Link to="https://secure.wayforpay.com/button/b004f79dab8cb" variant="primaryDarkBg" style={{ padding: '10px 32px', height: '48px' }}>
+								<Link
+									to="https://secure.wayforpay.com/button/b004f79dab8cb"
+									variant="primaryDarkBg"
+									style={{ padding: "10px 32px", height: "48px" }}
+								>
 									Підтримати
 								</Link>
 							)}
@@ -64,15 +73,15 @@ const Footer = () => {
 							</ul>
 							<ul className={"lg:justify-self-start font-light "}>
 								<li className={"text-white flex items-center leading-6"}>
-									<img src="/images/phone.svg" alt='phone' />
+									<img src="/images/phone.svg" alt="phone" />
 									<p className={"pl-[10px]"}>+38 067 568 17 88</p>
 								</li>
 								<li className={"text-white flex items-center"}>
-									<img src="/images/phone.svg" alt='phone' />
+									<img src="/images/phone.svg" alt="phone" />
 									<p className={"pl-[10px]"}>+38 063 628 66 30</p>
 								</li>
 								<li className={"text-white flex items-center"}>
-									<img src="/images/mail.svg" alt='email' />
+									<img src="/images/mail.svg" alt="email" />
 									<p className={"pl-[10px]"}>info@baza-trainee.tech</p>
 								</li>
 							</ul>
@@ -100,14 +109,28 @@ const Footer = () => {
 										}
 										variant={"underlineFooter"}
 									>
-										<BsLinkedin color={"#BCBCBC"} size={42} />
+										<div className="group">
+											<img
+												src="./images/linkedin.svg"
+												className="group-hover:hidden group-active:hidden"
+											/>
+											<img
+												src="./images/linkedin-hover.svg"
+												className="hidden group-hover:block group-active:hidden"
+											/>
+											<img
+												src="./images/linkedin-focus.svg"
+												className="hidden group-active:block "
+											/>
+										</div>
 									</Link>
 
 									<Link
 										to={"https://t.me/+CBXkAJlsCy83ZDYy"}
 										variant={"underlineFooter"}
+										className="text-[#BCBCBC] hover:text-[#F9E1A1] active:text-[#151515]"
 									>
-										<BsTelegram color={"#BCBCBC"} size={42} />
+										<BsTelegram size={35} />
 									</Link>
 								</li>
 							</ul>
