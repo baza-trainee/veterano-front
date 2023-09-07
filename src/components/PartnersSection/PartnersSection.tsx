@@ -22,7 +22,9 @@ const PartnersSection = () => {
 		searchPartners().then((data) => {
 			const arrayImg = data.partnerDTOList.map(
 				(partner: PartnerType) =>
-					`http://45.94.157.117:8080/api/v1/search/image/get?id=${partner.image}`
+					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
+						partner.image
+					}`
 			);
 			setImages(arrayImg);
 		});

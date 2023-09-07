@@ -42,12 +42,12 @@ const SubscribeSection = () => {
 			.oneOf([true], "Це поле є обов’язковим")
 			.required("Це поле є обов’язковим"),
 	});
-
+	// bg-[url("/images/subscribe-320.png")]
 	return (
-		<section>
+		<section className={'bg-[#8F9FB1] md:bg-[url("/images/subscribe-768.png")] bg-no-repeat bg-contain lg:bg-none'  }>
 			<Container
 				className={
-					'bg-[url("/images/subscribe-320w.jpeg")] md:bg-[url("/images/subscribe-768w.jpeg")] lg:bg-[url("/images/subscribe-1440w.jpeg")]'
+					'lg:bg-[url("/images/subscribe-1280.png")] bg-no-repeat bg-contain'
 				}
 			>
 				<div className={"subscribe-wrapper md:min-h-[606px] lg:min-h-[626px] "}>

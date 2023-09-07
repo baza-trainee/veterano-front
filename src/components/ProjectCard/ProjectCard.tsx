@@ -73,7 +73,8 @@ const ProjectCard: React.FC<CardProps> = ({
 					variant="primary"
 					size={isDesktop ? "large" : "small"}
 					className={
-						"h-216px w-[136px] md:w-[165px] lg:w-[170px] lg:text-[16px]"
+					variant === "carousel" ? "w-[136px] h-[36px]" : "w-[136px] h-[36px] md:w-[165px] lg:w-[170px] lg:h-[48px] lg:text-[16px]"
+
 					}
 				>
 					Детальніше
