@@ -40,7 +40,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 				}
 				{...props}
 			>
-				<Typography variant="h1">Вхід</Typography>
+				<Typography variant="h2" className={'px-[20px]'}>Вхід</Typography>
 				<Formik
 					initialValues={{ email: "", password: "" }}
 					validationSchema={validationSchema}
@@ -65,7 +65,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 					validateOnBlur={true}
 				>
 					{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
-						<Form className="flex flex-col gap-[92px]">
+						<Form className="flex flex-col gap-[92px] px-[20px] items-center">
 							<div className="flex flex-col gap-[32px] shrink-0">
 								<Input
 									value={values.email}
@@ -96,12 +96,12 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									onMouseDown={() => setIsVisible((prev) => !prev)}
 								/>
 							</div>
-							<div className="flex flex-col gap-[32px] items-center">
+							<div className="flex w-[129px] justify-center items-center ">
 								<Button
-									className="w-[129px]"
 									disabled={!isValid}
 									size="large"
 									type="submit"
+									className={"text-[18px] leading-[28px] h-[48px]"}
 								>
 									Увійти
 								</Button>
