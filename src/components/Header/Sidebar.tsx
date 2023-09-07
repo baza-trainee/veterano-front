@@ -8,7 +8,7 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 	return (
-		<div className="bg-yellow100 text-black h-[506px] p-4 z-[51] ">
+		<div className="bg-yellow100 w-[320px] text-black h-[506px] p-4 z-[51] ">
 			<div className="flex flex-col items-end gap-4 mb-11">
 				<div className="h-[48px] w-[48px] bg-black rounded-md">
 					<img
