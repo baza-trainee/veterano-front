@@ -1,7 +1,7 @@
 import Container from "../Container/Container.tsx";
 import Link from "../Links/Link.tsx";
 import NavigationLink from "../Links/NavigationLink.tsx";
-import { BsTelegram, BsLinkedin } from "react-icons/bs";
+import { BsTelegram } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
 
 const Footer = () => {
@@ -73,15 +73,15 @@ const Footer = () => {
 							</ul>
 							<ul className={"lg:justify-self-start font-light "}>
 								<li className={"text-white flex items-center leading-6"}>
-									<img src="/images/phone.svg" alt='phone' />
+									<img src="/images/phone.svg" alt="phone" />
 									<p className={"pl-[10px]"}>+38 067 568 17 88</p>
 								</li>
 								<li className={"text-white flex items-center"}>
-									<img src="/images/phone.svg" alt='phone' />
+									<img src="/images/phone.svg" alt="phone" />
 									<p className={"pl-[10px]"}>+38 063 628 66 30</p>
 								</li>
 								<li className={"text-white flex items-center"}>
-									<img src="/images/mail.svg" alt='email' />
+									<img src="/images/mail.svg" alt="email" />
 									<p className={"pl-[10px]"}>info@baza-trainee.tech</p>
 								</li>
 							</ul>
