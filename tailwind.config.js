@@ -172,7 +172,7 @@ export default {
 				yellow100: "#F7D67F",
 				yellow50: "#F9E1A1",
 				yellow30: "#FDF5E1",
-				grey100: "#262626",
+				grey100: "#313131",
 				grey50: "#808080",
 				grey30: "#ECECEC",
 				error100: "#D30018",

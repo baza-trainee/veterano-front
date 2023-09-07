@@ -90,11 +90,11 @@ const Input: FC<InputProps> = ({
 				</label>
 			)}
 			{props.name === "password" && (
-				<div className="absolute right-[5%] bottom-[10%] cursor-pointer z-10">
+				<div className="absolute right-[10px] bottom-[10px] cursor-pointer z-10">
 					{passwordVisible ? (
-						<AiFillEyeInvisible onMouseDown={onMouseDown} />
+						<AiFillEyeInvisible size={24} onMouseDown={onMouseDown} />
 					) : (
-						<BsFillEyeFill onMouseDown={onMouseDown} />
+						<BsFillEyeFill size={24} onMouseDown={onMouseDown} />
 					)}
 				</div>
 			)}
