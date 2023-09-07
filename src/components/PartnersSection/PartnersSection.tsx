@@ -4,6 +4,7 @@ import PartnersCard from "../PartnersCard/PartnersCard.tsx";
 import { useMedia } from "../../hooks/useMedia.tsx";
 import { useEffect, useState } from "react";
 import { searchPartners } from "../../api/SearchAPI.tsx";
+import path from "path";
 
 interface PartnerType {
 	id: number;
@@ -20,11 +21,11 @@ const PartnersSection = () => {
 
 	useEffect(() => {
 		searchPartners().then((data) => {
-			const arrayImg = data.partnerDTOList.map(
-				(partner: PartnerType) =>
-					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
-						partner.image
-					}`
+			const arrayImg = data.partnerDTOList.map((partner: PartnerType) =>
+				path.join(
+					import.meta.env.VITE_BASE_URL,
+					`/search/image/get?id=${partner.image}`
+				)
 			);
 			setImages(arrayImg);
 		});

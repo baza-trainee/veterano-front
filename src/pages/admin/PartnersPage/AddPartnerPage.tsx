@@ -6,6 +6,7 @@ import PartnerForm from "../../../components/AdminPanel/PartnerForm/PartnerForm.
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 import { getPartnerById } from "../../../api/PartnersAPI.ts";
 import { PartnersType } from "./PartnersPage.tsx";
+import path from "path";
 
 const AddPartnerPage = () => {
 	const { id } = useParams();
@@ -18,7 +19,10 @@ const AddPartnerPage = () => {
 			getPartnerById(Number(id)).then((data) => {
 				setPartnerData(data);
 				setInitialImage(
-					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${data.image}`
+					path.join(
+						import.meta.env.VITE_BASE_URL,
+						`/search/image/get?id=${data.image}`
+					)
 				);
 			});
 		}

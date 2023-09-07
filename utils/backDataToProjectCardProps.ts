@@ -1,3 +1,4 @@
+import path from "path";
 import { Card } from "../src/api/types/SearchTypes";
 
 export const convertBackDataToProjectCardProps = (data: Card[]) => {
@@ -5,10 +6,14 @@ export const convertBackDataToProjectCardProps = (data: Card[]) => {
 		return {
 			text: elem.description,
 			title: elem.title,
-			imageSrc: `${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
-				elem.imageId
-			}`,
-			url: `${import.meta.env.VITE_BASE_URL}/url/redirect?id=${elem.url}`,
+			imageSrc: path.join(
+				import.meta.env.VITE_BASE_URL,
+				`/search/image/get?id=${elem.imageId}`
+			),
+			url: path.join(
+				import.meta.env.VITE_BASE_URL,
+				`/search/image/get?id=${elem.url}`
+			),
 		};
 	});
 	return tmp;

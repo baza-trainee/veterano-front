@@ -5,6 +5,7 @@ import { getCardById } from "../../../api/CardsApi.ts";
 import { useEffect, useState } from "react";
 import { CardType } from "./interfaces/CardType.ts";
 import ProjectsForm from "../../../components/AdminPanel/Projects/ProjectsForm.tsx";
+import path from "path";
 
 const EditProjectPage = () => {
 	const [cardInfo, setCardInfo] = useState<CardType>();
@@ -18,7 +19,10 @@ const EditProjectPage = () => {
 					setCardInfo(data);
 					const imageId = data.imageId;
 					setInitialImage(
-						`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${imageId}`
+						path.join(
+							import.meta.env.VITE_BASE_URL,
+							`/search/image/get?id=${imageId}`
+						)
 					);
 				})
 				.catch((error) => {
