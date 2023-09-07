@@ -56,6 +56,7 @@ const Header: React.FC = () => {
 						to="https://secure.wayforpay.com/button/b004f79dab8cb"
 						variant="primary"
 						size="large"
+						style={{width: '182px', height: '48px', paddingLeft: '32px', paddingRight: '32px' }}
 					>
 						Підтримати
 					</Link>
