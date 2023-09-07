@@ -63,7 +63,7 @@ input {
 }
 @layer utilities {
 	.btn-style {
-		@apply font-light rounded py-2 px-10;
+		@apply font-light rounded py-2;
 	}
 	.arrow-btn {
 		@apply rounded flex items-center justify-center;
@@ -333,7 +333,7 @@ input {
 	}
 
 	.scroll-to-top-icon {
-		@apply w-12 h-12 flex-shrink-0;
+		@apply w-12 h-12 flex-shrink-0 justify-center transition-all duration-500 ease-in-out;
 	}
 
 	.scroll-to-top:hover .scroll-to-top-icon {
