@@ -14,23 +14,24 @@ interface DropDownProps {
 }
 
 const DropDown: FC<DropDownProps> = ({
-	cities,
-	value,
-	onChange,
-	placeholder,
-	name,
-	onValueSelected
-}) => {
+																			 cities,
+																			 value,
+																			 onChange,
+																			 placeholder,
+																			 name,
+																			 onValueSelected,
+																		 }) => {
 
 	const results = cities.filter((cityObj) =>
 		cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
-		cityObj.country.toLowerCase().includes(value.toLowerCase())
+		cityObj.country.toLowerCase().includes(value.toLowerCase()),
 	);
 
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
-	const [inputValue, setInputValue] = useState('');
+	const [inputValue, setInputValue] = useState("");
+
 
 	useEffect(() => {
 		if (value.length > 1 && !citySelected) {
@@ -38,59 +39,74 @@ const DropDown: FC<DropDownProps> = ({
 		}
 	}, [value, citySelected]);
 
+	useEffect(() => {
+		if (results.length === 0) {
+			setIsOpen(false);
+		}
+	}, [results]);
+
 	const listOnClickHandler = (city: string, country: string) => {
-		onValueSelected({ city, country })
-		setInputValue(`${capitalizeFirstLetter(city)}`)
+		onValueSelected({ city, country });
+		setInputValue(`${capitalizeFirstLetter(city)}`);
 		setIsOpen(false);
 		setCitySelected(true);
 	};
 
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter" && inputValue.length > 0) {
+			event.preventDefault();
+			// Якщо натиснута клавіша Enter при кастомному вводі, виконайте пошук
+			onValueSelected({ city: value, country: "" });
+			setCitySelected(true);
+		}
+	};
 	return (
 
-			<label
-				className={value.length > 1 ? "filter-label-chosen h-[48px]" : "filter-input  w-full h-[48px]"}
-			>
-				<input
-					placeholder={placeholder}
-					className={
-						value.length > 1
-							? "filter-label-input"
-							: "w-[125px] bg-[#F9F6EC] font-light text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px] placeholder:text-grey50"
-					}
-					value={inputValue}
-					onChange={e => {
-						onChange(e);
-						setCitySelected(false);
-						setInputValue(e.target.value);
-					}}
-					onBlur={() => setIsOpen(false)}
-					name={name}
-				/>
-				<BsFilter size={24} color={value.length > 1 ? "white" : ''} />
-				{isOpen &&
-					<ul id="cities" className={"filter-drop-down z-10"}>
-						{results.map((item, index) => (
-							<li
-								key={index}
-								onMouseDown={() => setActiveIndex(index)}
-								onMouseUp={() => setActiveIndex(null)}
-								onClick={() => {
-									listOnClickHandler(item.city, item.country);
-								}}
-								style={
-									index === activeIndex
-										? {
-											backgroundColor: "black",
-											color: "white",
-											cursor: "pointer",
-										}
-										: {}
-								}>
-								{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
-							</li>
-						))}
-					</ul>}
-			</label>
+		<label
+			className={value.length > 1 ? "filter-label-chosen h-[48px]" : "filter-input  w-full h-[48px]"}
+		>
+			<input
+				placeholder={placeholder}
+				className={
+					value.length > 1
+						? "filter-label-input"
+						: "w-[125px] bg-[#F9F6EC] font-light text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px] placeholder:text-grey50"
+				}
+				value={inputValue}
+				onChange={e => {
+					onChange(e);
+					setCitySelected(false);
+					setInputValue(e.target.value);
+				}}
+				onBlur={() => setIsOpen(false)}
+				onKeyDown={handleKeyPress}
+				name={name}
+			/>
+			<BsFilter size={24} color={value.length > 1 ? "white" : ""} />
+			{isOpen &&
+				<ul id="cities" className={"filter-drop-down z-10"}>
+					{results.map((item, index) => (
+						<li
+							key={index}
+							onMouseDown={() => {
+								listOnClickHandler(item.city, item.country)
+								setActiveIndex(index);
+							}}
+							onMouseUp={() => setActiveIndex(null)}
+							style={
+								index === activeIndex
+									? {
+										backgroundColor: "black",
+										color: "white",
+										cursor: "pointer",
+									}
+									: {}
+							}>
+							{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
+						</li>
+					))}
+				</ul>}
+		</label>
 
 	);
 };

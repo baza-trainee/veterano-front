@@ -54,7 +54,6 @@ const SearchResults = () => {
 		};
 
 		searchRequest(params).then((data) => {
-			console.log(data);
 			convertBackDataToProjectCardProps(data.cards);
 			setResults({
 				...data,
