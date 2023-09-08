@@ -15,15 +15,15 @@ type ListElementProps = {
 const ListElement: FC<ListElementProps> = ({ id, onChange, name, status, date, editHandler, removeHandler, checked }) => {
 
 	return (
-		<div id={id.toString()} className={"bg-white flex mt-4 items-center justify-between py-2 px-1 "}>
-			<div className={"flex gap-[18px] w-[439px]  items-center"}>
+		<div id={id.toString()} className={"bg-white flex mt-4 items-center justify-between py-2 px-1 font-light "}>
+			<div className={"flex gap-[18px] w-[439px]  items-center "}>
 				<div className={"w-[48px] h-[48px] p-3 check-wrapper "}>
 					<label className="custom-checkbox">
 						<input type="checkbox" className={"hidden"} checked={checked} onChange={onChange}/>
 						<span className="checkmark"></span>
 					</label>
 				</div>
-				<div>{name}</div>
+				<div className={''}>{name}</div>
 			</div>
 			<div>{status}</div>
 			<div>{date}</div>

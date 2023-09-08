@@ -15,7 +15,7 @@ const HeaderComponent: FC<HeaderComponentProps> = ({ value, onChange, name }) =>
 			<div className={"bg-grey100"}>
 				<div className={"px-[36px] pt-[38px] pb-[38px] pr-[80px] h-[118px] flex justify-between"}>
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>{name}</Typography>
-					<div className={"flex gap-16"}>
+					<div className={"flex gap-16 h-[48px]"}>
 						<SearchBar
 							value={value}
 							onChange={onChange}
