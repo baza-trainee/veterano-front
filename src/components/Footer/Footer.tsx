@@ -28,7 +28,7 @@ const Footer = () => {
 							{isMobile ? (
 								<Link
 									to="https://secure.wayforpay.com/button/b004f79dab8cb"
-									variant="secondary"
+									variant="primaryDarkBg"
 									size="wideMob"
 									style={{ padding: "10px 32px" }}
 								>
