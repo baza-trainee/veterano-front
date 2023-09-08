@@ -98,7 +98,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 				>
 					{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
 						<Form className="flex flex-col gap-[45px] px-[20px] items-center ">
-							<div className="flex flex-col gap-2 mb-[55px] shrink-0">
+							<div className="flex flex-col gap-2 mb-[55px] shrink-0 w-full">
 								<Input
 									value={values.email}
 									error={
@@ -110,6 +110,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									label="Логін"
 									onChange={handleChange}
 									onBlur={handleBlur}
+									style={{width: '100%'}}
 								/>
 								<Input
 									value={values.password}
@@ -126,6 +127,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									onBlur={handleBlur}
 									passwordVisible={isVisible}
 									onMouseDown={() => setIsVisible((prev) => !prev)}
+									style={{width: '100%'}}
 								/>
 							</div>
 							<div className="flex w-[129px] justify-center items-center flex-shrink-0 ">
