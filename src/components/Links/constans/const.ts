@@ -24,7 +24,8 @@ export const variantClassNames = {
 			" secondary-btn btn-style !bg-grey50 text-white shadow-none pointer-events-none ",
 	},
 	primaryDarkBg: {
-		active: "primary-dark-bg btn-style bg-white text-black border border-black",
+		active:
+			"primary-dark-bg btn-style bg-white text-black border border-black max-w-[288px]",
 		disabled:
 			"primary-dark-bg btn-style !bg-grey50 text-white shadow-none pointer-events-none",
 	},
