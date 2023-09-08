@@ -197,8 +197,12 @@ input {
 	}
 
 	.search-wrapper-error {
-		@apply border border-error50 bg-white rounded flex justify-between max-w-[288px] md:w-[349px] lg:w-[413px] p-[10px] items-center;
+		@apply border border-error50 bg-white rounded flex justify-between md:w-full lg:w-[413px] p-[10px] items-center;
 	}
+
+  .search-wrapper-error::placeholder {
+    @apply text-error50;
+  }
 
 	.search-wrapper-disabled {
 		@apply rounded flex justify-between max-w-[288px] md:w-[349px] lg:w-[413px] p-[10px] items-center outline-none bg-grey30;

@@ -1,7 +1,7 @@
 import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import FilterButton from "../FilterButton/FilterButton";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
@@ -25,6 +25,7 @@ const HeroSearchBar = () => {
 	const [onClickCategory, setOnClickCategory] = useState<string | null>(null);
 	const { isMobile } = useMedia();
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
+	const [triedToSubmit, setTriedToSubmit] = useState(false);
 
 	useEffect(() => {
 		getCategoryList().then((data) => {
@@ -37,7 +38,6 @@ const HeroSearchBar = () => {
 				setCities(data);
 			}
 		});
-
 		const scrollContainer = scrollContainerRef.current;
 
 		const handleScroll = (event: WheelEvent) => {
@@ -56,25 +56,45 @@ const HeroSearchBar = () => {
 		}
 	}, []);
 
+
+	const handleFilterChange = (
+		setFieldValue: (field: string, value: any) => void,
+		fieldName: string,
+		value: any,
+	) => {
+		setFieldValue(fieldName, value);
+		setTriedToSubmit(false);
+	};
+
+	const handleFormSubmit = (
+		values: { search: string; city: string; country: string; category: string },
+		{ setFieldError }: FormikHelpers<typeof values>,
+	) => {
+
+		if (!values.search && triedToSubmit) {
+			setFieldError("search", "Search is empty");
+			return;
+		}
+		const queryParams = new URLSearchParams();
+
+		if (values.search) queryParams.append("q", values.search.toString());
+		if (values.city) queryParams.append("city", values.city);
+		if (values.country) queryParams.append("country", values.country);
+		if (values.category) queryParams.append("category", values.category);
+		queryParams.append("page", "1");
+
+		if (queryParams.toString()) {
+			navigate(`/search?${queryParams}`);
+		}
+	};
+
 	return (
 		<Formik
 			initialValues={{ search: "", city: "", country: "", category: "Всі" }}
-			onSubmit={(values) => {
-				const queryParams = new URLSearchParams();
-
-				if (values.search) queryParams.append("q", values.search);
-				if (values.city) queryParams.append("city", values.city);
-				if (values.country) queryParams.append("country", values.country);
-				if (values.category) queryParams.append("category", values.category);
-				queryParams.append("page", "1");
-
-				if (queryParams.toString()) {
-					navigate(`/search?${queryParams}`);
-				}
-			}}
+			onSubmit={handleFormSubmit}
 		>
-			{({ values, setFieldValue, submitForm, handleChange, handleSubmit }) => (
-				<Form className={'md:w-[720px]'}>
+			{({ values, errors, setFieldValue, handleChange, handleSubmit }) => (
+				<Form className={"md:w-[720px]"}>
 					<div
 						className={
 							"md:flex md:mb-[10px] md:gap-[20px] md:w-full lg:mb-[18px]"
@@ -86,12 +106,14 @@ const HeroSearchBar = () => {
 								name={"search"}
 								value={values.search}
 								onChange={handleChange}
+								onSubmit={() => setTriedToSubmit(true)}
 								placeholder={
 									isMobile
 										? "Ключове слово для пошуку"
 										: "Введіть ключове слово для пошуку"
 								}
 								disabled={false}
+								error={errors.search}
 							/>
 						</div>
 						<div className={"my-6 md:my-0 md:w-[350px] lg:w-[197px]"}>
@@ -103,9 +125,11 @@ const HeroSearchBar = () => {
 								onValueSelected={({ city, country }) => {
 									setFieldValue("city", city);
 									setFieldValue("country", country);
-									submitForm();
+									setTriedToSubmit(false);
+									handleSubmit();
 								}}
 								placeholder={"Країна / місто"}
+
 							/>
 						</div>
 					</div>
@@ -119,7 +143,7 @@ const HeroSearchBar = () => {
 							name={"category"}
 							value={"Всі"}
 							onChange={(e) => {
-								handleChange(e);
+								handleFilterChange(setFieldValue, "category", e.target.value);
 								handleSubmit();
 							}}
 							checked={values.category === "Всі"}
@@ -143,7 +167,7 @@ const HeroSearchBar = () => {
 											}
 										}}
 										onChange={(e) => {
-											handleChange(e);
+											handleFilterChange(setFieldValue, "category", e.target.value);
 											handleSubmit();
 										}}
 										checked={values.category === category.categoryName}
