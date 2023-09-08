@@ -33,7 +33,6 @@ const HeroSearchBar = () => {
 
 	useEffect(() => {
 		const currentUrl = location.pathname;
-		console.log(currentUrl);
 
 		if(currentUrl.includes('/search')) {
 			setPage('search')
@@ -93,8 +92,10 @@ const HeroSearchBar = () => {
 		const queryParams = new URLSearchParams();
 
 		if (values.search) queryParams.append("q", values.search.toString());
-		if (values.city) queryParams.append("city", values.city);
-		if (values.country) queryParams.append("country", values.country);
+		if (values.city && values.country) {
+			queryParams.append("city", values.city)
+			queryParams.append("country", values.country);
+		}
 		if (values.category) queryParams.append("category", values.category);
 		queryParams.append("page", "1");
 
@@ -108,7 +109,7 @@ const HeroSearchBar = () => {
 			initialValues={{ search: "", city: "", country: "", category: "Всі" }}
 			onSubmit={handleFormSubmit}
 		>
-			{({ values, errors, setFieldValue, handleChange, handleSubmit }) => (
+			{({ values, setFieldValue, handleChange, handleSubmit }) => (
 				<Form className={"md:w-[720px]"}>
 					<div
 						className={
@@ -128,7 +129,6 @@ const HeroSearchBar = () => {
 										: "Введіть ключове слово для пошуку"
 								}
 								disabled={false}
-								error={errors.search}
 							/>
 						</div>
 						<div className={"my-6 md:my-0 md:w-[350px] lg:w-[197px]"}>

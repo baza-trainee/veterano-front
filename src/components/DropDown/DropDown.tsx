@@ -9,7 +9,7 @@ interface DropDownProps {
 	cities: LocationType[],
 	value: string,
 	name: string,
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (location: { city: string; country: string }) => void;
 	page?: string
@@ -70,7 +70,9 @@ const DropDown: FC<DropDownProps> = ({
 				}
 				value={inputValue}
 				onChange={e => {
-					onChange(e);
+					if(onChange) {
+						onChange(e);
+					}
 					setCitySelected(false);
 					setInputValue(e.target.value);
 				}}
