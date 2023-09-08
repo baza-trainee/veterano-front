@@ -8,7 +8,7 @@ interface TableHeaderProps{
 }
 const TableHeader: FC<TableHeaderProps> = ({checked, name, onChange, onClick}) => {
 	return (
-		<div className={"flex mt-6 border-b border-black items-center justify-between "}>
+		<div className={"flex mt-6 border-b border-black items-center justify-between font-light "}>
 			<div className={"flex gap-[18px] w-[439px] items-center"}>
 				<div className={"w-[48px] h-[48px] p-3 check-wrapper "}>
 					<label className="custom-checkbox">
