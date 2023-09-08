@@ -392,10 +392,11 @@ input {
 	}
 
 	.placeholder-grey {
-		@apply text-[14px] leading-[185%] text-grey50;
+		@apply text-[14px] leading-[26px] text-grey50;
 	}
+
 	.placeholder-error {
-		@apply text-[14px] leading-[185%] text-error30;
+		@apply text-[14px] leading-[26px] text-error30;
 	}
 
 	.admin-filter-input:focus-within > input {

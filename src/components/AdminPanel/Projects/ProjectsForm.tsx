@@ -116,7 +116,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 											name={"description"}
 											value={values.description}
 											onChange={handleChange}
-											className={`resize-none pt-[10px] pl-[10px] pr-[53px] w-full h-[548px] border rounded ${errors.description ? "placeholder:text-error30" : "placeholder:text-grey50"} placeholder:text-[14px] `}
+											className={`resize-none pt-[10px] font-light pl-[10px] pr-[53px] w-full h-[548px] border rounded ${errors.description ? "placeholder:text-error30" : "placeholder:text-grey50"} placeholder:text-[14px] `}
 											placeholder={errors.description ? errors.description as string : "Введіть текст тут"}
 										/>
 							</div>
@@ -128,7 +128,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									value={values.city}
 									name={"city"}
 									onChange={handleChange}
-									placeholder={"Місто / країна"}
+									placeholder={"Країна / місто"}
 									onValueSelected={({ city, country }) => {
 										setFieldValue("city", city);
 										setFieldValue("country", country);

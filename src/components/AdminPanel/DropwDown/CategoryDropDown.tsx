@@ -56,7 +56,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 
 	return (
 
-		<label className={"admin-filter-input w-full h-[48px]"}>
+		<label className={"admin-filter-input w-full h-[48px] text-[16px] leading-[24px] font-light"}>
 			<input
 				placeholder={error ? error : placeholder}
 				value={inputValue}
@@ -71,7 +71,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 					setInputValue(e.target.value);
 				}}
 				name={name}
-				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
+				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey placeholder:text-[14px]'}
 			/>
 			{isOpen ?
 				<BsChevronUp
