@@ -5,13 +5,13 @@ import Button from "../../components/Button/Button";
 import { login } from "../../api/AuthAPI";
 import Typography from "../../components/Typography/Typography";
 import { useEffect, useState } from "react";
-import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/lab";
 
 const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	const navigate = useNavigate();
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const [isError, setIsError] = useState<boolean>(false);
+	const [isError, setIsError] = useState<boolean>(true);
 	const validationSchema = object({
 		email: string()
 			.email("Введіть дійсний email")
@@ -32,6 +32,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 
 	return (
 		<>
+
 			<div
 				className={
 					"rounded-[4px] px-[32px] py-[64px] bg-yellow50 w-[518px]" +
@@ -40,6 +41,37 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 				}
 				{...props}
 			>
+
+					{isError && (
+						<Alert
+							sx={{
+								position: "absolute",
+								top: "-90px",
+								fontFamily: "e-Ukraine, sans-serif",
+								backgroundColor: "#D30018",
+								padding: "20px 40px",
+								color: '#FCFCFC',
+								height: "66px",
+								display: 'flex',
+								'& .MuiAlert-icon': {
+									padding: '0',
+									fontSize: '24px',
+									marginRight: '16px',
+									opacity: '1'
+								},
+								'& .MuiAlert-message': {
+									padding: '0',
+									fontSize: '14px',
+									fontWeight: '300',
+									lineHeight: '26px',
+								},
+							}}
+							variant="filled"
+							severity="error"
+						>
+							Невірний логін або пароль. Перевірте дані
+						</Alert>
+					)}
 				<Typography variant="h2" className={'px-[20px]'}>Вхід</Typography>
 				<Formik
 					initialValues={{ email: "", password: "" }}
@@ -65,8 +97,8 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 					validateOnBlur={true}
 				>
 					{({ values, handleBlur, handleChange, errors, touched, isValid }) => (
-						<Form className="flex flex-col gap-[92px] px-[20px] items-center">
-							<div className="flex flex-col gap-[32px] shrink-0">
+						<Form className="flex flex-col gap-[45px] px-[20px] items-center ">
+							<div className="flex flex-col gap-2 mb-[55px] shrink-0">
 								<Input
 									value={values.email}
 									error={
@@ -96,7 +128,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									onMouseDown={() => setIsVisible((prev) => !prev)}
 								/>
 							</div>
-							<div className="flex w-[129px] justify-center items-center ">
+							<div className="flex w-[129px] justify-center items-center flex-shrink-0 ">
 								<Button
 									disabled={!isValid}
 									size="large"
@@ -110,20 +142,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 					)}
 				</Formik>
 			</div>
-			{isError && (
-				<Alert
-					sx={{
-						position: "absolute",
-						bottom: "40px",
-						fontFamily: "e-Ukraine, sans-serif",
-						bgcolor: "#D30018",
-					}}
-					variant="filled"
-					severity="error"
-				>
-					Невірний логін або пароль. Перевірте дані
-				</Alert>
-			)}
+
 		</>
 	);
 };
