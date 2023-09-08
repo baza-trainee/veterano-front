@@ -11,25 +11,36 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({ data }) => {
-	const [activeIndex, setActiveIndex] = useState<number | null>(null);
+	const [activeIndices, setActiveIndices] = useState<number[]>([]);
 
 	const toggleAccordion = (index: number) => {
-		setActiveIndex(activeIndex === index ? null : index);
+		const isActive = activeIndices.includes(index);
+
+		if (isActive) {
+			setActiveIndices(activeIndices.filter((i) => i !== index));
+		} else {
+			setActiveIndices([...activeIndices, index]);
+		}
 	};
 
 	return (
 		<div className="space-y-4">
 			{data.map((item, index) => (
-				<div key={index}>
+				<div
+					key={index}
+					className={`${
+						!activeIndices.includes(index) ? "" : "border-b border-black"
+					}`}
+				>
 					<div
 						className={`flex items-center justify-between cursor-pointer pb-3 pt-3 ${
-							activeIndex === index ? "" : "border-b border-black"
+							activeIndices.includes(index) ? "" : "border-b border-black"
 						}`}
 						onClick={() => toggleAccordion(index)}
 					>
 						<div className="text-lg text-black font-medium">{item.title}</div>
 						<div>
-							{activeIndex === index ? (
+							{activeIndices.includes(index) ? (
 								<ArrowButton disabled={false} direction="top" variant="faq" />
 							) : (
 								<ArrowButton
@@ -40,8 +51,8 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
 							)}
 						</div>
 					</div>
-					{activeIndex === index && (
-						<div className="font-light pt-4 text-grey100 md:max-w-[675px] lg:max-w-[1070px]">
+					{activeIndices.includes(index) && (
+						<div className="font-light pt-2 pb-6 text-grey100 md:max-w-[675px] lg:max-w-[1070px] ">
 							{item.content}
 						</div>
 					)}
