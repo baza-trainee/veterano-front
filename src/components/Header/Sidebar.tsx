@@ -48,7 +48,7 @@ const Sidebar: FC<SidebarProps> = ({ toggleMenu }) => {
 				<Link
 					to="https://secure.wayforpay.com/button/b004f79dab8cb"
 					variant="primary"
-					className="w-full h-48px"
+					className="w-full h-[48px] leading-7 text-[18px]"
 				>
 					Підтримати
 				</Link>
