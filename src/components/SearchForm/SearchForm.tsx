@@ -2,7 +2,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import FilterButton from "../FilterButton/FilterButton";
 import { Form, Formik, FormikHelpers } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
@@ -26,6 +26,21 @@ const HeroSearchBar = () => {
 	const { isMobile } = useMedia();
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const [triedToSubmit, setTriedToSubmit] = useState(false);
+	const [page, setPage] = useState('')
+
+	const location = useLocation();
+
+
+	useEffect(() => {
+		const currentUrl = location.pathname;
+		console.log(currentUrl);
+
+		if(currentUrl.includes('/search')) {
+			setPage('search')
+		}
+
+
+	}, [location])
 
 	useEffect(() => {
 		getCategoryList().then((data) => {
@@ -129,7 +144,7 @@ const HeroSearchBar = () => {
 									handleSubmit();
 								}}
 								placeholder={"Країна / місто"}
-
+								page={page}
 							/>
 						</div>
 					</div>
