@@ -33,7 +33,7 @@ const CookiesPanel = () => {
 					сервісу. Якщо ви погоджуєтесь з їхнім використанням, натисніть ОК.
 					Більше інформації в{" "}
 					<Link
-						to={"/files/pol_conf.pdf"}
+						to={"/privacy"}
 						variant={"underlineFooter"}
 						style={{ color: "black" }}
 					>
