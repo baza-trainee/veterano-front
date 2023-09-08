@@ -30,15 +30,17 @@ const Checkbox: React.FC<CheckboxProps> = ({
 			/>
 			<label
 				htmlFor={id}
-				className="flex gap-[20px] items-center justi cursor-pointer peer font-light text-[14px] leading-[26px] md:text-[18px] md:leading-[28px]"
+				className="flex gap-2 cursor-pointer peer font-light text-[14px] leading-[26px] md:text-[18px] md:leading-[28px]"
 			>
+			<div className={'w-[48px] h-[48px] ml-[-10px] flex justify-center'}>
 				<BiCheck
 					fill={checked ? "black" : "transparent"}
 					className={
-						"block rounded-[4px]  border-black border-[2px] w-[24px] h-[24px] " +
+						"block rounded-[4px] border-black border-[2px] w-[24px] h-[24px] " +
 						(checked && " bg-yellow100")
 					}
 				/>
+			</div>
 				{label || children}
 			</label>
 		</>
