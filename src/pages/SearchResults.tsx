@@ -12,7 +12,7 @@ import Typography from "../components/Typography/Typography.tsx";
 import { useMedia } from "../hooks/useMedia.tsx";
 
 interface Card {
-	description: string;
+	text: string;
 	title: string;
 	url: string;
 	imageSrc: string;
@@ -54,7 +54,6 @@ const SearchResults = () => {
 		};
 
 		searchRequest(params).then((data) => {
-			console.log(data);
 			convertBackDataToProjectCardProps(data.cards);
 			setResults({
 				...data,
@@ -126,7 +125,7 @@ const SearchResults = () => {
 											imageSrc={card.imageSrc}
 											url={card.url}
 											title={card.title}
-											text={card.description}
+											text={card.text}
 											variant={isMobile ? "carousel" : "search"}
 										/>
 									))}
