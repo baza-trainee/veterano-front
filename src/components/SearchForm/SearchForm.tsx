@@ -2,7 +2,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import DropDown from "../DropDown/DropDown";
 import FilterButton from "../FilterButton/FilterButton";
 import { Form, Formik, FormikHelpers } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { getCategoryList, getCitiesList } from "../../api/SearchAPI.tsx";
 import React from "react";
@@ -26,6 +26,20 @@ const HeroSearchBar = () => {
 	const { isMobile } = useMedia();
 	const scrollContainerRef = useRef<HTMLDivElement>(null);
 	const [triedToSubmit, setTriedToSubmit] = useState(false);
+	const [page, setPage] = useState('')
+
+	const location = useLocation();
+
+
+	useEffect(() => {
+		const currentUrl = location.pathname;
+
+		if(currentUrl.includes('/search')) {
+			setPage('search')
+		}
+
+
+	}, [location])
 
 	useEffect(() => {
 		getCategoryList().then((data) => {
@@ -78,8 +92,10 @@ const HeroSearchBar = () => {
 		const queryParams = new URLSearchParams();
 
 		if (values.search) queryParams.append("q", values.search.toString());
-		if (values.city) queryParams.append("city", values.city);
-		if (values.country) queryParams.append("country", values.country);
+		if (values.city && values.country) {
+			queryParams.append("city", values.city)
+			queryParams.append("country", values.country);
+		}
 		if (values.category) queryParams.append("category", values.category);
 		queryParams.append("page", "1");
 
@@ -93,7 +109,7 @@ const HeroSearchBar = () => {
 			initialValues={{ search: "", city: "", country: "", category: "Всі" }}
 			onSubmit={handleFormSubmit}
 		>
-			{({ values, errors, setFieldValue, handleChange, handleSubmit }) => (
+			{({ values, setFieldValue, handleChange, handleSubmit }) => (
 				<Form className={"md:w-[720px]"}>
 					<div
 						className={
@@ -113,7 +129,6 @@ const HeroSearchBar = () => {
 										: "Введіть ключове слово для пошуку"
 								}
 								disabled={false}
-								error={errors.search}
 							/>
 						</div>
 						<div className={"my-6 md:my-0 md:w-[350px] lg:w-[197px]"}>
@@ -129,7 +144,7 @@ const HeroSearchBar = () => {
 									handleSubmit();
 								}}
 								placeholder={"Країна / місто"}
-
+								page={page}
 							/>
 						</div>
 					</div>
