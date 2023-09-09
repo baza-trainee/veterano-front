@@ -32,12 +32,12 @@ const ImageInput: FC<ImageInput>= ({
 		onChange(preview);
 	}, [preview]);
 
-	console.log('preview', preview);
+
 
 	useEffect(() => {
 		setPreview(src);
 	}, [src]);
-
+	console.log('preview', preview);
 
 	return (
 		<>
@@ -45,6 +45,16 @@ const ImageInput: FC<ImageInput>= ({
 				<ImageCroper
 					aspect={width / height}
 					src={file && URL.createObjectURL(file)}
+					onClose={(url: string) => {
+						setPreview(url);
+						setIsCropeningImg(false);
+					}}
+				/>
+			)}
+			{isCropeningImg && src && (
+				<ImageCroper
+					aspect={width / height}
+					src={src}
 					onClose={(url: string) => {
 						setPreview(url);
 						setIsCropeningImg(false);
