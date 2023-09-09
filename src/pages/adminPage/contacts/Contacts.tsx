@@ -13,7 +13,7 @@ export const Contacts = () => {
 			<div className="pl-9 pr-[80px] pt-12 ">
 				<Formik
 					validationSchema={validationSchema}
-					initialValues={{ phone: "38", secondPhone: "38", email: "" }}
+					initialValues={{ phone: "", secondPhone: "", email: "" }}
 					onSubmit={(values, { resetForm }) => {
 						submitForm(values);
 						resetForm();
@@ -25,9 +25,11 @@ export const Contacts = () => {
 								<Typography variant="h2" className="font-medium text-2xl">
 									Редагувати контакти
 								</Typography>
-								<Button variant="primary" type="submit">
-									Опублікувати
-								</Button>
+								<div className="hidden md:block">
+									<Button variant="primary" type="submit">
+										Опублікувати
+									</Button>
+								</div>
 							</div>
 							<div className="flex flex-col gap-4 max-w-[739px]">
 								<Field as={AdminInput} placeholder="Телефон" name="phone" />
@@ -58,6 +60,11 @@ export const Contacts = () => {
 									component="div"
 									className="text-red-500"
 								/>
+							</div>
+							<div className="block md:hidden mt-4">
+								<Button variant="primary" type="submit">
+									Опублікувати
+								</Button>
 							</div>
 						</Form>
 					)}
