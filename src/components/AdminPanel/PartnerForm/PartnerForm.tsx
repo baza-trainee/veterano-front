@@ -35,7 +35,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 			.required("Поле обов'язкове до заповнення"),
 	});
 
-
 	return (
 		<Formik
 			initialValues={{
@@ -54,7 +53,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 					if (id) {
 						const data = { id, image: base64Image, ...rest }
 						editPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate("/admin/partners", { state: { refresh: true } }));
 					} else {
 						const data = { image: base64Image, ...rest }
 						createPartner(data)

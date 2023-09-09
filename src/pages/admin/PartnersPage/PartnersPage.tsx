@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllPartners, removeCheckedPartners, removePartner } from "../../../api/PartnersAPI.ts";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
@@ -33,8 +33,22 @@ const PartnersPage = () => {
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
+	const location = useLocation();
+	const refresh = location.state?.refresh;
+
+
 	useEffect(() => {
-		navigate(`/admin/partners?page=${currentPage}`, { replace: true });
+		if (refresh) {
+			getAllPartners(currentPage, 7)
+				.then((resp) => {
+					setPartners(resp.partnerDTOList);
+					setCheckedItems(new Array(resp.partnerDTOList.length).fill(false));
+					setTotalPages(resp.totalPages);
+				});
+		}
+	}, [refresh]);
+
+	useEffect(() => {
 		getAllPartners(currentPage, 7)
 			.then((resp) => {
 				setPartners(resp.partnerDTOList);
@@ -43,12 +57,18 @@ const PartnersPage = () => {
 			});
 	}, [currentPage]);
 
+
+
+
+
 	useEffect(() => {
-		getAllPartners(currentPage, 100)
+		getAllPartners(1, 100)
 			.then((resp) => {
 				setSearchData(resp.partnerDTOList);
 			});
 	}, []);
+
+
 
 	const handleCheckedChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedItems = [...checkedItems];

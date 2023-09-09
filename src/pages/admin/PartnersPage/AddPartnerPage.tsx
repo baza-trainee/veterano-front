@@ -15,14 +15,19 @@ const AddPartnerPage = () => {
 
 	useEffect(() => {
 		if (id) {
-			getPartnerById(Number(id)).then((data) => {
+			getPartnerById(Number(id))
+				.then((data) => {
 				setPartnerData(data);
 				setInitialImage(
 					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${data.image}`
 				);
-			});
+			})
+				.catch((error) => {
+					console.error(error);
+				});
 		}
 	}, [id]);
+
 	return (
 		<>
 			<div className="flex items-center pl-[36px] pr-[80px] py-[38px] h-[118px] bg-grey100 place-content-between">

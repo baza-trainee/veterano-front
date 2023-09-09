@@ -153,15 +153,13 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 								<div className="mb-[22px] bg-white rounded">
 									<ImageInput
 										id="image"
+										src={image}
 										name="image"
 										className="bg-[white]"
-										src={image}
+										onChange={(img) => setFieldValue("image", img)}
+										error={errors.image}
 										width={265}
 										height={232}
-										onChange={(image) => {
-											setFieldValue("image", image);
-										}}
-										error={errors.image}
 									/>
 								</div>
 								<PublishComponent

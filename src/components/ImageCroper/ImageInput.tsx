@@ -15,9 +15,7 @@ interface ImageInput {
 	page? : string;
 }
 const ImageInput: FC<ImageInput>= ({
-	onChange = (preview: string) => {
-		console.log(preview);
-	},
+	onChange,
 	id = "",
 	className = "",
 	src = "",
@@ -27,13 +25,12 @@ const ImageInput: FC<ImageInput>= ({
 
 }) => {
 	const [isCropeningImg, setIsCropeningImg] = useState<boolean>(false);
-	const [preview, setPreview] = useState<string>("");
+	const [preview, setPreview] = useState<string>(src);
 	const [file, setFile] = useState<Blob | null>();
 
 	useEffect(() => {
 		onChange(preview);
 	}, [preview]);
-
 
 	return (
 		<>

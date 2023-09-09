@@ -11,7 +11,7 @@ import { Alert } from "@mui/lab";
 const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	const navigate = useNavigate();
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const [isError, setIsError] = useState<boolean>(true);
+	const [isError, setIsError] = useState<boolean>(false);
 	const validationSchema = object({
 		email: string()
 			.email("Введіть дійсний email")

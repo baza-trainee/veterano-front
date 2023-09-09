@@ -24,7 +24,6 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 	const [categorySelected, setCategorySelected] = useState(false);
 	const [inputValue, setInputValue] = useState(value);
 
-
 	useEffect(() => {
 		if (inputValue) {
 			setIsOpen(false);
