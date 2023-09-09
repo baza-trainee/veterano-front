@@ -1,12 +1,12 @@
 import { $host } from "./index.ts";
 
-interface PartnerType{
+interface PartnerType {
 	id?: number,
-	partnerName: string,
-	image: string,
-	url: string,
-	publication: string,
-	isEnabled: boolean
+	partnerName?: string,
+	image?: string,
+	url?: string,
+	publication?: string,
+	isEnabled?: boolean
 }
 
 export const createPartner = async ({ partnerName, image, url, publication, isEnabled }: PartnerType) => {
@@ -16,7 +16,7 @@ export const createPartner = async ({ partnerName, image, url, publication, isEn
 			image,
 			url,
 			publication,
-			isEnabled
+			isEnabled,
 		});
 		return data;
 	} catch (e) {
@@ -30,8 +30,8 @@ export const getAllPartners = async (currentPage: number, size: number) => {
 		const { data } = await $host.get("info/partner/get-all", {
 			params: {
 				page: currentPage,
-				size: size
-			}
+				size: size,
+			},
 		});
 		return data;
 	} catch (e) {

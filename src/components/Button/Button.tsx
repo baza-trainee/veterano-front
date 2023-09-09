@@ -16,9 +16,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
 	children = "Click",
-	onClick = () => {
-		console.log("clicked");
-	},
+	onClick,
 	className = "",
 	variant = "primary",
 	size = "small",
