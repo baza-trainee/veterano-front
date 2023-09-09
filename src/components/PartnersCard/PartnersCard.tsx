@@ -9,7 +9,7 @@ const PartnersCard: FC<PartnersCardProps> = ({image}) => {
 			backgroundImage: `url(${image})`,
 			backgroundPosition: 'center',
 			backgroundSize: 'cover'
-		}} className={'w-full h-[124px] md:h-[72px] lg:h-[94px]'}>
+		}} className={'w-[200px] md:w-full h-[124px] md:h-[72px] lg:h-[94px]'}>
 		</div>
 	);
 };
