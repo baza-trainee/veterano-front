@@ -2,15 +2,17 @@ import { BsFilter } from "react-icons/bs";
 import React, { FC, useEffect, useState } from "react";
 import { LocationType } from "../SearchForm/SearchForm.tsx";
 import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
+import NavigationLink from "../Links/NavigationLink.tsx";
 
 
 interface DropDownProps {
 	cities: LocationType[],
 	value: string,
 	name: string,
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (location: { city: string; country: string }) => void;
+	page?: string
 }
 
 const DropDown: FC<DropDownProps> = ({
@@ -20,6 +22,7 @@ const DropDown: FC<DropDownProps> = ({
 																			 placeholder,
 																			 name,
 																			 onValueSelected,
+																			 page,
 																		 }) => {
 
 	const results = cities.filter((cityObj) =>
@@ -39,11 +42,6 @@ const DropDown: FC<DropDownProps> = ({
 		}
 	}, [value, citySelected]);
 
-	useEffect(() => {
-		if (results.length === 0) {
-			setIsOpen(false);
-		}
-	}, [results]);
 
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country });
@@ -55,11 +53,9 @@ const DropDown: FC<DropDownProps> = ({
 	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter" && inputValue.length > 0) {
 			event.preventDefault();
-			// Якщо натиснута клавіша Enter при кастомному вводі, виконайте пошук
-			onValueSelected({ city: value, country: "" });
-			setCitySelected(true);
 		}
 	};
+
 	return (
 
 		<label
@@ -74,7 +70,9 @@ const DropDown: FC<DropDownProps> = ({
 				}
 				value={inputValue}
 				onChange={e => {
-					onChange(e);
+					if(onChange) {
+						onChange(e);
+					}
 					setCitySelected(false);
 					setInputValue(e.target.value);
 				}}
@@ -83,13 +81,13 @@ const DropDown: FC<DropDownProps> = ({
 				name={name}
 			/>
 			<BsFilter size={24} color={value.length > 1 ? "white" : ""} />
-			{isOpen &&
+			{isOpen && results.length > 0 ? (
 				<ul id="cities" className={"filter-drop-down z-10"}>
 					{results.map((item, index) => (
 						<li
 							key={index}
 							onMouseDown={() => {
-								listOnClickHandler(item.city, item.country)
+								listOnClickHandler(item.city, item.country);
 								setActiveIndex(index);
 							}}
 							onMouseUp={() => setActiveIndex(null)}
@@ -101,11 +99,27 @@ const DropDown: FC<DropDownProps> = ({
 										cursor: "pointer",
 									}
 									: {}
-							}>
+							}
+						>
 							{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
 						</li>
 					))}
-				</ul>}
+				</ul>
+			) : (
+				results.length === 0 &&
+				<div className={"filter-drop-down z-10 p-[20px] flex justify-center items-center"}>
+					{page === 'search'
+						?
+						<p className={"text-[14px] leading-6 font-light text-center"}>
+							Нажаль, зараз у нас немає проєктів у данному регіоні.</p> :
+						<p className={"text-[14px] leading-6 font-light text-center"}>
+							Нажаль, зараз у нас немає проєктів у данному регіоні. Ви можете переглянути всі доступні проєкти за <NavigationLink to={'search'} variant={'underlineFooter'} style={{fontSize: '14px'}}>посиланням</NavigationLink>
+						</p>
+
+					}
+
+				</div>
+			)}
 		</label>
 
 	);
