@@ -33,8 +33,8 @@ const PartnersPage = () => {
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
+
 	useEffect(() => {
-		navigate(`/admin/partners?page=${currentPage}`, { replace: true });
 		getAllPartners(currentPage, 7)
 			.then((resp) => {
 				setPartners(resp.partnerDTOList);
@@ -44,7 +44,7 @@ const PartnersPage = () => {
 	}, [currentPage]);
 
 	useEffect(() => {
-		getAllPartners(currentPage, 100)
+		getAllPartners(1, 100)
 			.then((resp) => {
 				setSearchData(resp.partnerDTOList);
 			});
@@ -69,19 +69,19 @@ const PartnersPage = () => {
 				<div className={"min-h-[609px]"}>
 					<TableHeader
 						checked={isAllChecked}
-						name={'Назва'}
+						name={"Назва"}
 						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, partners.length)}
-						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, 'id')}
-						/>
-					{filteredProjects.length < 1 && <Search404/>}
-						{filteredProjects && filteredProjects.map((partner, index) =>
+						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, "id")}
+					/>
+					{filteredProjects.length < 1 && <Search404 />}
+					{filteredProjects && filteredProjects.map((partner, index) =>
 						<React.Fragment key={partner.id}>
 							<ListElement
 								id={partner.id}
 								name={capitalizeFirstLetter(partner.partnerName)}
 								status={partner.isEnabled ? "активний" : "неактивний"}
 								date={partner.publication}
-								removeHandler={() => handleRemove(partner.id, setPartners, 'id', removePartner)}
+								removeHandler={() => handleRemove(partner.id, setPartners, "id", removePartner)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
 								editHandler={() => navigate(`/admin/partners/${partner.id}`)}

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { CardType } from "./interfaces/CardType.ts";
 import ProjectsForm from "../../../components/AdminPanel/Projects/ProjectsForm.tsx";
 
+
 const EditProjectPage = () => {
 	const [cardInfo, setCardInfo] = useState<CardType>();
 	const { id } = useParams<string>();

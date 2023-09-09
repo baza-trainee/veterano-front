@@ -16,27 +16,20 @@ interface PartnerType {
 
 const PartnersSection = () => {
 	const { isDesktop, isTablet, isMobile } = useMedia();
-	const [images, setImages] = useState<string[]>();
+	const [items, setItems] = useState<PartnerType[]>();
 
 	useEffect(() => {
 		searchPartners().then((data) => {
-			const arrayImg = data.partnerDTOList.map(
-				(partner: PartnerType) =>
-					`${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
-						partner.image
-					}`
-			);
-			setImages(arrayImg);
+			console.log(data);
+			setItems(data.partnerDTOList);
 		});
 	}, []);
-
-	const itemsObjects = images && images.map((image) => ({ image }));
 
 	return (
 		<Section title={"Партнери"} className={"bg-white "}>
 			{isDesktop && (
 				<Carousel
-					items={itemsObjects || []}
+					items={items || []}
 					gap={52}
 					slidesPerView={5}
 					component={PartnersCard}
@@ -45,7 +38,7 @@ const PartnersSection = () => {
 
 			{isTablet && (
 				<Carousel
-					items={itemsObjects || []}
+					items={items || []}
 					gap={21}
 					slidesPerView={4}
 					component={PartnersCard}
@@ -54,7 +47,7 @@ const PartnersSection = () => {
 
 			{isMobile && (
 				<Carousel
-					items={itemsObjects || []}
+					items={items || []}
 					gap={1}
 					slidesPerView={1}
 					component={PartnersCard}

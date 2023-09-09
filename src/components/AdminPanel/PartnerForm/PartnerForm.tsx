@@ -1,7 +1,7 @@
 import AdminInput from "../Input/AdminInput.tsx";
 import ImageInput from "../../ImageCroper/ImageInput.tsx";
 import * as Yup from "yup";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useFormatDate } from "../../../hooks/useFormatDate.ts";
 import { createPartner, editPartner } from "../../../api/PartnersAPI.ts";
 import { blobUrlToBase64 } from "../BlobToBase64.ts";
@@ -15,12 +15,26 @@ interface PartnerFormProps {
 	url?: string;
 	image?: string;
 	publication?: string;
-	isEnabled?: boolean
+	isEnabled?: boolean;
 }
-const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerName, url, image }) => {
+
+const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partnerName, url, image }) => {
 
 	const formatDate = useFormatDate();
 	const navigate = useNavigate();
+	const [initialState, setInitialState] = useState<PartnerFormProps>({});
+
+	useEffect(() => {
+		setInitialState({
+			id: id || 0,
+			partnerName: partnerName || "",
+			url: url || "",
+			image: image || "",
+			isEnabled: isEnabled || true,
+			publication: publication || formatDate,
+		});
+	}, [id]);
+
 
 	const validationSchema = Yup.object({
 		partnerName: Yup.string()
@@ -35,28 +49,38 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 			.required("Поле обов'язкове до заповнення"),
 	});
 
-
 	return (
 		<Formik
 			initialValues={{
-				id: id || 0,
+				id: id || null,
 				partnerName: partnerName || "",
 				url: url || "",
 				image: image || "",
 				isEnabled: isEnabled || true,
-				publication: publication || formatDate
+				publication: publication || formatDate,
 			}}
 			validationSchema={validationSchema}
 			onSubmit={async (values, { setSubmitting }) => {
 				try {
-					const { id, image, ...rest } = values;
-					const base64Image = await blobUrlToBase64(image);
 					if (id) {
-						const data = { id, image: base64Image, ...rest }
+						const changedValues = Object.keys(initialState).reduce<Partial<PartnerFormProps>>((acc, key) => {
+
+							if ((initialState as any)[key] !== (values as any)[key]) {
+								(acc as any)[key] = (values as any)[key];
+							}
+							return acc;
+						}, {});
+
+						const { image, ...rest } = changedValues;
+						const base64Image = image ? await blobUrlToBase64(image) : undefined;
+						const data = { id, image: base64Image, ...rest };
+
 						editPartner(data)
 							.then(() => navigate("/admin/partners"));
 					} else {
-						const data = { image: base64Image, ...rest }
+						const { id, image, ...rest } = values;
+						const base64Image = await blobUrlToBase64(image);
+						const data = { image: base64Image, ...rest };
 						createPartner(data)
 							.then(() => navigate("/admin/partners"));
 					}
@@ -80,12 +104,12 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled,publication, partnerN
 						<div className="flex flex-col w-[738px]">
 							<div className="mb-[22px]">
 								<AdminInput
+									type={"text"}
 									value={values.partnerName}
-									error={errors.partnerName}
+									placeholder={"Додати назву"}
 									name={"partnerName"}
 									onChange={handleChange}
-									placeholder={"Додати назву"}
-									type={"text"}
+									error={errors.partnerName}
 								/>
 							</div>
 							<div className="mb-[22px]">
