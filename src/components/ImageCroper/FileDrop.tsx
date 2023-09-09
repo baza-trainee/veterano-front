@@ -29,6 +29,7 @@ export const FileDrop: React.FC<FileDropProps> = ({
 
 }) => {
 	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
 	useEffect(() => {
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
 	}, [acceptedFiles]);
