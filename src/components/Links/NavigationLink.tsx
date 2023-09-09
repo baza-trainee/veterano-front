@@ -14,7 +14,6 @@ const NavigationLink: FC<LinkPropsType> = ({
 	const NavLinkClass = size ? sizeClassNames[size] : "";
 	const variantStyles = variantClassNames[variant] || "";
 
-
 	let variantClassName = "";
 	if (typeof variantStyles === "string") {
 		variantClassName = variantStyles;
@@ -28,7 +27,7 @@ const NavigationLink: FC<LinkPropsType> = ({
 		<>
 			<NavLink
 				to={to}
-				className={`${variantClassName} ${NavLinkClass}`}
+				className={`h-[48px] md:px-[32px] ${variantClassName} ${NavLinkClass}`}
 				style={({ isActive }) => ({
 					fontWeight: isActive ? "bold" : "",
 					cursor: isActive ? "default" : "",
