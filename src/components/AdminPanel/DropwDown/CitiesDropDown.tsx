@@ -22,6 +22,7 @@ interface ResultsType {
 
 const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, value, placeholder, name, onValueSelected }) => {
 
+
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
