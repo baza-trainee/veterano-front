@@ -2,13 +2,13 @@ import { $host } from "./index.ts";
 
 interface CardType {
 	cardId?: number;
-	title: string;
-	description: string;
-	image: string;
-	url: string;
-	categories: { categoryName: string }[];
-	publication: string;
-	location: {
+	title?: string;
+	description?: string;
+	image?: string;
+	url?: string;
+	categories?: { categoryName: string }[];
+	publication?: string;
+	location?: {
 		city: string;
 		country: string;
 	};

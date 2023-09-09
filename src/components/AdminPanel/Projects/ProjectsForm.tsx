@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import { validationSchema } from "../../../pages/admin/ProjectsPage/validationShema.ts";
 import { createCard, editCard } from "../../../api/CardsApi.ts";
@@ -28,21 +28,36 @@ interface ProjectsFormProps {
 }
 
 const ProjectsForm: FC<ProjectsFormProps> = ({
- type,
- cardId,
- title,
- url,
- description,
- city,
- country,
- image,
- isEnabled,
- publication,
- category,
- }) => {
+																							 type,
+																							 cardId,
+																							 title,
+																							 url,
+																							 description,
+																							 city,
+																							 country,
+																							 image,
+																							 isEnabled,
+																							 publication,
+																							 category,
+																						 }) => {
 	const formatDate = useFormatDate();
 	const navigate = useNavigate();
+	const [initialState, setInitialState] = useState<ProjectsFormProps>({});
 
+	useEffect(() => {
+		setInitialState({
+			cardId: cardId || 0,
+			title: title || "",
+			url: url || "",
+			description: description || "",
+			city: city || "",
+			country: country || "",
+			image: image || "",
+			isEnabled: isEnabled || true,
+			publication: publication || formatDate,
+			category: category || "",
+		});
+	}, []);
 	return (
 		<Formik
 			initialValues={{
@@ -60,17 +75,30 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			validationSchema={validationSchema}
 			onSubmit={async (values, { setSubmitting }) => {
 				try {
-					const { cardId, isEnabled, city, country, category, image, ...rest } = values;
-					const location = { city, country };
-					const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
-					const base64Image = await blobUrlToBase64(image);
-
 					if (values && type === "add") {
+						const { isEnabled, city, country, category, image, ...rest } = values;
+						const location = { city, country };
+						const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
+						const base64Image = await blobUrlToBase64(image);
 						const cardData = { ...rest, image: base64Image, location, categories: categoryArray };
 						createCard(cardData)
 							.then(() => navigate("/admin/projects"));
 					} else {
-						const cardData = { ...rest, cardId, isEnabled, image: base64Image, location, categories: categoryArray };
+
+						const changedValues = Object.keys(initialState).reduce<Partial<ProjectsFormProps>>((acc, key) => {
+							if ((initialState as any)[key] !== (values as any)[key]) {
+								(acc as any)[key] = (values as any)[key];
+							}
+							return acc;
+						}, {});
+
+						const { city, country, category, image, ...rest } = changedValues;
+
+						const location = city && country ? { city, country } : undefined;
+						const categoryArray = category ? category.split(",").map(item => ({ categoryName: item.trim() })) : undefined;
+						const base64Image = image ? await blobUrlToBase64(image) : undefined;
+
+						const cardData = { cardId, ...rest, image: base64Image, location, categories: categoryArray };
 						editCard(cardData)
 							.then(() => navigate("/admin/projects"));
 					}

@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAllPartners, removeCheckedPartners, removePartner } from "../../../api/PartnersAPI.ts";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
@@ -33,20 +33,6 @@ const PartnersPage = () => {
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
 
-	const location = useLocation();
-	const refresh = location.state?.refresh;
-
-
-	useEffect(() => {
-		if (refresh) {
-			getAllPartners(currentPage, 7)
-				.then((resp) => {
-					setPartners(resp.partnerDTOList);
-					setCheckedItems(new Array(resp.partnerDTOList.length).fill(false));
-					setTotalPages(resp.totalPages);
-				});
-		}
-	}, [refresh]);
 
 	useEffect(() => {
 		getAllPartners(currentPage, 7)
@@ -57,18 +43,12 @@ const PartnersPage = () => {
 			});
 	}, [currentPage]);
 
-
-
-
-
 	useEffect(() => {
 		getAllPartners(1, 100)
 			.then((resp) => {
 				setSearchData(resp.partnerDTOList);
 			});
 	}, []);
-
-
 
 	const handleCheckedChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
 		const newCheckedItems = [...checkedItems];
@@ -89,19 +69,19 @@ const PartnersPage = () => {
 				<div className={"min-h-[609px]"}>
 					<TableHeader
 						checked={isAllChecked}
-						name={'Назва'}
+						name={"Назва"}
 						onChange={handleAllCheckedChange(setAllChecked, setCheckedItems, partners.length)}
-						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, 'id')}
-						/>
-					{filteredProjects.length < 1 && <Search404/>}
-						{filteredProjects && filteredProjects.map((partner, index) =>
+						onClick={() => handleRemoveSelected(partners, checkedItems, setPartners, setCheckedItems, removeCheckedPartners, "id")}
+					/>
+					{filteredProjects.length < 1 && <Search404 />}
+					{filteredProjects && filteredProjects.map((partner, index) =>
 						<React.Fragment key={partner.id}>
 							<ListElement
 								id={partner.id}
 								name={capitalizeFirstLetter(partner.partnerName)}
 								status={partner.isEnabled ? "активний" : "неактивний"}
 								date={partner.publication}
-								removeHandler={() => handleRemove(partner.id, setPartners, 'id', removePartner)}
+								removeHandler={() => handleRemove(partner.id, setPartners, "id", removePartner)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
 								editHandler={() => navigate(`/admin/partners/${partner.id}`)}
