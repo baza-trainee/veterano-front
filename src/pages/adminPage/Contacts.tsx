@@ -1,41 +1,14 @@
 import { useState } from "react";
-import Typography from "../../components/Typography/Typography";
 import { AdminHeader } from "../../components/AdminHeader";
+import Typography from "../../components/Typography/Typography";
 import Button from "../../components/Button/Button";
+import { submitForm } from "./submitForm";
 import AdminInput from "../../components/AdminPanel/Input/AdminInput";
 
 export const Contacts = () => {
 	const [firstPhone, setFirstPhone] = useState<string>("");
 	const [secondPhone, setSecondPhone] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
-	const [secondEmail, setSecondEmail] = useState<string>("");
-
-	const handleSubmit = async () => {
-		const dataToSend = {
-			firstPhone,
-			secondPhone,
-			email,
-			secondEmail,
-		};
-
-		try {
-			const response = await fetch("URL_СЕРВЕРА", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(dataToSend),
-			});
-
-			if (response.ok) {
-				// Обробка успішної відповіді від сервера, якщо потрібно
-			} else {
-				// Обробка помилки від сервера, якщо потрібно
-			}
-		} catch (error) {
-			// Обробка помилки під час виконання запиту
-		}
-	};
 
 	return (
 		<div>
@@ -45,7 +18,10 @@ export const Contacts = () => {
 					<Typography variant="h2" className="font-medium text-2xl">
 						Редагувати контакти
 					</Typography>
-					<Button variant="primary" onClick={handleSubmit}>
+					<Button
+						variant="primary"
+						onClick={() => submitForm({ firstPhone, secondPhone, email })}
+					>
 						Опублікувати
 					</Button>
 				</div>
@@ -55,28 +31,18 @@ export const Contacts = () => {
 						placeholder="Телефон"
 						name="phone"
 						onChange={(e) => setFirstPhone(e.target.value)}
-						type={'text'}
 					/>
 					<AdminInput
 						value={secondPhone}
 						placeholder="Телефон"
 						name="secondPhone"
 						onChange={(e) => setSecondPhone(e.target.value)}
-						type={'text'}
 					/>
 					<AdminInput
 						value={email}
 						placeholder="Контактний e-mail"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
-						type={'text'}
-					/>
-					<AdminInput
-						value={secondEmail}
-						placeholder="e-mail для обробки звернень через форму зворотнього зв’язку"
-						name="secondEmail"
-						onChange={(e) => setSecondEmail(e.target.value)}
-						type={'text'}
 					/>
 				</div>
 			</div>
