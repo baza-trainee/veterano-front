@@ -35,6 +35,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 		});
 	}, [id]);
 
+
 	const validationSchema = Yup.object({
 		partnerName: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")

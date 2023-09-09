@@ -32,40 +32,41 @@ const ImageInput: FC<ImageInput>= ({
 		onChange(preview);
 	}, [preview]);
 
-
-
 	useEffect(() => {
-		setPreview(src);
+		if (!preview) {
+			setPreview(src);
+		}
 	}, [src]);
-	console.log('preview', preview);
+
 
 	return (
 		<>
-			{isCropeningImg && file && (
-				<ImageCroper
-					aspect={width / height}
-					src={file && URL.createObjectURL(file)}
-					onClose={(url: string) => {
-						setPreview(url);
-						setIsCropeningImg(false);
-					}}
-				/>
-			)}
-			{isCropeningImg && src && (
-				<ImageCroper
-					aspect={width / height}
-					src={src}
-					onClose={(url: string) => {
-						setPreview(url);
-						setIsCropeningImg(false);
-					}}
-				/>
+			{isCropeningImg && (
+				file ? (
+					<ImageCroper
+						aspect={width / height}
+						src={URL.createObjectURL(file)}
+						onClose={(url: string) => {
+							setPreview(url);
+							setIsCropeningImg(false);
+						}}
+					/>
+				) : (
+					<ImageCroper
+						aspect={width / height}
+						src={src}
+						onClose={(url: string) => {
+							setPreview(url);
+							setIsCropeningImg(false);
+						}}
+					/>
+				)
 			)}
 			<FileDrop
 				{...props}
 				id={id}
 				className={className}
-				src={preview || src}
+				src={preview}
 				imgHeight={height}
 				imgWidth={width}
 				openEditer={() => {
