@@ -9,7 +9,7 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 	children?: React.ReactNode;
 }
 const Checkbox: React.FC<CheckboxProps> = ({
-	id = "test",
+	id = "testing",
 	label,
 	checked = false,
 	onCheck = (event: ChangeEvent<HTMLInputElement>): void => {
