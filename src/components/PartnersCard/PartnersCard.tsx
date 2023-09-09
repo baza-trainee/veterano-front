@@ -6,7 +6,7 @@ interface PartnersCardProps {
 }
 const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
 	return (
-		<a href={`${import.meta.env.VITE_BASE_URL}/url/redirect?id=${url}`}>
+		<a href={url}>
 			<div
 				style={{
 					backgroundImage: `url(${image})`,
