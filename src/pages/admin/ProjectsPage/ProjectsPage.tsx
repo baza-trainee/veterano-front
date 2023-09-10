@@ -48,7 +48,7 @@ const ProjectsPage = () => {
 		setCheckedItems(newCheckedItems);
 	};
 
-	const filteredProjects = value ? searchData.filter((project) => project.title.includes(value)) : projects;
+	const filteredProjects = value ? searchData.filter((project) => project.title.toLowerCase().includes(value.toLowerCase())) : projects;
 
 	return (
 		<>
