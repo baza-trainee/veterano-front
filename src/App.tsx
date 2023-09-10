@@ -15,7 +15,6 @@ import ProjectsPage from "./pages/admin/ProjectsPage/ProjectsPage.tsx";
 import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
 import { Contacts } from "./pages/adminPage/contacts/Contacts.tsx";
-import { DocumentPage } from "./pages/adminPage/Document.tsx";
 import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
 import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";
 import { TermsSite } from "./ruleFiles/TermsSite.tsx";
@@ -41,7 +40,6 @@ function App() {
 							element={<EditProjectPage />}
 						/>
 						<Route path="contacts" element={<Contacts />} />
-						<Route path="documents" element={<DocumentPage />} />
 						<Route path="partners" element={<PartnersPage />} />
 						<Route path="partners/:id" element={<AddPartnerPage />} />
 						<Route path="partners/add" element={<AddPartnerPage />} />

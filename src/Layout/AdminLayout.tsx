@@ -35,9 +35,6 @@ const AdminLayout = () => {
 						<NavLinkAdmin icon={"/images/admin/contacts.svg"} to={"contacts"}>
 							Контакти
 						</NavLinkAdmin>
-						<NavLinkAdmin icon={"/images/admin/file.svg"} to={"documents"}>
-							Документи
-						</NavLinkAdmin>
 					</div>
 
 					<button
