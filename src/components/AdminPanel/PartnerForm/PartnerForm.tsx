@@ -43,6 +43,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			.required("Поле обов'язкове до заповнення. Введіть назву"),
 		url: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
+			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
 			.required("Поле обов'язкове до заповнення. Введіть посилання"),
 		image: Yup.mixed()
 			.required("Поле обов'язкове до заповнення"),
@@ -55,7 +56,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			initialValues={{
 				id: id || null,
 				partnerName: partnerName || "",
-				url: url || "",
+				url: url || "https://",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
