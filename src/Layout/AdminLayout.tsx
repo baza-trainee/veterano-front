@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
 	const navigate = useNavigate();
@@ -12,13 +12,9 @@ const AdminLayout = () => {
 		<div className={"flex"}>
 			<div className={"w-[272px] bg-yellow50"}>
 				<header className={"bg-grey100 h-[118px]"}>
-					<NavLink to="/">
-						<div
-							className={"px-[32px] pt-[40px] pb-[38px] hover:cursor-pointer"}
-						>
-							<img src="/images/logo-white-sm.svg" alt="" />
-						</div>
-					</NavLink>
+					<div className={"px-[32px] pt-[40px] pb-[38px]"}>
+						<img src="/images/logo-white-sm.svg" alt="" />
+					</div>
 				</header>
 				<div
 					className={
