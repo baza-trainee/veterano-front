@@ -7,6 +7,7 @@ interface PartnersCardProps {
 const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
 	return (
 		<a
+			target="_blank"
 			href={url}
 			style={{
 				backgroundImage: `url(${
