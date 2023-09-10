@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { useMedia } from "../hooks/useMedia";
 
 ///phone number
 export const phoneNumberRegExp =
@@ -17,7 +18,7 @@ export const emailValidationSchema = Yup.string()
 	.required("Введіть дійсний email");
 
 ///name
-export const name = Yup.string()
+export const nameValidationSchema = Yup.string()
 	.min(2, "Поля повинні мати більше 2 символів")
 	.max(30, "Ім’я повинно бути не більше 30 знаків")
 	.matches(/^[a-zA-Z\u0400-\u04FF\s]*$/, "Тільки літери та пробіли дозволені")
@@ -25,3 +26,8 @@ export const name = Yup.string()
 		return !/^\s+$/.test(value!);
 	})
 	.required("Заповніть пусте поле");
+export const passwordValidationSchema = Yup.string()
+	.min(8, "Поля повинні мати більше 2 символів")
+	.max(52, "Ім’я повинно бути не більше 52 знаків")
+	.required("Заповніть пусте поле");
+// eslint-disable-next-line react-hooks/rules-of-hooks
