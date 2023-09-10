@@ -84,7 +84,7 @@ const ProjectsPage = () => {
 				<div className={"mt-[25px]"}>
 					<Pagination
 						pageCount={totalPages}
-						currentPage={1}
+						currentPage={currentPage}
 						onSelectedPage={(selectedPage: number) => {setCurrentPage(selectedPage)}}
 						prevClassName={"md:!pl-[141px]"} />
 				</div>
