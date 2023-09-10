@@ -1,32 +1,24 @@
-import Input from "../../components/Input/Input";
-import { string, object } from "yup";
-import { Formik, Form } from "formik";
-import Button from "../../components/Button/Button";
-import { login } from "../../api/AuthAPI";
-import Typography from "../../components/Typography/Typography";
+import { Alert } from "@mui/lab";
+import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "@mui/lab";
+import { login } from "../../api/AuthAPI";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
+import Typography from "../../components/Typography/Typography";
+import {
+	emailValidationSchema,
+	passwordValidationSchema,
+} from "../../validationFields/validationFields";
+import { object } from "yup";
 
 const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	const navigate = useNavigate();
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
 	const validationSchema = object({
-		email: string()
-			.email("Введіть дійсний email")
-			.matches(
-				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-				"Введіть дійсний email"
-			)
-			.test("domain", "Корабель там 🖕", (value) => {
-				return !value?.endsWith(".ru") && !value?.endsWith(".by");
-			})
-			.required("Введіть дійсний email"),
-		password: string()
-			.min(8, "Поля повинні мати більше 2 символів")
-			.max(52, "Ім’я повинно бути не більше 52 знаків")
-			.required("Заповніть пусте поле"),
+		email: emailValidationSchema,
+		password: passwordValidationSchema,
 	});
 
 	useEffect(() => {
@@ -36,7 +28,6 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 
 	return (
 		<>
-
 			<div
 				className={
 					"rounded-[4px] px-[32px] py-[64px] bg-yellow50 w-[518px]" +
@@ -45,38 +36,39 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 				}
 				{...props}
 			>
-
-					{isError && (
-						<Alert
-							sx={{
-								position: "absolute",
-								top: "-90px",
-								fontFamily: "e-Ukraine, sans-serif",
-								backgroundColor: "#D30018",
-								padding: "20px 40px",
-								color: '#FCFCFC',
-								height: "66px",
-								display: 'flex',
-								'& .MuiAlert-icon': {
-									padding: '0',
-									fontSize: '24px',
-									marginRight: '16px',
-									opacity: '1'
-								},
-								'& .MuiAlert-message': {
-									padding: '0',
-									fontSize: '14px',
-									fontWeight: '300',
-									lineHeight: '26px',
-								},
-							}}
-							variant="filled"
-							severity="error"
-						>
-							Невірний логін або пароль. Перевірте дані
-						</Alert>
-					)}
-				<Typography variant="h2" className={'px-[20px]'}>Вхід</Typography>
+				{isError && (
+					<Alert
+						sx={{
+							position: "absolute",
+							top: "-90px",
+							fontFamily: "e-Ukraine, sans-serif",
+							backgroundColor: "#D30018",
+							padding: "20px 40px",
+							color: "#FCFCFC",
+							height: "66px",
+							display: "flex",
+							"& .MuiAlert-icon": {
+								padding: "0",
+								fontSize: "24px",
+								marginRight: "16px",
+								opacity: "1",
+							},
+							"& .MuiAlert-message": {
+								padding: "0",
+								fontSize: "14px",
+								fontWeight: "300",
+								lineHeight: "26px",
+							},
+						}}
+						variant="filled"
+						severity="error"
+					>
+						Невірний логін або пароль. Перевірте дані
+					</Alert>
+				)}
+				<Typography variant="h2" className={"px-[20px]"}>
+					Вхід
+				</Typography>
 				<Formik
 					initialValues={{ email: "", password: "" }}
 					validationSchema={validationSchema}
@@ -114,7 +106,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									label="Логін"
 									onChange={handleChange}
 									onBlur={handleBlur}
-									style={{width: '100%'}}
+									style={{ width: "100%" }}
 								/>
 								<Input
 									value={values.password}
@@ -131,7 +123,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 									onBlur={handleBlur}
 									passwordVisible={isVisible}
 									onMouseDown={() => setIsVisible((prev) => !prev)}
-									style={{width: '100%'}}
+									style={{ width: "100%" }}
 								/>
 							</div>
 							<div className="flex w-[129px] justify-center items-center flex-shrink-0 ">
@@ -148,7 +140,6 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 					)}
 				</Formik>
 			</div>
-
 		</>
 	);
 };
