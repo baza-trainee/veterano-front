@@ -4,7 +4,6 @@ import { validationSchema } from "../../../pages/admin/ProjectsPage/validationSh
 import { createCard, editCard } from "../../../api/CardsApi.ts";
 import AdminInput from "../Input/AdminInput.tsx";
 import CitiesDropDown from "../DropwDown/CitiesDropDown.tsx";
-import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
 import CategoryDropDown from "../DropwDown/CategoryDropDown.tsx";
 import ImageInput from "../../ImageCroper/ImageInput.tsx";
 import { useFormatDate } from "../../../hooks/useFormatDate.tsx";
@@ -12,14 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { blobUrlToBase64 } from "../BlobToBase64.ts";
 import PublishComponent from "../PublishComponent.tsx";
 
-
 interface ProjectsFormProps {
 	cardId?: number;
 	title?: string;
 	url?: string;
 	description?: string;
-	city?: string;
-	country?: string;
+	location?: {
+		city: string;
+		country: string;
+	} | string;
 	image?: string;
 	isEnabled?: boolean;
 	publication?: string;
@@ -33,8 +33,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 																							 title,
 																							 url,
 																							 description,
-																							 city,
-																							 country,
+																							 location,
 																							 image,
 																							 isEnabled,
 																							 publication,
@@ -50,8 +49,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			title: title || "",
 			url: url || "",
 			description: description || "",
-			city: city || "",
-			country: country || "",
+			location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
 			image: image || "",
 			isEnabled: isEnabled || true,
 			publication: publication || formatDate,
@@ -65,8 +63,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 				title: title || "",
 				url: url || "",
 				description: description || "",
-				city: city || "",
-				country: country || "",
+				location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
@@ -76,11 +73,27 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			onSubmit={async (values, { setSubmitting }) => {
 				try {
 					if (values && type === "add") {
-						const { isEnabled, city, country, category, image, ...rest } = values;
-						const location = { city, country };
+						// const { isEnabled, city, country, category, image, ...rest } = values;
+						const { isEnabled, location, category, image, ...rest } = values;
+
+						// const location = { city, country };
+						let locationObject;
+
+						if (typeof location === "string") {
+							const locationArray = location.split("/");
+							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+						} else if (typeof location === "object") {
+							locationObject = location;
+						}
 						const categoryArray = category.split(",").map(item => ({ categoryName: item.trim() }));
 						const base64Image = await blobUrlToBase64(image);
-						const cardData = { ...rest, image: base64Image, location, categories: categoryArray };
+						const cardData = {
+							...rest,
+							image: base64Image,
+							location: locationObject,
+							categories: categoryArray,
+						};
+						console.log(cardData);
 						createCard(cardData)
 							.then(() => navigate("/admin/projects"));
 					} else {
@@ -92,15 +105,31 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							return acc;
 						}, {});
 
-						const { city, country, category, image, ...rest } = changedValues;
-
-						const location = city && country ? { city, country } : undefined;
+						const { location, category, image, ...rest } = changedValues;
 						const categoryArray = category ? category.split(",").map(item => ({ categoryName: item.trim() })) : undefined;
-						const base64Image = image ? await blobUrlToBase64(image) : undefined;
+						let locationObject;
 
-						const cardData = { cardId, ...rest, image: base64Image, location, categories: categoryArray };
+						if (typeof location === "string") {
+							const locationArray = location.split("/");
+							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+						} else if (typeof location === "object") {
+							locationObject = location;
+						}
+						const base64Image = image ? await blobUrlToBase64(image) : undefined;
+						const cardData = {
+							cardId, ...rest,
+							image: base64Image,
+							location: locationObject,
+							categories: categoryArray,
+						};
+						console.log(cardData);
 						editCard(cardData)
-							.then(() => navigate("/admin/projects"));
+							.then(() => {
+								navigate("/admin/projects");
+							})
+							.catch((error) => {
+								console.error("Помилка при запиті:", error);
+							});
 					}
 				} catch (e) {
 					console.log("Error submitting", e);
@@ -108,12 +137,12 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 					setSubmitting(false);
 				}
 			}}
-			validateOnChange={false}
+			validateOnChange={true}
 			validateOnBlur={true}
 			enableReinitialize={true}
 
 		>
-			{({ values, setFieldValue, errors, handleChange, isValid, handleSubmit }) => (
+			{({ values, setFieldValue, handleBlur, touched, errors, handleChange, isValid, handleSubmit }) => (
 
 				<Form onSubmit={e => {
 					e.preventDefault();
@@ -128,7 +157,8 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									placeholder={"Додати назву проекту"}
 									name={"title"}
 									onChange={handleChange}
-									error={errors.title as string} />
+									onBlur={handleBlur}
+									error={touched.title ? errors.title : ""} />
 							</div>
 							<div className="mb-[22px]">
 								<AdminInput
@@ -137,31 +167,38 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									placeholder={"Додати посилання"}
 									name={"url"}
 									onChange={handleChange}
-									error={errors.url as string} />
+									onBlur={handleBlur}
+									error={touched.url ? errors.url : ""} />
 							</div>
 							<div>
 										<textarea
 											name={"description"}
 											value={values.description}
 											onChange={handleChange}
-											className={`resize-none pt-[10px] font-light pl-[10px] pr-[53px] w-full h-[548px] border rounded ${errors.description ? "placeholder:text-error30" : "placeholder:text-grey50"} placeholder:text-[14px] `}
-											placeholder={errors.description ? errors.description as string : "Введіть текст тут"}
+											onBlur={handleBlur}
+											className={`resize-none pt-[10px] font-light pl-[10px] pr-[53px] w-full h-[548px] border rounded placeholder:text-grey50 placeholder:text-[14px] placeholder:font-light placeholder:leading-[26px] `}
+											placeholder={"Введіть текст тут"}
 										/>
+								{touched.description && errors.description &&
+									<div className={"text-error50 font-light text-[16px] leading-6 mt-1 pl-2"}>{errors.description}</div>}
 							</div>
 						</div>
 						<div className="flex flex-col w-[305px]">
 							<div className="mb-[22px]">
 								<CitiesDropDown
-									inputDisplayValue={values.city ? `${capitalizeFirstLetter(values.city || "")}/${capitalizeFirstLetter(values.country || "")}` : ""}
-									value={values.city}
-									name={"city"}
+									inputDisplayValue={location && location}
+									value={values.location}
+									name={"location"}
 									onChange={handleChange}
 									placeholder={"Країна / місто"}
+									onBlur={handleBlur}
 									onValueSelected={({ city, country }) => {
-										setFieldValue("city", city);
-										setFieldValue("country", country);
+										setFieldValue("location", `${city}/${country}`);
 									}}
-									error={errors.city as string || errors.country as string} />
+									error={touched.location && errors.location ? errors.location : ""}
+								/>
+								{touched.location && errors.location &&
+									<div className={"text-error50 font-light text-[16px] leading-6 mt-1 pl-2"}>{errors.location}</div>}
 							</div>
 							<div className="mb-[22px]">
 								<CategoryDropDown
@@ -170,12 +207,15 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									onChange={e => {
 										handleChange(e);
 									}}
+									onBlur={handleBlur}
 									placeholder={"Категорія"}
 									onValueSelected={(category) => {
 										setFieldValue("category", category);
 									}}
-									error={errors.category as string}
+									error={touched.category && errors.category ? errors.category : ""}
 								/>
+								{touched.category && errors.category &&
+									<div className={"text-error50 font-light text-[16px] leading-6 mt-1 pl-2"}>{errors.category}</div>}
 							</div>
 							<div className="flex flex-col">
 								<div className="mb-[22px] bg-white rounded">

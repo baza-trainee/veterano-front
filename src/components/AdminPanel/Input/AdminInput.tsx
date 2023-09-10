@@ -7,19 +7,25 @@ interface AdminInputProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	error?: string;
 	type: string;
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const AdminInput: FC<AdminInputProps> = ({error, type, value, name, placeholder, ...props }) => {
+const AdminInput: FC<AdminInputProps> = ({onBlur, error, type, value, name, placeholder, ...props }) => {
 
 	return (
-		<input
-			value={value}
-			type={type}
-			placeholder={error ? error : placeholder}
-			name={name}
-			className={`w-full h-[48px] bg-white hover:shadow-middle font-light rounded px-[10px] py-[11px] focus:outline-none placeholder:text-[14px] placeholder:font-light ${error ? 'placeholder:text-error30' : 'placeholder:text-grey50'} `}
-			{...props}
-		/>
+		<>
+			<input
+				value={value}
+				type={type}
+				placeholder={placeholder}
+				name={name}
+				onBlur={onBlur}
+				className={`w-full h-[48px] bg-white hover:shadow-middle font-light rounded px-[10px] py-[11px] focus:outline-none placeholder:text-[14px] placeholder:leading-[26px] placeholder:font-light placeholder:text-grey50 `}
+				{...props}
+			/>
+			{error &&
+				<div className={'text-error50 font-light text-[16px] leading-6 mt-1 pl-2'}>{error}</div>}
+		</>
 	);
 };
 
