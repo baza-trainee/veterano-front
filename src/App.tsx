@@ -14,7 +14,7 @@ import AddPartnerPage from "./pages/admin/PartnersPage/AddPartnerPage.tsx";
 import ProjectsPage from "./pages/admin/ProjectsPage/ProjectsPage.tsx";
 import AddProjectPage from "./pages/admin/ProjectsPage/AddProjectPage.tsx";
 import EditProjectPage from "./pages/admin/ProjectsPage/EditProjectPage.tsx";
-import { Contacts } from "./pages/adminPage/Contacts.tsx";
+import { Contacts } from "./pages/adminPage/contacts/Contacts.tsx";
 import { DocumentPage } from "./pages/adminPage/Document.tsx";
 import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
 import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";

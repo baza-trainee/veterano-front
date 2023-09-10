@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Typography from "./Typography/Typography";
+import { NavLink } from "react-router-dom";
 
 interface HeaderProps {
 	name: string;
@@ -11,12 +12,14 @@ export const AdminHeader: FC<HeaderProps> = ({ name }) => {
 			<Typography variant="h2" className="text-white">
 				{name}
 			</Typography>
-			<div className="bg-white w-9 h-9 rounded-md flex justify-center items-center">
-				<img
-					src="/images/admin/close-darkbg.svg"
-					className="hover:cursor-pointer"
-				/>
-			</div>
+			<NavLink to="/admin">
+				<div className="bg-white w-9 h-9 rounded-md flex justify-center items-center hover:cursor-pointer">
+					<img
+						src="/images/admin/close-darkbg.svg"
+						className="hover:cursor-pointer"
+					/>
+				</div>
+			</NavLink>
 		</div>
 	);
 };
