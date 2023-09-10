@@ -9,6 +9,7 @@ const NavigationLink: FC<LinkPropsType> = ({
 	children,
 	size,
 	disabled,
+	className,
 	...props
 }) => {
 	const NavLinkClass = size ? sizeClassNames[size] : "";
@@ -27,7 +28,11 @@ const NavigationLink: FC<LinkPropsType> = ({
 		<>
 			<NavLink
 				to={to}
-				className={`h-[48px] md:px-[32px] ${variantClassName} ${NavLinkClass}`}
+				className={
+					`h-[48px] md:px-[32px] ${variantClassName} ${NavLinkClass}` +
+					" " +
+					className
+				}
 				style={({ isActive }) => ({
 					fontWeight: isActive ? "bold" : "",
 					cursor: isActive ? "default" : "",
