@@ -26,6 +26,7 @@ export async function submitForm(values: FormValues) {
 
 function phoneFormat(phone: string) {
 	const numders = phone.split("");
+
 	let changedPhone: string = "";
 	if (numders[0] == "0") {
 		changedPhone = ["3", "8", ...numders].join("");

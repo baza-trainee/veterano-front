@@ -10,7 +10,7 @@ export const Contacts = () => {
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
-			<div className="pl-9 pr-[80px] pt-12 ">
+			<div className="pl-9 pr-[80px] pt-12  ">
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{ phone: "", secondPhone: "", email: "" }}
