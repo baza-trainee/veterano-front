@@ -7,6 +7,7 @@ interface PartnersCardProps {
 const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
 	return (
 		<a
+			target="_blank"
 			href={url}
 			style={{
 				backgroundImage: `url(${
@@ -15,7 +16,7 @@ const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
 				backgroundPosition: "center",
 				backgroundSize: "cover",
 			}}
-			className={"w-full h-[124px] md:h-[72px] lg:h-[94px]"}
+			className={"w-[200px] md:w-full h-[124px] md:h-[72px] lg:h-[94px]"}
 		></a>
 	);
 };

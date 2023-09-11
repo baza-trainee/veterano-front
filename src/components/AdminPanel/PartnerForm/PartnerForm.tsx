@@ -33,16 +33,18 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			isEnabled: isEnabled || true,
 			publication: publication || formatDate,
 		});
-	}, [id]);
-
+	}, [id, partnerName, url, image, isEnabled, publication ]);
 
 	const validationSchema = Yup.object({
 		partnerName: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Поле обов'язкове до заповнення"),
+			.max(100, "Поля повинні мати не більше 100 символів")
+			.matches(/^[0-9a-zA-Zа-яА-Я-()&]+$/, 'Поле не повинно містити спеціальних символів')
+			.required("Поле обов'язкове до заповнення. Введіть назву"),
 		url: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Поле обов'язкове до заповнення"),
+			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
+			.required("Поле обов'язкове до заповнення. Введіть посилання"),
 		image: Yup.mixed()
 			.required("Поле обов'язкове до заповнення"),
 		publication: Yup.string()
@@ -54,14 +56,16 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			initialValues={{
 				id: id || null,
 				partnerName: partnerName || "",
-				url: url || "",
+				url: url || "https://",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
 			}}
 			validationSchema={validationSchema}
 			onSubmit={async (values, { setSubmitting }) => {
+
 				try {
+					setSubmitting(true)
 					if (id) {
 						const changedValues = Object.keys(initialState).reduce<Partial<PartnerFormProps>>((acc, key) => {
 
@@ -90,12 +94,12 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 					setSubmitting(false);
 				}
 			}}
-			validateOnChange={false}
+			validateOnChange={true}
 			validateOnBlur={true}
 			enableReinitialize={true}
-		>
-			{({ values, handleSubmit, handleChange, errors, isValid, setFieldValue }) => (
 
+		>
+			{({ values, handleBlur, handleSubmit, touched,  handleChange, errors, isValid, setFieldValue }) => (
 				<Form onSubmit={e => {
 					e.preventDefault();
 					handleSubmit();
@@ -109,13 +113,16 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 									placeholder={"Додати назву"}
 									name={"partnerName"}
 									onChange={handleChange}
-									error={errors.partnerName}
+									error={touched.partnerName ? errors.partnerName : ''}
+									onBlur={handleBlur}
 								/>
+
 							</div>
 							<div className="mb-[22px]">
 								<AdminInput
 									value={values.url}
-									error={errors.url}
+									error={touched.url ? errors.url : ''}
+									onBlur={handleBlur}
 									name={"url"}
 									onChange={handleChange}
 									placeholder={"Додати посилання"}
@@ -133,7 +140,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 										className="bg-[white] !h-[121px] rounded"
 										onChange={(img) => setFieldValue("image", img)}
 										page={"partners"}
-										error={errors.image}
+										error={touched.image ? errors.image : ''}
 									/>
 								</div>
 
