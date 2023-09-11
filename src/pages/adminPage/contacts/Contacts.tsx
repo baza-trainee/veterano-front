@@ -5,6 +5,7 @@ import AdminInput from "../../../components/AdminPanel/Input/AdminInput";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validationSchema } from "./schema.ts";
 import { submitForm } from "./submit.ts";
+import { ChangeEvent } from "react";
 
 export const Contacts = () => {
 	return (
@@ -32,7 +33,12 @@ export const Contacts = () => {
 								</div>
 							</div>
 							<div className="flex flex-col gap-4 max-w-[739px]">
-								<Field as={AdminInput} placeholder="Телефон" name="phone" />
+								<Field
+									as={AdminInput}
+									placeholder="Телефон"
+									name="phone"
+									onInput={handleInput}
+								/>
 								<ErrorMessage
 									name="phone"
 									component="div"
@@ -43,6 +49,7 @@ export const Contacts = () => {
 									as={AdminInput}
 									placeholder="Телефон"
 									name="secondPhone"
+									onInput={handleInput}
 								/>
 								<ErrorMessage
 									name="secondPhone"
@@ -73,3 +80,6 @@ export const Contacts = () => {
 		</div>
 	);
 };
+function handleInput(e: ChangeEvent<HTMLInputElement>) {
+	e.target.value = e.target.value.replace(/[a-zA-Z]/g, "");
+}

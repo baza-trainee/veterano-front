@@ -30,6 +30,8 @@ function phoneFormat(phone: string) {
 	let changedPhone: string = "";
 	if (numders[0] == "0") {
 		changedPhone = ["3", "8", ...numders].join("");
+	} else if (numders[0] == "+") {
+		changedPhone = numders.slice(1).join("");
 	}
 	return changedPhone;
 }
