@@ -93,7 +93,6 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
-						console.log(cardData);
 						createCard(cardData)
 							.then(() => navigate("/admin/projects"));
 					} else {
