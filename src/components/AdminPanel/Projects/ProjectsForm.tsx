@@ -47,7 +47,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 		setInitialState({
 			cardId: cardId || 0,
 			title: title || "",
-			url: url || "",
+			url: url || "https://",
 			description: description || "",
 			location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
 			image: image || "",
@@ -61,7 +61,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			initialValues={{
 				cardId: cardId || 0,
 				title: title || "",
-				url: url || "",
+				url: url || "https://",
 				description: description || "",
 				location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
 				image: image || "",

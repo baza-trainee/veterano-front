@@ -8,7 +8,7 @@ import { blobUrlToBase64 } from "../BlobToBase64.ts";
 import { Form, Formik } from "formik";
 import PublishComponent from "../PublishComponent.tsx";
 import { useNavigate } from "react-router-dom";
-import { images, publicationDate, title } from "../../../validationFields/validationFields.ts";
+import { images, publicationDate, title, urls } from "../../../validationFields/validationFields.ts";
 
 interface PartnerFormProps {
 	id?: number;
@@ -38,10 +38,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 
 	const validationSchema = Yup.object({
 		partnerName: title,
-		url: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
-			.required("Поле обов'язкове до заповнення. Введіть посилання"),
+		url: urls,
 		image: images,
 		publication: publicationDate,
 	});
