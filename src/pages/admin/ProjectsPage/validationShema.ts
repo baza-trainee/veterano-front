@@ -12,16 +12,19 @@ export const validationSchema = Yup.object({
 		.required("Поле обов'язкове до заповнення"),
 	location: Yup.string()
 		.min(2, "Поля повинні мати більше 2 символів")
-		.matches(/^[a-zA-Zа-яА-Я0-9()&/, \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
-		.test('hasCityAndCountry', 'Поле повинно містити місто / країну', value => {
+		.max(50, "Введіть не більше 50 символів")
+		.matches(/^[a-zA-Zа-яА-Я0-9()&/, \-\p{L}]+$/u, "Поле не повинно містити спеціальних символів")
+		.test("hasCityAndCountry", "Поле повинно містити місто / країну", value => {
 			if (!value) return false;
-			const parts = value.split('/');
-			return parts.length === 2 && parts[0].trim() !== '' && parts[1].trim() !== '';
+			const parts = value.split("/");
+			return parts.length === 2 && parts[0].trim() !== "" && parts[1].trim() !== "";
 		})
 		.required("Поле обов'язкове до заповнення"),
 	image: images,
 	publication: publicationDate,
 	category: Yup.string()
-		.matches(/^[a-zA-Zа-яА-Я0-9()&, \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
+		.min(2, "Поля повинні мати більше 2 символів")
+		.max(50, "Введіть не більше 30 символів")
+		.matches(/^[a-zA-Zа-яА-Я0-9()&, \-\p{L}]+$/u, "Поле не повинно містити спеціальних символів")
 		.required("Поле обов'язкове до заповнення"),
 });
