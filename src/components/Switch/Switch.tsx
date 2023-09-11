@@ -2,11 +2,9 @@ import { FC } from "react";
 
 interface SwitchPropsType {
 	isChecked: boolean;
-	setIsChecked: (value: boolean) => void;
-
+	onChange: (isChecked: boolean) => void;
 }
-const Switch:FC<SwitchPropsType> = ( {isChecked, setIsChecked}) => {
-
+const Switch:FC<SwitchPropsType> = ( {isChecked, onChange}) => {
 	return (
 
 		<label
@@ -15,7 +13,7 @@ const Switch:FC<SwitchPropsType> = ( {isChecked, setIsChecked}) => {
 			<input
 				type="checkbox"
 				checked={isChecked}
-				onChange={() => setIsChecked(!isChecked)}
+				onChange={() => onChange(!isChecked)}
 				style={{ position: 'absolute', opacity: 0, height: 0, width: 0 }}
 			/>
 		</label>

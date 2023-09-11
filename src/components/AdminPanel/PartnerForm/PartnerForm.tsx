@@ -30,7 +30,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			partnerName: partnerName || "",
 			url: url || "",
 			image: image || "",
-			isEnabled: isEnabled || true,
+			isEnabled: isEnabled || false,
 			publication: publication || formatDate,
 		});
 	}, [id, partnerName, url, image, isEnabled, publication ]);
@@ -39,11 +39,11 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 		partnerName: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(100, "Поля повинні мати не більше 100 символів")
-			.matches(/^[0-9a-zA-Zа-яА-Я-()&]+$/, 'Поле не повинно містити спеціальних символів')
+			.matches(/^[a-zA-Zа-яА-Я0-9()&, \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
 			.required("Поле обов'язкове до заповнення. Введіть назву"),
 		url: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
+			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
 			.required("Поле обов'язкове до заповнення. Введіть посилання"),
 		image: Yup.mixed()
 			.required("Поле обов'язкове до заповнення"),
@@ -58,7 +58,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 				partnerName: partnerName || "",
 				url: url || "https://",
 				image: image || "",
-				isEnabled: isEnabled || true,
+				isEnabled: isEnabled || false,
 				publication: publication || formatDate,
 			}}
 			validationSchema={validationSchema}
@@ -78,7 +78,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 						const { image, ...rest } = changedValues;
 						const base64Image = image ? await blobUrlToBase64(image) : undefined;
 						const data = { id, image: base64Image, ...rest };
-
 						editPartner(data)
 							.then(() => navigate("/admin/partners"));
 					} else {
@@ -146,7 +145,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 
 								<PublishComponent
 									isEnabled={values.isEnabled}
-									setIsChecked={(isChecked: boolean) => setFieldValue("isEnabled", isChecked)}
+									onChange={(isChecked: boolean) => setFieldValue("isEnabled", isChecked)}
 									publication={values.publication}
 									isValid={isValid}
 									onValueSelected={(date: string) => {

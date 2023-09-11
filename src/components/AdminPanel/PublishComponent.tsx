@@ -5,13 +5,13 @@ import { FC, useState } from "react";
 
 interface  PublishComponentProps{
 	isEnabled: boolean,
-	setIsChecked: (data: boolean) => void,
+	onChange: (data: boolean) => void;
 	publication: string,
 	isValid: boolean,
 	onValueSelected: (date: string) => void,
 
 }
-const PublishComponent: FC<PublishComponentProps> = ({isEnabled, setIsChecked, publication, isValid, onValueSelected}) => {
+const PublishComponent: FC<PublishComponentProps> = ({isEnabled, onChange, publication, isValid, onValueSelected}) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	return (
@@ -21,10 +21,7 @@ const PublishComponent: FC<PublishComponentProps> = ({isEnabled, setIsChecked, p
 					<div className={"flex items-center mb-4 font-light text-[14px] text-grey100"}>
 						<span className={'leading-[26px]'}>Стан</span>: <span
 						className={"block underline ml-4 w-[100px]"}>{isEnabled ? "активний" : "неактивний"}</span>
-						<Switch
-							isChecked={isEnabled || false}
-							setIsChecked={setIsChecked}
-						/>
+						<Switch isChecked={isEnabled} onChange={onChange} />
 					</div>
 
 					<div className={"flex items-center font-light text-[14px] relative"}>
