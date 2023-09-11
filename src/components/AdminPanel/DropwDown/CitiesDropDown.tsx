@@ -11,7 +11,8 @@ interface CitiesDropDownProps {
 	placeholder: string,
 	onValueSelected: (location: { city: string; country: string }) => void;
 	error?: string
-	inputDisplayValue?: string
+	inputDisplayValue?: { city: string; country: string } | string
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 interface ResultsType {
@@ -20,20 +21,31 @@ interface ResultsType {
 	error?: string;
 }
 
-const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, value, placeholder, name, onValueSelected }) => {
-
+const CitiesDropDown: FC<CitiesDropDownProps> = ({
+																									 onBlur,
+																									 onChange,
+																									 inputDisplayValue,
+																									 value,
+																									 placeholder,
+																									 name,
+																									 onValueSelected,
+																								 }) => {
 
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
-	const [inputValue, setInputValue] = useState(inputDisplayValue);
+	const [inputValue, setInputValue] = useState("");
 
 	useEffect(() => {
-		if (inputDisplayValue) {
-			setIsOpen(false);
-			setInputValue(inputDisplayValue)
-		} else if (value.length > 1 && !citySelected) {
+		if (inputDisplayValue && typeof inputDisplayValue === 'object' && !citySelected) {
+			const value = `${capitalizeFirstLetter(inputDisplayValue.city)}/${capitalizeFirstLetter(inputDisplayValue.country)}`;
+			setInputValue(value);
+		}
+	}, [inputDisplayValue, citySelected]);
+
+	useEffect(() => {
+		if (value.length > 1 && !citySelected) {
 			const cities = results.filter((cityObj) =>
 				cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
 				cityObj.country.toLowerCase().includes(value.toLowerCase()),
@@ -44,8 +56,6 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, val
 				setIsOpen(false);
 			}
 		}
-
-
 	}, [value, citySelected]);
 
 	useEffect(() => {
@@ -60,34 +70,41 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({ inputDisplayValue, error, val
 		setCitySelected(true);
 	};
 
-
-	const cities = results.filter((cityObj) =>
-		cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
-		cityObj.country.toLowerCase().includes(value.toLowerCase()),
-	);
+	const cities = results.filter((cityObj) => {
+		if (typeof value === 'string') {
+			return cityObj.city.toLowerCase().includes(value.toLowerCase()) ||
+				cityObj.country.toLowerCase().includes(value.toLowerCase());
+		}
+		return false;
+	});
 
 	return (
 
 		<label className={"admin-filter-input w-full h-[48px] text-[16px] leading-[26px] font-light"}>
 			<input
-				placeholder={error ? error : placeholder}
+				placeholder={placeholder}
 				value={inputValue}
 				onChange={(e) => {
-					setInputValue(e.target.value);
+					const newValue = e.target.value;
+					setInputValue(newValue);
 					setCitySelected(false);
+					if (onChange) onChange(e);
+
 				}}
-				onBlur={() => {
+				onBlur={(e) => {
 					if (inputValue) {
-						const separatorIndex = inputValue.indexOf('/');
+						const separatorIndex = inputValue.indexOf("/");
 						if (separatorIndex !== -1) {
 							const city = inputValue.slice(0, separatorIndex).trim();
 							const country = inputValue.slice(separatorIndex + 1).trim();
 							onValueSelected({ city, country });
 							setInputValue(`${city} / ${country}`);
 						}
-				}}}
+					}
+					if (onBlur) onBlur(e);
+				}}
 				name={name}
-				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey'}
+				className={"placeholder:placeholder-grey"}
 			/>
 			<BsFilter size={24} />
 			{isOpen &&

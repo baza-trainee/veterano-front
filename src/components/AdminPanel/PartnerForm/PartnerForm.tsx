@@ -8,6 +8,7 @@ import { blobUrlToBase64 } from "../BlobToBase64.ts";
 import { Form, Formik } from "formik";
 import PublishComponent from "../PublishComponent.tsx";
 import { useNavigate } from "react-router-dom";
+import { images, publicationDate, title } from "../../../validationFields/validationFields.ts";
 
 interface PartnerFormProps {
 	id?: number;
@@ -33,20 +34,16 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			isEnabled: isEnabled || true,
 			publication: publication || formatDate,
 		});
-	}, [id]);
-
+	}, [id, partnerName, url, image, isEnabled, publication ]);
 
 	const validationSchema = Yup.object({
-		partnerName: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Поле обов'язкове до заповнення"),
+		partnerName: title,
 		url: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.required("Поле обов'язкове до заповнення"),
-		image: Yup.mixed()
-			.required("Поле обов'язкове до заповнення"),
-		publication: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
+			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
+			.required("Поле обов'язкове до заповнення. Введіть посилання"),
+		image: images,
+		publication: publicationDate,
 	});
 
 	return (
@@ -54,14 +51,16 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 			initialValues={{
 				id: id || null,
 				partnerName: partnerName || "",
-				url: url || "",
+				url: url || "https://",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
 			}}
 			validationSchema={validationSchema}
 			onSubmit={async (values, { setSubmitting }) => {
+
 				try {
+					setSubmitting(true)
 					if (id) {
 						const changedValues = Object.keys(initialState).reduce<Partial<PartnerFormProps>>((acc, key) => {
 
@@ -76,13 +75,13 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 						const data = { id, image: base64Image, ...rest };
 
 						editPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1));
 					} else {
 						const { id, image, ...rest } = values;
 						const base64Image = await blobUrlToBase64(image);
 						const data = { image: base64Image, ...rest };
 						createPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1))
 					}
 				} catch (error) {
 					console.log(error);
@@ -90,12 +89,12 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 					setSubmitting(false);
 				}
 			}}
-			validateOnChange={false}
+			validateOnChange={true}
 			validateOnBlur={true}
 			enableReinitialize={true}
-		>
-			{({ values, handleSubmit, handleChange, errors, isValid, setFieldValue }) => (
 
+		>
+			{({ values, handleBlur, handleSubmit, touched,  handleChange, errors, isValid, setFieldValue }) => (
 				<Form onSubmit={e => {
 					e.preventDefault();
 					handleSubmit();
@@ -109,13 +108,16 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 									placeholder={"Додати назву"}
 									name={"partnerName"}
 									onChange={handleChange}
-									error={errors.partnerName}
+									error={touched.partnerName ? errors.partnerName : ''}
+									onBlur={handleBlur}
 								/>
+
 							</div>
 							<div className="mb-[22px]">
 								<AdminInput
 									value={values.url}
-									error={errors.url}
+									error={touched.url ? errors.url : ''}
+									onBlur={handleBlur}
 									name={"url"}
 									onChange={handleChange}
 									placeholder={"Додати посилання"}
@@ -133,7 +135,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 										className="bg-[white] !h-[121px] rounded"
 										onChange={(img) => setFieldValue("image", img)}
 										page={"partners"}
-										error={errors.image}
+										error={touched.image ? errors.image : ''}
 									/>
 								</div>
 

@@ -23,7 +23,12 @@ export const ErrorPage = () => {
 			>
 				Ми не змогли знайти сторінку, яку Ви шукаєте. Можливо, сталася помилка
 			</Typography>
-			<NavigationLink to="/" variant="primary" size="wideMob">
+			<NavigationLink
+				className="!px-[0px] lg:!px-[0px] md:!px-[0px] md:min-w-[288px]"
+				to="/"
+				variant="primary"
+				size="wideMob"
+			>
 				Повернутись на головну
 			</NavigationLink>
 		</Container>

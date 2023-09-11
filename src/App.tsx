@@ -18,6 +18,7 @@ import { Contacts } from "./pages/adminPage/contacts/Contacts.tsx";
 import ScrollToTop from "./components/ScrollToTopFunction/ScrollToTopFunction.ts";
 import { PrivacyPolic } from "./ruleFiles/PrivacyPolicy.tsx";
 import { TermsSite } from "./ruleFiles/TermsSite.tsx";
+import { Contacts } from "./pages/adminPage/contacts/Contacts.tsx";
 
 function App() {
 	return (
