@@ -39,11 +39,11 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 		partnerName: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(100, "Поля повинні мати не більше 100 символів")
-			.matches(/^[0-9a-zA-Zа-яА-Я-()&]+$/, 'Поле не повинно містити спеціальних символів')
+			.matches(/^[a-zA-Zа-яА-Я0-9()&, \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
 			.required("Поле обов'язкове до заповнення. Введіть назву"),
 		url: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
-			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
+			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
 			.required("Поле обов'язкове до заповнення. Введіть посилання"),
 		image: Yup.mixed()
 			.required("Поле обов'язкове до заповнення"),
