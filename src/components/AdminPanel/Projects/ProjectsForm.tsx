@@ -49,7 +49,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			title: title || "",
 			url: url || "https://",
 			description: description || "",
-			location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
+			location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 			image: image || "",
 			isEnabled: isEnabled || true,
 			publication: publication || formatDate,
@@ -63,7 +63,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 				title: title || "",
 				url: url || "https://",
 				description: description || "",
-				location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
+				location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
@@ -77,7 +77,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 						let locationObject;
 						if (typeof location === "string") {
 							const locationArray = location.split("/");
-							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+							locationObject = { country: locationArray[0].trim(), city: locationArray[1].trim() };
 						} else if (typeof location === "object") {
 							locationObject = location;
 						}
@@ -89,6 +89,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
+						console.log(cardData);
 						createCard(cardData)
 							.then(() => navigate(-1));
 					} else {
@@ -106,7 +107,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 
 						if (typeof location === "string") {
 							const locationArray = location.split("/");
-							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+							locationObject = { country: locationArray[0].trim(), city: locationArray[1].trim() };
 						} else if (typeof location === "object") {
 							locationObject = location;
 						}
@@ -117,6 +118,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
+						console.log(cardData);
 						editCard(cardData)
 							.then(() => {
 								navigate(-1)
@@ -186,8 +188,8 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									onChange={handleChange}
 									placeholder={"Країна / місто"}
 									onBlur={handleBlur}
-									onValueSelected={({ city, country }) => {
-										setFieldValue("location", `${city}/${country}`);
+									onValueSelected={({ country, city }) => {
+										setFieldValue("location", `${country}/${city}`);
 									}}
 									error={touched.location && errors.location ? errors.location : ""}
 								/>
