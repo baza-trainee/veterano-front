@@ -14,22 +14,28 @@ interface AdminDropDownProps {
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	placeholder: string,
 	onValueSelected: (category: string) => void;
-	error?: string
+	error?: string,
+	onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange, placeholder, onValueSelected }) => {
+const CategoryDropDown: FC<AdminDropDownProps> = ({ onBlur, value, name, onChange, placeholder, onValueSelected }) => {
 	const [activeIndex, setActiveIndex] = useState<number | null>(null);
 	const [results, setResults] = useState<ResultsType[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [categorySelected, setCategorySelected] = useState(false);
-	const [inputValue, setInputValue] = useState(value);
+	const [inputValue, setInputValue] = useState("");
+	const [inputPlaceholder, setInputPlaceholder] = useState("")
 
 	useEffect(() => {
-		if (inputValue) {
-			setIsOpen(false);
+		if (value) {
+			setInputValue(value);
+			setCategorySelected(true)
+		}
+	}, [inputValue, categorySelected]);
 
-		} else if (value.length > 1 && !categorySelected) {
-			const categoriesList = value.length > 2 ? results.filter(category => category.categoryName.includes(value)) : results;
+	useEffect(() => {
+		if (value.length > 1 && !categorySelected) {
+			const categoriesList = value.length > 0 ? results.filter(category => category.categoryName.includes(value)) : results;
 			if (categoriesList.length > 0) {
 				setIsOpen(true);
 			} else {
@@ -37,7 +43,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 			}
 		}
 		setInputValue(value);
-	}, [value, categorySelected, results]);
+	}, [value, categorySelected]);
 
 	useEffect(() => {
 		getCategoryList()
@@ -57,7 +63,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 
 		<label className={"admin-filter-input w-full h-[48px] text-[16px] leading-[24px] font-light"}>
 			<input
-				placeholder={error ? error : placeholder}
+				placeholder={inputPlaceholder ? inputPlaceholder : placeholder}
 				value={inputValue}
 				onChange={(e) => {
 					setInputValue(e.target.value);
@@ -68,16 +74,17 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 				onBlur={(e) => {
 					onValueSelected(e.target.value);
 					setInputValue(e.target.value);
+					if (onBlur) onBlur(e);
 				}}
 				name={name}
-				className={error ? 'placeholder:placeholder-error' : 'placeholder:placeholder-grey placeholder:text-[14px]'}
+				className={`${inputPlaceholder ? "placeholder:text-black placeholder:text-[16px] placeholder:leading-[24px]" : "placeholder:placeholder-grey placeholder:text-[14px] placeholder:leading-[26px]" } "placeholder:font-light" `}
 			/>
 			{isOpen ?
 				<BsChevronUp
 					size={18}
 					onClick={() => {
 						setIsOpen(!isOpen);
-						setInputValue("Оберіть категорію");
+
 					}}
 					className={"cursor-pointer"} />
 				:
@@ -85,9 +92,10 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ error, value, name, onChange
 					size={18}
 					onClick={() => {
 						setIsOpen(!isOpen);
-						setInputValue("Оберіть категорію");
+						setInputPlaceholder("Оберіть категорію");
 					}}
 					className={"cursor-pointer"} />
+
 			}
 			{isOpen &&
 				<ul id="categories" className={"admin-filter-drop-down z-10"}>

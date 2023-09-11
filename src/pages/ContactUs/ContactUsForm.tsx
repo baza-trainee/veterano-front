@@ -8,6 +8,10 @@ import ModalWindow from "../../components/Modal/ModalWindow.tsx";
 import Textarea from "../../components/Textarea/Textarea";
 import Typography from "../../components/Typography/Typography";
 import { useMedia } from "../../hooks/useMedia.tsx";
+import {
+	emailValidationSchema,
+	nameValidationSchema,
+} from "../../validationFields/validationFields.ts";
 
 const ContactUsForm = () => {
 	const { isMobile, isDesktop } = useMedia();
@@ -17,29 +21,13 @@ const ContactUsForm = () => {
 		? "Скоротіть текст до 300 знаків"
 		: "Просимо скоротити ваше повідомлення до 300 знаків";
 	const validationSchema = Yup.object({
-		name: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.max(30, "Ім’я повинно бути не більше 30 знаків")
-			.matches(
-				/^[a-zA-Zа-яА-ЯіІїЇєЄґҐ]*(?:[ ]{0,1}[a-zA-Zа-яА-ЯіІїЇєЄґҐ]+)*$/,
-				"Не дозволено числа, спеціальні символи чи два або більше пробіли підряд"
-			)
-			.required("Заповніть пусте поле"),
-		email: Yup.string()
-			.email("Введіть дійсний email")
-			.test("domain", "Корабель там 🖕", (value) => {
-				return !value?.endsWith(".ru") && !value?.endsWith(".by");
-			})
-			.matches(
-				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-				"Введіть дійсний email"
-			)
-			.required("Введіть дійсний email"),
+		name: nameValidationSchema,
+		email: emailValidationSchema,
 		message: Yup.string()
 			.min(2, "Поля повинні мати більше 2 символів")
 			.max(300, maxMessage)
 			.matches(
-				/^[a-zA-Z0-9а-яА-ЯіІїЇєЄґҐ.,!?:-]*$/,
+				/^[a-zA-Z0-9а-яА-ЯіІїЇєЄґҐ  .,!?:-]*$/,
 				"Не дозволено спеціальні символи"
 			)
 			.required("Введіть ваше повідомлення"),

@@ -62,8 +62,9 @@ const EditProjectPage = () => {
 						title={cardInfo?.title}
 						url={cardInfo?.url}
 						description={cardInfo?.description}
-						city={cardInfo?.location.city}
-						country={cardInfo?.location.country}
+						location={cardInfo?.location}
+						// city={cardInfo?.location.city}
+						// country={cardInfo?.location.country}
 						image={initialImage}
 						isEnabled={cardInfo?.isEnabled}
 						publication={cardInfo?.publication}

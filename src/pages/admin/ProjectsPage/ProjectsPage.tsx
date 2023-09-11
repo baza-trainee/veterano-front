@@ -48,7 +48,7 @@ const ProjectsPage = () => {
 		setCheckedItems(newCheckedItems);
 	};
 
-	const filteredProjects = value ? searchData.filter((project) => project.title.includes(value)) : projects;
+	const filteredProjects = value ? searchData.filter((project) => project.title.toLowerCase().includes(value.toLowerCase())) : projects;
 
 	return (
 		<>
@@ -84,7 +84,7 @@ const ProjectsPage = () => {
 				<div className={"mt-[25px]"}>
 					<Pagination
 						pageCount={totalPages}
-						currentPage={1}
+						currentPage={currentPage}
 						onSelectedPage={(selectedPage: number) => {setCurrentPage(selectedPage)}}
 						prevClassName={"md:!pl-[141px]"} />
 				</div>

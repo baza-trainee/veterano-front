@@ -10,6 +10,10 @@ import { useState } from "react";
 import { createSubscription } from "../../api/SubscribeAPI.ts";
 import ModalWindow from "../Modal/ModalWindow.tsx";
 import Container from "../Container/Container.tsx";
+import {
+	emailValidationSchema,
+	nameValidationSchema,
+} from "../../validationFields/validationFields.ts";
 
 const SubscribeSection = () => {
 	const { isDesktop } = useMedia();
@@ -17,34 +21,19 @@ const SubscribeSection = () => {
 	const [fieldsFilled, setFieldsFilled] = useState(false);
 
 	const validationSchema = Yup.object({
-		name: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.max(30, "Ім’я повинно бути не більше 30 знаків")
-			.matches(
-				/^[a-zA-Z\u0400-\u04FF\s]*$/,
-				"Тільки літери та пробіли дозволені"
-			)
-			.test("no-only-spaces", "Ім'я повинно містити літери", (value) => {
-				return !/^\s+$/.test(value!);
-			})
-			.required("Заповніть пусте поле"),
-		email: Yup.string()
-			.email("Введіть дійсний email")
-			.matches(
-				/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-				"Введіть дійсний email"
-			)
-			.test("domain", "Корабель там 🖕", (value) => {
-				return !value?.endsWith(".ru") && !value?.endsWith(".by");
-			})
-			.required("Введіть дійсний email"),
+		name: nameValidationSchema,
+		email: emailValidationSchema,
 		check: Yup.bool()
 			.oneOf([true], "Це поле є обов’язковим")
 			.required("Це поле є обов’язковим"),
 	});
 	// bg-[url("/images/subscribe-320.png")]
 	return (
-		<section className={'bg-[#8F9FB1] md:bg-[url("/images/subscribe-768.png")] bg-no-repeat bg-contain lg:bg-none'  }>
+		<section
+			className={
+				'bg-[#8F9FB1] md:bg-[url("/images/subscribe-768.png")] bg-no-repeat bg-contain lg:bg-none'
+			}
+		>
 			<Container
 				className={
 					'lg:bg-[url("/images/subscribe-1280.png")] bg-no-repeat bg-contain'
