@@ -4,9 +4,11 @@ import { MdEmail, MdPhone } from "react-icons/md";
 import Section from "../../components/Section/Section.tsx";
 import Container from "../../components/Container/Container.tsx";
 import ContactUsForm from "./ContactUsForm.tsx";
+import { useContacts } from "../../hooks/useContacts.ts";
 
 const ContactUs = () => {
 	const { isMobile, isTablet, isDesktop } = useMedia();
+	const contacts = useContacts();
 
 	return (
 		<>
@@ -49,15 +51,15 @@ const ContactUs = () => {
 					<ul className={"text-black text-[18px] leading-7 font-light"}>
 						<li>
 							<MdPhone size={24} />
-							<p>+38 067 568 17 88</p>
+							<p>+{contacts?.firstPhoneNumber}</p>
 						</li>
 						<li>
 							<MdPhone size={24} />
-							<p>+38 063 628 66 30</p>
+							<p>+{contacts?.secondPhoneNumber}</p>
 						</li>
 						<li>
 							<MdEmail size={24} />
-							<p>info@baza-trainee.tech</p>
+							<p>{contacts?.email}</p>
 						</li>
 					</ul>
 				</div>
