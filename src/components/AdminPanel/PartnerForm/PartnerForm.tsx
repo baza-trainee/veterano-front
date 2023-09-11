@@ -75,13 +75,13 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 						const data = { id, image: base64Image, ...rest };
 
 						editPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1));
 					} else {
 						const { id, image, ...rest } = values;
 						const base64Image = await blobUrlToBase64(image);
 						const data = { image: base64Image, ...rest };
 						createPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1))
 					}
 				} catch (error) {
 					console.log(error);

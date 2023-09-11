@@ -25,10 +25,13 @@ export interface PartnersType {
 
 const PartnersPage = () => {
 	const navigate = useNavigate();
+	const urlParams = new URLSearchParams(window.location.search);
+	const pageParam = urlParams.get("page");
+	const page = pageParam ? parseInt(pageParam) : 1;
 	const [value, setValue] = useState("");
 	const [partners, setPartners] = useState<PartnersType[]>([]);
 	const [searchData, setSearchData] = useState<PartnersType[]>([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(page);
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
@@ -41,7 +44,7 @@ const PartnersPage = () => {
 				setCheckedItems(new Array(resp.partnerDTOList.length).fill(false));
 				setTotalPages(resp.totalPages);
 			});
-	}, [currentPage]);
+	}, [currentPage, page]);
 
 	useEffect(() => {
 		getAllPartners(1, 100)

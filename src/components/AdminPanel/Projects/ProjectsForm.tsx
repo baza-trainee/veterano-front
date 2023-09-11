@@ -73,12 +73,8 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			onSubmit={async (values, { setSubmitting }) => {
 				try {
 					if (values && type === "add") {
-						// const { isEnabled, city, country, category, image, ...rest } = values;
 						const { isEnabled, location, category, image, ...rest } = values;
-
-						// const location = { city, country };
 						let locationObject;
-
 						if (typeof location === "string") {
 							const locationArray = location.split("/");
 							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
@@ -94,7 +90,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							categories: categoryArray,
 						};
 						createCard(cardData)
-							.then(() => navigate("/admin/projects"));
+							.then(() => navigate(-1));
 					} else {
 
 						const changedValues = Object.keys(initialState).reduce<Partial<ProjectsFormProps>>((acc, key) => {
@@ -121,10 +117,9 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
-						console.log(cardData);
 						editCard(cardData)
 							.then(() => {
-								navigate("/admin/projects");
+								navigate(-1)
 							})
 							.catch((error) => {
 								console.error("Помилка при запиті:", error);
