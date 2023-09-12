@@ -1,4 +1,5 @@
 import { $host } from "../../../api";
+import { getContacts } from "../../../api/ContactsAPI";
 
 interface FormValues {
 	phone: string;
@@ -9,14 +10,12 @@ interface FormValues {
 export async function submitForm(values: FormValues) {
 	const { phone, secondPhone, email } = values;
 	try {
-		const response = await $host.patch("/info/contact/update", {
-			phone: phoneFormat(phone),
-			secondPhone: phoneFormat(secondPhone),
+		await $host.patch("/info/contact/update", {
+			firstPhoneNumber: phoneFormat(phone),
+			secondPhoneNumber: phoneFormat(secondPhone),
 			email: email,
 		});
-		const data = response.data;
-		console.log(data);
-
+		const data = await getContacts();
 		return data;
 	} catch (error) {
 		console.error("Error updating data", error);
@@ -33,5 +32,5 @@ function phoneFormat(phone: string) {
 	} else if (numders[0] == "+") {
 		changedPhone = numders.slice(1).join("");
 	}
-	return changedPhone;
+	return phone;
 }

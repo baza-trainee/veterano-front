@@ -150,7 +150,7 @@ const HeroSearchBar = () => {
 					</div>
 					<div
 						ref={scrollContainerRef}
-						className={"flex overflow-x-auto gap-4 search-filter lg:w-[630px]"}
+						className={"flex overflow-x-auto gap-4 search-filter lg:w-[630px] noScrollbar"}
 					>
 						<FilterButton
 							id={`filter-всі`}

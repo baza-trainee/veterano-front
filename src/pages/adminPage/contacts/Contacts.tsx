@@ -8,6 +8,14 @@ import { submitForm } from "./submit.ts";
 import { ChangeEvent } from "react";
 
 export const Contacts = () => {
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [contacts, setContacts] = useState<ContactsType | null>();
+	useEffect(() => {
+		getContacts().then((data) => {
+			setContacts(data);
+			isLoading && setIsLoading(false);
+		});
+	}, [isLoading]);
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
@@ -57,25 +65,26 @@ export const Contacts = () => {
 									className="text-red-500"
 								/>
 
-								<Field
-									as={AdminInput}
-									placeholder="Контактний e-mail"
-									name="email"
-								/>
-								<ErrorMessage
-									name="email"
-									component="div"
-									className="text-red-500"
-								/>
-							</div>
-							<div className="block md:hidden mt-4">
-								<Button variant="primary" type="submit">
-									Опублікувати
-								</Button>
-							</div>
-						</Form>
-					)}
-				</Formik>
+									<Field
+										as={AdminInput}
+										placeholder="Контактний e-mail"
+										name="email"
+									/>
+									<ErrorMessage
+										name="email"
+										component="div"
+										className="text-red-500"
+									/>
+								</div>
+								<div className="block md:hidden mt-4">
+									<Button variant="primary" type="submit">
+										Опублікувати
+									</Button>
+								</div>
+							</Form>
+						)}
+					</Formik>
+				)}
 			</div>
 		</div>
 	);

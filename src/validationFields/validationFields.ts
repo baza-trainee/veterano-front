@@ -40,3 +40,11 @@ export const images = Yup.mixed().required("Поле обов'язкове до 
 export const publicationDate = Yup.mixed().required(
 	"Поле обов'язкове до заповнення"
 );
+
+export const urls = Yup.string()
+	.min(2, "Поля повинні мати більше 2 символів")
+	.matches(
+		/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/,
+		"Поле повинно містити URL в форматі https://domain.com"
+	)
+	.required("Поле обов'язкове до заповнення. Введіть посилання");
