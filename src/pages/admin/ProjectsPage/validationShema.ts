@@ -1,11 +1,9 @@
 import * as Yup from "yup";
-import { images, publicationDate, title } from "../../../validationFields/validationFields.ts";
+import { images, publicationDate, title, urls } from "../../../validationFields/validationFields.ts";
 
 export const validationSchema = Yup.object({
 	title: title,
-	url: Yup.string()
-		.min(2, "Поля повинні мати більше 2 символів")
-		.required("Поле обов'язкове до заповнення"),
+	url: urls,
 	description: Yup.string()
 		.min(2, "Поля повинні мати більше 2 символів")
 		.max(255, "Поля повинні мати не більше 255 символів")

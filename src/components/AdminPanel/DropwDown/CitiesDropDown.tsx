@@ -39,7 +39,7 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({
 
 	useEffect(() => {
 		if (inputDisplayValue && typeof inputDisplayValue === 'object' && !citySelected) {
-			const value = `${capitalizeFirstLetter(inputDisplayValue.city)}/${capitalizeFirstLetter(inputDisplayValue.country)}`;
+			const value = `${capitalizeFirstLetter(inputDisplayValue.country)}/${capitalizeFirstLetter(inputDisplayValue.city)}`;
 			setInputValue(value);
 		}
 	}, [inputDisplayValue, citySelected]);
@@ -95,10 +95,10 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({
 					if (inputValue) {
 						const separatorIndex = inputValue.indexOf("/");
 						if (separatorIndex !== -1) {
-							const city = inputValue.slice(0, separatorIndex).trim();
-							const country = inputValue.slice(separatorIndex + 1).trim();
-							onValueSelected({ city, country });
-							setInputValue(`${city} / ${country}`);
+							const country = inputValue.slice(0, separatorIndex).trim();
+							const city = inputValue.slice(separatorIndex + 1).trim();
+							onValueSelected({ country, city });
+							setInputValue(`${country} / ${city} `);
 						}
 					}
 					if (onBlur) onBlur(e);
@@ -125,7 +125,7 @@ const CitiesDropDown: FC<CitiesDropDownProps> = ({
 									}
 									: {}
 							}>
-							{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
+							{capitalizeFirstLetter(item.country)}/{capitalizeFirstLetter(item.city)}
 						</li>
 					))}
 				</ul>}
