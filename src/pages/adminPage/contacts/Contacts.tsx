@@ -5,24 +5,33 @@ import AdminInput from "../../../components/AdminPanel/Input/AdminInput";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validationSchema } from "./schema.ts";
 import { submitForm } from "./submit.ts";
-import { useContacts } from "../../../hooks/useContacts.ts";
+import { useEffect, useState } from "react";
+import { ContactsType, getContacts } from "../../../api/ContactsAPI.ts";
 
 export const Contacts = () => {
-	const contacts = useContacts();
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [contacts, setContacts] = useState<ContactsType | null>();
+	useEffect(() => {
+		getContacts().then((data) => {
+			setContacts(data);
+			isLoading && setIsLoading(false);
+		});
+	}, [isLoading]);
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
 			<div className="pl-9 pr-[80px] pt-12  ">
-				{contacts && (
+				{contacts && !isLoading && (
 					<Formik
 						validationSchema={validationSchema}
 						initialValues={{
-							phone: contacts?.firstPhoneNumber || "",
-							secondPhone: contacts?.secondPhoneNumber || "",
+							phone: `+${contacts?.firstPhoneNumber}` || "+380",
+							secondPhone: `+${contacts?.secondPhoneNumber}` || "+380",
 							email: contacts?.email || "",
 						}}
-						onSubmit={(values, { resetForm }) => {
-							submitForm(values);
+						onSubmit={async (values, { resetForm }) => {
+							await submitForm(values);
+							setIsLoading(true);
 							resetForm();
 						}}
 					>
