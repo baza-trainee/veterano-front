@@ -28,7 +28,12 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	...props
 
 }) => {
-	const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+	const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+		accept: {
+			'image/jpeg': ['.jpeg']
+		}
+	});
 
 	useEffect(() => {
 		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
@@ -55,8 +60,6 @@ export const FileDrop: React.FC<FileDropProps> = ({
 						<MdOutlineFileDownload size={27}/>
 						Завантажити зображення
 					</span>
-
-
 				)}
 			</div>
 			{src && (
