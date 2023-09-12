@@ -53,15 +53,19 @@ input {
 	background-color: inherit;
 }
 
-.noScrollbar::-webkit-scrollbar {
-	display: none;
-}
 
-.noScrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
+
+
 @layer utilities {
+  .noScrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .noScrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
 	.btn-style {
 		@apply font-light rounded py-2;
 	}
