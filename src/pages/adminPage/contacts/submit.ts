@@ -32,5 +32,5 @@ function phoneFormat(phone: string) {
 	} else if (numders[0] == "+") {
 		changedPhone = numders.slice(1).join("");
 	}
-	return phone;
+	return changedPhone;
 }
