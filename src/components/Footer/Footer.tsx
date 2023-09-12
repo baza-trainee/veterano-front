@@ -3,11 +3,13 @@ import Link from "../Links/Link.tsx";
 import NavigationLink from "../Links/NavigationLink.tsx";
 import { BsTelegram } from "react-icons/bs";
 import { useMediaQuery } from "react-responsive";
+import { useContacts } from "../../hooks/useContacts.ts";
 
 const Footer = () => {
 	const isMobile = useMediaQuery({
 		query: "(max-width: 480px)",
 	});
+	const contacts = useContacts();
 	return (
 		<footer
 			className={
@@ -74,15 +76,15 @@ const Footer = () => {
 							<ul className={"lg:justify-self-start font-light "}>
 								<li className={"text-white flex items-center leading-6"}>
 									<img src="/images/phone.svg" alt="phone" />
-									<p className={"pl-[10px]"}>+38 067 568 17 88</p>
+									<p className={"pl-[10px]"}>+{contacts?.firstPhoneNumber}</p>
 								</li>
 								<li className={"text-white flex items-center"}>
 									<img src="/images/phone.svg" alt="phone" />
-									<p className={"pl-[10px]"}>+38 063 628 66 30</p>
+									<p className={"pl-[10px]"}>+{contacts?.secondPhoneNumber}</p>
 								</li>
 								<li className={"text-white flex items-center"}>
 									<img src="/images/mail.svg" alt="email" />
-									<p className={"pl-[10px]"}>info@baza-trainee.tech</p>
+									<p className={"pl-[10px]"}>{contacts?.email}</p>
 								</li>
 							</ul>
 							<ul className={"md:self-center lg:self-start lg:mt-0 text-white"}>

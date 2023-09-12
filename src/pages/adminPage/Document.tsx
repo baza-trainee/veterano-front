@@ -38,6 +38,7 @@ export const DocumentPage = () => {
 							Правила користування сайтом
 						</p>
 					</AdminInputFile>
+
 					<AdminInputFile
 						placeholder="Додати документ"
 						name="addDoc"

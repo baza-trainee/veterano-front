@@ -3,11 +3,18 @@ import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
+
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!sessionStorage.getItem("JWT"))
 			navigate("../../auth/login", { relative: "path" });
 	});
+
+	const logOutHandler = () => {
+		sessionStorage.removeItem("JWT")
+		navigate("../../auth/login", { relative: "path" });
+	}
+
 	return (
 		<div className={"flex"}>
 			<div className={"w-[272px] bg-yellow50"}>
@@ -37,6 +44,7 @@ const AdminLayout = () => {
 					</div>
 
 					<button
+						onClick={logOutHandler}
 						className={
 							"w-full flex py-3 px-4 gap-3 border border-transparent rounded hover:border hover:border-black bg-inherit"
 						}

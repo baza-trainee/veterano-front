@@ -34,7 +34,7 @@ const ContactUsForm = () => {
 	});
 	return (
 		<div className={"contact-feedback md:gap-[26px] lg:gap-[30px]"}>
-			<div className={"md:w-[22%] lg:w-[298px]"}>
+			<div className={"md:w-[200px] lg:w-[298px]"}>
 				<Typography
 					variant={isDesktop ? "h4" : "h5"}
 					component={isDesktop ? "h4" : "h5"}
