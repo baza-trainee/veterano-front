@@ -24,9 +24,9 @@ const ProjectCard: React.FC<CardProps> = ({
 
 	const cardStyle = {
 		carousel: {
-			wrapper: "h-[606px] md:h-[588px] lg:h-[692px]",
+			wrapper: "md:h-[588px] lg:h-[692px]",
 			image: "w-full h-[240px] md:h-[246px] lg:h-[266px]",
-			info: "p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8 h-[366px] md:h-[342px] lg:h-[426px] ",
+			info: "p-3 sm:px-4 sm:py-6 md:px-3 md:py-6 lg:p-8 md:h-[342px] lg:h-[426px] ",
 			desc: "h-[216px] line-clamp-[9] overflow-hidden text-ellipsis whitespace-normal md:h-[192px] md:line-clamp-[8] lg:h-[252px] lg:line-clamp-[9]",
 		},
 		search: {
@@ -34,7 +34,7 @@ const ProjectCard: React.FC<CardProps> = ({
 				"flex flex-col md:flex-row justify-between mb-[32px] lg:h-[291px]",
 			image:
 				"w-full md:min-w-[165px] md:w-[165px] md:h-[201px] lg:h-full lg:min-w-[413px]  lg:w-[413px]",
-			info: "flex w-full flex-col py-6 px-4 justify-betwen md:pt-[2px] md:pb-4 lg:py-[32px] lg:px-4 flex-shrink-1 ",
+			info: "flex w-full flex-col py-6 px-4 justify-between md:pt-[2px] md:pb-4 lg:py-[32px] lg:px-4 flex-shrink-1 ",
 			desc: "",
 		},
 	};
@@ -67,18 +67,18 @@ const ProjectCard: React.FC<CardProps> = ({
 						{text}
 					</Typography>
 				</div>
-
 				<Link
 					to={url}
 					variant="primary"
 					size={isDesktop ? "large" : "small"}
 					className={
-					variant === "carousel" ? "w-[136px] h-[36px]" : "w-[136px] h-[36px] md:w-[165px] lg:w-[170px] lg:h-[48px] lg:text-[16px]"
+						variant === "carousel" ? "w-[136px] h-[36px]" : "w-[136px] h-[36px] md:w-[165px] lg:w-[170px] lg:h-[48px] lg:text-[16px]"
 
 					}
 				>
 					Детальніше
 				</Link>
+
 			</div>
 		</div>
 	);
