@@ -47,7 +47,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 		setInitialState({
 			cardId: cardId || 0,
 			title: title || "",
-			url: url || "https://",
+			url: url || "",
 			description: description || "",
 			location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 			image: image || "",
@@ -61,7 +61,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			initialValues={{
 				cardId: cardId || 0,
 				title: title || "",
-				url: url || "https://",
+				url: url || "",
 				description: description || "",
 				location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 				image: image || "",
@@ -228,7 +228,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 								</div>
 								<PublishComponent
 									isEnabled={values.isEnabled}
-									setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
+									onChange={(isChecked) => setFieldValue("isEnabled", isChecked)}
 									publication={values.publication}
 									isValid={isValid}
 									onValueSelected={(date) => {
