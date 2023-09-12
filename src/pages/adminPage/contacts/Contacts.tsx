@@ -25,8 +25,8 @@ export const Contacts = () => {
 					<Formik
 						validationSchema={validationSchema}
 						initialValues={{
-							phone: contacts?.firstPhoneNumber || "",
-							secondPhone: contacts?.secondPhoneNumber || "",
+							phone: `+${contacts?.firstPhoneNumber}` || "+380",
+							secondPhone: `+${contacts?.secondPhoneNumber}` || "+380",
 							email: contacts?.email || "",
 						}}
 						onSubmit={async (values, { resetForm }) => {
