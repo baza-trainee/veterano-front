@@ -89,7 +89,6 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
-						console.log(cardData);
 						createCard(cardData)
 							.then(() => navigate(-1));
 					} else {
@@ -118,7 +117,6 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
-						console.log(cardData);
 						editCard(cardData)
 							.then(() => {
 								navigate(-1)
