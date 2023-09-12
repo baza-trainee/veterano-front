@@ -7,6 +7,6 @@ export const useContacts = () => {
 		getContacts().then((data) => {
 			setContacts(data);
 		});
-	});
+	}, []);
 	return contacts;
 };
