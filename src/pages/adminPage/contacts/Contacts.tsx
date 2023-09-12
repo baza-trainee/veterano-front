@@ -5,7 +5,8 @@ import AdminInput from "../../../components/AdminPanel/Input/AdminInput";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validationSchema } from "./schema.ts";
 import { submitForm } from "./submit.ts";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { ContactsType, getContacts } from "../../../api/ContactsAPI.ts";
 
 export const Contacts = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -65,26 +66,25 @@ export const Contacts = () => {
 									className="text-red-500"
 								/>
 
-									<Field
-										as={AdminInput}
-										placeholder="Контактний e-mail"
-										name="email"
-									/>
-									<ErrorMessage
-										name="email"
-										component="div"
-										className="text-red-500"
-									/>
-								</div>
-								<div className="block md:hidden mt-4">
-									<Button variant="primary" type="submit">
-										Опублікувати
-									</Button>
-								</div>
-							</Form>
-						)}
-					</Formik>
-				)}
+								<Field
+									as={AdminInput}
+									placeholder="Контактний e-mail"
+									name="email"
+								/>
+								<ErrorMessage
+									name="email"
+									component="div"
+									className="text-red-500"
+								/>
+							</div>
+							<div className="block md:hidden mt-4">
+								<Button variant="primary" type="submit">
+									Опублікувати
+								</Button>
+							</div>
+						</Form>
+					)}
+				</Formik>
 			</div>
 		</div>
 	);
