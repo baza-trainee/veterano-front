@@ -33,9 +33,9 @@ const ProjectCard: React.FC<CardProps> = ({
 			wrapper:
 				"flex flex-col md:flex-row justify-between mb-[32px] md:h-[201px] lg:h-[291px]",
 			image:
-				"w-full md:w-[165px] md:h-[201px] lg:h-full lg:w-[413px]",
+				"w-full md:min-w-[165px] md:w-[165px] md:h-[201px] lg:h-full lg:min-w-[413px]  lg:w-[413px]",
 			info: "flex w-full flex-col py-6 px-4 justify-between md:pt-[2px] md:pb-4 lg:py-[32px] lg:px-4 flex-shrink-1 ",
-			desc: "md:h-[71px] md:w-[498px] md:multi-line-truncate-md lg:h-[116px] lg:w-[815px] lg:multi-line-truncate-lg",
+			desc: "",
 		},
 	};
 
