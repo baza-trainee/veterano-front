@@ -8,6 +8,7 @@ interface ConfirmModal{
 }
 
 const ConfirmModal: FC<ConfirmModal> = ({active, setActive, onClick,  }) => {
+
 	return (
 		<ModalWindow
 			className={"bg-white w-[352px] h-[196px] px-6 py-[32px] flex flex-col gap-6 items-center "}
