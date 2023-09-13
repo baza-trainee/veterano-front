@@ -18,10 +18,13 @@ import ConfirmModal from "../../../components/AdminPanel/ConfirmModal/ConfirmMod
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
+	const urlParams = new URLSearchParams(window.location.search);
+	const pageParam = urlParams.get("page");
+	const page = pageParam ? parseInt(pageParam) : 1;
 	const [value, setValue] = useState("");
 	const [projects, setProjects] = useState<ProjectType[]>([]);
 	const [searchData, setSearchData] = useState<ProjectType[]>([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(page);
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
@@ -34,17 +37,16 @@ const ProjectsPage = () => {
 	};
 
 	useEffect(() => {
-		navigate(`/admin/projects?page=${currentPage}`, { replace: true });
 		getAllCards(currentPage, 7)
 			.then((resp) => {
 				setProjects(resp.cards);
 				setCheckedItems(new Array(resp.cards.length).fill(false));
 				setTotalPages(resp.totalPages);
 			});
-	}, [currentPage]);
+	}, [currentPage, page]);
 
 	useEffect(() => {
-		getAllCards(currentPage, 100)
+		getAllCards(1, 100)
 			.then((resp) => {
 				setSearchData(resp.cards);
 			});

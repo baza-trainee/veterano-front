@@ -47,9 +47,9 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 		setInitialState({
 			cardId: cardId || 0,
 			title: title || "",
-			url: url || "",
+			url: url || "https://",
 			description: description || "",
-			location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
+			location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 			image: image || "",
 			isEnabled: isEnabled || true,
 			publication: publication || formatDate,
@@ -61,9 +61,9 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			initialValues={{
 				cardId: cardId || 0,
 				title: title || "",
-				url: url || "",
+				url: url || "https://",
 				description: description || "",
-				location: location && typeof location === "object" ? `${location.city}/${location.country}` : "",
+				location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 				image: image || "",
 				isEnabled: isEnabled || true,
 				publication: publication || formatDate,
@@ -73,15 +73,11 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 			onSubmit={async (values, { setSubmitting }) => {
 				try {
 					if (values && type === "add") {
-						// const { isEnabled, city, country, category, image, ...rest } = values;
 						const { isEnabled, location, category, image, ...rest } = values;
-
-						// const location = { city, country };
 						let locationObject;
-
 						if (typeof location === "string") {
 							const locationArray = location.split("/");
-							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+							locationObject = { country: locationArray[0].trim(), city: locationArray[1].trim() };
 						} else if (typeof location === "object") {
 							locationObject = location;
 						}
@@ -95,7 +91,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 						};
 						console.log(cardData);
 						createCard(cardData)
-							.then(() => navigate("/admin/projects"));
+							.then(() => navigate(-1));
 					} else {
 
 						const changedValues = Object.keys(initialState).reduce<Partial<ProjectsFormProps>>((acc, key) => {
@@ -111,7 +107,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 
 						if (typeof location === "string") {
 							const locationArray = location.split("/");
-							locationObject = { city: locationArray[0].trim(), country: locationArray[1].trim() };
+							locationObject = { country: locationArray[0].trim(), city: locationArray[1].trim() };
 						} else if (typeof location === "object") {
 							locationObject = location;
 						}
@@ -125,7 +121,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 						console.log(cardData);
 						editCard(cardData)
 							.then(() => {
-								navigate("/admin/projects");
+								navigate(-1)
 							})
 							.catch((error) => {
 								console.error("Помилка при запиті:", error);
@@ -192,8 +188,8 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									onChange={handleChange}
 									placeholder={"Країна / місто"}
 									onBlur={handleBlur}
-									onValueSelected={({ city, country }) => {
-										setFieldValue("location", `${city}/${country}`);
+									onValueSelected={({ country, city }) => {
+										setFieldValue("location", `${country}/${city}`);
 									}}
 									error={touched.location && errors.location ? errors.location : ""}
 								/>

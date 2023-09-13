@@ -8,6 +8,7 @@ import { blobUrlToBase64 } from "../BlobToBase64.ts";
 import { Form, Formik } from "formik";
 import PublishComponent from "../PublishComponent.tsx";
 import { useNavigate } from "react-router-dom";
+import { images, publicationDate, title, urls } from "../../../validationFields/validationFields.ts";
 
 interface PartnerFormProps {
 	id?: number;
@@ -36,19 +37,10 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 	}, [id, partnerName, url, image, isEnabled, publication ]);
 
 	const validationSchema = Yup.object({
-		partnerName: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.max(100, "Поля повинні мати не більше 100 символів")
-			.matches(/^[a-zA-Zа-яА-Я0-9()&, \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
-			.required("Поле обов'язкове до заповнення. Введіть назву"),
-		url: Yup.string()
-			.min(2, "Поля повинні мати більше 2 символів")
-			.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
-			.required("Поле обов'язкове до заповнення. Введіть посилання"),
-		image: Yup.mixed()
-			.required("Поле обов'язкове до заповнення"),
-		publication: Yup.string()
-			.required("Поле обов'язкове до заповнення"),
+		partnerName: title,
+		url: urls,
+		image: images,
+		publication: publicationDate,
 	});
 
 	return (
@@ -80,13 +72,13 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 						const data = { id, image: base64Image, ...rest };
 
 						editPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1));
 					} else {
 						const { id, image, ...rest } = values;
 						const base64Image = await blobUrlToBase64(image);
 						const data = { image: base64Image, ...rest };
 						createPartner(data)
-							.then(() => navigate("/admin/partners"));
+							.then(() => navigate(-1))
 					}
 				} catch (error) {
 					console.log(error);

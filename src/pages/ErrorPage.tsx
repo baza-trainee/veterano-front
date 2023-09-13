@@ -24,7 +24,7 @@ export const ErrorPage = () => {
 				Ми не змогли знайти сторінку, яку Ви шукаєте. Можливо, сталася помилка
 			</Typography>
 			<NavigationLink
-				className=" md:px-[0px] md:min-w-[288px] text-[18px]"
+				className="!px-[0px] lg:!px-[0px] md:!px-[0px] md:min-w-[288px]"
 				to="/"
 				variant="primary"
 				size="wideMob"
