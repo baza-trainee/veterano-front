@@ -17,7 +17,6 @@ export const Contacts = () => {
 			isLoading && setIsLoading(false);
 		});
 	}, [isLoading]);
-
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
