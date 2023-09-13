@@ -4,14 +4,15 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (!sessionStorage.getItem("JWT"))
-			navigate("../../auth/login", { relative: "path" });
+			navigate("../../../../auth/login", { relative: "path" });
 	});
 
 	const logOutHandler = () => {
 		sessionStorage.removeItem("JWT");
-		navigate("../../auth/login", { relative: "path" });
+		navigate("../../../../auth/login", { relative: "path" });
 	};
 
 	return (

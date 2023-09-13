@@ -20,7 +20,6 @@ const PartnersSection = () => {
 
 	useEffect(() => {
 		searchPartners().then((data) => {
-			console.log(data);
 			setItems(data.partnerDTOList);
 		});
 	}, []);

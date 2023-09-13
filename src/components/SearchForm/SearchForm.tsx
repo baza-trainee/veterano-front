@@ -38,7 +38,6 @@ const HeroSearchBar = () => {
 			setPage('search')
 		}
 
-
 	}, [location])
 
 	useEffect(() => {
@@ -52,6 +51,7 @@ const HeroSearchBar = () => {
 				setCities(data);
 			}
 		});
+
 		const scrollContainer = scrollContainerRef.current;
 
 		const handleScroll = (event: WheelEvent) => {
@@ -97,6 +97,7 @@ const HeroSearchBar = () => {
 			queryParams.append("country", values.country);
 		}
 		if (values.category) queryParams.append("category", values.category);
+
 		queryParams.append("page", "1");
 
 		if (queryParams.toString()) {
