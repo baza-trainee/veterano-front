@@ -7,11 +7,8 @@ interface TableHeaderProps {
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 	onClick: () => void
 }
-
-const TableHeader: FC<TableHeaderProps> = ({ checked, name, onChange, onClick }) => {
-
-	const [isOpen, setIsOpen] = useState(false);
-
+const TableHeader: FC<TableHeaderProps> = ({checked, name, onChange, onClick}) => {
+	const [isOpen, setIsOpen] = useState(false)
 	return (
 		<div className={"flex mt-6 border-b border-black items-center justify-between font-light "}>
 			<div className={"flex gap-[18px] w-[439px] items-center"}>
