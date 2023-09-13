@@ -80,9 +80,15 @@ const DropDown: FC<DropDownProps> = ({
 				onKeyDown={handleKeyPress}
 				name={name}
 			/>
-			<BsFilter size={24} color={value.length > 1 ? "white" : ""} />
+			<BsFilter onClick={() => setIsOpen(true)} size={24} color={value.length > 1 ? "white" : ""} />
 			{isOpen && results.length > 0 ? (
 				<ul id="cities" className={"filter-drop-down z-10"}>
+					<li
+						onMouseDown={() => {
+							listOnClickHandler("", "");
+						}}
+
+					>Всі локації</li>
 					{results.map((item, index) => (
 						<li
 							key={index}

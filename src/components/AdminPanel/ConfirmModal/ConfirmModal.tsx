@@ -24,7 +24,10 @@ const ConfirmModal: FC<ConfirmModal> = ({active, setActive, onClick,  }) => {
 			</div>
 			<div className={"flex gap-6 justify-center items-center text-[16px] font-light leading-6"}>
 				<div className={"text-success100 flex items-center gap-2 cursor-pointer"}
-						 onClick={onClick}>
+						 onClick={() => {
+							 onClick()
+							 setActive(false)
+						 }}>
 					<img src="/admin/approve.svg" alt={"approve"} />
 					Так
 				</div>

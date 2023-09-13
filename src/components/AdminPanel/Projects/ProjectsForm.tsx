@@ -47,25 +47,27 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 		setInitialState({
 			cardId: cardId || 0,
 			title: title || "",
-			url: url || "https://",
+			url: url || "",
 			description: description || "",
 			location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 			image: image || "",
-			isEnabled: isEnabled || true,
+			isEnabled: isEnabled || false,
 			publication: publication || formatDate,
 			category: category || "",
 		});
-	}, []);
+	}, [cardId, title, url, description, location, image, isEnabled, publication, category ]);
+
+
 	return (
 		<Formik
 			initialValues={{
 				cardId: cardId || 0,
 				title: title || "",
-				url: url || "https://",
+				url: url || "",
 				description: description || "",
 				location: location && typeof location === "object" ? `${location.country}/${location.city}` : "",
 				image: image || "",
-				isEnabled: isEnabled || true,
+				isEnabled: isEnabled || false,
 				publication: publication || formatDate,
 				category: category || "",
 			}}
@@ -100,7 +102,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							return acc;
 						}, {});
 
-						const { location, category, image, ...rest } = changedValues;
+						const { isEnabled, location, category, image, ...rest } = changedValues;
 						const categoryArray = category ? category.split(",").map(item => ({ categoryName: item.trim() })) : undefined;
 						let locationObject;
 
@@ -137,7 +139,6 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 
 		>
 			{({ values, setFieldValue, handleBlur, touched, errors, handleChange, isValid, handleSubmit }) => (
-
 				<Form onSubmit={e => {
 					e.preventDefault();
 					handleSubmit();
@@ -225,8 +226,11 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 									/>
 								</div>
 								<PublishComponent
+									page={'project'}
 									isEnabled={values.isEnabled}
-									setIsChecked={(isChecked) => setFieldValue("isEnabled", isChecked)}
+									onChange={(isChecked) => {
+										setFieldValue("isEnabled", isChecked)
+									}}
 									publication={values.publication}
 									isValid={isValid}
 									onValueSelected={(date) => {
@@ -236,7 +240,6 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 											setFieldValue("publication", formatDate);
 										}
 									}} />
-
 							</div>
 						</div>
 					</div>
