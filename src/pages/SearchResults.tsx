@@ -38,10 +38,11 @@ const SearchResults = () => {
 	const city = searchParams.get("city");
 	const country = searchParams.get("country");
 	const category = searchParams.get("category");
-	const size = isMobile ? 6 : 4;
+	const size = isMobile ? 3 : 4;
 	const [results, setResults] = useState<ResultsType | null>(null);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState( 1);
 	const [additionalCards, setAdditionalCards] = useState<Card[]>([]);
+	const [loadPage, setLoadPage] = useState(2);
 
 	useEffect(() => {
 		const params = {
@@ -63,17 +64,19 @@ const SearchResults = () => {
 	}, [q, city, country, category, currentPage]);
 
 	const loadMore = async () => {
-		const nextPage = currentPage + 1;
+
 		const params = {
 			q,
 			city,
 			country,
 			category: category === "Всі" ? null : category,
-			page: nextPage,
+			page: loadPage,
 			size,
 		};
 		const newItems = await searchRequest(params);
 		setAdditionalCards([...additionalCards, ...newItems.cards]);
+		const nextPage = loadPage + 1;
+		setLoadPage(nextPage)
 	};
 
 	const handleSelectedPage = (selectedPage: number) => {
@@ -126,7 +129,7 @@ const SearchResults = () => {
 											url={card.url}
 											title={card.title}
 											text={card.text}
-											variant={isMobile ? "carousel" : "search"}
+											variant={"search"}
 										/>
 									))}
 							</div>

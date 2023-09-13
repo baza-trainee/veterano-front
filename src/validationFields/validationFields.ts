@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 export const phoneNumberRegExp =
-	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+	/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}[ \-]*[0-9]{3,4}$/;
 
 export const emailValidationSchema = Yup.string()
 	.email("Введіть дійсний email")
@@ -29,11 +29,13 @@ export const passwordValidationSchema = Yup.string()
 export const title = Yup.string()
 	.min(2, "Поля повинні мати більше 2 символів")
 	.max(100, "Поля повинні мати не більше 100 символів")
-	.matches(/^[0-9a-zA-Zа-яА-Я-()& \-\p{L}]+$/u, 'Поле не повинно містити спеціальних символів')
-	.required("Поле обов'язкове до заповнення. Введіть назву")
+	.matches(
+		/^[0-9a-zA-Zа-яА-Я-()& \-\p{L}]+$/u,
+		"Поле не повинно містити спеціальних символів"
+	)
+	.required("Поле обов'язкове до заповнення. Введіть назву");
 
-export const images = Yup.mixed()
-	.required("Поле обов'язкове до заповнення")
+export const images = Yup.mixed().required("Поле обов'язкове до заповнення");
 
 export const publicationDate = Yup.mixed()
 	.required("Поле обов'язкове до заповнення")
