@@ -7,6 +7,7 @@ interface ModalWindowProps {
 	active: boolean;
 	setActive: React.Dispatch<React.SetStateAction<boolean>>;
 	style?: React.CSSProperties
+	isImage?: boolean
 }
 
 const ModalWindow: FC<ModalWindowProps> = ({
@@ -14,6 +15,7 @@ const ModalWindow: FC<ModalWindowProps> = ({
 	setActive,
 	className,
 	children,
+	isImage= true,
   ...props
 }) => {
 
@@ -29,11 +31,11 @@ const ModalWindow: FC<ModalWindowProps> = ({
 			onClick={() => setActive(false)}
 		>
 			<div
-				className={`${className} modal-content relative absolute top-0 md:top-[92px]`}
+				className={`${className} modal-content absolute top-0 md:top-[92px]`}
 				onClick={(e) => e.stopPropagation()}
 				{...props}
 			>
-				<div
+				{isImage && <div
 					onClick={() => setActive(false)}
 					className={
 						"absolute right-[16px] md:right-[24px] top-[24px] flex justify-end cursor-pointer"
@@ -41,6 +43,8 @@ const ModalWindow: FC<ModalWindowProps> = ({
 				>
 					<img src="/images/close.svg" alt="close" />
 				</div>
+				}
+
 				{children}
 			</div>
 		</div>

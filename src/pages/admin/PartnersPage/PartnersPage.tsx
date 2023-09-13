@@ -13,6 +13,8 @@ import {
 	handleRemoveSelected,
 } from "../../../../utils/functions/admin/adminFnc.ts";
 import Search404 from "../../../components/Search404/Search404.tsx";
+import ConfirmModal from "../../../components/AdminPanel/ConfirmModal/ConfirmModal.tsx";
+
 
 export interface PartnersType {
 	id: number,
@@ -35,8 +37,13 @@ const PartnersPage = () => {
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(partners.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
+	const [active, setActive] = useState(false);
+	const [selectedPartnerId, setSelectedPartnerId] = useState<number | null>(null);
 
-
+	const openModal = (partnerId: number) => {
+		setSelectedPartnerId(partnerId);
+		setActive(true);
+	};
 	useEffect(() => {
 		getAllPartners(currentPage, 7)
 			.then((resp) => {
@@ -84,12 +91,22 @@ const PartnersPage = () => {
 								name={capitalizeFirstLetter(partner.partnerName)}
 								status={partner.isEnabled ? "активний" : "неактивний"}
 								date={partner.publication}
-								removeHandler={() => handleRemove(partner.id, setPartners, "id", removePartner)}
+								removeHandler={() => openModal(partner.id)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
 								editHandler={() => navigate(`/admin/partners/${partner.id}`)}
 							/>
-						</React.Fragment>,
+							{active && selectedPartnerId === partner.id &&
+								<ConfirmModal
+									onClick={() => {
+									handleRemove(partner.id, setPartners, "id", removePartner)
+									setActive(false)
+								}}
+									active={active}
+									setActive={setActive}
+								/>
+								}
+						</React.Fragment>
 					)}
 				</div>
 				<div className={"mt-[25px]"}>
@@ -99,6 +116,8 @@ const PartnersPage = () => {
 											prevClassName={"md:!pl-[141px]"} />
 				</div>
 			</div>
+
+
 		</>
 	);
 };

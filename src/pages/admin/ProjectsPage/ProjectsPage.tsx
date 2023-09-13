@@ -14,6 +14,7 @@ import {
 	handleRemoveSelected,
 } from "../../../../utils/functions/admin/adminFnc.ts";
 import Search404 from "../../../components/Search404/Search404.tsx";
+import ConfirmModal from "../../../components/AdminPanel/ConfirmModal/ConfirmModal.tsx";
 
 const ProjectsPage = () => {
 	const navigate = useNavigate();
@@ -27,6 +28,13 @@ const ProjectsPage = () => {
 	const [isAllChecked, setAllChecked] = useState(false);
 	const [checkedItems, setCheckedItems] = useState(new Array(projects.length).fill(false));
 	const [totalPages, setTotalPages] = useState(0);
+	const [active, setActive] = useState(false);
+	const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
+	const openModal = (projectId: number) => {
+		setSelectedProjectId(projectId);
+		setActive(true);
+	};
 
 	useEffect(() => {
 		getAllCards(currentPage, 7)
@@ -75,11 +83,21 @@ const ProjectsPage = () => {
 								name={capitalizeFirstLetter(project.title)}
 								status={project.isEnabled ? "активний" : "неактивний"}
 								date={project.publication}
-								removeHandler={() => handleRemove(project.cardId, setProjects, "cardId", removeCard)}
+								removeHandler={() => openModal(project.cardId)}
 								checked={checkedItems[index]}
 								onChange={handleCheckedChange(index)}
 								editHandler={() => navigate(`/admin/projects/edit-project/${project.cardId}`)}
 							/>
+							{active && selectedProjectId === project.cardId &&
+								<ConfirmModal
+									onClick={() => {
+										handleRemove(project.cardId, setProjects, "cardId", removeCard)
+										setActive(false)
+									}}
+									active={active}
+									setActive={setActive}
+								/>
+							}
 						</React.Fragment>,
 					)}
 				</div>
