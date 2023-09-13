@@ -17,11 +17,12 @@ export const Contacts = () => {
 			isLoading && setIsLoading(false);
 		});
 	}, [isLoading]);
+
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
 			<div className="pl-9 pr-[80px] pt-12  ">
-				{contacts && !isLoading && (
+				{!isLoading && (
 					<Formik
 						validationSchema={validationSchema}
 						initialValues={{
