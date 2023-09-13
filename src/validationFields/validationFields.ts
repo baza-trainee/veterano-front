@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 export const phoneNumberRegExp =
-	/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}[ \-]*[0-9]{3,4}$/;
+	/^[\+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
 
 export const emailValidationSchema = Yup.string()
 	.email("Введіть дійсний email")
@@ -37,11 +37,15 @@ export const title = Yup.string()
 
 export const images = Yup.mixed().required("Поле обов'язкове до заповнення");
 
-export const publicationDate = Yup.mixed()
-	.required("Поле обов'язкове до заповнення")
+export const publicationDate = Yup.mixed().required(
+	"Поле обов'язкове до заповнення"
+);
 
 
 export const urls = Yup.string()
 	.min(2, "Поля повинні мати більше 2 символів")
-	.matches(/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/, "Поле повинно містити URL в форматі https://domain.com")
-	.required("Поле обов'язкове до заповнення. Введіть посилання")
+	.matches(
+		/^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z-/]{2,}$/,
+		"Поле повинно містити URL в форматі https://domain.com"
+	)
+	.required("Поле обов'язкове до заповнення. Введіть посилання");

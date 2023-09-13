@@ -3,7 +3,6 @@ import NavLinkAdmin from "../components/NavLinkAdmin/NavLinkAdmin.tsx";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const AdminLayout = () => {
-
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!sessionStorage.getItem("JWT"))
@@ -11,9 +10,9 @@ const AdminLayout = () => {
 	});
 
 	const logOutHandler = () => {
-		sessionStorage.removeItem("JWT")
+		sessionStorage.removeItem("JWT");
 		navigate("../../auth/login", { relative: "path" });
-	}
+	};
 
 	return (
 		<div className={"flex"}>
@@ -37,9 +36,6 @@ const AdminLayout = () => {
 						</NavLinkAdmin>
 						<NavLinkAdmin icon={"/images/admin/contacts.svg"} to={"contacts"}>
 							Контакти
-						</NavLinkAdmin>
-						<NavLinkAdmin icon={"/images/admin/file.svg"} to={"documents"}>
-							Документи
 						</NavLinkAdmin>
 					</div>
 

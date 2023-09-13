@@ -24,9 +24,13 @@ export async function submitForm(values: FormValues) {
 }
 
 function phoneFormat(phone: string) {
-	phone[0] === "+" && (phone = phone.slice(1));
-	if (phone[0] === "0") {
-		phone = "38" + phone;
+	const numders = phone.split("");
+
+	let changedPhone: string = "";
+	if (numders[0] == "0") {
+		changedPhone = ["3", "8", ...numders].join("");
+	} else if (numders[0] == "+") {
+		changedPhone = numders.slice(1).join("");
 	}
-	return phone;
+	return changedPhone;
 }
