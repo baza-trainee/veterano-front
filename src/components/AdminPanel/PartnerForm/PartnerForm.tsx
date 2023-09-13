@@ -20,7 +20,6 @@ interface PartnerFormProps {
 }
 
 const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partnerName, url, image }) => {
-
 	const formatDate = useFormatDate();
 	const navigate = useNavigate();
 	const [initialState, setInitialState] = useState<PartnerFormProps>({});
@@ -77,6 +76,7 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 						const { id, image, ...rest } = values;
 						const base64Image = await blobUrlToBase64(image);
 						const data = { image: base64Image, ...rest };
+						console.log('create', data);
 						createPartner(data)
 							.then(() => navigate(-1))
 					}
@@ -138,7 +138,9 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 
 								<PublishComponent
 									isEnabled={values.isEnabled}
-									onChange={(isChecked: boolean) => setFieldValue("isEnabled", isChecked)}
+									onChange={(isChecked: boolean) => {
+										setFieldValue("isEnabled", isChecked);
+									}}
 									publication={values.publication}
 									isValid={isValid}
 									onValueSelected={(date: string) => {

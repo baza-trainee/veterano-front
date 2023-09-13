@@ -14,7 +14,7 @@ export const validationSchema = Yup.object({
 	location: Yup.string()
 		.min(2, "Поля повинні мати більше 2 символів")
 		.max(50, "Введіть не більше 50 символів")
-		.matches(/^[a-zA-Zа-яА-Я0-9()&/, \-\p{L}]+$/u, "Поле не повинно містити спеціальних символів")
+		.matches(/^[a-zA-Zа-яА-Я()&/, \-\p{L}]+$/u, "Поле не повинно містити спеціальних символів та цифр")
 		.test("hasCityAndCountry", "Поле повинно містити місто / країну", value => {
 			if (!value) return false;
 			const parts = value.split("/");

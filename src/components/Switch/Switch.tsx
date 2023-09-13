@@ -3,12 +3,16 @@ import { FC } from "react";
 interface SwitchPropsType {
 	isChecked: boolean;
 	onChange: (isChecked: boolean) => void;
+	disabled?: boolean
+
 }
-const Switch:FC<SwitchPropsType> = ( {isChecked, onChange}) => {
+const Switch:FC<SwitchPropsType> = ( {isChecked, onChange, disabled=false}) => {
+
+	const style = disabled ? "switch-label pointer-events-none" : "switch-label"
 	return (
 
 		<label
-			className={`switch-label ${isChecked ? 'switch-on' : ''} `}
+			className={`${style} ${isChecked ? 'switch-on' : ''} `}
 		>
 			<input
 				type="checkbox"
