@@ -463,17 +463,11 @@ input {
 		@apply bg-yellow30 rounded;
 	}
 
-  .multi-line-truncate-md {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .multi-line-truncate-lg {
+  .multi-line-truncate {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
 }
