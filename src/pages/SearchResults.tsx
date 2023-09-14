@@ -38,11 +38,12 @@ const SearchResults = () => {
 	const city = searchParams.get("city");
 	const country = searchParams.get("country");
 	const category = searchParams.get("category");
-	const size = isMobile ? 3 : 4;
+	const size = isMobile ? 1 : 4;
 	const [results, setResults] = useState<ResultsType | null>(null);
 	const [currentPage, setCurrentPage] = useState( 1);
 	const [additionalCards, setAdditionalCards] = useState<Card[]>([]);
 	const [loadPage, setLoadPage] = useState(2);
+	const totalPages = results?.totalPages ?? 0;
 
 	useEffect(() => {
 		const params = {
@@ -134,6 +135,7 @@ const SearchResults = () => {
 									))}
 							</div>
 							{isMobile ? (
+								loadPage <= totalPages &&
 								<div className={"flex justify-center"}>
 									<Button
 										variant={"secondary"}
