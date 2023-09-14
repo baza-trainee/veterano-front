@@ -1,5 +1,5 @@
 import Typography from "../../../components/Typography/Typography.tsx";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 import { getCardById } from "../../../api/CardsApi.ts";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ const EditProjectPage = () => {
 	const [cardInfo, setCardInfo] = useState<CardType>();
 	const { id } = useParams<string>();
 	const [initialImage, setInitialImage] = useState<string>("");
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (id) {
@@ -43,9 +44,7 @@ const EditProjectPage = () => {
 					<Typography variant={"h3"} component={"h3"} className={"text-white"}>
 						Проєкти
 					</Typography>
-					<NavLink to={"/admin/projects/"}>
-						<IconClose />
-					</NavLink>
+					<IconClose onClick={() => navigate(-1)}/>
 				</div>
 			</div>
 			<div className={"pt-[48px] pl-[34px] pr-[80px] pb-[128px] bg-grey30 "}>
@@ -63,8 +62,6 @@ const EditProjectPage = () => {
 						url={cardInfo?.url}
 						description={cardInfo?.description}
 						location={cardInfo?.location}
-						// city={cardInfo?.location.city}
-						// country={cardInfo?.location.country}
 						image={initialImage}
 						isEnabled={cardInfo?.isEnabled}
 						publication={cardInfo?.publication}
