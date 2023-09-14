@@ -13,7 +13,7 @@ const Carousel: FC<CarouselProps> = ({ items, gap, slidesPerView, component: Com
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [slideWidth, setSlideWidth] = useState(0);
-
+	console.log(items);
 	useEffect(() => {
 		if (containerRef.current) {
 			const containerWidth = containerRef.current
