@@ -39,7 +39,7 @@ const PartnersPage = () => {
 	const [totalPages, setTotalPages] = useState(0);
 	const [active, setActive] = useState(false);
 	const [selectedPartnerId, setSelectedPartnerId] = useState<number | null>(null);
-
+	console.log(partners);
 	const openModal = (partnerId: number) => {
 		setSelectedPartnerId(partnerId);
 		setActive(true);
@@ -99,22 +99,24 @@ const PartnersPage = () => {
 							{active && selectedPartnerId === partner.id &&
 								<ConfirmModal
 									onClick={() => {
-									handleRemove(partner.id, setPartners, "id", removePartner)
-									setActive(false)
-								}}
+										handleRemove(partner.id, setPartners, "id", removePartner);
+										setActive(false);
+									}}
 									active={active}
 									setActive={setActive}
 								/>
-								}
-						</React.Fragment>
+							}
+						</React.Fragment>,
 					)}
 				</div>
-				<div className={"mt-[25px]"}>
-					<Pagination pageCount={totalPages} currentPage={currentPage} onSelectedPage={(selectedPage: number) => {
-						setCurrentPage(selectedPage);
-					}}
-											prevClassName={"md:!pl-[141px]"} />
-				</div>
+				{partners.length > 0 &&
+					<div className={"mt-[25px]"}>
+						<Pagination pageCount={totalPages} currentPage={currentPage} onSelectedPage={(selectedPage: number) => {
+							setCurrentPage(selectedPage);
+						}}
+												prevClassName={"md:!pl-[141px]"} />
+					</div>}
+
 			</div>
 
 
