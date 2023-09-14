@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Typography from "../../../components/Typography/Typography.tsx";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PartnerForm from "../../../components/AdminPanel/PartnerForm/PartnerForm.tsx";
 import IconClose from "../../../components/AdminPanel/IconButtons/IconClose.tsx";
 import { getPartnerById } from "../../../api/PartnersAPI.ts";
@@ -12,6 +12,7 @@ const AddPartnerPage = () => {
 	const [initialImage, setInitialImage] = useState<string>("");
 
 	const [partnerData, setPartnerData] = useState<PartnersType>();
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		if (id) {
@@ -38,9 +39,7 @@ const AddPartnerPage = () => {
 				>
 					Партнери
 				</Typography>
-				<NavLink to={"/admin/partners/"}>
-					<IconClose />
-				</NavLink>
+				<IconClose onClick={() => navigate(-1)} />
 			</div>
 			<div className="px-[36px] pt-[48px]">
 				<Typography variant="h4" component="h2" className="mb-[36px]">
