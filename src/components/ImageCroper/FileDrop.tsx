@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { BiSolidTrash, BiSolidPencil } from "react-icons/bi";
 import { MdOutlineFileDownload } from "react-icons/md";
@@ -28,20 +28,28 @@ export const FileDrop: React.FC<FileDropProps> = ({
 	...props
 
 }) => {
-
-	const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+ const [error, setError] = useState('')
+	const { acceptedFiles, getRootProps, getInputProps, fileRejections } = useDropzone({
 		accept: {
-			'image/jpeg': ['.jpeg']
-		}
+			'image/jpeg': ['.jpeg'],
+			'image/jpg': ['.jpg'],
+			'image/png': ['.png']
+		},
+		maxSize: 300000 // 300 KB
 	});
 
 	useEffect(() => {
-		onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
-	}, [acceptedFiles]);
+		if (fileRejections.length > 0) {
+			setError('Оберіть зображення менше 300Кб')
+		} else {
+			onFileChoise(acceptedFiles[0], !!acceptedFiles[0]);
+		}
+	}, [acceptedFiles, fileRejections]);
+
 	return (
 		<div
 			className={
-			`${props.page ? 'flex' : 'flex flex-col'}  items-center justify-center rounded p-[10px] w-[305px] h-[298px]`
+			`${props.page ? 'flex' : 'flex flex-col'}  ${error ? 'items-none' : 'items-center'}  justify-center rounded p-[10px] w-[305px] h-[298px]`
 				+ " " +
 				className
 			}
@@ -56,9 +64,9 @@ export const FileDrop: React.FC<FileDropProps> = ({
 				{src ? (
 					<img height={imgHeight} width={imgWidth} src={src} alt="Preview" />
 				) : (
-					<span className={`${props.error ? 'text-error30' : ''} flex items-center gap-[12px]`}>
+					<span className={`${props.error || error ? 'text-error30' : ''} flex items-center gap-[12px]`}>
 						<MdOutlineFileDownload size={27}/>
-						Завантажити зображення
+						{error ? error : 'Завантажити зображення'}
 					</span>
 				)}
 			</div>
@@ -77,7 +85,9 @@ export const FileDrop: React.FC<FileDropProps> = ({
 						</button>
 					)}
 				</div>
+
 			)}
+
 		</div>
 	);
 };

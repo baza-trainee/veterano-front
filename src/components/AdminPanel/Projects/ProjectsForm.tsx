@@ -91,6 +91,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 							location: locationObject,
 							categories: categoryArray,
 						};
+						console.log(JSON.stringify(cardData.image, null, 2));
 						createCard(cardData)
 							.then(() => navigate(-1));
 					} else {
