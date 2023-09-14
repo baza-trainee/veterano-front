@@ -34,7 +34,7 @@ const DropDown: FC<DropDownProps> = ({
 	const [isOpen, setIsOpen] = useState(false);
 	const [citySelected, setCitySelected] = useState(false);
 	const [inputValue, setInputValue] = useState("");
-
+	const [isFilterOpen, setIsFilterOpen] = useState(false);
 
 	useEffect(() => {
 		if (value.length > 1 && !citySelected) {
@@ -43,6 +43,10 @@ const DropDown: FC<DropDownProps> = ({
 	}, [value, citySelected]);
 
 
+	const openListHandler = () => {
+		setIsFilterOpen(!isFilterOpen);
+
+	};
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country });
 		setInputValue(`${capitalizeFirstLetter(city)}`);
@@ -70,25 +74,32 @@ const DropDown: FC<DropDownProps> = ({
 				}
 				value={inputValue}
 				onChange={e => {
-					if(onChange) {
+					if (onChange) {
 						onChange(e);
 					}
 					setCitySelected(false);
 					setInputValue(e.target.value);
 				}}
-				onBlur={() => setIsOpen(false)}
+				onBlur={() => {
+					setIsFilterOpen(false);
+					setIsOpen(false);
+				}}
 				onKeyDown={handleKeyPress}
 				name={name}
 			/>
-			<BsFilter onClick={() => setIsOpen(true)} size={24} color={value.length > 1 ? "white" : ""} />
-			{isOpen && results.length > 0 ? (
+			<div onMouseDown={openListHandler}>
+				<BsFilter size={24} color={value.length > 1 ? "white" : ""} />
+			</div>
+
+			{isOpen || isFilterOpen && results.length > 0 ? (
 				<ul id="cities" className={"filter-drop-down z-10"}>
 					<li
 						onMouseDown={() => {
 							listOnClickHandler("", "");
 						}}
 
-					>Всі локації</li>
+					>Всі локації
+					</li>
 					{results.map((item, index) => (
 						<li
 							key={index}
@@ -112,16 +123,17 @@ const DropDown: FC<DropDownProps> = ({
 					))}
 				</ul>
 			) : (
-				results.length === 0 &&
+				isOpen || isFilterOpen && results.length === 0 &&
 				<div className={"filter-drop-down z-10 p-[20px] flex justify-center items-center"}>
-					{page === 'search'
+					{page === "search"
 						?
 						<p className={"text-[14px] leading-6 font-light text-center"}>
 							Нажаль, зараз у нас немає проєктів у данному регіоні.</p> :
 						<p className={"text-[14px] leading-6 font-light text-center"}>
-							Нажаль, зараз у нас немає проєктів у данному регіоні. Ви можете переглянути всі доступні проєкти за <NavigationLink to={'search'} variant={'underlineFooter'} style={{fontSize: '14px'}}>посиланням</NavigationLink>
+							Нажаль, зараз у нас немає проєктів у данному регіоні. Ви можете переглянути всі доступні проєкти
+							за <NavigationLink to={"search"} variant={"underlineFooter"}
+																 style={{ fontSize: "14px" }}>посиланням</NavigationLink>
 						</p>
-
 					}
 
 				</div>
