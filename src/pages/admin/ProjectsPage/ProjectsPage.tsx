@@ -110,7 +110,6 @@ const ProjectsPage = () => {
 							prevClassName={"md:!pl-[141px]"} />
 					</div>
 				}
-
 			</div>
 		</>
 	);
