@@ -35,7 +35,7 @@ const ProjectCard: React.FC<CardProps> = ({
 			image:
 				"w-full md:min-w-[165px] md:w-[165px] md:h-[201px] lg:h-full lg:min-w-[413px]  lg:w-[413px]",
 			info: "flex w-full flex-col py-6 px-4 justify-between md:pt-[2px] md:pb-4 lg:py-[32px] lg:px-4 flex-shrink-1 ",
-			desc: "",
+			desc: "md:w-[498px] md:multi-line-truncate lg:h-[116px] lg:w-[815px]",
 		},
 	};
 
@@ -62,7 +62,7 @@ const ProjectCard: React.FC<CardProps> = ({
 					<Typography
 						variant={"p"}
 						component={"p"}
-						className={"mt-3 mb-6  lg:mb-auto  " + cardStyle[variant].desc}
+						className={"mt-3 mb-6 md:mb-auto lg:mb-auto  " + cardStyle[variant].desc}
 					>
 						{text}
 					</Typography>
