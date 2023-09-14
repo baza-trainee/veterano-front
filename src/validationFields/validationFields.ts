@@ -1,6 +1,7 @@
 import * as Yup from "yup";
-export const phoneNumberRegExp =
-	/^[\+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
+
+
+export const phoneNumberRegExp = /^\+380\s\d{2}\s\d{3}\s\d{4}$/;
 
 export const emailValidationSchema = Yup.string()
 	.email("Введіть дійсний email")
