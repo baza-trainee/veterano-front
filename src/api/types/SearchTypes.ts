@@ -9,6 +9,7 @@ export interface Card {
 	publication: string;
 	categories: Category[];
 	location: Location;
+	urlId: string;
 }
 export interface Category {
 	categoryName: "string";

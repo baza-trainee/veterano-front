@@ -8,7 +8,7 @@ export const convertBackDataToProjectCardProps = (data: Card[]) => {
 			imageSrc: `${import.meta.env.VITE_BASE_URL}/search/image/get?id=${
 				elem.imageId
 			}`,
-			url: `${import.meta.env.VITE_BASE_URL}/url/redirect/${elem.url}`,
+			url: `${import.meta.env.VITE_BASE_URL}/url/redirect/${elem.urlId}`,
 		};
 	});
 	return tmp;
