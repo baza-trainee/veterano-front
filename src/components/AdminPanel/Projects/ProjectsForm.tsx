@@ -220,7 +220,7 @@ const ProjectsForm: FC<ProjectsFormProps> = ({
 										name="image"
 										className="bg-[white]"
 										onChange={(img) => setFieldValue("image", img)}
-										error={errors.image}
+										error={touched.image ? errors.image : ''}
 										width={265}
 										height={232}
 									/>

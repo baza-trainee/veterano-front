@@ -150,7 +150,6 @@ const PartnerForm: FC<PartnerFormProps> = ({ id, isEnabled, publication, partner
 											setFieldValue("publication", formatDate);
 										}
 									}}
-
 								/>
 							</div>
 						</div>
