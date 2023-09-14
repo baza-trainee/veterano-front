@@ -3,8 +3,9 @@ import { FC } from "react";
 interface PartnersCardProps {
 	image: string;
 	url: string;
+	partnerName: string
 }
-const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
+const PartnersCard: FC<PartnersCardProps> = ({ url, image, partnerName }) => {
 	return (
 		<a
 			target="_blank"
@@ -17,6 +18,7 @@ const PartnersCard: FC<PartnersCardProps> = ({ url, image }) => {
 				backgroundSize: "cover",
 			}}
 			className={"w-[200px] md:w-full h-[124px] md:h-[72px] lg:h-[94px]"}
+			title={partnerName}
 		></a>
 	);
 };
