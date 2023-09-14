@@ -46,6 +46,8 @@ export const FileDrop: React.FC<FileDropProps> = ({
 		}
 	}, [acceptedFiles, fileRejections]);
 
+	console.log(props.error);
+
 	return (
 		<div
 			className={
