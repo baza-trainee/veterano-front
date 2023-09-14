@@ -118,7 +118,7 @@ const DropDown: FC<DropDownProps> = ({
 									: {}
 							}
 						>
-							{capitalizeFirstLetter(item.city)}/{capitalizeFirstLetter(item.country)}
+							{capitalizeFirstLetter(item.country)}/{capitalizeFirstLetter(item.city)}
 						</li>
 					))}
 				</ul>
