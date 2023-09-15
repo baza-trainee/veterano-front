@@ -90,3 +90,14 @@ export const removeCheckedCards = async (cardIds: number[]): Promise<void> => {
 	}
 };
 
+export const getAllCategories = async () => {
+	try {
+		const { data } = await $host.get("card/all-categories");
+		return data;
+	} catch (e) {
+		console.error("Error:", e);
+		return null;
+	}
+};
+
+

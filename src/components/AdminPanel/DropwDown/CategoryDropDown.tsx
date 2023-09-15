@@ -1,7 +1,7 @@
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import React, { FC, useEffect, useState } from "react";
-import { getCategoryList } from "../../../api/SearchAPI.tsx";
 import { capitalizeFirstLetter } from "../../../../utils/functions/functions.ts";
+import { getAllCategories } from "../../../api/CardsApi.ts";
 
 
 interface ResultsType {
@@ -46,7 +46,7 @@ const CategoryDropDown: FC<AdminDropDownProps> = ({ onBlur, value, name, onChang
 	}, [value, categorySelected]);
 
 	useEffect(() => {
-		getCategoryList()
+		getAllCategories()
 			.then(data => setResults(data));
 	}, []);
 
