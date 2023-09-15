@@ -57,6 +57,7 @@ input {
 
 
 @layer utilities {
+
   .noScrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -224,6 +225,20 @@ input {
 		@apply min-w-[89%] text-[14px] font-light leading-[26px] md:w-full lg:text-[16px] lg:leading-[24px]  bg-inherit outline-none;
 	}
 
+  .search-input:-webkit-autofill,
+  .search-input:-webkit-autofill:hover,
+  .search-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #151515;
+    -webkit-box-shadow: 0 0 0 40rem #F9F6EC inset;
+  }
+
+  .search-input:focus:-webkit-autofill,
+  .search-input:focus:-webkit-autofill:hover,
+  .search-input:focus:-webkit-autofill:focus {
+    -webkit-text-fill-color: #FCFCFC;
+    -webkit-box-shadow: 0 0 0 40rem #151515 inset;
+  }
+
 	.search-input:invalid .search-wrapper {
 		@apply bg-error50;
 	}
@@ -239,6 +254,7 @@ input {
 	.filter-input {
 		@apply relative w-full flex justify-between items-center p-[10px] bg-[#F9F6EC] rounded text-[14px] leading-[26px] font-light;
 	}
+
 	.filter-label-chosen {
 		@apply relative flex justify-between items-center p-[10px] bg-black rounded;
 	}
@@ -246,6 +262,13 @@ input {
 	.filter-label-input {
 		@apply bg-black text-white outline-none font-light leading-[24px] lg:max-w-[150px];
 	}
+
+  .filter-label-input:-webkit-autofill,
+  .filter-label-input:-webkit-autofill:hover,
+  .filter-label-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #FCFCFC;
+    -webkit-box-shadow: 0 0 0 40rem #151515 inset;
+  }
 
 	.filter-input:hover {
 		@apply bg-yellow50;
