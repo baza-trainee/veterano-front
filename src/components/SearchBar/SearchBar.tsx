@@ -1,5 +1,6 @@
 import React, { FC, InputHTMLAttributes, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useURLParams } from "../../hooks/useURLParams.tsx";
 
 interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
 	id?: string,
@@ -24,6 +25,8 @@ const SearchBar: FC<SearchBarProps> = ({
 																			 }) => {
 	const [isFocused, setIsFocused] = useState<boolean | null>(false);
 	const [errors, setErrors] = useState<string | null>(null);
+	const [isManuallyEdited, setIsManuallyEdited] = useState(false);
+	const paramsValue = useURLParams("q")
 
 	useEffect(() => {
 
@@ -55,8 +58,13 @@ const SearchBar: FC<SearchBarProps> = ({
 				}
 				id="search"
 				type="text"
-				value={value}
-				onChange={onChange}
+				value={isManuallyEdited ? value : paramsValue || value}
+				onChange={e => {
+					setIsManuallyEdited(true);
+					if (onChange) {
+						onChange(e);
+					}
+				}}
 				placeholder={placeholder}
 				{...props}
 			/>

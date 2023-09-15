@@ -3,6 +3,8 @@ import React, { FC, useEffect, useState } from "react";
 import { LocationType } from "../SearchForm/SearchForm.tsx";
 import { capitalizeFirstLetter } from "../../../utils/functions/functions.ts";
 import NavigationLink from "../Links/NavigationLink.tsx";
+import { useURLParams } from "../../hooks/useURLParams.tsx";
+
 
 
 interface DropDownProps {
@@ -35,6 +37,8 @@ const DropDown: FC<DropDownProps> = ({
 	const [citySelected, setCitySelected] = useState(false);
 	const [inputValue, setInputValue] = useState("");
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
+	const paramsValue = useURLParams("city")
+	const [isManuallyEdited, setIsManuallyEdited] = useState(false);
 
 	useEffect(() => {
 		if (value.length > 1 && !citySelected) {
@@ -42,10 +46,8 @@ const DropDown: FC<DropDownProps> = ({
 		}
 	}, [value, citySelected]);
 
-
 	const openListHandler = () => {
 		setIsFilterOpen(!isFilterOpen);
-
 	};
 	const listOnClickHandler = (city: string, country: string) => {
 		onValueSelected({ city, country });
@@ -63,17 +65,18 @@ const DropDown: FC<DropDownProps> = ({
 	return (
 
 		<label
-			className={value.length > 1 ? "filter-label-chosen h-[48px]" : "filter-input  w-full h-[48px]"}
+			className={value.length > 1 || paramsValue ? "filter-label-chosen h-[48px]" : "filter-input w-full h-[48px]"}
 		>
 			<input
 				placeholder={placeholder}
 				className={
-					value.length > 1
+					value.length > 1 || paramsValue
 						? "filter-label-input"
 						: "w-[125px] bg-[#F9F6EC] font-light text-[14px] leading-[26px] lg:text-[16px] lg:leading-[24px] placeholder:text-grey50"
 				}
-				value={inputValue}
+				value={isManuallyEdited ? inputValue : paramsValue || inputValue}
 				onChange={e => {
+					setIsManuallyEdited(true);
 					if (onChange) {
 						onChange(e);
 					}
@@ -88,7 +91,7 @@ const DropDown: FC<DropDownProps> = ({
 				name={name}
 			/>
 			<div onMouseDown={openListHandler}>
-				<BsFilter size={24} color={value.length > 1 ? "white" : ""} />
+				<BsFilter size={24} color={value.length > 1 || paramsValue ? "white" : ""} />
 			</div>
 
 			{isOpen || isFilterOpen && results.length > 0 ? (

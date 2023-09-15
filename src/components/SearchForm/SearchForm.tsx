@@ -29,16 +29,15 @@ const HeroSearchBar = () => {
 	const [page, setPage] = useState('')
 
 	const location = useLocation();
-
-
 	useEffect(() => {
 		const currentUrl = location.pathname;
-
 		if(currentUrl.includes('/search')) {
 			setPage('search')
 		}
 
 	}, [location])
+
+
 
 	useEffect(() => {
 		getCategoryList().then((data) => {
@@ -136,7 +135,7 @@ const HeroSearchBar = () => {
 							<DropDown
 								name={"city"}
 								cities={cities}
-								value={values.city}
+								value={ values.city}
 								onChange={handleChange}
 								onValueSelected={({ city, country }) => {
 									setFieldValue("city", city);
