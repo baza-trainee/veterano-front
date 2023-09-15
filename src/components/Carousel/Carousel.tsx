@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react";
 import ArrowButton from "../ArrowButton/ArrowButton.tsx";
+import { useMedia } from "../../hooks/useMedia.tsx";
 
 interface CarouselProps {
 	items: any[];
@@ -7,12 +8,16 @@ interface CarouselProps {
 	slidesPerView: number;
 	component: React.ComponentType<any>;
 	button?: () => React.ReactElement;
+	cardWidth? : number
 }
 
-const Carousel: FC<CarouselProps> = ({ items, gap, slidesPerView, component: Component, button, }) => {
+const Carousel: FC<CarouselProps> = ({cardWidth,  items, gap, slidesPerView, component: Component, button }) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [slideWidth, setSlideWidth] = useState(0);
+	const customSlideWidth = items.length < 3 && cardWidth;
+	const {isDesktop} = useMedia()
+
 
 	useEffect(() => {
 		if (containerRef.current) {
@@ -33,12 +38,12 @@ const Carousel: FC<CarouselProps> = ({ items, gap, slidesPerView, component: Com
 		setCurrentSlide(
 			currentSlide + slidesPerView < items.length
 				? currentSlide + 1
-				: currentSlide
+				: currentSlide,
 		);
 	};
 
 	return (
-		<div ref={containerRef} className={'overflow-hidden m-auto'}>
+		<div ref={containerRef} className={"overflow-hidden m-auto"}>
 			<div
 				className="flex items-center relative "
 				style={{
@@ -52,6 +57,7 @@ const Carousel: FC<CarouselProps> = ({ items, gap, slidesPerView, component: Com
 						className={"flex justify-center md:justify-start"}
 						style={{
 							minWidth: `${slideWidth}px`,
+							width: `${isDesktop && customSlideWidth ? customSlideWidth : 0 }px`,
 							marginRight: (index < items.length - 1) ? `${gap}px` : "0px",
 						}}
 					>

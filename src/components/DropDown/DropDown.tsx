@@ -68,6 +68,7 @@ const DropDown: FC<DropDownProps> = ({
 			className={value.length > 1 || paramsValue ? "filter-label-chosen h-[48px]" : "filter-input w-full h-[48px]"}
 		>
 			<input
+				autoComplete="none"
 				placeholder={placeholder}
 				className={
 					value.length > 1 || paramsValue

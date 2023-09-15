@@ -33,6 +33,7 @@ const ProjectSection = () => {
 					gap={20}
 					slidesPerView={3}
 					component={ProjectCard}
+					cardWidth={413}
 					button={() => (
 						<NavigationLink to={"/search"} variant={"secondary"}>
 							Дивитися всі проєкти

@@ -18,6 +18,16 @@ export const Contacts = () => {
 		});
 	}, [isLoading]);
 
+	const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+		let value = e.target.value.replace(/[^0-9+]/g, '');
+
+		if (value.startsWith("+380")) {
+			value = value.replace(/(\d{3})(\d{2})?(\d{3})?(\d{4})?/, '$1 $2 $3 $4').trim();
+		}
+
+		e.target.value = value;
+	};
+
 	return (
 		<div>
 			<AdminHeader name="Контакти" />
@@ -54,6 +64,7 @@ export const Contacts = () => {
 										placeholder="Телефон"
 										name="phone"
 										onInput={handleInput}
+
 									/>
 									<ErrorMessage
 										name="phone"
@@ -97,6 +108,4 @@ export const Contacts = () => {
 		</div>
 	);
 };
-function handleInput(e: ChangeEvent<HTMLInputElement>) {
-	e.target.value = e.target.value.replace(/[a-zA-Z]/g, "");
-}
+
