@@ -18,6 +18,7 @@ const Carousel: FC<CarouselProps> = ({cardWidth,  items, gap, slidesPerView, com
 	const customSlideWidth = items.length < 3 && cardWidth;
 	const {isDesktop} = useMedia()
 
+
 	useEffect(() => {
 		if (containerRef.current) {
 			const containerWidth = containerRef.current
