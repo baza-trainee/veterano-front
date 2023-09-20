@@ -50,7 +50,9 @@ export const getAllPartners = async (currentPage: number, size: number) => {
 
 export const getPartnerById = async (id: number) => {
 	try {
-		const { data } = await $host.get("info/partner/get?id=" + id);
+		const { data } = await $host.get("info/partner/get?id=" + id, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error getting card:", e);
@@ -60,7 +62,9 @@ export const getPartnerById = async (id: number) => {
 
 export const editPartner = async (partner: PartnerType) => {
 	try {
-		const { data } = await $host.patch("info/partner/update", partner);
+		const { data } = await $host.patch("info/partner/update", partner, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error editing card:", e);
@@ -70,7 +74,9 @@ export const editPartner = async (partner: PartnerType) => {
 
 export const removePartner = async (id: number) => {
 	try {
-		const { data } = await $host.delete("info/partner/delete?id=" + id);
+		const { data } = await $host.delete("info/partner/delete?id=" + id, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error deleting card:", e);
@@ -81,7 +87,11 @@ export const removePartner = async (id: number) => {
 export const removeCheckedPartners = async (ids: number[]): Promise<void> => {
 	try {
 		await Promise.all(
-			ids.map((id) => $host.delete("info/partner/delete?id=" + id))
+			ids.map((id) =>
+				$host.delete("info/partner/delete?id=" + id, {
+					headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+				})
+			)
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);

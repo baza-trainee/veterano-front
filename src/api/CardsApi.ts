@@ -58,7 +58,9 @@ export const getAllCards = async (currentPage: number, size: number) => {
 
 export const getCardById = async (id: string) => {
 	try {
-		const { data } = await $host.get("card/get?id=" + id);
+		const { data } = await $host.get("card/get?id=" + id, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error getting card:", e);
@@ -68,7 +70,9 @@ export const getCardById = async (id: string) => {
 
 export const editCard = async (card: CardType) => {
 	try {
-		const { data } = await $host.patch("card/update", card);
+		const { data } = await $host.patch("card/update", card, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error editing card:", e);
@@ -78,7 +82,9 @@ export const editCard = async (card: CardType) => {
 
 export const removeCard = async (cardId: number) => {
 	try {
-		const { data } = await $host.delete("card/delete?id=" + cardId);
+		const { data } = await $host.delete("card/delete?id=" + cardId, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error deleting card:", e);
@@ -89,7 +95,11 @@ export const removeCard = async (cardId: number) => {
 export const removeCheckedCards = async (cardIds: number[]): Promise<void> => {
 	try {
 		await Promise.all(
-			cardIds.map((cardId) => $host.delete("card/delete?id=" + cardId))
+			cardIds.map((cardId) =>
+				$host.delete("card/delete?id=" + cardId, {
+					headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+				})
+			)
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
@@ -99,7 +109,9 @@ export const removeCheckedCards = async (cardIds: number[]): Promise<void> => {
 
 export const getAllCategories = async () => {
 	try {
-		const { data } = await $host.get("card/all-categories");
+		const { data } = await $host.get("card/all-categories", {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+		});
 		return data;
 	} catch (e) {
 		console.error("Error:", e);
