@@ -76,7 +76,7 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 						try {
 							const res = await login(values);
 							if (res) {
-								sessionStorage.setItem("JWT", res.token);
+								sessionStorage.setItem("JWT", res.token.access_token);
 								navigate("../../admin", { relative: "path" });
 							}
 						} catch (e) {
