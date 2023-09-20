@@ -1,15 +1,21 @@
 import { $host } from "./index.ts";
 
 interface PartnerType {
-	id?: number,
-	partnerName?: string,
-	image?: string,
-	url?: string,
-	publication?: string,
-	isEnabled?: boolean
+	id?: number;
+	partnerName?: string;
+	image?: string;
+	url?: string;
+	publication?: string;
+	isEnabled?: boolean;
 }
 
-export const createPartner = async ({ partnerName, image, url, publication, isEnabled }: PartnerType) => {
+export const createPartner = async ({
+	partnerName,
+	image,
+	url,
+	publication,
+	isEnabled,
+}: PartnerType) => {
 	try {
 		const { data } = await $host.post("info/partner/add", {
 			partnerName,
@@ -73,7 +79,7 @@ export const removePartner = async (id: number) => {
 export const removeCheckedPartners = async (ids: number[]): Promise<void> => {
 	try {
 		await Promise.all(
-			ids.map(id => $host.delete("info/partner/delete?id=" + id)),
+			ids.map((id) => $host.delete("info/partner/delete?id=" + id))
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
