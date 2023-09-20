@@ -34,6 +34,8 @@ export const createPartner = async ({
 export const getAllPartners = async (currentPage: number, size: number) => {
 	try {
 		const { data } = await $host.get("info/partner/get-all", {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
+
 			params: {
 				page: currentPage,
 				size: size,

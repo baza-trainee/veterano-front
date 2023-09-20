@@ -14,7 +14,15 @@ interface CardType {
 	};
 }
 
-export const createCard = async ({ title, description, image, url, categories, publication, location, }: CardType) => {
+export const createCard = async ({
+	title,
+	description,
+	image,
+	url,
+	categories,
+	publication,
+	location,
+}: CardType) => {
 	try {
 		const { data } = await $host.post("card/add", {
 			title,
@@ -35,6 +43,7 @@ export const createCard = async ({ title, description, image, url, categories, p
 export const getAllCards = async (currentPage: number, size: number) => {
 	try {
 		const { data } = await $host.get("card/get-all", {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
 			params: {
 				page: currentPage,
 				size: size,
@@ -56,8 +65,6 @@ export const getCardById = async (id: string) => {
 		return null;
 	}
 };
-
-
 
 export const editCard = async (card: CardType) => {
 	try {
@@ -82,7 +89,7 @@ export const removeCard = async (cardId: number) => {
 export const removeCheckedCards = async (cardIds: number[]): Promise<void> => {
 	try {
 		await Promise.all(
-			cardIds.map(cardId => $host.delete("card/delete?id=" + cardId)),
+			cardIds.map((cardId) => $host.delete("card/delete?id=" + cardId))
 		);
 	} catch (e) {
 		console.error("Error deleting card:", e);
@@ -99,5 +106,3 @@ export const getAllCategories = async () => {
 		return null;
 	}
 };
-
-
