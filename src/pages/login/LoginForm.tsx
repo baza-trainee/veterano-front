@@ -24,7 +24,8 @@ const LoginForm = ({ className = "", ...props }: { className?: string }) => {
 	useEffect(() => {
 		if (sessionStorage.getItem("JWT"))
 			navigate("../../admin", { relative: "path" });
-	});
+	}, []);
+
 
 	return (
 		<>

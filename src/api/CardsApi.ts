@@ -32,6 +32,8 @@ export const createCard = async ({
 			categories,
 			publication,
 			location,
+		}, {
+			headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` },
 		});
 		return data;
 	} catch (e) {
