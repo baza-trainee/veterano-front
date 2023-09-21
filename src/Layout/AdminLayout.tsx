@@ -7,8 +7,8 @@ const AdminLayout = () => {
 
 	useEffect(() => {
 		if (!sessionStorage.getItem("JWT"))
-			navigate("../../../../auth/login", { relative: "path" });
-	});
+			navigate("../../../../auth/login");
+	}, []);
 
 	const logOutHandler = () => {
 		sessionStorage.removeItem("JWT");

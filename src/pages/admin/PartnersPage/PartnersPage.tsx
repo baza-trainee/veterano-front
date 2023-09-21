@@ -39,7 +39,7 @@ const PartnersPage = () => {
 	const [totalPages, setTotalPages] = useState(0);
 	const [active, setActive] = useState(false);
 	const [selectedPartnerId, setSelectedPartnerId] = useState<number | null>(null);
-	console.log(partners);
+
 	const openModal = (partnerId: number) => {
 		setSelectedPartnerId(partnerId);
 		setActive(true);

@@ -23,7 +23,8 @@ export const createPartner = async ({
 			url,
 			publication,
 			isEnabled,
-		});
+		},
+			{headers: { Authorization: `Bearer ${sessionStorage.getItem("JWT")}` }});
 		return data;
 	} catch (e) {
 		console.error("Error creating card:", e);
