@@ -42,10 +42,10 @@ const ProjectCard: React.FC<CardProps> = ({
 	return (
 		<div
 			className={
-				cardStyle[variant].wrapper + " " + " sm:w-full md:w-full lg:w-full"
+				cardStyle[variant].wrapper + " " + " sm:w-full md:w-full lg:w-full "
 			}
 		>
-			<img src={imageSrc} alt={title} className={cardStyle[variant].image} />
+			<img src={imageSrc} alt={title} className={cardStyle[variant].image + " " + " object-cover"}  />
 			<div
 				className={
 					className +

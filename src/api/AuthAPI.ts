@@ -8,7 +8,7 @@ export const login = async ({ email, password }: Login) => {
 	try {
 		const { data } = await $host.post("/users/auth/login", {
 			email,
-			password,
+      password,
 		});
 		return data;
 	} catch (e) {
